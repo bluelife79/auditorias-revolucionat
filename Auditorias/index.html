@@ -108,7 +108,7 @@
 
 <body>
   <div class="container">
-    <h1>📋 Panel de Control de Auditorías</h1>
+    <h1>Panel de Control de Auditorías</h1>
 
     <div class="instrucciones">
       <strong>Cómo funciona:</strong> cada vez que subas archivos nuevos a la carpeta <strong>Auditorias</strong> de GitHub, aparecerán aquí automáticamente. Haz clic en el nombre para abrirlo o pulsa “Copiar enlace” para enviarlo.
@@ -124,8 +124,8 @@
     const REPOSITORIO = "auditorias-revolucionat";
     const CARPETA = "Auditorias";
 
-    const API_URL = `https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${CARPETA}`;
-    const WEB_BASE = `https://${USUARIO}.github.io/${REPOSITORIO}/${CARPETA}/`;
+    const API_URL = `https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${encodeURIComponent(CARPETA)}`;
+    const WEB_BASE = `https://${USUARIO}.github.io/${REPOSITORIO}/${encodeURIComponent(CARPETA)}/`;
 
     const estado = document.getElementById("estado");
     const lista = document.getElementById("lista-auditorias");
@@ -138,19 +138,24 @@
     }
 
     function iconoArchivo(nombreArchivo) {
-      if (nombreArchivo.toLowerCase().endsWith(".docx")) return "📥";
-      return "📄";
+      return nombreArchivo.toLowerCase().endsWith(".docx") ? "DOCX" : "HTML";
     }
 
     function crearEnlaceSeguro(nombreArchivo) {
       return WEB_BASE + encodeURIComponent(nombreArchivo);
     }
 
-    function dibujarArchivos(archivos) {
-      lista.innerHTML = "";
+    function normalizarDatosGitHub(datos) {
+      if (Array.isArray(datos)) return datos;
+      if (datos && Array.isArray(datos.data)) return datos.data;
+      return [];
+    }
+
+    function dibujarArchivos(datos) {
+      const archivos = normalizarDatosGitHub(datos);
 
       const archivosValidos = archivos
-        .filter(item => item.type === "file")
+        .filter(item => item && item.type === "file" && item.name)
         .filter(item => {
           const nombre = item.name.toLowerCase();
           return (
@@ -160,6 +165,7 @@
         })
         .sort((a, b) => a.name.localeCompare(b.name, "es"));
 
+      lista.innerHTML = "";
       estado.textContent = `Archivos encontrados: ${archivosValidos.length}`;
 
       if (archivosValidos.length === 0) {
@@ -178,7 +184,7 @@
         a.href = enlaceCompleto;
         a.target = "_blank";
         a.rel = "noopener noreferrer";
-        a.textContent = `${iconoArchivo(nombreArchivo)} ${limpiarNombre(nombreArchivo)}`;
+        a.textContent = `${iconoArchivo(nombreArchivo)} · ${limpiarNombre(nombreArchivo)}`;
 
         const btn = document.createElement("button");
         btn.className = "btn-copiar";
@@ -205,31 +211,85 @@
       });
     }
 
-    async function cargarArchivos() {
-      try {
-        const respuesta = await fetch(API_URL, {
-          headers: {
-            "Accept": "application/vnd.github+json"
-          }
-        });
+    async function cargarConFetch() {
+      const respuesta = await fetch(API_URL, {
+        headers: {
+          "Accept": "application/vnd.github+json"
+        },
+        cache: "no-store"
+      });
 
-        if (!respuesta.ok) {
-          throw new Error(`Error API GitHub: ${respuesta.status}`);
+      if (!respuesta.ok) {
+        throw new Error(`GitHub API respondió ${respuesta.status}`);
+      }
+
+      return await respuesta.json();
+    }
+
+    function cargarConJsonp() {
+      return new Promise((resolve, reject) => {
+        const callbackName = "githubCallback_" + Date.now();
+
+        const timeout = setTimeout(() => {
+          cleanup();
+          reject(new Error("Tiempo agotado al cargar JSONP"));
+        }, 10000);
+
+        function cleanup() {
+          clearTimeout(timeout);
+          delete window[callbackName];
+          if (script.parentNode) script.parentNode.removeChild(script);
         }
 
-        const datos = await respuesta.json();
-        dibujarArchivos(datos);
+        window[callbackName] = function(response) {
+          cleanup();
 
-      } catch (error) {
-        estado.textContent = "No se pudieron cargar los archivos automáticamente.";
-        lista.innerHTML = `
-          <li>
-            Revisa que el repositorio sea público, que la carpeta se llame exactamente
-            <strong>Auditorias</strong> y que GitHub Pages esté activo desde la rama main.
-          </li>
-        `;
-        console.error(error);
+          if (!response || !response.meta || response.meta.status < 200 || response.meta.status >= 300) {
+            reject(new Error("GitHub JSONP no devolvió una respuesta válida"));
+            return;
+          }
+
+          resolve(response.data);
+        };
+
+        const script = document.createElement("script");
+        script.src = `${API_URL}?callback=${callbackName}`;
+        script.onerror = function() {
+          cleanup();
+          reject(new Error("No se pudo cargar JSONP desde GitHub"));
+        };
+
+        document.head.appendChild(script);
+      });
+    }
+
+    async function cargarArchivos() {
+      estado.textContent = "Cargando archivos...";
+
+      try {
+        const datos = await cargarConFetch();
+        dibujarArchivos(datos);
+        return;
+      } catch (errorFetch) {
+        console.warn("Fetch falló. Probando JSONP...", errorFetch);
       }
+
+      try {
+        const datos = await cargarConJsonp();
+        dibujarArchivos(datos);
+        return;
+      } catch (errorJsonp) {
+        console.error("JSONP también falló:", errorJsonp);
+      }
+
+      estado.textContent = "No se pudieron cargar los archivos automáticamente.";
+      lista.innerHTML = `
+        <li>
+          No se ha podido leer la carpeta desde GitHub. Revisa que el repositorio sea público,
+          que la carpeta se llame exactamente <strong>Auditorias</strong> y que no tengas el navegador
+          bloqueando api.github.com.
+        </li>
+      `;
     }
 
     cargarArchivos();
