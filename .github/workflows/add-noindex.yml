@@ -1,0 +1,69 @@
+name: Add noindex to auditorias
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Auditorias/**/*.html'
+
+permissions:
+  contents: write
+
+jobs:
+  add-noindex:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Add noindex meta tags to HTML files
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          META = '''  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+            <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">'''
+
+          carpeta = Path("Auditorias")
+          cambios = 0
+
+          for archivo in carpeta.rglob("*.html"):
+              texto = archivo.read_text(encoding="utf-8", errors="ignore")
+              texto_minusculas = texto.lower()
+
+              if "noindex" in texto_minusculas:
+                  continue
+
+              nuevo_texto, n = re.subn(
+                  r"(<head[^>]*>)",
+                  r"\1\n" + META,
+                  texto,
+                  count=1,
+                  flags=re.IGNORECASE
+              )
+
+              if n == 0:
+                  print(f"Sin head, no modificado: {archivo}")
+                  continue
+
+              archivo.write_text(nuevo_texto, encoding="utf-8")
+              print(f"Noindex añadido: {archivo}")
+              cambios += 1
+
+          print(f"Archivos modificados: {cambios}")
+          PY
+
+      - name: Commit changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add Auditorias/*.html
+            git commit -m "Add noindex to auditorias"
+            git push
+          else
+            echo "No hay cambios que guardar"
+          fi
