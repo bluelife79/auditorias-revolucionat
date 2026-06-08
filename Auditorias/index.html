@@ -29,33 +29,34 @@
     </div>
 
     <script>
-        // === CONFIGURACIÓN AUTOMÁTICA ===
+        // === CONFIGURACIÓN CORREGIDA ===
         const USUARIO_GITHUB = "bluelife79";  
-        const NOMBRE_PROYECTO = "auditorias";     
+        const NOMBRE_PROYECTO = "auditorias-revolucionat";     
         // ============================
 
         async function obtenerArchivos() {
             const lista = document.getElementById('lista-auditorias');
             try {
-                const urlApi = `https://github.com{USUARIO_GITHUB}/${NOMBRE_PROYECTO}/contents`;
+                // Ahora la dirección apunta al repositorio correcto
+                const urlApi = `https://github.com{USUARIO_GITHUB}/${NOMBRE_PROYECTO}/contents/Auditorias`;
                 const respuesta = await fetch(urlApi);
                 const archivos = await respuesta.json();
                 
                 lista.innerHTML = '';
 
-                // Filtra solo los .html y descarta el index.html
+                // Filtra solo archivos HTML y salta el index.html
                 const archivosHtml = archivos.filter(item => 
                     item.name.endsWith('.html') && item.name.toLowerCase() !== 'index.html'
                 );
 
                 if (archivosHtml.length === 0) {
-                    lista.innerHTML = '<li>No se encontraron archivos todavía. Asegúrate de subirlos a la carpeta.</li>';
+                    lista.innerHTML = '<li>No se encontraron archivos todavía en la carpeta Auditorias.</li>';
                     return;
                 }
 
                 archivosHtml.forEach(archivo => {
                     const li = document.createElement('li');
-                    const enlaceWeb = `https://${USUARIO_GITHUB}.github.io/${NOMBRE_PROYECTO}/${archivo.name}`;
+                    const enlaceWeb = `https://${USUARIO_GITHUB}.github.io/${NOMBRE_PROYECTO}/Auditorias/${archivo.name}`;
                     
                     const a = document.createElement('a');
                     a.href = enlaceWeb;
@@ -80,7 +81,7 @@
                     lista.appendChild(li);
                 });
             } catch (error) {
-                lista.innerHTML = '<li>Error al conectar con el servidor de archivos.</li>';
+                lista.innerHTML = '<li>Error de conexión con el servidor.</li>';
             }
         }
 
