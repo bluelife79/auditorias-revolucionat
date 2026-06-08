@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Auditoría dinámica · Nadia · Silvia Ferrero</title>
+<style>
+:root{
+  --bg:#f6f7fb;
+  --paper:#ffffff;
+  --ink:#16171d;
+  --muted:#667085;
+  --line:#e6e8ef;
+  --red:#e5484d;
+  --red-soft:#fff1f1;
+  --orange:#f59f00;
+  --orange-soft:#fff7e6;
+  --green:#12a150;
+  --green-soft:#ecfdf3;
+  --blue:#2563eb;
+  --blue-soft:#eff6ff;
+  --violet:#7c3aed;
+  --violet-soft:#f5f0ff;
+  --slate:#344054;
+  --slate-soft:#f2f4f7;
+  --yellow:#f7c948;
+  --shadow:0 14px 40px rgba(16,24,40,.08);
+  --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(37,99,235,.12), transparent 30%),
+    radial-gradient(circle at 85% 10%, rgba(124,58,237,.12), transparent 28%),
+    var(--bg);
+  color:var(--ink);
+  line-height:1.55;
+}
+a{color:inherit}
+.layout{display:grid;grid-template-columns:290px 1fr;gap:28px;max-width:1480px;margin:0 auto;padding:24px}
+.sidebar{
+  position:sticky;top:18px;height:calc(100vh - 36px);overflow:auto;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow)
+}
+.brand{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.logo{width:42px;height:42px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--violet));display:grid;place-items:center;color:white;font-weight:900}
+.brand h1{font-size:14px;line-height:1.1;margin:0}
+.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}
+.search{margin:14px 0}
+.search input{width:100%;border:1px solid var(--line);border-radius:16px;padding:12px 13px;font-size:13px;background:#fff}
+.nav a{
+  display:flex;align-items:center;gap:8px;
+  text-decoration:none;padding:10px 10px;border-radius:14px;
+  color:#344054;font-size:13px;margin:2px 0
+}
+.nav a:hover{background:var(--slate-soft);color:#111827}
+.nav .dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.main{min-width:0}
+.hero{
+  background:linear-gradient(135deg,#ffffff 0%,#f8fbff 48%,#f4efff 100%);
+  border:1px solid var(--line);border-radius:34px;padding:34px;box-shadow:var(--shadow);overflow:hidden;position:relative
+}
+.hero:after{content:"";position:absolute;right:-90px;top:-90px;width:240px;height:240px;background:rgba(37,99,235,.12);border-radius:50%}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.hero h2{font-size:44px;line-height:1.02;margin:18px 0 12px;letter-spacing:-.04em}
+.hero .sub{font-size:18px;color:#344054;max-width:920px}
+.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px}
+.metric small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:800}
+.metric strong{display:block;font-size:26px;margin-top:6px}
+.metric .tag{display:inline-flex;margin-top:8px;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800}
+.tag.red{background:var(--red-soft);color:var(--red)}
+.tag.green{background:var(--green-soft);color:var(--green)}
+.tag.orange{background:var(--orange-soft);color:#b76b00}
+.tag.blue{background:var(--blue-soft);color:var(--blue)}
+.tag.violet{background:var(--violet-soft);color:var(--violet)}
+.section{margin-top:28px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 14px}
+.section h3{font-size:28px;letter-spacing:-.03em;margin:0}
+.section .lead{color:var(--muted);margin:6px 0 0;max-width:840px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 26px rgba(16,24,40,.05)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:900}
+.bigline{font-size:22px;font-weight:900;letter-spacing:-.02em;margin:6px 0}
+.callout{border-radius:24px;padding:22px;border:1px solid}
+.callout.red{background:var(--red-soft);border-color:#ffd0d0}
+.callout.orange{background:var(--orange-soft);border-color:#ffe0a3}
+.callout.green{background:var(--green-soft);border-color:#bdeed2}
+.callout.blue{background:var(--blue-soft);border-color:#cfe1ff}
+.callout.violet{background:var(--violet-soft);border-color:#dfd2ff}
+.quote{border-left:5px solid var(--blue);padding:12px 14px;background:#f8fafc;border-radius:0 16px 16px 0;font-weight:700}
+.table{width:100%;border-collapse:separate;border-spacing:0 10px}
+.table th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:0 12px 3px}
+.table td{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}
+.table td:first-child{border-left:1px solid var(--line);border-radius:16px 0 0 16px;font-weight:800}
+.table td:last-child{border-right:1px solid var(--line);border-radius:0 16px 16px 0}
+.score{font-weight:900;font-size:18px}
+.bar{height:10px;border-radius:999px;background:#edf0f5;overflow:hidden;margin-top:7px}
+.bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));}
+.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;border:1px solid}
+.pill.red{background:var(--red-soft);color:var(--red);border-color:#ffd0d0}
+.pill.green{background:var(--green-soft);color:var(--green);border-color:#bdeed2}
+.pill.orange{background:var(--orange-soft);color:#ad6500;border-color:#ffe0a3}
+.pill.blue{background:var(--blue-soft);color:var(--blue);border-color:#cfe1ff}
+.pill.violet{background:var(--violet-soft);color:var(--violet);border-color:#dfd2ff}
+.accordion{display:grid;gap:12px}
+details{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(16,24,40,.04)}
+summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:900;display:flex;align-items:center;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:22px;color:var(--blue)}
+details[open] summary:after{content:"–"}
+.details-body{padding:0 20px 20px;color:#344054}
+.timeline{position:relative;margin-left:8px}
+.timeline:before{content:"";position:absolute;left:12px;top:4px;bottom:4px;width:2px;background:var(--line)}
+.t-item{position:relative;padding-left:44px;margin:0 0 16px}
+.t-dot{position:absolute;left:2px;top:4px;width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--blue)}
+.t-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px}
+.t-card h4{margin:0 0 6px;font-size:16px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.mini{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:14px}
+.mini h5{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.script{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:18px;padding:16px;font-weight:700;white-space:pre-wrap}
+.chapter{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:34px;height:34px;border-radius:14px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;font-weight:900}
+.clean-list{margin:0;padding-left:18px}
+.clean-list li{margin:8px 0}
+.sticky-actions{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;gap:10px;z-index:20}
+.btn{border:0;border-radius:999px;padding:12px 16px;background:#111827;color:#fff;box-shadow:var(--shadow);font-weight:800;cursor:pointer}
+.btn.secondary{background:#fff;color:#111827;border:1px solid var(--line)}
+mark{background:#fff2a8;border-radius:6px;padding:0 3px}
+@media(max-width:1050px){
+  .layout{grid-template-columns:1fr;padding:14px}
+  .sidebar{position:relative;height:auto}
+  .hero-grid,.grid-4{grid-template-columns:1fr 1fr}
+  .grid-3,.grid-2,.split{grid-template-columns:1fr}
+  .hero h2{font-size:34px}
+}
+@media print{
+  .sidebar,.sticky-actions{display:none}
+  body{background:#fff}
+  .layout{display:block;max-width:100%;padding:0}
+  .card,.hero,details{box-shadow:none;break-inside:avoid}
+  details{display:block}
+  details .details-body{display:block}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">R</div>
+      <div>
+        <h1>Auditoría dinámica</h1>
+        <p>Nadia · Silvia Ferrero</p>
+      </div>
+    </div>
+    <div class="search"><input id="searchInput" placeholder="Buscar en la auditoría..." /></div>
+    <nav class="nav">
+      <a href="#resumen"><span class="dot"></span>Resumen inicial</a>
+      <a href="#ficha"><span class="dot"></span>Ficha del caso</a>
+      <a href="#veredicto"><span class="dot"></span>Veredicto</a>
+      <a href="#silvia"><span class="dot"></span>7 factores Silvia</a>
+      <a href="#scoreboard"><span class="dot"></span>Scoreboard</a>
+      <a href="#errores"><span class="dot"></span>Errores repetidos</a>
+      <a href="#pitch"><span class="dot"></span>Pitch y cierre</a>
+      <a href="#frame"><span class="dot"></span>Frame-by-frame</a>
+      <a href="#evolucion"><span class="dot"></span>Evolución Nadia</a>
+      <a href="#diagnostico-real"><span class="dot"></span>Diagnóstico real</a>
+      <a href="#plan"><span class="dot"></span>Plan de entrenamiento</a>
+      <a href="#scripts"><span class="dot"></span>Scripts</a>
+      <a href="#ejecutivo"><span class="dot"></span>Resumen ejecutivo</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="hero" id="top">
+      <span class="eyebrow">REVOLUCIONA-T · CLOSER NADIA · PROSPECTO SILVIA FERRERO</span>
+      <h2>Una venta cerrada que no valida el sistema.</h2>
+      <p class="sub">El cierre existió. Pero el análisis no cambia: Silvia llegó pre-vendida, sin resistencia y con decisión prácticamente tomada. La auditoría sirve para ver qué errores siguen vivos aunque la llamada terminara en pago único.</p>
+      <div class="hero-grid">
+        <div class="metric"><small>Nota global</small><strong>5.2 / 10</strong><span class="tag orange">Cerrada con alarma</span></div>
+        <div class="metric"><small>Resultado</small><strong>1.300€</strong><span class="tag green">Pago único</span></div>
+        <div class="metric"><small>Duración</small><strong>45 min</strong><span class="tag blue">Pitch 13 min</span></div>
+        <div class="metric"><small>Riesgo</small><strong>Alto</strong><span class="tag red">Sistema sin test</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="resumen">
+      <div class="section-head">
+        <div>
+          <h3>Resumen para despertar a Nadia</h3>
+          <p class="lead">La idea que tiene que quedar clavada antes de leer el detalle.</p>
+        </div>
+      </div>
+      <div class="callout red">
+        <div class="kicker">Mensaje central</div>
+        <div class="bigline">Silvia compró. Pero no porque la llamada resolviera objeciones: no hubo objeciones.</div>
+        <p>Si una prospect llega con autoridad previa de Jonathan, meses de contenido consumido, cero fricción económica y ninguna resistencia, el cierre no prueba el sistema. Lo que prueba el sistema es qué ocurre cuando aparece precio, duda, miedo, tiempo o auto-confianza. En esta llamada eso no apareció.</p>
+      </div>
+    </section>
+
+    <section class="section" id="ficha">
+      <div class="section-head">
+        <div>
+          <h3>Ficha del caso</h3>
+          <p class="lead">Datos completos de contexto. Sin resumir lo importante.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="kicker">Identificación</div>
+          <p><strong>Prospecto:</strong> Silvia Ferrero</p>
+          <p><strong>Closer:</strong> Nadia</p>
+          <p><strong>Fecha:</strong> 11 mayo 2025</p>
+          <p><strong>Duración:</strong> 45 minutos</p>
+          <p><strong>Resultado:</strong> CERRADA — 1.300€ pago único</p>
+          <p><strong>Nota global:</strong> 5.2 / 10</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Historial Nadia</div>
+          <p>Soledad <span class="pill red">DERROTA · 4.6</span></p>
+          <p>Magda <span class="pill red">DERROTA · 5.1</span></p>
+          <p>Mónica <span class="pill orange">SIN CIERRE · 5.0</span></p>
+          <p>Begoña <span class="pill orange">SIN CIERRE · 3.2</span></p>
+          <p>Silvia <span class="pill green">CERRADA · 5.2</span></p>
+          <p class="lead">Lectura del conjunto auditado, no afirmación cronológica de que esta fuera la última llamada realizada.</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Perfil Silvia</div>
+          <p>Manchester, UK · 47 años dentro de dos meses.</p>
+          <p>Autónoma · trabaja 10-12 horas diarias desde casa.</p>
+          <p>Casada, sin hijos · marido más joven y activo, va al gym 5 días.</p>
+          <p>Sigue a Jonathan desde hace meses.</p>
+          <p>Jonathan habló con ella previamente antes de la llamada.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="card">
+          <div class="kicker">Historial físico y médico</div>
+          <ul class="clean-list">
+            <li>Bajó 20 kilos antes de los 30 y los mantuvo años.</li>
+            <li>Pandemia: intoxicación por moho → urgencias diarias → bajada drástica de peso.</li>
+            <li>Actualmente tomando suplementos para detoxificación: 1 año de 2 estimados.</li>
+            <li>Recuperó el peso perdido durante la enfermedad + rebote.</li>
+            <li>Objetivo: tonificar, perder grasa abdominal y prepararse para la menopausia.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Rutina, motivación y precio</div>
+          <ul class="clean-list">
+            <li>Bici estática 15 min/día de lunes a viernes + 7.000 pasos diarios.</li>
+            <li>6 meses con mancuernas de 5 kg en casa — YouTube.</li>
+            <li>Motivación: viajar con su marido y mantenerse ágil durante décadas.</li>
+            <li>Compromiso declarado: implícito 10/10: “lo que quiero lo consigo”.</li>
+            <li>Reacción al precio: “vale, de acuerdo” → eligió pago único sin dudar.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="veredicto">
+      <div class="section-head"><div><h3>Veredicto — la verdad que esta auditoría tiene que decir</h3></div></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="kicker">Lo que sí ocurrió</div>
+          <p>Esta llamada se cerró. Eso es un hecho. Y hay que reconocerlo.</p>
+          <p>También hay que decir lo que este cierre no es: no es evidencia de que el sistema de Nadia funciona. Es evidencia de que Silvia Ferrero llegó a esta llamada prácticamente decidida antes de que Nadia dijera su primera frase.</p>
+          <p>Jonathan la había contactado previamente. Silvia lleva meses siguiendo el contenido. Cuando abrió la llamada, su primera frase fue que le había llamado la atención que Jonathan trabajara con mujeres de su edad porque “lo que me encuentro con mucha gente con la que trabajas no entiende lo que son los desafíos de tener cuarenta y tantos.” Eso no es el inicio de alguien que necesita convencer. Es el inicio de alguien que ya eligió y está esperando confirmar.</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Lo que el cierre no demuestra</div>
+          <p>Cuando Nadia presentó el precio en el minuto 41, Silvia respondió “vale, de acuerdo” y eligió el pago único. Sin preguntas. Sin dudas. Sin objeciones. Silvia cerró esta venta sola.</p>
+          <p>Hay que entender lo que eso significa de cara al trabajo real: con Soledad, Magda, Mónica y Begoña — las cuatro llamadas previas analizadas en este bloque, todas sin cierre — el sistema de Nadia fue sometido a prueba. Con Silvia, no fue sometido a ninguna prueba.</p>
+          <p>El peligro de este cierre no es el cierre en sí. El peligro es lo que puede enseñarle a quien lo lee sin contexto: que el sistema está funcionando. No es así. La única cosa que está funcionando aquí es el perfil de Silvia. Hay que separar las dos cosas con precisión.</p>
+          <p>Esta auditoría va a auditar la llamada con la misma exigencia que todas las anteriores. Porque los errores que aparecen aquí — y son los mismos que en las cuatro llamadas previas analizadas — son los que van a costarle otra venta cuando la prospect no sea Silvia.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="silvia">
+      <div class="section-head"><div><h3>Por qué Silvia era una prospect imposible de perder — los 7 factores</h3><p class="lead">Silvia era estructuralmente diferente a cualquier otra prospect de las llamadas auditadas.</p></div></div>
+      <div class="grid-4">
+        <div class="card chapter"><div class="num">1</div><div><strong>Jonathan habló con ella antes.</strong><p>Es el factor más importante de toda la llamada. Silvia llegó con la autoridad de Jonathan ya activa en su cabeza. Cialdini lo llamaría “pre-autorización de la confianza”.</p></div></div>
+        <div class="card chapter"><div class="num">2</div><div><strong>Meses de seguimiento de contenido.</strong><p>No es una prospect fría. Ha consumido el mensaje durante meses y ya lo considera válido. No necesita que le convenzan del “por qué Jonathan”.</p></div></div>
+        <div class="card chapter"><div class="num">3</div><div><strong>Motivación intrínseca altísima.</strong><p>“Yo siempre sirvo así, lo que quiero lo consigo.” Tiene historial de logros: perdió 20 kilos, los mantuvo, sobrevivió una intoxicación grave.</p></div></div>
+        <div class="card chapter"><div class="num">4</div><div><strong>Sin restricción económica visible.</strong><p>Eligió pago único de 1.300€ sin preguntar por fraccionado, sin pensarlo y sin mirarlo con el marido.</p></div></div>
+        <div class="card chapter"><div class="num">5</div><div><strong>Sin consulta de pareja necesaria.</strong><p>Su marido está más en forma que ella. Sería muy difícil que él pusiera resistencia a que ella hiciera ejercicio.</p></div></div>
+        <div class="card chapter"><div class="num">6</div><div><strong>Urgencia médica propia.</strong><p>Perimenopausia, toxinas del moho y rebote. Silvia ya tiene razones médicas reales para actuar ahora. Nadia no tuvo que crearlas.</p></div></div>
+        <div class="card chapter"><div class="num">7</div><div><strong>Cero objeciones.</strong><p>Ni económica, ni de tiempo, ni de confianza, ni de auto-duda. La objeción es el verdadero examen de un sistema de ventas. Aquí no hubo examen.</p></div></div>
+        <div class="callout orange"><strong>Dato de calibración:</strong><p>Este perfil existe en aproximadamente el 10-15% de las llamadas en cualquier programa high-ticket. Son las que se cierran casi solas.</p><p>La pregunta correcta no es “¿cómo cerré a Silvia?” sino “¿qué habría pasado con Silvia si hubiera habido cualquier resistencia?”</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="scoreboard">
+      <div class="section-head"><div><h3>Scoreboard — los 13 libros como jueces</h3></div></div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>Bloque</th><th>Nota</th><th>Evaluación</th></tr></thead>
+          <tbody>
+            <tr><td>Apertura / Agenda</td><td><span class="score">5.5</span><div class="bar"><span style="width:55%"></span></div></td><td>Blount-Virtual: agenda funcional. Voss: 1 minuto hablando de sí misma en lugar de de Silvia.</td></tr>
+            <tr><td>Diagnóstico calidad</td><td><span class="score">5.0</span><div class="bar"><span style="width:50%"></span></div></td><td>SPIN Rackham: solo preguntas de Situación. Cero Implicación. Mom Test: preguntas hipotéticas.</td></tr>
+            <tr><td>Diagnóstico profundidad</td><td><span class="score">4.5</span><div class="bar"><span style="width:45%"></span></div></td><td>Gap Selling: sin brecha definida. Voss: sin labeling profundo. El marido+viajes nunca excavado.</td></tr>
+            <tr><td>Construcción de valor</td><td><span class="score">5.0</span><div class="bar"><span style="width:50%"></span></div></td><td>Challenger Sale: sin Reframe. Pitch genérico con personalización superficial.</td></tr>
+            <tr><td>Manejo de objeciones</td><td><span class="score">N/A</span></td><td>Sin objeciones — sistema sin test real.</td></tr>
+            <tr><td>Cierre</td><td><span class="score">4.0</span><div class="bar"><span style="width:40%"></span></div></td><td>Influence: compromiso “lo que quiero lo consigo” nunca usado. Pre-Suasión: precio sin frame.</td></tr>
+            <tr><td>Lenguaje / Tono</td><td><span class="score">6.5</span><div class="bar"><span style="width:65%"></span></div></td><td>Why She Buys: tono cálido y natural. Exactly What to Say: transiciones débiles.</td></tr>
+            <tr><td>Estructura</td><td><span class="score">4.5</span><div class="bar"><span style="width:45%"></span></div></td><td>“Dos cosas” — quinta vez. Hipotéticas. “Yo también soy autónoma” — 1 min de tangente propia.</td></tr>
+            <tr><td>GLOBAL</td><td><span class="score">5.2 / 10</span><div class="bar"><span style="width:52%"></span></div></td><td>Para una llamada cerrada, este número lo dice todo.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="errores">
+      <div class="section-head"><div><h3>Errores que aparecen en esta llamada — los mismos de siempre</h3><p class="lead">Cada error con lo que dijo Nadia, análisis y dos alternativas operativas.</p></div></div>
+      <div class="accordion">
+
+        <details open>
+          <summary>MIN 7:19 — “Hay que cambiar dos cosas” — quinta llamada, mismo error</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Nadia: “Realmente hay que cambiar dos cosas, que son alimentación y entrenamiento.”</div>
+            <p>Quinta llamada auditada. Quinta aparición de esta frase o de alguna variante. Eso no es un tic verbal. Es una forma de estructurar la venta que revela cómo Nadia piensa la llamada: primero anuncia el proceso, luego intenta encajar a la persona dentro de él.</p>
+            <p>Keenan (Gap Selling) es explícito: el closer no vende el proceso, vende el estado futuro. Cuando se dice “hay que cambiar dos cosas,” el foco mental del prospect se desplaza del futuro que quiere al trabajo que le espera. Eso no construye urgencia — la reduce.</p>
+            <p>Con Silvia no importó porque Silvia ya quería comprar. Con una próxima Begoña, puede ser el momento en que el Elefante decide que hay demasiado trabajo por delante.</p>
+            <div class="split">
+              <div class="mini"><h5>Opción A · Keenan — estado futuro primero</h5><p class="script">“Silvia, lo que me describes — tonificada, fuerte, subiendo montañas con tu marido dentro de diez años — eso es completamente posible. Especialmente si empezamos a trabajar antes de que la menopausia cambie las reglas del juego. ¿Qué es lo que más te preocupa perder si no haces nada ahora?”</p><p><strong>Por qué funciona:</strong> El foco es el futuro de Silvia, no el proceso del programa.</p></div>
+              <div class="mini"><h5>Opción B · Challenger Sale — enseña algo antes de describir</h5><p class="script">“Silvia, lo que me cuentas del moho y la recuperación — hay algo importante que entender. Tu cuerpo no ha pasado por un proceso normal de ganancia de peso. Ha pasado por un trauma real. Y lo que funciona para cualquier mujer de 40 años no funciona igual para ti. El protocolo tiene que ser diferente.”</p><p><strong>Por qué funciona:</strong> Enseña algo que Silvia no sabía. Posiciona el programa como la solución a SU problema específico, no a “perder peso en general”.</p></div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 9:47 + 10:52 + 12:28 — Tres preguntas hipotéticas seguidas</summary>
+          <div class="details-body">
+            <div class="quote">Min 9:47 — “¿Estarías ahora dispuesta al final a sacar algo de tiempo para comenzar a entrenar?”<br>Min 10:52 — “¿Tú crees que te podrías comprometer con eso, con entrenar una horita?”<br>Min 12:28 — “¿Tú te podrías comprometer con decir, venga, ahora tres horitas al día?”</div>
+            <p>Tres preguntas hipotéticas en 3 minutos. Rob Fitzpatrick (Mom Test) llama a estas “questions that get the answer you want, not the answer you need.” Cualquier persona que ha llegado a una llamada de ventas responde “sí, claro, sí” a estas preguntas porque no cuestan nada. Son afirmaciones sin coste.</p>
+            <p>Con Silvia, las tres obtuvieron “sí” automático. No porque Silvia vaya a hacerlo — sino porque decir “no” a una hipótesis es socialmente incómodo. El dato real sobre si Silvia va a entrenar no está en estas respuestas. Está en su historial de comportamiento: seis meses con mancuernas en casa, bici estática todos los días, 7000 pasos diarios. Eso ya dice “sí” sin que haga falta preguntar.</p>
+            <div class="split">
+              <div class="mini"><h5>Opción A · Mom Test — comportamiento real</h5><p class="script">“Silvia, llevas seis meses con las mancuernas y la bici estática. ¿Qué es lo que te ha impedido hasta ahora ver los resultados que esperabas? ¿Qué tendría que haber sido diferente para que esos seis meses hubieran funcionado?”</p><p><strong>Por qué funciona:</strong> Revela los bloqueadores reales del sistema de Silvia — información que el programa tiene que resolver explícitamente.</p></div>
+              <div class="mini"><h5>Opción B · SPIN — Implicación desde el comportamiento</h5><p class="script">“Llevas 3-4 años con la bici y seis meses con las mancuernas. Eso es constancia real. ¿Qué te dice el hecho de que con esa constancia los resultados no hayan llegado como esperabas?”</p><p><strong>Por qué funciona:</strong> Rackham dice que la pregunta de Implicación convierte el problema en urgencia. Silvia responde sola el “por qué necesito un sistema diferente”.</p></div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 10:15-11:08 — “Yo también soy autónoma” — un minuto hablando de Nadia</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Nadia: “No te entiendo porque yo también soy autónoma, también trabajo antes desde las 7 ya empezaba con el ordenador y luego es que no hay un fin, ¿me entiendes? [...] Eso me pasa a mí y al final dije, no, mira, la primera hora de la mañana va a ser sagrada para mí...”</div>
+            <p>Esto duró aproximadamente 50 segundos. En una llamada de 45 minutos, 50 segundos hablando del propio closer sobre sí misma es un problema de estructura. Voss (Never Split the Difference) es claro: en una conversación de diagnóstico, el closer habla lo mínimo posible. Cada segundo de hablar del closer es un segundo robado de escuchar al prospect.</p>
+            <p>El error más profundo aquí no es el tiempo — es la dinámica que crea. Cuando el closer comparte su propia historia para validar a la prospect, invierte la relación de autoridad. De repente el closer pasa de ser el experto que diagnostica a ser un par que cuenta su historia. Eso debilita la posición.</p>
+            <p>Silvia no necesitaba que Nadia compartiera su experiencia laboral para confiar en el programa. El tiempo se debía haber usado en preguntar: “¿Cómo gestionas ahora mismo la energía después de diez horas de trabajo? ¿Hay un momento del día en que te sientes más con ganas de moverte?”</p>
+            <div class="split">
+              <div class="mini"><h5>Opción A · Voss — redirigir al prospect</h5><p class="script">“Entiendo perfectamente eso de no saber cuándo termina el trabajo cuando eres autónoma. ¿Cuándo del día sueles tener más energía — mañana o tarde?”</p><p><strong>Por qué funciona:</strong> Valida sin hablar de sí misma, y abre una pregunta de comportamiento real sobre el sistema de Silvia.</p></div>
+              <div class="mini"><h5>Opción B · Mom Test — información útil</h5><p class="script">“Silvia, con tu horario actual — empezando a las 6 o las 7 — ¿cuándo sientes que podrías encajar esos 40 minutos sin que te cueste sacrificar algo importante?”</p><p><strong>Por qué funciona:</strong> Obtiene datos de comportamiento real sobre la disponibilidad de Silvia, que son más útiles que cualquier historia personal de Nadia.</p></div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 23:24-24:44 — El diagnóstico emocional superficial</summary>
+          <div class="details-body">
+            <p>Nadia preguntó “¿cómo te sientes contigo misma? ¿Cómo te ves?” — que es una pregunta válida. Silvia dio una respuesta moderada: “me siento bien, mi autoestima es buena, pero me veo en el espejo y no me gusta la parte del abdomen.” Nadia escuchó y continuó.</p>
+            <p>Luego en el 24:08 Nadia mencionó al marido más joven y preguntó si eso generaba miedo. Silvia dio una respuesta emocional genuina: “quiero mantener ese nivel de actividad porque lo disfruto mucho.”</p>
+            <p>Aquí está el error de profundidad. Silvia acaba de decir algo muy específico: tiene un marido más joven que la ama y con quien disfruta viajando. Su miedo no es estético — es perder la paridad física que mantiene su vida de pareja activa. Eso es un activo emocional de primer nivel.</p>
+            <div class="quote">Label que faltó: “Parece que lo que más te preocupa no es cómo te ves en el espejo — es que dentro de diez años no puedas seguirle el ritmo a él en esos viajes que disfrutáis tanto.” [Silencio.]</div>
+            <p>Esa frase, con ese silencio, habría sido el activo del cierre. En cambio, Nadia preguntó “¿tú con esta subida de peso te has notado que estás menos ágil?” — que es una pregunta de Situación cuando se necesitaba un label emocional.</p>
+            <div class="split">
+              <div class="mini"><h5>Opción A · Voss — labeling del activo más profundo</h5><p class="script">“Parece que lo que más te preocupa no es la báscula — es la imagen de un futuro en el que tú y tu marido sigáis viajando juntos con el mismo ritmo, y que eso depende de lo que hagas ahora.”
+[Silencio de 4 segundos.]</p><p><strong>Por qué funciona:</strong> Nombra el miedo real de Silvia con precisión. Cuando el prospect escucha su propia realidad formulada así, la conexión es inmediata.</p></div>
+              <div class="mini"><h5>Opción B · SPIN — Implicación temporal</h5><p class="script">“Silvia, si dentro de cinco años el nivel de actividad que tienes ahora ha bajado — las cuestas, los viajes, el ritmo — ¿cómo crees que eso afectaría a tu relación con tu marido y a la vida que disfrutáis juntos?”</p><p><strong>Por qué funciona:</strong> Rackham — convierte el dolor físico en consecuencia relacional real. Esa consecuencia tiene un peso emocional que mueve al Elefante.</p></div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 26:42-27:10 — La única Implicación de la llamada — deflactada</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Nadia: “Imagínate de aquí a un año, si sigues con el mismo estilo de vida que ahora, ¿tú crees que podría ir a más?”</div>
+            <p>Esta fue la única pregunta de Implicación de todo el diagnóstico. Bien formulada. El problema fue lo que vino después.</p>
+            <p>Silvia respondió: “no sé si me mantendría, la verdad es que los últimos meses ya no he notado más cambios, creo que me han mantenido estable.”</p>
+            <p>Eso era información nueva e importante: Silvia no cree que va a empeorar. Su urgencia no es “si no hago algo me voy a deteriorar” — es “no estoy donde quiero estar y no sé cómo llegar.” Eso cambia el argumento del programa de “parar el deterioro” a “llegar donde quiero.”</p>
+            <p>Nadia respondió: “¿te conformarías con estar así como estás ahora el resto de tu vida?” — pregunta válida. Pero luego inmediatamente: “porque mi pregunta a lo que voy es si realmente el hecho de que estés aquí es porque no estás conforme...” — Nadia contestó su propia pregunta antes de dejar que Silvia lo hiciera.</p>
+            <p>La pregunta de Implicación necesita silencio después de la respuesta del prospect. El closer no rellena ese silencio — deja que el prospect lo sienta.</p>
+            <div class="split">
+              <div class="mini"><h5>Opción A · SPIN + silencio</h5><p class="script">“Silvia, si dentro de tres años el cuerpo que tienes ahora es exactamente igual al que tienes hoy — mismo abdomen, misma ropa, misma sensación subiendo cuestas — ¿eso te parece bien o eso sería un fracaso personal para ti?”
+[Silencio. Esperar.]</p><p><strong>Por qué funciona:</strong> La pregunta es binaria y fuerza una respuesta emocional real. “Fracaso personal” activaría la identidad de Silvia (“lo que quiero lo consigo”) como argumento de decisión.</p></div>
+              <div class="mini"><h5>Opción B · Gap Selling — nombrar la brecha</h5><p class="script">“Silvia, llevas seis meses con las mancuernas, cuatro años con la bici, 7000 pasos diarios. Eso es disciplina real. Y sigues sin el cuerpo que quieres. ¿Cuánto más tiempo quieres que pase así?”</p><p><strong>Por qué funciona:</strong> Keenan dice que la brecha tiene que ser sentida en su dimensión temporal. El contraste entre el esfuerzo de Silvia y la ausencia de resultados crea urgencia genuina.</p></div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 28:25 — “Yo estoy segurísima de que te podemos ayudar” — antes de terminar el diagnóstico</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Nadia: “Bueno pues Silvia, con lo que me has comentado, yo estoy segurísima de que te podemos ayudar con el programa que tenemos, ¿vale?”</div>
+            <p>Este patrón aparece en múltiples llamadas de Nadia. Es una señal prematura de cierre que ocurre cuando el diagnóstico emocional todavía no está completo. En este caso, en el minuto 28, Nadia no había explorado:</p>
+            <ul class="clean-list">
+              <li>El activo del marido más joven en profundidad.</li>
+              <li>La dimensión de la menopausia como urgencia específica.</li>
+              <li>El miedo más profundo de Silvia: perder la paridad con su marido en viajes.</li>
+              <li>El historial de éxitos de Silvia como argumento del cierre.</li>
+            </ul>
+            <p>Cialdini (Pre-Suasión) documentaría esto como un error de timing: cuando el closer lanza la señal de “podemos ayudarte” antes de que el prospect haya sentido completamente la magnitud de su propio problema, el pitch llega a un cerebro que todavía no está en el estado de máxima receptividad.</p>
+            <p>Con Silvia no importó — ella ya estaba en ese estado antes de la llamada. Con una prospect que necesita convencer, ese timing habría cortado el diagnóstico justo cuando más faltaba profundizar.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="pitch">
+      <div class="section-head"><div><h3>Fase 3 — Pitch y cierre</h3><p class="lead">La llamada cerró, pero el pitch y el cierre no estuvieron a la altura del perfil de Silvia.</p></div></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="kicker">Pitch · 28:51-41:38 · 13 minutos</div>
+          <p><strong>Lo que hizo Nadia:</strong> Pitch de 13 minutos. Estructura: tres pilares, alimentación personalizada, entrenamiento en casa, acompañamiento por WhatsApp.</p>
+          <p><strong>Lo que estaba bien:</strong> Nadia usó datos reales de Silvia — la avena, el trabajo desde casa, el mediodía sin tiempo para cocinar, las cantidades, el cubata del fin de semana. Eso es personalización real y es mérito genuino.</p>
+          <p>El momento de “la airfryer” (min 35:25) fue demasiado casual y tangencial, pero el instinto de conectar con la vida real de Silvia estaba ahí.</p>
+          <div class="callout orange"><strong>Lo que faltó: el Reframe.</strong><p>El Challenger Sale dice que el pitch de élite no describe el programa — enseña al prospect algo que no sabía sobre su propio problema.</p></div>
+          <p>Silvia tenía una situación médica muy específica: intoxicación por moho, sistema inmune comprometido, rebound de una dieta restrictiva involuntaria, perimenopausia. Eso no es “mujer de 40 que quiere perder peso.” Es un caso clínico específico.</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Reframe que faltó</div>
+          <p class="script">“Silvia, lo que me estás describiendo no es un problema de alimentación o de ejercicio estándar. Tu cuerpo ha pasado por un trauma real — dos años de toxinas atacando tu sistema inmune, urgencias diarias, una dieta que no elegiste pero que tu cuerpo vivió como restricción. Cuando el cuerpo sale de ese estado, reacciona acumulando exactamente lo que describes: grasa abdominal, dificultad para perder peso. Lo que funciona para cualquier mujer de 47 años no funciona igual para ti. El protocolo tiene que empezar por entender cómo está tu cuerpo ahora mismo, no por aplicar un plan genérico. Eso es exactamente lo que vamos a hacer.”</p>
+          <p>Esa frase cambia todo el frame. Silvia ya no está comprando “un programa de pérdida de peso” — está comprando la solución específica a su situación específica. Eso hace que el precio de 1.300€ sea irrefutable.</p>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:20px"><div><h3>Los activos que no llegaron al pitch</h3></div></div>
+      <div class="grid-5 grid-4">
+        <div class="callout blue"><strong>1. Marido y viajes activos</strong><p>El motivador emocional más poderoso de la llamada.</p></div>
+        <div class="callout blue"><strong>2. “Mantener ese nivel de actividad”</strong><p>Las propias palabras de Silvia sobre su estado futuro.</p></div>
+        <div class="callout blue"><strong>3. “Lo que quiero lo consigo”</strong><p>Identidad de logro. Activo de Cialdini para el cierre.</p></div>
+        <div class="callout blue"><strong>4. Talla 14</strong><p>Miedo específico, concreto y medible.</p></div>
+        <div class="callout blue"><strong>5. Viajes y cuestas</strong><p>Señal física de deterioro con consecuencias relacionales.</p></div>
+      </div>
+      <p class="lead">Ninguno de estos cinco apareció en el argumento del precio.</p>
+
+      <div class="accordion" style="margin-top:18px">
+        <details open>
+          <summary>MIN 41:38-42:27 — El cierre más débil posible de una llamada cerrada</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Nadia: “¿Y bueno, ya comentarte el tema de la inversión, ¿vale? Son 1.500 euros el programa por los seis meses.”<br>Y luego en el 42:15: “¿Vamos para adelante entonces? ¿Crees que esto te puede ayudar?”<br>Silvia respondió: “Vamos para adelante, sí.”</div>
+            <div class="grid-3">
+              <div class="mini"><h5>Problema 1</h5><p><strong>El precio llegó sin Pre-Suasión.</strong> El frame mental del prospect en el momento de escuchar el precio determina cómo lo evalúa. Si lo último que Silvia tenía en la cabeza era el acompañamiento diario por WhatsApp, el precio llega en frame de “¿vale la pena este servicio?”. Si lo último era ella en diez años sin poder seguirle el ritmo a su marido, el frame cambia.</p></div>
+              <div class="mini"><h5>Problema 2</h5><p><strong>El compromiso de Silvia nunca fue usado.</strong> “Lo que quiero lo consigo” debía aparecer en el cierre: “Silvia, me dijiste que lo que quieres lo consigues. Has perdido 20 kilos a los 30. Has sobrevivido dos años de intoxicación. ¿Esto qué es para ti?”</p></div>
+              <div class="mini"><h5>Problema 3</h5><p><strong>“¿Crees que esto te puede ayudar?” es una pregunta de validación, no de decisión.</strong> Con Silvia funcionó. Con otra prospect con dudas obtendría: “sí, creo que sí... pero me lo tengo que pensar”.</p></div>
+            </div>
+            <div class="split">
+              <div class="mini"><h5>Opción A · Pre-Suasión + Activos + Cialdini</h5><p class="script">“Silvia, antes del precio — me dijiste que quieres estar subiendo cuestas con tu marido dentro de diez años. Me dijiste que la ropa de talla 14 es tu límite y no quieres cruzarlo. Y me dijiste que lo que quieres lo consigues. El programa son 1.300€ pago único o 1.500€ en tres cuotas. ¿Cuál se adapta mejor a ti?”</p><p><strong>Por qué funciona:</strong> El precio llega en el frame emocional correcto, con los activos de Silvia como contexto, y la decisión se desplaza de “sí o no” a “cuál de las dos opciones”.</p></div>
+              <div class="mini"><h5>Opción B · Jones + Cialdini</h5><p class="script">“Silvia, ya me has dicho todo lo que necesito saber. La única pregunta que me queda: ¿empezamos esta semana?”</p><p><strong>Por qué funciona:</strong> Phil M. Jones documenta que el cierre más efectivo es el que elimina la deliberación y la convierte en una fecha concreta. Silvia ya dijo que quiere empezar. La fecha la activa.</p></div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="frame">
+      <div class="section-head"><div><h3>Frame-by-frame — todos los momentos críticos</h3><p class="lead">Timeline visual con señales, activos y fallos.</p></div></div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 1:32 | Silvia | Señal de prospect pre-vendida</h4><p>“Lo que me encuentro con mucha gente con la que trabajas no entiende lo que son los desafíos de tener cuarenta y tantos.”</p><p>La primera frase de Silvia dice: “ya confío en Jonathan, solo quiero confirmar que vosotros lo entendéis.” No es una prospect que necesita convencer.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 2:28-6:50 | Silvia | Activos entregados voluntariamente</h4><p>Toda la historia del moho — cuatro minutos de contexto médico específico que cualquier closer con el Challenger Sale activo habría convertido en el Reframe principal del pitch. Nadia lo escuchó bien pero no lo construyó como argumento.</p><p><strong>Fuente:</strong> Challenger Sale — la historia de Silvia es el insight del pitch.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 6:50 | Silvia | Activo central subexplorado</h4><p>“No quiero encontrarme que dentro de 10 años no puedo disfrutar de una vida activa cuando viajamos. Mi marido es más joven que yo.”</p><p><strong>Fuente:</strong> Voss — el labeling de este momento era el activo del cierre. No ocurrió.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 7:19 | Nadia | Resta</h4><p>“Hay que cambiar dos cosas.” — Quinta vez.</p><p><strong>Fuente:</strong> Keenan — vende proceso antes de que el prospect sienta la brecha.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 9:47-12:28 | Nadia | Tres restas</h4><p>Tres preguntas hipotéticas seguidas. “¿Estarías dispuesta...? ¿Te podrías comprometer...? ¿Te podrías comprometer...?”</p><p><strong>Fuente:</strong> Mom Test — cero información de comportamiento real.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 10:15 | Nadia | Resta</h4><p>50 segundos hablando de su propia experiencia como autónoma.</p><p><strong>Fuente:</strong> Voss / Let's Get Real — el closer habla lo mínimo posible durante el diagnóstico.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 23:24 | Nadia | Suma parcial</h4><p>“¿Cómo te sientes contigo misma?” — buena pregunta de apertura emocional.</p><p><strong>Fuente:</strong> Voss — bien instinto. Mal seguimiento cuando Silvia respondió.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 24:08 | Nadia | Suma con fallo</h4><p>Mencionó al marido más joven. Silvia respondió con el activo de los viajes.</p><p><strong>Fuente:</strong> Voss — el label del activo emocional nunca llegó.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 26:42 | Nadia | Suma parcial</h4><p>“Imagínate de aquí a un año...” — única pregunta de Implicación de la llamada.</p><p><strong>Fuente:</strong> SPIN Rackham — bien construida. Deflactada cuando Nadia continuó sin dejar el silencio.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 27:43 | Silvia | Activo de identidad — nunca usado en cierre</h4><p>“Lo que quiero lo consigo y no me da miedo esforzarme.”</p><p><strong>Fuente:</strong> Influence (Cialdini) — compromiso y consistencia. Debía haber aparecido en el cierre.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 28:25 | Nadia | Resta</h4><p>“Yo estoy segurísima de que te podemos ayudar.” — Antes de terminar el diagnóstico.</p><p><strong>Fuente:</strong> Pre-Suasión — señal prematura que corta el diagnóstico emocional.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 28:51-41:38 | Nadia | Pitch de 13 minutos</h4><p>Personalización real pero sin Reframe. Sin los activos del diagnóstico. Sin check-ins estructurados.</p><p><strong>Fuente:</strong> Challenger Sale + SPIN Rackham.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 35:25 | Nadia | Tangente</h4><p>Conversación sobre la airfryer — off topic, 40 segundos sin valor diagnóstico ni de pitch.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 41:38 | Nadia | Precio sin Pre-Suasión</h4><p>El precio llegó sin frame emocional previo.</p><p><strong>Fuente:</strong> Pre-Suasión (Cialdini) — el contexto antes del precio determina cómo se evalúa.</p></div></div>
+        <div class="t-item"><div class="t-dot"></div><div class="t-card"><h4>MIN 42:15 | Nadia | Cierre débil</h4><p>“¿Vamos para adelante entonces? ¿Crees que esto te puede ayudar?”</p><p><strong>Fuente:</strong> Influence + Jones — los activos de Silvia nunca usados. Pregunta de validación, no de decisión.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="evolucion">
+      <div class="section-head"><div><h3>Evolución de Nadia — 5 llamadas, la fotografía completa</h3></div></div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>Dimensión</th><th>Soledad</th><th>Magda</th><th>Mónica</th><th>Begoña</th><th>Silvia</th></tr></thead>
+          <tbody>
+            <tr><td>Nota global</td><td>4.6</td><td>5.1</td><td>5.0</td><td>3.2</td><td>5.2</td></tr>
+            <tr><td>Resultado</td><td>DERROTA</td><td>DERROTA</td><td>SIN C.</td><td>SIN C.</td><td>CERRADA</td></tr>
+            <tr><td>Prospect pre-vendida</td><td>No</td><td>No</td><td>No</td><td>No</td><td>SÍ — crítico</td></tr>
+            <tr><td>“Hay que cambiar dos cosas”</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+            <tr><td>Preguntas hipotéticas</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+            <tr><td>Implicación construida</td><td>No</td><td>No</td><td>No</td><td>No</td><td>1 parcial</td></tr>
+            <tr><td>Activos en el cierre</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>No</td></tr>
+            <tr><td>Labeling emocional profundo</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>Reframe (Challenger Sale)</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>Pre-Suasión antes del precio</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>Diagnóstico emocional real</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Superficial</td></tr>
+            <tr><td>Tangente sobre Nadia misma</td><td>—</td><td>—</td><td>—</td><td>—</td><td>50 seg</td></tr>
+            <tr><td>Resistencia encontrada</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No — diferencial key</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="callout red"><strong>La fotografía que esto da</strong><p>Cuatro llamadas con prospects que tenían resistencia: cuatro resultados sin cierre, notas entre 3.2 y 5.1.</p><p>Una llamada con la prospect más cualificada y pre-vendida del equipo: cierre, nota 5.2.</p><p>Eso no es una curva de aprendizaje. Es un sistema que solo funciona cuando no necesita funcionar.</p></div>
+        <div class="callout orange"><strong>La comparación más dura</strong><p>Silvia (CERRADA con nota 5.2) vs Begoña (SIN CIERRE con nota 3.2). Begoña era una prospect perfectamente cualificada — 95 kilos, Mounjaro, solo necesitaba nutrición, médico de respiratorio diciéndole que adelgazara.</p><p>Silvia era también perfectamente cualificada. La diferencia entre los dos resultados no fue la calidad de la prospect. Fue que Begoña no venía pre-vendida y Silvia sí.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="diagnostico-real">
+      <div class="section-head"><div><h3>El diagnóstico real — lo que este cierre dice sobre el sistema</h3></div></div>
+      <div class="card">
+        <p>La raíz del problema de Nadia no es técnica. No es que no sepa escuchar o que no sea empática — en esta llamada se vio calidez genuina y buenas preguntas en algunos momentos. La raíz es que no tiene una arquitectura mental de la llamada que funcione independientemente de lo que diga la prospect.</p>
+        <div class="grid-2">
+          <div class="mini"><h5>Lo que Nadia hace en cada llamada</h5><p>Responde a lo que el prospect dice. Si el prospect habla, escucha. Si el prospect pone resistencia, no sabe qué hacer. Si el prospect llega convencida, todo fluye.</p></div>
+          <div class="mini"><h5>Lo que hace un closer con sistema</h5><p>Lleva la conversación hacia donde necesita ir. Tiene claro antes de entrar cuál es el gap que va a buscar, qué Reframe va a usar en el pitch, y cuáles son las dos o tres resistencias más probables con su respuesta ya preparada.</p></div>
+        </div>
+        <p>Eso no cambia si el prospect habla mucho o poco, si llega motivado o escéptico.</p>
+        <p>Rackham (SPIN) lo documenta con datos de 35.000 llamadas: los closers que mejoran son los que cambian la estructura de sus preguntas, no solo el tono. Nadia tiene buen tono. Las preguntas siguen siendo las mismas.</p>
+        <p>Específicamente para el problema de las preguntas hipotéticas — después de cinco llamadas con el mismo error, no es un olvido. Es un hábito. Y los hábitos no se cambian con conocer la teoría. Se cambian haciendo un cambio concreto en cada llamada: antes de hacer cualquier pregunta sobre el futuro o el compromiso, preguntarse “¿esta pregunta pregunta por lo que hará esta persona o por lo que diría esta persona?” Si la respuesta es “lo que diría” — la pregunta no se hace.</p>
+      </div>
+    </section>
+
+    <section class="section" id="plan">
+      <div class="section-head"><div><h3>Plan de entrenamiento — Nadia, lo que cambia ya</h3></div></div>
+      <div class="grid-2">
+        <div class="callout green"><strong>Lo que no se toca</strong><ul class="clean-list"><li>La calidez. Nadia conecta de forma genuina y eso no se construye con entrenamiento.</li><li>La agenda. Está bien estructurada en todas las llamadas.</li></ul></div>
+        <div class="callout red"><strong>Lo que cambia esta semana — sin negociación</strong><p>Cinco protocolos operativos para que la siguiente llamada no dependa de que la prospect venga decidida de casa.</p></div>
+      </div>
+      <div class="accordion" style="margin-top:16px">
+        <details open><summary>1. “Hay que cambiar dos cosas” — eliminada permanentemente</summary><div class="details-body"><p>Sustitución obligatoria: el primer momento diagnóstico empieza con el estado futuro del prospect, no con la descripción del proceso del programa.</p></div></details>
+        <details><summary>2. Ninguna pregunta hipotética más</summary><div class="details-body"><p>Antes de cada pregunta sobre compromiso o disponibilidad: “¿estoy preguntando por lo que hará o por lo que diría?” Si es lo segundo, no se hace.</p><p>La sustitución siempre es por comportamiento pasado: “la última vez que intentaste hacer algo así, ¿qué pasó exactamente?”</p></div></details>
+        <details><summary>3. Preparación pre-llamada — 5 minutos antes de cada llamada</summary><div class="details-body"><p>Tres preguntas obligatorias antes de entrar:</p><ul class="clean-list"><li>¿Cuál es el gap principal que voy a buscar?</li><li>¿Cuál es el Reframe que voy a usar en el pitch?</li><li>¿Cuál es la resistencia más probable y cuál es mi respuesta?</li></ul><p>Si no hay respuestas a las tres, la llamada no empieza.</p></div></details>
+        <details><summary>4. No hablar de uno mismo durante el diagnóstico</summary><div class="details-body"><p>Si aparece el impulso de compartir una experiencia propia para validar al prospect — pararlo.</p><p>Sustituir por: “Entiendo eso. ¿Qué fue lo que hizo que llegaras ahí?”</p></div></details>
+        <details><summary>5. El Post-it — nueva llamada sin él</summary><div class="details-body"><p>Antes del pitch: cinco activos escritos del diagnóstico.</p><p>El pitch empieza con Activo 1. El cierre empieza con Activos 1, 2 y 3 + el número o declaración de compromiso del prospect.</p></div></details>
+      </div>
+    </section>
+
+    <section class="section" id="scripts">
+      <div class="section-head"><div><h3>Scripts para Nadia — los que cambian el resultado con otra prospect</h3></div></div>
+      <div class="grid-2">
+        <div class="card"><div class="kicker">Script 01 · Sustitución permanente de “hay que cambiar dos cosas”</div><p><strong>Cuándo:</strong> Siempre. Al inicio de la exploración diagnóstica.</p><p class="script">“[NOMBRE], dime una cosa — si dentro de un año las cosas hubieran cambiado exactamente como tú quieres, ¿cómo te verías? ¿Qué sería diferente en tu día a día?”
+[Escuchar. No hablar. Dejar que el prospect construya el estado futuro.]</p></div>
+        <div class="card"><div class="kicker">Script 02 · Sustitución de preguntas hipotéticas por preguntas de comportamiento</div><p><strong>Cuándo:</strong> Siempre que aparezca el impulso de preguntar “¿podrías sacar una hora...?”</p><p class="script">“[NOMBRE], la semana pasada — ¿hubo algún momento en que podrías haber entrenado y no lo hiciste? ¿Qué pasó?”</p></div>
+        <div class="card"><div class="kicker">Script 03 · Reframe Challenger para historial médico o trauma físico</div><p><strong>Cuándo:</strong> Cuando el prospect menciona una enfermedad, lesión, o situación física específica que generó el problema de peso.</p><p class="script">“[NOMBRE], lo que me describes no es un problema de dieta y ejercicio estándar. Tu cuerpo ha pasado por [lo específico que describió]. El protocolo que funciona para eso es diferente al que funciona para cualquier otra mujer de tu edad. Y eso es exactamente lo que vamos a construir para ti.”</p></div>
+        <div class="card"><div class="kicker">Script 04 · Labeling del activo relacional</div><p><strong>Cuándo:</strong> Cuando el prospect menciona la pareja o familia como motivación para el cambio.</p><p class="script">“Parece que lo que más te preocupa no es cómo te ves en el espejo — es la imagen de [lo específico que describió la prospect sobre su vida futura con quien ama].”
+[Silencio de 4 segundos.]</p></div>
+        <div class="card"><div class="kicker">Script 05 · Cierre con activos y Pre-Suasión</div><p><strong>Cuándo:</strong> Antes de presentar el precio, siempre.</p><p class="script">“[NOMBRE], antes del precio — me dijiste [Activo 1]. Me describiste [Activo 2]. Y me dijiste [Activo 3 — declaración de identidad o compromiso]. El programa son [precio]. ¿Cuándo empezamos?”</p></div>
+        <div class="card"><div class="kicker">Script 06 · Respuesta ante ausencia de resistencia</div><p><strong>Cuándo:</strong> Cuando el prospect dice sí a todo desde el principio.</p><p class="script">En lugar de acelerar al pitch: “Me alegra que todo esto resuene. Antes de contarte el programa, quiero asegurarme de entender bien tu situación. ¿Cuál es el momento del día en que más notas la diferencia entre cómo estás ahora y cómo quieres estar?”</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="ejecutivo">
+      <div class="section-head"><div><h3>Resumen ejecutivo — la verdad completa</h3></div></div>
+      <div class="grid-3">
+        <div class="metric"><small>Nota</small><strong>5.2 / 10</strong><span class="tag orange">Cerrada débil</span></div>
+        <div class="metric"><small>Resultado</small><strong>1.300€</strong><span class="tag green">Pago único</span></div>
+        <div class="metric"><small>Calificación real</small><strong>Prospect fácil</strong><span class="tag red">No valida sistema</span></div>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="callout red">
+          <strong>Cinco cosas que causaron los cuatro cierres fallidos previos analizados y que siguen aquí</strong>
+          <ol class="clean-list">
+            <li>“Hay que cambiar dos cosas” — quinta llamada, mismo patrón.</li>
+            <li>Cero preguntas de Implicación reales en las primeras cuatro llamadas analizadas. Una parcial en esta.</li>
+            <li>Preguntas hipotéticas en lugar de preguntas de comportamiento — en todas las llamadas.</li>
+            <li>Los activos del diagnóstico nunca llegan al cierre — en ninguna de las cinco llamadas analizadas.</li>
+            <li>Sin Reframe en el pitch — en ninguna de las cinco llamadas analizadas.</li>
+          </ol>
+        </div>
+        <div class="callout green">
+          <strong>Tres cosas que merecen reconocimiento real</strong>
+          <ol class="clean-list">
+            <li>El tono sigue siendo cálido y genuino. Eso no se fabrica.</li>
+            <li>La escucha del historial de Silvia (moho, pandemia, rebote) fue paciente y atenta.</li>
+            <li>La personalización del pitch (avena, trabajo desde casa, cantidades) tiene datos reales de la llamada.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="callout blue" style="margin-top:16px">
+        <div class="kicker">Para Nadia, la frase que resume estas cinco llamadas analizadas</div>
+        <p class="bigline">“Cerraste a Silvia. Bien. Pero antes de que eso te dé confianza, responde esta pregunta: ¿Qué habrías hecho diferente si Silvia hubiera dicho ‘es que ahora no puedo permitirme 1.300 euros’ o ‘lo tengo que pensar’ o ‘creo que no voy a ser constante’? Si la respuesta no es inmediata y concreta, el sistema no está funcionando. Silvia compró a pesar de la llamada, no gracias a ella. Y eso importa porque otra prospect no va a venir pre-vendida.”</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="sticky-actions">
+  <button class="btn" onclick="window.print()">Imprimir / PDF</button>
+  <button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Arriba</button>
+</div>
+
+<script>
+const input = document.getElementById('searchInput');
+const root = document.querySelector('.main');
+let original = root.innerHTML;
+input.addEventListener('input', () => {
+  const q = input.value.trim();
+  root.innerHTML = original;
+  if(!q) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  nodes.forEach(node => {
+    if(re.test(node.nodeValue)){
+      const span = document.createElement('span');
+      span.innerHTML = node.nodeValue.replace(re, m => `<mark>${m}</mark>`);
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+  document.querySelectorAll('details').forEach(d => d.open = true);
+});
+</script>
+</body>
+</html>

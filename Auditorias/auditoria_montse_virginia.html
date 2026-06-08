@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría RevolucionaT · Montse · Virginia</title>
+  <style>
+    :root{
+      --bg:#f6f1e8;
+      --paper:#fffaf2;
+      --ink:#211a15;
+      --muted:#6e6258;
+      --line:#e6d8c5;
+      --gold:#d79b36;
+      --gold2:#f2c36b;
+      --terracotta:#bc5e3c;
+      --wine:#6e2f45;
+      --green:#2f6b57;
+      --blue:#315f86;
+      --red:#b8453d;
+      --shadow:0 24px 70px rgba(55,36,18,.16);
+      --shadow-soft:0 10px 28px rgba(55,36,18,.10);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 12% 5%, rgba(215,155,54,.22), transparent 32%),
+        radial-gradient(circle at 90% 12%, rgba(110,47,69,.16), transparent 30%),
+        linear-gradient(135deg,#f8f0df 0%,#f3eadb 45%,#f8f4ea 100%);
+      color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.55;
+    }
+    .progress{position:fixed;top:0;left:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--wine));width:0%;z-index:1000;box-shadow:0 0 20px rgba(215,155,54,.55)}
+    .wrap{max-width:1220px;margin:0 auto;padding:28px 22px 80px}
+    .hero{
+      position:relative;overflow:hidden;border-radius:36px;padding:42px;
+      background:linear-gradient(135deg,#2b1b17 0%,#5d2e2d 42%,#c78735 100%);
+      color:#fff;box-shadow:var(--shadow);min-height:440px;
+    }
+    .hero:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,255,255,.18) 0 1px,transparent 1px);background-size:26px 26px;transform:rotate(-8deg);opacity:.28}
+    .hero:after{content:"";position:absolute;right:-120px;bottom:-160px;width:460px;height:460px;border-radius:50%;background:rgba(255,255,255,.12);filter:blur(2px)}
+    .hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:end}
+    .kicker{letter-spacing:.16em;text-transform:uppercase;font-weight:800;font-size:.82rem;color:#ffe3a7;margin-bottom:16px}
+    h1{font-size:clamp(2.4rem,5vw,5.5rem);line-height:.92;margin:0 0 16px;font-weight:950;letter-spacing:-.06em}
+    .subtitle{font-size:1.25rem;max-width:760px;color:#fff3dc;margin:0 0 28px}
+    .hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+    .hero-stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:22px;padding:18px;backdrop-filter:blur(12px)}
+    .hero-stat .num{font-size:1.75rem;font-weight:950;line-height:1}.hero-stat .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:#ffe8bd;margin-top:6px}
+    .score-card{background:rgba(255,250,242,.94);color:var(--ink);border-radius:30px;padding:26px;box-shadow:0 22px 50px rgba(0,0,0,.18)}
+    .score-ring{width:160px;height:160px;border-radius:50%;margin:0 auto 18px;background:conic-gradient(var(--gold) 0 65%,rgba(33,26,21,.12) 65% 100%);display:grid;place-items:center;box-shadow:inset 0 0 0 14px rgba(255,250,242,.85)}
+    .score-ring span{font-size:2.8rem;font-weight:950}.score-ring small{font-size:1rem;color:var(--muted)}
+    .status{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;background:#e6f4ed;color:#205a45;font-weight:900;font-size:.86rem}
+    .sticky-nav{position:sticky;top:12px;z-index:50;margin:18px 0 28px;background:rgba(255,250,242,.86);backdrop-filter:blur(16px);border:1px solid rgba(230,216,197,.9);border-radius:999px;padding:10px;box-shadow:var(--shadow-soft);display:flex;gap:8px;overflow:auto}
+    .sticky-nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:800;font-size:.86rem;padding:10px 14px;border-radius:999px}.sticky-nav a:hover{background:#f0dfc7;color:var(--ink)}
+    section{margin:30px 0}.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 18px}.section-title h2{margin:0;font-size:clamp(1.65rem,3vw,2.6rem);line-height:1;font-weight:950;letter-spacing:-.04em}.section-title .tag{font-weight:900;color:var(--wine);background:#f4e3d6;border:1px solid #e8c9b4;border-radius:999px;padding:8px 12px;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+    .card{background:rgba(255,250,242,.94);border:1px solid rgba(230,216,197,.95);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-soft)}
+    .grid{display:grid;gap:18px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .mini{padding:18px;border-radius:22px;background:#fffdf8;border:1px solid var(--line)}.mini b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin-bottom:5px}.mini span{font-weight:850;color:var(--ink)}
+    .profile-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.pill{padding:12px 14px;border-radius:16px;background:#fffdf8;border:1px solid var(--line);font-weight:700}.pill:before{content:"•";color:var(--gold);font-weight:950;margin-right:8px}
+    .verdict{font-size:1.08rem}.verdict p{margin:0 0 16px}.callout{border-left:6px solid var(--gold);background:linear-gradient(90deg,rgba(215,155,54,.14),rgba(255,250,242,.8));padding:20px;border-radius:20px;margin:18px 0;font-weight:750}.callout.danger{border-color:var(--red);background:linear-gradient(90deg,rgba(184,69,61,.13),rgba(255,250,242,.8))}.callout.green{border-color:var(--green);background:linear-gradient(90deg,rgba(47,107,87,.13),rgba(255,250,242,.8))}
+    table{width:100%;border-collapse:separate;border-spacing:0 10px}.scoreboard th{text-align:left;color:var(--muted);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:0 12px}.scoreboard td{background:#fffdf8;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 12px;font-weight:700}.scoreboard td:first-child{border-left:1px solid var(--line);border-radius:16px 0 0 16px}.scoreboard td:last-child{border-right:1px solid var(--line);border-radius:0 16px 16px 0}.grade{font-weight:950;color:#fff;background:linear-gradient(135deg,var(--wine),var(--terracotta));border-radius:999px;padding:6px 10px;display:inline-block;min-width:48px;text-align:center}
+    .recognition{counter-reset:good}.good-card{position:relative;overflow:hidden}.good-card:before{counter-increment:good;content:"BIEN " counter(good);display:inline-flex;background:#ecf6ef;color:var(--green);font-weight:950;border-radius:999px;padding:7px 10px;font-size:.78rem;margin-bottom:12px}.good-card h3{margin:0 0 10px;font-size:1.2rem}.good-card p{margin:0 0 10px}
+    .sources{display:grid;gap:14px}.source{background:#fffdf8;border:1px solid var(--line);border-radius:24px;overflow:hidden}.source summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:950;display:flex;justify-content:space-between;gap:14px;align-items:center}.source summary::-webkit-details-marker{display:none}.source summary:after{content:"+";font-size:1.4rem;color:var(--gold);font-weight:900}.source[open] summary:after{content:"–"}.source .body{padding:0 20px 20px;color:#30261f}.source p{margin:0 0 14px}.quote{font-family:ui-serif, Georgia, serif;font-size:1.16rem;line-height:1.45;background:#f7ead7;border:1px solid #ead5ba;border-radius:22px;padding:18px;margin:14px 0;color:#3b261c}.quote:before{content:"“";font-size:2rem;color:var(--gold);line-height:0;margin-right:4px}
+    .timeline{position:relative;padding-left:26px}.timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:3px;background:linear-gradient(var(--gold),var(--wine));border-radius:99px}.time-item{position:relative;margin-bottom:16px;background:#fffdf8;border:1px solid var(--line);border-radius:22px;padding:18px}.time-item:before{content:"";position:absolute;left:-24px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px #f6f1e8}.time{font-weight:950;color:var(--wine);font-size:.9rem;text-transform:uppercase;letter-spacing:.06em}.time-item h3{margin:6px 0 8px}.time-item p{margin:0}
+    .comparison{overflow:auto}.matrix td,.matrix th{padding:12px 10px;text-align:center}.matrix th:first-child,.matrix td:first-child{text-align:left;font-weight:900}.matrix th{font-size:.75rem;text-transform:uppercase;color:var(--muted)}.matrix td{background:#fffdf8;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-weight:800}.matrix td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px}.matrix td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.no{color:var(--red)}.yes{color:var(--green)}
+    .plan-list{display:grid;gap:14px;counter-reset:plan}.plan-step{position:relative;background:#fffdf8;border:1px solid var(--line);border-radius:22px;padding:20px 20px 20px 70px}.plan-step:before{counter-increment:plan;content:counter(plan);position:absolute;left:20px;top:20px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--terracotta));color:#fff;font-weight:950}.plan-step h3{margin:0 0 8px}.plan-step p{margin:0}
+    .script{background:#fffdf8;border:1px solid var(--line);border-radius:24px;padding:20px;margin:14px 0}.script h3{margin:0 0 10px;color:var(--wine)}.script blockquote{margin:12px 0 0;padding:16px 18px;border-radius:18px;background:#f5eadb;border-left:5px solid var(--gold);font-weight:750}
+    .exec{background:linear-gradient(135deg,#241815,#6e2f45);color:#fff;border-radius:34px;padding:32px;box-shadow:var(--shadow)}.exec h2{color:#fff;margin-top:0}.exec .mini{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}.exec .mini b{color:#ffe3a7}.exec .mini span{color:#fff}.exec p{color:#fff4e3}.final-quote{font-family:ui-serif, Georgia, serif;font-size:1.35rem;line-height:1.45;color:#fff;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.22);padding:24px;border-radius:24px;margin-top:18px}
+    @media(max-width:900px){.hero-content,.grid.two,.grid.three,.grid.four,.profile-list{grid-template-columns:1fr}.hero{padding:28px}.hero-grid{grid-template-columns:repeat(2,1fr)}.sticky-nav{border-radius:22px}.score-card{order:-1}}
+    @media print{.sticky-nav,.progress{display:none}.card,.hero,.exec{box-shadow:none}body{background:#fff}.wrap{max-width:none}}
+  </style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-content">
+      <div>
+        <div class="kicker">REVOLUCIONA-T · CLOSER MONTSE · PROSPECTO VIRGINIA</div>
+        <h1>La llamada que cerró porque Virginia ya venía preparada</h1>
+        <p class="subtitle">Una venta real. Un hito para Montse. Y una advertencia estratégica: cerrar a una prospect de 9/10 no valida una estructura que sigue sin Reframe ni Pre-Suasión.</p>
+        <div class="hero-grid">
+          <div class="hero-stat"><div class="num">95'</div><div class="label">Duración</div></div>
+          <div class="hero-stat"><div class="num">6.5</div><div class="label">Nota global</div></div>
+          <div class="hero-stat"><div class="num">3×500€</div><div class="label">Venta cerrada</div></div>
+          <div class="hero-stat"><div class="num">8/10</div><div class="label">Compromiso</div></div>
+        </div>
+      </div>
+      <aside class="score-card">
+        <div class="score-ring"><div><span>6.5</span><small>/10</small></div></div>
+        <div class="status">✅ CERRADA · Stripe tras la llamada</div>
+        <p style="margin:18px 0 0;color:var(--muted);font-weight:700">Resultado: 3 cuotas de 500€ fraccionado. Cierre conseguido, pero con una prospect que llegó con el camino prácticamente despejado.</p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="sticky-nav">
+    <a href="#ficha">Ficha</a><a href="#contexto">Contexto</a><a href="#scoreboard">Scoreboard</a><a href="#veredicto">Veredicto</a><a href="#funciono">Funcionó</a><a href="#fuentes">13 fuentes</a><a href="#errores">Errores</a><a href="#comparativa">Comparativa</a><a href="#plan">Plan</a><a href="#resumen">Resumen</a>
+  </nav>
+
+  <section id="ficha">
+    <div class="section-title"><h2>Ficha del caso</h2><span class="tag">Datos base</span></div>
+    <div class="grid two">
+      <div class="card grid two">
+        <div class="mini"><b>Prospecto</b><span>Virginia · Madrid · 42 años · funcionaria</span></div>
+        <div class="mini"><b>Closer</b><span>Montse</span></div>
+        <div class="mini"><b>Fecha</b><span>26 mayo 2025</span></div>
+        <div class="mini"><b>Duración</b><span>95 minutos</span></div>
+        <div class="mini"><b>Resultado</b><span>✅ Cerrada · 3×500€</span></div>
+        <div class="mini"><b>Compromiso</b><span>8/10</span></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Historial Montse</h3>
+        <div class="profile-list">
+          <div class="pill">Emma · SEG. · 6.4</div>
+          <div class="pill">Gladys · SEG. · 7.1</div>
+          <div class="pill">Katherine · SEG. · 6.7</div>
+          <div class="pill">Susanna · S/CIE. · 5.5</div>
+          <div class="pill">Lydia · SEG. · 6.5</div>
+          <div class="pill">Virginia · CER. · 6.5</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-top:0">Perfil Virginia</h3>
+      <div class="profile-list">
+        <div class="pill">Funcionaria · trabajo sedentario a 20 pasos de casa</div>
+        <div class="pill">Marido Juan Carlos: musculador, turno noche, come mucho, sobrepeso</div>
+        <div class="pill">Hijo Víctor, 8 años</div>
+        <div class="pill">Bajo supervisión: endocrinólogo desde diciembre 2024 + psicóloga reciente</div>
+        <div class="pill">Medicación activa: Wegovy dosis baja prescrita · rehusó Metformina</div>
+        <div class="pill">Ha perdido 12 kg en un año: 100+ → 92 kg · anclada en 92</div>
+        <div class="pill">Objetivo: 78-80 kg · historial de 15+ dietas desde 2015</div>
+        <div class="pill">Recursos en casa: bici spinning, banco de musculación, bandas elásticas</div>
+        <div class="pill">Natación 1x/semana con monitor desde septiembre</div>
+        <div class="pill">Zumba abandonado: lesión + fue el profesor</div>
+        <div class="pill">Conoce Jonathan desde hace poco — llegó motivada y orientada</div>
+        <div class="pill">Frustración real: pierde peso pero “sigue desordenada” con la comida</div>
+        <div class="pill">Decisión autónoma · sin obstáculo económico · sin marido veto</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contexto">
+    <div class="section-title"><h2>Antes de empezar</h2><span class="tag">El contexto que define la auditoría</span></div>
+    <div class="card verdict">
+      <p>Esta llamada cerró. Eso es un hecho real y merece ser reconocido. También es un hecho que el cierre no se produjo de la misma manera en que cerró Mariona con Ana, ni como cerró Virginia con la técnica de Montse.</p>
+      <p>Virginia llegó a esta llamada con el 70% del trabajo de convencimiento ya hecho sola. Tenía endocrinólogo de confianza, psicóloga, había perdido 12 kg, sabía exactamente lo que quería — orden en la comida, ideas sencillas, entrenamiento de fuerza — tenía dinero disponible, tomaba la decisión de forma autónoma y no necesitaba consultar con nadie. No venía desde la desesperación. Venía a buscar el siguiente nivel.</p>
+      <div class="callout danger">Eso es el prospect más fácil de cerrar en toda la trayectoria del proyecto. Más fácil que Virginia fueron solo las prospects pre-vendidas por Jonathan. Y aun así, la llamada duró 95 minutos.</div>
+      <p>La diferencia entre evaluar bien y evaluar mal esta llamada está en preguntarse honestamente: ¿habría cerrado esta llamada si Virginia hubiera sido un 6/10 en lugar de un 9/10? Con los instrumentos técnicos que Montse desplegó en los 95 minutos — sin Reframe, sin Pre-Suasión, con pitch de plantilla, con la pregunta de Implicación resuelta en blanco — la respuesta es probablemente no.</p>
+      <p>Eso no anula el mérito real que hay en esta llamada. Pero sí define la nota.</p>
+    </div>
+  </section>
+
+  <section id="scoreboard">
+    <div class="section-title"><h2>Scoreboard</h2><span class="tag">Lectura técnica</span></div>
+    <div class="card">
+      <table class="scoreboard">
+        <thead><tr><th>Bloque</th><th>Nota</th><th>Qué libro lo evalúa y por qué</th></tr></thead>
+        <tbody>
+          <tr><td>Apertura / Agenda</td><td><span class="grade">7.5</span></td><td>Blount-Virtual: limpia, profesional. Agenda clara y honesta.</td></tr>
+          <tr><td>Diagnóstico calidad</td><td><span class="grade">6.5</span></td><td>SPIN / Mom Test: Virginia habló sola. Montse facilitó pero no excavó. Leading questions. “Me queda claro” x2.</td></tr>
+          <tr><td>Diagnóstico profundidad</td><td><span class="grade">6.5</span></td><td>Voss: profundidad real — pero construida por Virginia, no extraída por Montse. Labels ausentes en momentos clave.</td></tr>
+          <tr><td>Construcción de valor</td><td><span class="grade">5.5</span></td><td>Challenger Sale: sin Reframe. Pitch de 12 minutos sin check-ins reales. Template con personalización superficial.</td></tr>
+          <tr><td>Manejo de objeciones</td><td><span class="grade">6.5</span></td><td>JOLT: sin objeciones reales de Virginia. El 8/10 fue aceptado con excavación superficial.</td></tr>
+          <tr><td>Cierre</td><td><span class="grade">6.0</span></td><td>Jones: Virginia cerró sola. Pre-Suasión ausente. El precio llegó frío. Montse no obstruyó pero no impulsó.</td></tr>
+          <tr><td>Lenguaje / Tono</td><td><span class="grade">8.0</span></td><td>Why She Buys: calidez genuina. Respeto al endocrinólogo. Natural en todo momento.</td></tr>
+          <tr><td>Estructura</td><td><span class="grade">5.5</span></td><td>95 minutos. “Me queda claro” x2. Tangente del bizcocho. Pitch tarde y largo. Sin Pre-Suasión.</td></tr>
+          <tr><td><strong>GLOBAL</strong></td><td><span class="grade">6.5</span></td><td><strong>Cerrada, pero el cierre valida más el perfil de Virginia que la estructura desplegada.</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="veredicto">
+    <div class="section-title"><h2>Veredicto</h2><span class="tag">La lectura real</span></div>
+    <div class="card verdict">
+      <p>Esta llamada cerró. Primera vez en el proyecto que Montse cierra a alguien sin que Jonathan la hubiera pre-vendido. Eso es un hito real.</p>
+      <p>Pero hay algo que Montse necesita escuchar para seguir creciendo: el 6.5 de una llamada cerrada dice más sobre el perfil de Virginia que sobre la técnica de Montse. Un 6.5 en una llamada cerrada no es una contradicción — es la señal de que hay estructuras ausentes que solo no costaron la venta porque Virginia no las necesitaba.</p>
+      <div class="callout green">Lo que Montse hizo en esta llamada que funcionó de verdad: aguantar 55 minutos escuchando sin interrumpir, hacer la pregunta de futuro que produjo la mejor imagen del proyecto de Montse, y decir “una cosa que no necesitas en este momento es más información”. Esa fue su frase más precisa de toda su trayectoria.</div>
+      <div class="callout danger">Lo que no hizo: el Reframe. La Pre-Suasión. Un pitch con Virginia en el centro real, no en el centro superficial. Excavación del 8/10. Y dos veces más aparece “me queda claro” para cortar el diagnóstico.</div>
+      <p>La llamada siguiente que Montse tenga con una Virginia de 6/10 — con obstáculos reales, con el marido que hay que convencer, con el precio que duele, con el historial de abandono que pesa más — esa llamada va a necesitar los instrumentos que aquí no hacían falta. Y si no los tiene, esa llamada termina en seguimiento.</p>
+    </div>
+  </section>
+
+  <section id="funciono">
+    <div class="section-title"><h2>Lo que funcionó</h2><span class="tag">Con precisión</span></div>
+    <div class="grid two recognition">
+      <div class="card good-card"><h3>La paciencia de 55 minutos</h3><p>Montse permitió que Virginia hablara sin prisa. Eso es real y no es trivial. La mayoría de los closers habrían cortado ese monólogo a los 20 minutos con “me queda claro, vamos al entrenamiento”. Montse no lo hizo — al menos no hasta el minuto 28 y el 1:07.</p><p>Ese espacio fue lo que produjo el “calcetín”, la madre, el Wegovy, los pensamientos intrusivos. Todo eso salió porque Montse no interrumpió. Voss lo llamaría presencia activa.</p></div>
+      <div class="card good-card"><h3>“Una cosa que no necesitas es más información” · min 1:07</h3><p>Esta fue la frase más precisa de las seis llamadas auditadas de Montse. Llegó en el momento correcto, fue específica para Virginia, y ella lo confirmó con “ya te digo, yo que me sé las calorías, los macros, todo”.</p><p>Keenan — Gap Selling — identificó la causa raíz del gap de forma que resonó. Eso es Montse.</p></div>
+      <div class="card good-card"><h3>La pregunta de futuro · min 1:09</h3><p>“¿Qué cosas tendrían que suceder para que dijeras que ha sido la mejor decisión en años?”</p><p>Virginia construyó la imagen más específica y emocionalmente rica de todas las llamadas de Montse: la terraza, el banco, acostar al niño para ponerse a entrenar, la nevera con platos que conoce. Eso no habría salido sin la pregunta de Montse. Rackham — SPIN — Need-Payoff bien colocado.</p></div>
+      <div class="card good-card"><h3>Respeto al endocrinólogo</h3><p>Montse dijo “queda claro que tu endocrinólogo es tu persona de referencia”. Virginia lo había señalado como figura central y Montse no la desafió.</p><p>Eso eliminó la fricción más probable de esta prospect: la de que el programa entrara en conflicto con su médico de confianza. Bien calibrado.</p></div>
+      <div class="card good-card"><h3>El argumento del control vs la medicación</h3><p>Virginia dijo múltiples veces que quería recuperar el control frente a la Wegovy. Montse recogió ese activo y lo usó: “dejar de depender de soluciones temporales, empezar a construir algo sostenible”.</p><p>Ese argumento fue correcto y Virginia lo confirmó.</p></div>
+    </div>
+  </section>
+
+  <section id="fuentes">
+    <div class="section-title"><h2>Las 13 fuentes</h2><span class="tag">Una por una</span></div>
+    <div class="sources">
+      <details class="source" open><summary>Fuente 1 · Never Split the Difference — Chris Voss</summary><div class="body"><p>Voss construye sobre la distinción entre escucha activa y escucha pasiva. Escucha activa es la que produce que el prospect profundice — a través de labels precisos, mirroring, y silencio estratégico. Escucha pasiva es la que permite que el prospect hable sin que el closer dirija el nivel de profundidad.</p><p>Montse tuvo escucha pasiva durante los 55 minutos de diagnóstico. Virginia habló. Montse validó. Los activos emergieron porque Virginia era extraordinariamente articulada y reflexiva, no porque Montse los excavara con labels.</p><p><strong>Min 38:26.</strong> Virginia dijo “darme la vuelta como un calcetín, pero no sé por dónde.” El label correcto:</p><div class="quote">Parece que llevas años haciendo las cosas bien — perdiendo peso, yendo al endocrinólogo, a la psicóloga — y aun así sientes que hay una pieza central que ningún sistema te ha dado.</div><p>Montse respondió: “Explícame esto.” Es una buena pregunta pero no es un label. Label y pregunta tienen efectos distintos. El label produce que el prospect se sienta comprendido antes de profundizar. La pregunta solo pide más información.</p><p><strong>Min 46:00.</strong> Virginia describió a su madre: inflamada, con el ojo cerrado, tiroides desbocado, lo pasaron muy mal. Eso era un momento para un label de identidad profunda:</p><div class="quote">Parece que cuando piensas en la menopausia no estás pensando en un número en la báscula — estás pensando en tu madre y en lo que viste.</div><p>Montse respondió: “Vale. Vale. Vale.” Y pasó adelante. Tres “vale” seguidos es exactamente lo que Voss llama filling the silence — el closer que llena el espacio en lugar de dejarlo actuar.</p><p>El mirroring no apareció en ningún momento de los 95 minutos. Cuando Virginia dijo “calcetín”, “ideas”, “orden”, “control” — la técnica de repetir las últimas palabras como pregunta habría generado más profundidad en esas palabras específicas.</p></div></details>
+      <details class="source"><summary>Fuente 2 · Gap Selling — Keenan</summary><div class="body"><p><strong>Estado actual</strong> — construido principalmente por Virginia: 92 kg anclada, “desordenada” con la comida pese a perder 12 kg, dependiente del Wegovy, sin sistema de entrenamiento, ruido mental constante alrededor de la alimentación. Montse facilitó el espacio pero no excavó activamente estos elementos.</p><p><strong>Impact Layer</strong> — parcialmente desarrollado. El primero: la madre. La imagen de cómo llegó su madre a la menopausia — inflamada, ojo cerrado, engordó muchísimo, lo pasaron muy mal — es el Impact Layer más potente de toda la llamada. Virginia lo describió en el minuto 45:59-46:00. Montse respondió con tres “vale” y pasó al siguiente tema. Keenan diría que ese fue el momento de anclar la urgencia: “¿Y tú cómo quieres llegar a la menopausia?” Una sola pregunta de Implicación. No llegó.</p><p>El segundo: el colesterol alto con la analítica reciente. Virginia lo mencionó en el minuto 49:50 como señal médica de que algo está yendo mal. Montse no lo recogió en el argumento del diagnóstico ni del precio.</p><p><strong>Estado futuro</strong> — construido completamente por Virginia. La imagen de la terraza, el banco, el niño acostado, los platos en la nevera — eso lo construyó Virginia en respuesta a la pregunta de Montse. Esa pregunta fue buena. Pero el Estado Futuro emergió de la sofisticación de Virginia, no de una técnica de excavación de Montse.</p><p><strong>Causa raíz — el Reframe que faltó:</strong> Virginia ha probado más de 15 sistemas. Todos fallaron en adherencia. La causa raíz: ningún sistema fue construido para Virginia — todos pidieron que Virginia se adaptara a ellos. Sus aversiones a la verdura, sus horarios, su familia, su hijo.</p><div class="quote">Virginia, lo que llevas buscando toda la vida no es disciplina — tienes de sobra. Perdiste 12 kilos en un año con medicación. Lo que no has tenido nunca es un sistema construido para ti: para lo que comes, lo que no comes, el horario de tu marido, el niño. Todos los anteriores eran para otra persona. Este no.</div></div></details>
+      <details class="source"><summary>Fuente 3 · Objections — Jeb Blount</summary><div class="body"><p>Virginia no puso objeciones reales de precio ni de decisión. Cuando llegó el precio dijo “yo creo que cogería fracción ahora mismo.” Eso elimina el argumento de que Montse manejó objeciones — no había objeciones que manejar.</p><p>Lo que sí hubo fue una objeción suave al compromiso: el 8/10 con el argumento “es que me lo he planteado tantas veces y siempre me han preguntado lo mismo.” Esa es la única resistencia real que Virginia expresó. Blount habría esperado un LDA específico:</p><p><strong>Ledge:</strong> “Ese 8 es honesto y tiene sentido con todo lo que me estás contando.”</p><p><strong>Disrupt:</strong> “Virginia, llevas 15 sistemas. En todos los anteriores el sistema te pedía que te adaptaras a él. Lo que es diferente aquí es que el sistema se adapta a ti. Eso es lo que ninguno anterior ha hecho.”</p><p><strong>Ask:</strong> “Con eso en mente, ¿el 8 se mantiene o cambia?”</p><p>Lo que Montse dijo: “Este 8, para llegar a este 10, lo que te falta es esta confianza que en este momento no tienes porque has hecho muchas cosas.” Y luego: “¿Tú crees que con nuestra ayuda esta vez puedo lograrlo?”</p><div class="callout danger">Esa segunda pregunta fue un error. “¿Crees que puedes lograrlo?” en un momento de duda activa invita al “no lo sé, pero no por vosotros” que Virginia dio. La pregunta correcta no busca que el prospect confirme que el closer puede ayudarla — busca que el prospect articule por qué esta vez es diferente.</div></div></details>
+      <details class="source"><summary>Fuente 4 · Virtual Selling — Jeb Blount</summary><div class="body"><p>La llamada fue técnicamente limpia — sin cortes, buena calidad, sin problemas de conexión. Montse manejó el pequeño problema de volumen al inicio sin drama. Bien.</p><p>El problema de esta fuente está en el pitch. Del minuto 1:16 al 1:28 — aproximadamente 12 minutos — Montse habló con Virginia interviniendo muy brevemente. Blount documenta que la atención en video cae drásticamente después de 4 minutos de monólogo sin interacción real. Los check-ins que hizo Montse — “¿te das cuenta?”, “¿ves?” — fueron genéricos. No específicos.</p><div class="quote">Virginia, esto que te digo de las ideas sencillas y el recetario propio — eso es exactamente el “calcetín” que me describías. ¿Lo ves?</div><p>Eso mantiene al prospect activamente en la conversación.</p><p>Hay además una tangente que consumió tiempo diagnóstico sin valor: el bizcocho de manzana de Jonathan, minutos 20:22-21:04. Dos minutos de conversación sobre cómo salió el bizcocho y cómo corregirlo. Eso es rapport que se fue demasiado lejos. Virginia es una prospect articulada y no lo necesitaba.</p></div></details>
+      <details class="source"><summary>Fuente 5 · The JOLT Effect — Dixon y McKenna</summary><div class="body"><p>El Omission Bias de Virginia era específico: ha probado 15 sistemas y todos han fallado de formas distintas. Su mente tiene registro de múltiples ciclos de entusiasmo-abandono. Por eso dio un 8/10 honesto y no un 10 — hay un 20% de ella que dice “este será otro más.”</p><p>Dixon y McKenna dicen que cuando el Omission Bias viene del historial, la herramienta es Judge the indecision — nombrar el miedo directamente y diferenciarlo del programa actual.</p><p>Montse no hizo esto. En lugar de nombrar el patrón — “Virginia, tu 8 dice que llevas años viendo cómo los sistemas fallan en un punto. El punto donde fallan es siempre el mismo — piden que te adaptes tú a ellos. Eso no pasa aquí porque construimos el sistema para ti” — preguntó si creía que podría lograrlo “con nuestra ayuda.” Virginia respondió honestamente que no sabía. Esa respuesta era la esperada ante esa pregunta.</p><p>El TRoT no fue necesario porque Virginia tenía el dinero y la decisión lista. Pero el Judge the indecision sí era necesario y no ocurrió.</p></div></details>
+      <details class="source"><summary>Fuente 6 · Switch — Chip y Dan Heath</summary><div class="body"><p><strong>Jinete de Virginia — clarísimo:</strong> conoce sus patrones, ha trabajado con psicóloga, tiene endocrinólogo, sabe qué quiere: orden, ideas, fuerza. El Jinete llegó a la llamada con todo el mapa.</p><p><strong>Elefante de Virginia — activo y con dirección:</strong> quería el cambio. El único freno era el historial de intentos anteriores y el miedo a que “este sea uno más.” Eso era el 20% que faltaba para el 10/10.</p><p><strong>Camino — sin obstáculos:</strong> dinero disponible, decisión autónoma, ningún bloqueador. El camino más despejado de todas las llamadas del proyecto.</p><p><strong>Bright Spot que Montse sí usó:</strong> cuando Virginia describió que la natación había sido un éxito — “conseguí una parcela de tranquilidad” — Montse lo conectó con el banco de la terraza y el programa. Correcto. Heath llama a esto ampliar lo que ya funciona.</p><p><strong>Bright Spot que Montse no usó:</strong> Virginia ha perdido 12 kilos en un año bajo disciplina real. Eso no es falta de adherencia — es la mayor evidencia de que cuando el sistema funciona, Virginia lo ejecuta. Ese bright spot debía haber llegado al argumento del 8/10: “Virginia, perdiste 12 kilos con un sistema que tú misma describes como incompleto. Imagínate lo que puedes hacer con uno que sea tuyo.”</p></div></details>
+      <details class="source"><summary>Fuente 7 · Why She Buys — Bridget Brennan</summary><div class="body"><p>Esta es la fuente donde Montse tiene su mayor fortaleza. La calidez, el respeto, la no condescendencia — todo fue auténtico en esta llamada. Virginia se sintió escuchada y en un espacio seguro.</p><p>Brennan documenta que las mujeres compran identidades, no productos. La identidad aspiracional de Virginia era muy específica: no quería ser una mujer de 60 kilos — quería ser una mujer con su peso X, aficionada al ejercicio de fuerza, que llega a la menopausia con los hábitos establecidos, diferente a su madre. Esa identidad emergió completamente en el minuto 38-39. Montse la recogió en el pitch como “aprender a gestionar, tomar el control, crear hábitos, esta paz.” Bien. Pero se quedó en el nivel correcto sin el nivel de detalle del estado futuro que Virginia había construido.</p><div class="quote">Virginia, me dijiste que lo que quieres es llegar a la menopausia diferente a como llegó tu madre. Con los hábitos instalados, con el sistema tuyo, sin depender de la inyección. Eso es lo que construimos aquí.</div><p>No apareció en el argumento del precio.</p></div></details>
+      <details class="source"><summary>Fuente 8 · The Mom Test — Rob Fitzpatrick</summary><div class="body"><p>Esta fuente tiene dos momentos claros en esta llamada — uno bueno y uno malo.</p><p><strong>Malo · Min 37:34:</strong> “¿Tú puedes sacar al menos una hora tres veces a la semana?” Virginia respondió: “Sí, yo creo que sí, sí.” Y añadió el matiz importante por sí misma: “si no la he sacado es porque no sé por dónde tirar.” Eso es una hipotética de Fitzpatrick — pregunta de intención futura que obtiene la respuesta optimista socialmente correcta. El dato real lo dio Virginia por su propia voluntad, no porque la pregunta lo extrajera.</p><div class="quote">Virginia, los días que tienes un hueco en casa ahora mismo — qué es lo que sueles hacer con ese rato cuando el niño no está.</div><p>Eso da datos reales de comportamiento.</p><p><strong>Bueno:</strong> la exploración del historial de dietas. “¿Y por qué crees que no te ha funcionado con todos estos antes?” en el minuto 23:30 fue comportamiento pasado real. Virginia respondió con la causa raíz: “no lo hago mío, noto sacrificio.” Eso es Mom Test bien aplicado.</p></div></details>
+      <details class="source"><summary>Fuente 9 · Pre-Suasión — Robert Cialdini</summary><div class="body"><p>El precio llegó así — minuto 1:29:08 — después de que Montse preguntó “¿tienes alguna duda?” y Virginia pidió los datos económicos y temporales.</p><p>No hubo ningún frame emocional cargado inmediatamente antes del precio. El activo de la madre — la imagen de cómo llegó a la menopausia — estaba disponible. El Wegovy como “parche” estaba disponible. El “calcetín” estaba disponible. Ninguno fue reactivado justo antes del precio.</p><div class="quote">Virginia, antes del precio — me dijiste que el miedo que tienes es llegar a la menopausia como llegó tu madre. Y que la inyección está tapando el problema pero sin enseñarte a comer. El programa de seis meses son 1.500 euros en tres cuotas. ¿Cuánto vale llegar a la menopausia con los hábitos instalados y sin depender de la inyección?</div><p>Con ese frame el precio se evalúa contra la imagen de la madre y la dependencia de la medicación. Sin ese frame se evalúa contra “1.500 euros por un programa de nutrición y ejercicio.” Virginia dijo “cogería fracción ahora mismo” de todas formas — porque estaba lista para comprar. Pero en una prospect menos resuelta, la ausencia de Pre-Suasión habría producido resistencia.</p></div></details>
+      <details class="source"><summary>Fuente 10 · Influence — Robert Cialdini</summary><div class="body"><p><strong>Compromiso y consistencia:</strong> el 8/10 fue obtenido pero no fue convertido en argumento del cierre. Virginia argumentó su propio 8 con claridad — “me lo he planteado tantas veces... siempre me han preguntado lo mismo, siempre por mí no por vosotros.” Montse aceptó el argumento y no usó el 8 como puente para la diferenciación del programa. El principio de consistencia requiere que el compromiso declarado sea anclado antes del precio. No ocurrió.</p><p><strong>Prueba social:</strong> en el minuto 1:27:47, Virginia preguntó: “¿Otras personas lo han conseguido? ¿Sin tener que recurrir a eso [la medicación]?” Montse respondió con una respuesta confusa y Virginia tuvo que pedir aclaración. Eso fue un momento de prueba social que Montse no supo resolver.</p><div class="quote">Sí, Virginia — tenemos mujeres con historiales de dietas muy parecidos al tuyo, que llegaron aquí con el mismo punto exacto donde estás tú, y que hoy tienen el sistema propio que describiste. Eso es el objetivo de los seis meses.</div><p><strong>Autoridad:</strong> bien gestionado el respeto al endocrinólogo — Montse no entró en conflicto con la figura médica de referencia de Virginia. Ese fue el único elemento de autoridad bien calibrado.</p><p><strong>Simpatía:</strong> muy alta. Virginia dijo al final que comunicaba bien porque “no tiene nada que esconder” — eso indica que el rapport de Montse creó un espacio genuinamente seguro. Ese es el activo más consistente de Montse en todas sus llamadas.</p></div></details>
+      <details class="source"><summary>Fuente 11 · The Challenger Sale — Dixon y Adamson</summary><div class="body"><p>Séptima llamada en el proyecto de Montse. Séptima sin Reframe.</p><p>El Reframe de esta llamada estaba construido y disponible desde el minuto 23:35 cuando Virginia explicó sola por qué fallaron todos los anteriores: “porque no lo hago mío, noto sacrificio.” La causa raíz era obvia: todos los sistemas anteriores estaban diseñados para otras personas. Virginia tenía que adaptarse a ellos. Ninguno estaba diseñado para sus aversiones, su familia, su horario.</p><div class="quote">Virginia, en los 15 sistemas anteriores la pregunta siempre fue: ¿puede Virginia adaptarse a este plan? Y nunca funcionó porque la pregunta correcta es la contraria: ¿puede este plan adaptarse a Virginia? Eso es lo que nunca has tenido. Y eso es exactamente lo que construimos aquí.</div><p>Esa frase enseña algo. Cambia el frame del programa de “otro sistema de nutrición y ejercicio” a “el primero diseñado para la Virginia real.” Posiciona el argumento del precio de forma completamente diferente.</p><p>Sin ese Reframe, el pitch describió el programa correctamente pero no enseñó nada nuevo. Virginia ya sabía que quería algo sencillo y adaptado — llevaba 55 minutos diciéndolo.</p></div></details>
+      <details class="source"><summary>Fuente 12 · SPIN Selling — Neil Rackham</summary><div class="body"><p><strong>Situación ✅</strong> — Bien cubierta: trabajo, horarios, marido, hijo, historial de dietas, medicación, natación, materiales en casa.</p><p><strong>Problema ✅</strong> — Bien identificado por Virginia: desordenada con la comida, sin sistema de entrenamiento, ruido mental, anclada en 92 kg.</p><p><strong>Implicación ✗</strong> — Esta es la pérdida más grande de la llamada. En el minuto 57:58, Montse preguntó: “Virginia, que decides no hacer nada, ¿cómo crees que te vas a ver y a sentir dentro de un año?” Virginia respondió: “No lo sé, no lo he pensado.” Montse aceptó esa respuesta y continuó.</p><div class="quote">No lo has pensado — ¿qué crees que pasaría si sigues igual, si en un año la Wegovy ya no funciona igual, sin haber aprendido a comer?</div><p>Virginia habría construido la imagen. Pero Montse no insistió. Rackham: la Implicación es la categoría de preguntas que más predice el cierre en ventas de alto valor. Que Montse no insistiera ante “no lo sé” dejó la urgencia sin anclar.</p><p>Comparativa directa: en la llamada de Lydia, cuando Montse preguntó la misma Implicación, Lydia respondió con el miedo a quemarse — riñones, ojos, extremidades. Ese fue el activo de urgencia central. Con Virginia, la misma pregunta no produjo nada porque Montse no presionó. El activo de urgencia — la madre en la menopausia — habría salido si Montse hubiera insistido.</p><p><strong>Necesidad-Beneficio ✅</strong> — La pregunta del futuro, minuto 1:09, fue la mejor de la llamada y produjo la imagen más específica del proyecto de Montse.</p></div></details>
+      <details class="source"><summary>Fuente 13 · Exactly What to Say — Phil M. Jones</summary><div class="body"><p><strong>Bien ejecutado:</strong> “una cosa que no necesitas en este momento es más información” — Jones llamaría a esto una frase de reposicionamiento. Específica, orientada, produjo confirmación inmediata de Virginia.</p><p>También bien: “¿por qué sientes que esto es lo que necesitas en este momento?” justo antes del precio — pregunta que invitó a Virginia a argumentar su propia decisión.</p><p><strong>Lo que faltó:</strong> en el momento del 8/10, Jones tiene una frase específica que Montse no usó:</p><div class="quote">¿Qué tendría que ser diferente esta vez para que sintieras que el ciclo se rompe?</div><p>Esa pregunta aísla el obstáculo real del compromiso declarado. Montse hizo algo parecido pero con peor ángulo — “¿crees que con nuestra ayuda puedes lograrlo?” — que produjo una respuesta ambigua.</p><p>La frase del precio debería haber sido:</p><div class="quote">Virginia, antes de decirte el precio — si todo lo que me describiste del “calcetín” pudiera quedar resuelto definitivamente, ¿cuánto vale eso?</div><p>Eso carga el frame antes del número.</p></div></details>
+    </div>
+  </section>
+
+  <section id="errores">
+    <div class="section-title"><h2>Los errores concretos de ejecución</h2><span class="tag">Donde se perdió potencia</span></div>
+    <div class="timeline">
+      <div class="time-item"><div class="time">Fallo 1</div><h3>“Me queda claro” x2</h3><p><strong>Min 28:44:</strong> “Perfecto. Vale, me queda claro todo el tema de la alimentación.”<br><strong>Min 1:07:19:</strong> “Sí, me queda todo clarísimo.”<br>Son el mismo patrón que lleva apareciendo en todas las llamadas. En la llamada de Lydia apareció. En Katherine. En Emma. En esta. Seis llamadas, seis apariciones. Que el diagnóstico se corte con “me queda claro” dice que el closer ha decidido que ya tiene suficiente. El prospect lo percibe. Virginia en este caso siguió hablando sola — pero eso fue por la iniciativa de Virginia, no porque Montse reabriera el espacio.</p></div>
+      <div class="time-item"><div class="time">Fallo 2</div><h3>La pregunta de Implicación aceptada en blanco</h3><p>Cuando Virginia dijo “no lo sé, no lo he pensado” ante la Implicación del minuto 57:58, Montse continuó. La Implicación abandonada es la pérdida de urgencia más cara de la llamada. La madre de Virginia — la imagen de cómo llegó a la menopausia — estaba disponible como respuesta si Montse hubiera insistido con una segunda pregunta.</p></div>
+      <div class="time-item"><div class="time">Fallo 3</div><h3>La tangente del bizcocho</h3><p>Minutos 20:22-21:04. Dos minutos de conversación sobre si el bizcocho de manzana quedó aguado y cómo corregirlo. Eso es rapport que excedió su función. El rapport sirve para crear confianza. Dos minutos de bizcocho en el diagnóstico es tiempo diagnóstico perdido.</p></div>
+      <div class="time-item"><div class="time">Fallo 4</div><h3>El pitch como template</h3><p>A partir del minuto 1:16, el pitch siguió la estructura estándar: “este programa no es una dieta rígida... tampoco un entrenamiento genérico... aquí el acompañamiento es el 80%...” Ese es el pitch de todas las llamadas de Montse. La personalización aparece en destellos pero la arquitectura es la misma. Virginia lo notó y siguió con “ya empieza la cosa a funcionar” — no porque el pitch la convenciera, sino porque ya venía convencida.</p></div>
+      <div class="time-item"><div class="time">Fallo 5</div><h3>La pregunta de prueba social mal ejecutada</h3><p>Min 1:27:47. Virginia preguntó: “¿Otras personas lo han conseguido?” Montse respondió: “¿No han tenido que recurrir a eso?” Virginia no entendió: “¿En qué sentido?” El intercambio fue confuso. Una oportunidad de prueba social concreta se convirtió en un malentendido.</p></div>
+    </div>
+  </section>
+
+  <section id="comparativa">
+    <div class="section-title"><h2>Comparativa</h2><span class="tag">Equipo y llamadas anteriores</span></div>
+    <div class="grid two">
+      <div class="card"><h3>Montse vs sus propias llamadas</h3><p>Emma (6.4, SEG.) · Gladys (7.1, SEG.) · Katherine (6.7, SEG.) · Susanna (5.5, S/CIE.) · Lydia (6.5, SEG.) · Virginia (6.5, CER.)</p><p>La llamada de Gladys (7.1) sigue siendo técnicamente mejor que esta. En Gladys, Montse hizo un diagnóstico más activo — excavó la brecha de forma más directa, hizo preguntas de Implicación que produjeron respuestas poderosas. Virginia produjo sus propias respuestas poderosas sin necesitar la excavación de Montse.</p></div>
+      <div class="card"><h3>Montse vs Ana y Elena</h3><p><strong>Montse vs Ana:</strong> la llamada de Ana con Mariona (7.0, cerrada) fue más exigente técnicamente que esta. Mariona tenía fricción — el 7/10 de compromiso, la resistencia al precio. Ana tuvo que trabajar. El cierre de Mariona fue más merecido desde el punto de vista técnico que el de Virginia.</p><p><strong>Montse vs Elena:</strong> la llamada de Elena con Gisela (6.8, seguimiento con flag médico) tuvo una prospect más difícil que Virginia pero con más obstáculos. Elena ejecutó mejor el diagnóstico emocional en términos técnicos — llegó a la profundidad de la identidad perdida de Gisela con más precisión que Montse llegó a la identidad de Virginia.</p></div>
+    </div>
+    <div class="card comparison" style="margin-top:18px">
+      <h3 style="margin-top:0">La variable que persiste en todas las llamadas de Montse</h3>
+      <table class="matrix">
+        <thead><tr><th>Llamada</th><th>Reframe</th><th>Pre-Suasión</th><th>Reserva</th><th>Implicación</th><th>“Me queda claro”</th></tr></thead>
+        <tbody>
+          <tr><td>Emma</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Sí</td></tr>
+          <tr><td>Gladys</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Sí x1</td><td class="no">No</td></tr>
+          <tr><td>Katherine</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Sí</td></tr>
+          <tr><td>Susanna</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Sí</td></tr>
+          <tr><td>Lydia</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Sí x1</td><td class="yes">Sí</td></tr>
+          <tr><td>Virginia</td><td class="no">No</td><td class="no">No</td><td>N/A</td><td class="no">Abandonada</td><td class="yes">Sí x2</td></tr>
+        </tbody>
+      </table>
+      <div class="callout danger">Seis llamadas. Cero Reframes. Cero Pre-Suasiones. Eso no es un hábito pendiente de desarrollar. Es un patrón instalado. Esa es la verdad que esta auditoría tiene que decir.</div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="section-title"><h2>Plan de entrenamiento</h2><span class="tag">Montse · Iteración 6</span></div>
+    <div class="grid two">
+      <div class="card"><h3>Lo que no se toca</h3><div class="profile-list" style="grid-template-columns:1fr"><div class="pill">La paciencia de escucha — real y valiosa.</div><div class="pill">La calidez y respeto al contexto médico de la prospect.</div><div class="pill">La pregunta de futuro: “¿qué tendría que suceder para que dijeras que ha sido la mejor decisión en años?” — que aparezca en todas las llamadas.</div><div class="pill">“Una cosa que no necesitas es más información” — esa precisión hay que replicarla.</div></div></div>
+      <div class="card"><h3>Lo que cambia desde esta semana</h3><div class="plan-list"><div class="plan-step"><h3>Reframe</h3><p>Séptima llamada sin él. Una frase antes de cada pitch que enseña algo al prospect sobre su propio problema. Para Virginia: “todos tus sistemas anteriores te pedían que te adaptaras tú a ellos. Este no — este se adapta a ti.” Construirlo en la preparación pre-llamada con los datos del diagnóstico.</p></div><div class="plan-step"><h3>Pre-Suasión</h3><p>Séptima llamada sin ella. El activo más poderoso del diagnóstico, reactivado en una frase, inmediatamente antes del precio. Para Virginia: la madre en la menopausia + la dependencia del Wegovy. Nunca llega el precio frío.</p></div><div class="plan-step"><h3>“Me queda claro” eliminada</h3><p>Sustitución obligatoria: “¿Hay algo más sobre esto que no me hayas contado y que creas que es importante que yo sepa?” En todas las llamadas, sin excepción.</p></div><div class="plan-step"><h3>Cuando la Implicación produce “no lo sé”</h3><p>No aceptar. “No lo has pensado — si en un año estás igual, con la inyección ya menos efectiva, sin el sistema instalado, ¿qué pasaría?” Una segunda pregunta. No seguir adelante sin que el prospect haya construido la imagen de inacción.</p></div><div class="plan-step"><h3>Controlar la tangente de rapport</h3><p>El rapport sirve para crear confianza, no para hablar de recetas. Si la conversación se va al bizcocho o a temas ajenos al diagnóstico durante más de 30 segundos: redirigir. “Oye, eso está muy bien, y quiero que sigamos con algo que me importa más — me decías antes...”</p></div></div></div>
+    </div>
+  </section>
+
+  <section id="resumen">
+    <div class="exec">
+      <h2>Resumen ejecutivo</h2>
+      <div class="grid three">
+        <div class="mini"><b>Nota</b><span>6.5 / 10</span></div>
+        <div class="mini"><b>Resultado</b><span>✅ Cerrada</span></div>
+        <div class="mini"><b>Motivo real</b><span>Virginia vino lista para comprar</span></div>
+      </div>
+      <div class="grid two" style="margin-top:18px">
+        <div class="mini"><b>Lo que cerró esta venta</b><span>Virginia.</span></div>
+        <div class="mini"><b>Lo que Montse aportó</b><span>No arruinarla. Una frase brillante. Paciencia real.</span></div>
+        <div class="mini"><b>Lo que faltó</b><span>Reframe, Pre-Suasión, Implicación ejecutada hasta el fondo, pitch con la identidad específica de Virginia en el centro.</span></div>
+        <div class="mini"><b>Pregunta clave</b><span>¿Qué habría pasado si Virginia hubiera dado un 6/10, con marido, dinero justo e historial de abandono?</span></div>
+      </div>
+      <p style="margin-top:20px">Esa llamada — con los instrumentos que desplegó aquí — termina en seguimiento. Y eso es lo que separa cerrar un 9/10 de cerrar consistentemente.</p>
+      <div class="final-quote">Cerraste a la prospect más fácil del proyecto con los mismos instrumentos que has usado en las llamadas que no cerraron. Eso no valida los instrumentos — valida que Virginia no los necesitaba. El mérito real de esta llamada es la paciencia y la frase “no necesitas más información.” Eso fue tuyo. Lo que sigue siendo de nadie son el Reframe y la Pre-Suasión. Siete llamadas sin ellos. Cuando estén, podrás cerrar a la Virginia que venga con un 6/10.</div>
+    </div>
+  </section>
+</div>
+<script>
+  const bar=document.getElementById('progress');
+  window.addEventListener('scroll',()=>{const h=document.documentElement;const sc=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;bar.style.width=sc+'%'});
+</script>
+</body>
+</html>

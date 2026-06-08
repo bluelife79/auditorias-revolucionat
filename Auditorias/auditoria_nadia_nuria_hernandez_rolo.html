@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoría Nadia · Nuria Hernández Rolo</title>
+<style>
+:root {
+  --bg:#070914; --panel:#0f1424; --panel2:#151b2e; --text:#f4f7fb; --muted:#9aa6bd;
+  --line:rgba(255,255,255,.10); --accent:#ff4d6d; --accent2:#7c5cff; --good:#34d399; --warn:#fbbf24; --bad:#fb7185;
+  --shadow:0 24px 70px rgba(0,0,0,.35); --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;background:
+  radial-gradient(circle at 18% -10%, rgba(124,92,255,.35), transparent 34%),
+  radial-gradient(circle at 85% 5%, rgba(255,77,109,.28), transparent 30%),
+  linear-gradient(180deg,#070914 0%,#0b1020 45%,#070914 100%);color:var(--text);line-height:1.58}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom, black, transparent 85%);}
+.header{position:relative;padding:54px 28px 30px;max-width:1280px;margin:0 auto}
+.topline{display:inline-flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);backdrop-filter: blur(10px);color:#d9e2f5;font-size:13px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--bad);box-shadow:0 0 18px var(--bad)}
+h1{font-size:clamp(34px,6vw,74px);line-height:.96;margin:22px 0 14px;letter-spacing:-.055em}
+.subtitle{font-size:clamp(16px,2vw,22px);color:var(--muted);max-width:900px}
+.hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.metric{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.045));border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.metric small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.09em}
+.metric strong{display:block;font-size:23px;margin-top:6px}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px 80px}
+.nav{position:sticky;top:18px;align-self:start;max-height:calc(100vh - 36px);overflow:auto;padding:14px;border:1px solid var(--line);border-radius:22px;background:rgba(15,20,36,.72);backdrop-filter: blur(14px)}
+.nav h3{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin:8px 10px 12px}
+.nav a{display:block;color:#dbe5fb;text-decoration:none;padding:9px 10px;border-radius:12px;font-size:13px;border:1px solid transparent}
+.nav a:hover{background:rgba(255,255,255,.07);border-color:var(--line)}
+.panel{position:relative;margin-bottom:22px;padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(180deg,rgba(15,20,36,.94),rgba(15,20,36,.72));box-shadow:var(--shadow);overflow:hidden}
+.panel:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:.9}
+.panel.good:before{background:linear-gradient(90deg,var(--good),#22d3ee)}
+.panel.bad:before{background:linear-gradient(90deg,var(--bad),#f97316)}
+.panel.summary:before{background:linear-gradient(90deg,#fbbf24,var(--accent))}
+.section-kicker{position:absolute;right:22px;top:18px;color:rgba(255,255,255,.08);font-weight:900;font-size:44px}
+h2{font-size:clamp(24px,3vw,38px);line-height:1.05;margin:0 0 18px;letter-spacing:-.035em}
+h4{font-size:16px;margin:22px 0 8px;color:#fff;letter-spacing:-.01em}
+p{color:#d6deef;margin:0 0 13px}
+blockquote{margin:14px 0;padding:14px 16px;border-left:4px solid var(--accent);background:rgba(255,255,255,.055);border-radius:12px;color:#fff;font-weight:650}
+.ficha-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ficha-item,.ficha-wide{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:16px;padding:14px}
+.ficha-wide{grid-column:1/-1}
+.ficha-item small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.ficha-item b{font-size:15px}
+.ficha-wide p{margin:0;color:#dbe5fb}
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.score-card{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:18px;padding:16px}
+.score-head{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:10px}
+.score-head span{font-weight:800}
+.score-head strong{font-size:22px;color:#fff}
+.bar{height:9px;background:rgba(255,255,255,.09);border-radius:999px;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--bad),var(--warn),var(--good))}
+.score-card p{font-size:14px;color:#c7d2e9}
+.global-score{margin-top:16px;padding:20px;border-radius:18px;background:linear-gradient(135deg,rgba(251,113,133,.22),rgba(124,92,255,.20));border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:space-between}
+.global-score span{font-size:13px;letter-spacing:.12em;color:var(--muted)}
+.global-score strong{font-size:32px}
+.accordion details{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.045);margin-bottom:12px;overflow:hidden}
+.accordion summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:850;display:flex;gap:12px;align-items:center}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary span{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:rgba(255,255,255,.09);color:#fff;font-size:12px}
+.detail-body{padding:0 18px 18px}
+.mini-table{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#eaf0ff;background:rgba(0,0,0,.26);border:1px solid var(--line);border-radius:12px;padding:12px;overflow:auto;margin:8px 0}
+.tabletext .mini-table{margin-bottom:0;border-radius:0;border-bottom:0}
+.tabletext .mini-table:first-child{border-radius:12px 12px 0 0}
+.tabletext .mini-table:last-child{border-radius:0 0 12px 12px;border-bottom:1px solid var(--line)}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.nav{position:relative;top:0}.hero-grid{grid-template-columns:repeat(2,1fr)}.score-grid,.ficha-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.header,.layout{padding-left:16px;padding-right:16px}.hero-grid{grid-template-columns:1fr}.panel{padding:20px}}
+@media print{body{background:#fff;color:#111}.nav{display:none}.layout{display:block}.panel{break-inside:avoid;background:#fff;color:#111;box-shadow:none}p,blockquote{color:#111}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="topline"><span class="dot"></span> Auditoría forense · Revoluciona-T</div>
+  <h1>Nadia · Nuria Hernández Rolo</h1>
+  <p class="subtitle">Resultado real: “si me gana la lotería te vuelvo a llamar”. Una llamada donde el problema no fue la intención de compra, sino una cualificación económica tardía que llegó cuando ya no quedaba llamada.</p>
+  <div class="hero-grid">
+    <div class="metric"><small>Nota global</small><strong>4.1 / 10</strong></div>
+    <div class="metric"><small>Duración</small><strong>60 min</strong></div>
+    <div class="metric"><small>Resultado</small><strong>No cerrable ahora</strong></div>
+    <div class="metric"><small>Brecha precio</small><strong>+90–100€/mes</strong></div>
+  </div>
+</header>
+<main class="layout">
+  <aside class="nav"><h3>Índice</h3><a href="#s1">Ficha del caso</a><a href="#s2">La lectura honesta de esta llamada</a><a href="#s3">Scoreboard</a><a href="#s4">El historial de Nadia en contexto — 9 llamadas ahora</a><a href="#s5">Lo que funcionó</a><a href="#s6">Los fallos</a><a href="#s7">Las 13 fuentes — evaluación completa</a><a href="#s8">Para Nadia — la conversación que necesita tener consigo misma</a><a href="#s9">Plan de acción — Nuria — seguimiento</a><a href="#s10">Resumen ejecutivo</a></aside>
+  <div><section id="s1" class="panel ficha">
+      <div class="section-kicker">01</div>
+      <h2>Ficha del caso</h2>
+      <div class="content"><div class="ficha-grid"><div class="ficha-item"><small>Prospecto</small><b>Nuria Hernández Rolo · Candelaria, Tenerife · 47 años</b></div><div class="ficha-item"><small>Closer</small><b>Nadia</b></div><div class="ficha-item"><small>Fecha</small><b>28 mayo 2026</b></div><div class="ficha-item"><small>Duración</small><b>60 minutos</b></div><div class="ficha-item"><small>Resultado</small><b>“Si me gana la lotería te vuelvo a llamar”</b></div><div class="ficha-item"><small>Nota global</small><b>4.1 / 10</b></div><div class="ficha-wide"><p>Historial Nadia: Soledad (DER. 4.6) · Magda (DER. 5.1) · Mónica (S/CIE. 5.0) · Begoña (S/CIE. 3.2) · Silvia (CER. pre-vendida 5.2) · Leslye (SEG. 5.3) · Elena P1 (SEG. 5.8) · Nuria (4.1)</p></div><div class="ficha-wide"><h4>Perfil Nuria:</h4></div><div class="ficha-wide"><p>Funcionaria interina · Consorcio de Tributos Canarias</p></div><div class="ficha-item"><small>Examen oposiciones</small><b>18 julio (mes y medio)</b></div><div class="ficha-wide"><p>Vive sola · paga todo ella (alquiler, coche, gastos)</p></div><div class="ficha-wide"><p>Sin pareja · padres no pueden ayudar económicamente</p></div><div class="ficha-wide"><p>Hipotiroidismo (20 años, medicada)</p></div><div class="ficha-wide"><p>Cansancio brutal persistente · analítica perfecta · médico le recetó melatonina</p></div><div class="ficha-item"><small>Entrenamiento actual</small><b>0 (lleva ~1 año parada)</b></div><div class="ficha-wide"><p>Historial: funcional 1 año, 2x/semana, sin resultados</p></div><div class="ficha-item"><small>Objetivo</small><b>perder 5-6 kg, tonificarse, sentirse “apretadita”</b></div><div class="ficha-item"><small>Madre</small><b>120 kg, no se cuida — referente negativo máximo</b></div><div class="ficha-wide"><p>“Mi vida es el cansancio”</p></div><div class="ficha-item"><small>Precio esperado</small><b>150-160€/mes</b></div><div class="ficha-item"><small>Precio mínimo del programa</small><b>250€/mes (6 cuotas) → brecha de 90-100€/mes</b></div><div class="ficha-item"><small>Decisión</small><b>autónoma</b></div></div></div>
+    </section><section id="s2" class="panel veredicto">
+      <div class="section-kicker">02</div>
+      <h2>La lectura honesta de esta llamada</h2>
+      <div class="content"><p>Esta llamada terminó con “si me toca la lotería te llamo”.</p>
+<p>Eso no es EN SEGUIMIENTO. Eso es un NO educado dicho con cariño. Nuria salió de la llamada sin posibilidad real de entrar al programa. No porque no quisiera — sino porque el gap económico era real y estructural, y Nadia lo descubrió en el minuto 55, después de 55 minutos de diagnóstico y pitch.</p>
+<p>El fallo central no fue técnico. Fue de orden operativo.</p>
+<p>Nuria dijo en el minuto 37: “Lo que me preocupa es el tema del dinero.” Dijo exactamente eso. Llevaban 37 minutos hablando y ya había dicho esto. Nadia respondió: “no me gusta dar precio de entrada porque prefiero que primero entiendas qué tiene el programa” — y siguió con el pitch.</p>
+<p>Eso fue un error de calificación que costó 23 minutos más de llamada.</p>
+<p>Y hay algo más grave: Nuria había dado señales de precio-sensibilidad desde antes del minuto 37. En el minuto 30 dijo: “no sé si van a cobrar un montón de dinero que yo no me puedo permitir.” En el minuto 4, en la presentación inicial, ya estaba titubeando. Una closer con la cualificación instalada habría preguntado en los primeros 15 minutos: “Nuria, antes de seguir, una pregunta directa — ¿tienes en mente un presupuesto mensual para esto?” Esa pregunta habría cambiado todo el enfoque de la llamada.</p>
+<p>En cambio, Nadia hizo el diagnóstico completo, el pitch completo, y reveló el precio en el minuto 55. La respuesta de Nuria: esperaba 150-160€/mes. El programa: 250€/mes mínimo. Eso es un 56% más de lo que Nuria esperaba. No un 10%, no un 20% — un 56%. Esa brecha no se cierra con valor añadido cuando se descubre en el último minuto de una llamada de 60 minutos.</p>
+<p>Resultado: la llamada terminó con una broma sobre la lotería.</p></div>
+    </section><section id="s3" class="panel score">
+      <div class="section-kicker">03</div>
+      <h2>Scoreboard</h2>
+      <div class="content"><div class="score-grid"><div class="score-card">
+      <div class="score-head"><span>Apertura / Agenda</span><strong>6.5</strong></div>
+      <div class="bar"><i style="width:65%"></i></div>
+      <p>Rapport canario natural. Agenda clara. Nada excepcional.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Diagnóstico calidad</span><strong>5.0</strong></div>
+      <div class="bar"><i style="width:50%"></i></div>
+      <p>Alimentación explorada superficialmente. Cansancio nombrado, no excavado.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Diagnóstico profundidad</span><strong>4.0</strong></div>
+      <div class="bar"><i style="width:40%"></i></div>
+      <p>El activo más potente (madre 120 kg) duró 45 segundos. “Mi vida es el cansancio” — no explorado.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Construcción de valor</span><strong>3.5</strong></div>
+      <div class="bar"><i style="width:35%"></i></div>
+      <p>Pitch de plantilla 17 minutos. Sin Reframe. Sin Pre-Suasión. Sin activos de Nuria.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Manejo de objeciones</span><strong>2.5</strong></div>
+      <div class="bar"><i style="width:25%"></i></div>
+      <p>Obstáculo económico fundamental no cualificado hasta el minuto 55. Respuesta pasiva al final.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Cierre</span><strong>1.5</strong></div>
+      <div class="bar"><i style="width:15%"></i></div>
+      <p>“Si me toca la lotería te llamo.” El peor cierre del proyecto.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Lenguaje / Tono</span><strong>7.0</strong></div>
+      <div class="bar"><i style="width:70%"></i></div>
+      <p>Natural, warm, sin presión. Genuino.</p>
+    </div><div class="score-card">
+      <div class="score-head"><span>Estructura</span><strong>3.0</strong></div>
+      <div class="bar"><i style="width:30%"></i></div>
+      <p>Sin pre-cualificación económica. Pitch sin activos. Sin Reframe x9. Sin Pre-Suasión x9.</p>
+    </div></div><div class="global-score"><span>GLOBAL</span><strong>4.1 / 10</strong></div></div>
+    </section><section id="s4" class="panel tabletext">
+      <div class="section-kicker">04</div>
+      <h2>El historial de Nadia en contexto — 9 llamadas ahora</h2>
+      <div class="content"><pre class="mini-table">DIMENSIÓN              |SOL|MAG|MÓN|BEG|SIL|LES|ELE|NUR</pre>
+<pre class="mini-table">Nota global            |4.6|5.1|5.0|3.2|5.2|5.3|5.8|4.1</pre>
+<pre class="mini-table">Resultado              |DER|DER|S/C|S/C|CER|SEG|SEG|NO</pre>
+<pre class="mini-table">“Me ha quedado claro”  |Sí |Sí |Sí×3|Sí|Sí |Sí |Sí |Sí×2</pre>
+<pre class="mini-table">Diagnóstico emocional  |No |Lim|No |No |N/A|Lim|Bno|No</pre>
+<pre class="mini-table">Cualific. económica    |No |No |No |No |No |No |No |No (tarde, min 55)</pre>
+<pre class="mini-table">Reframe                |No |No |No |No |No |No |No |No</pre>
+<pre class="mini-table">Pre-Suasión            |No |No |No |No |No |No |No |No</pre>
+<pre class="mini-table">Activos en pitch       |No |No |No |No |No |No |No |No</pre>
+<pre class="mini-table">Reserva de plaza       |No |No |No |No |No |No |Sí |No</pre>
+<pre class="mini-table">Reagendación concreta  |No |No |No |No |No |No |Sí |No</pre>
+<p>La llamada de Elena (5.8) era la mejor de Nadia. Esta llamada es la segunda peor del proyecto — solo por encima de Begoña (3.2), la llamada de 19 minutos. Aquí fueron 60 minutos y el resultado es prácticamente el mismo.</p>
+<p>La diferencia con Begoña: al menos en Begoña la llamada terminó rápido. En esta, Nadia invirtió 60 minutos completos para llegar exactamente al mismo sitio. Eso es peor, no mejor.</p></div>
+    </section><section id="s5" class="panel good">
+      <div class="section-kicker">05</div>
+      <h2>Lo que funcionó</h2>
+      <div class="content"><h4>BIEN 1 — RAPPORT GENUINO</h4>
+<p>El acento canario, la broma de “te voy a dar una clase magistral sobre las haciendas canarias,” la naturalidad. Nuria se relajó y habló con apertura. Nadia no es forzada en el rapport — es auténtica. Eso es real.</p>
+<h4>BIEN 2 — PREGUNTA DE IMPLICACIÓN PRESENTE (MIN 32:37)</h4>
+<blockquote>“Si pasa un año y no haces nada, ¿qué crees que podría llegar a pasar?” — La pregunta estuvo. Nuria respondió: “más flácida y más cansancio.” Eso es correcto. El problema fue que ahí acabó — no hubo segunda implicación.</blockquote>
+<h4>BIEN 3 — CONECTÓ EL CANSANCIO CON ALIMENTACIÓN Y PERIMENOPAUSE (MIN 24:28)</h4>
+<blockquote>“Hombre, al final sí que es verdad que el tema de la alimentación hace mucho, sobre todo en los niveles de energía.” Correcto en dirección. No fue suficientemente profundo, pero al menos conectó el síntoma principal de Nuria con el programa.</blockquote>
+<h4>BIEN 4 — MENCIONÓ LA GARANTÍA (MIN 54)</h4>
+<blockquote>“Tenemos una garantía de 15 días.” Bien instinto — reducir el riesgo percibido. Llegó tarde y en el contexto equivocado (después del precio), pero la herramienta existe en la cabeza de Nadia. Eso es progreso.</blockquote>
+<p>Esos son los cuatro elementos que funcionaron. En una llamada de 60 minutos, con el nivel técnico que se espera después de 8 llamadas anteriores. Es demasiado poco.</p></div>
+    </section><section id="s6" class="panel bad">
+      <div class="section-kicker">06</div>
+      <h2>Los fallos</h2>
+      <div class="content"><h4>FALLO 0 — EL MÁS IMPORTANTE: LA CUALIFICACIÓN ECONÓMICA EN EL MINUTO 55</h4>
+<p>Este es el fallo que hay que nombrar primero porque lo invalida todo lo demás.</p>
+<p>Nuria dijo en el minuto 30: “no sé si van a cobrar un montón de dinero que yo no me puedo permitir.”</p>
+<p>Nadia escuchó eso y dijo: “luego te comento, primero entendamos tu situación.”</p>
+<p>Eso fue un error. Cuando el prospect te dice “me preocupa el precio” antes de que hayas dicho nada del programa, la pregunta correcta en ese momento es:</p>
+<blockquote>“Nuria, bien que me lo dices. Para que luego no perdamos tiempo ninguna de las dos, ¿tienes en mente cuánto podrías destinar mensualmente a esto?”</blockquote>
+<blockquote>Si dice 150-160€: en este momento sabes que el programa estándar no cuadra. Tienes dos opciones: (a) ves si existe una estructura de pago viable, o (b) no continúas con el pitch completo porque no hay punto de llegada.</blockquote>
+<blockquote>Si dice “no sé, depende de lo que sea”: puedes continuar con el diagnóstico sabiendo que el precio necesitará justificación fuerte.</blockquote>
+<p>En cambio, Nadia eligió no preguntar, hacer el diagnóstico completo (30 minutos) y el pitch completo (17 minutos), y revelar el precio en el minuto 55. Cuando Nuria dijo que esperaba 150-160€/mes, ya no había tiempo para nada. La llamada era una cáscara vacía en ese momento.</p>
+<p>La cualificación económica no existe en ninguna de las 8 llamadas anteriores de Nadia. Esta es la novena y sigue sin existir.</p>
+<h4>FALLO 1 — LA MADRE DE 120 KILOS: EL ACTIVO MÁS POTENTE DE LA LLAMADA DURÓ 45 SEGUNDOS</h4>
+<p>En el minuto 33, Nuria dijo: “Yo no quiero llegar a eso. Yo quiero llegar a la vejez bien. Mi madre está bien, pero tiene sobrepeso. Y se lo digo, todo ese peso en las rodillas eso al final influye.”</p>
+<p>Eso es el activo de identidad más poderoso de toda la llamada. No son los 5-6 kilos. No es el vaquero que aprieta. Es el miedo concreto a un futuro específico que ya tiene nombre y cara y 120 kilos.</p>
+<p>¿Qué hizo Nadia con eso? Dijo “claro, claro, claro” y pasó a la siguiente pregunta.</p>
+<p>El label correcto:</p>
+<blockquote>“Nuria, me has dicho que tienes a tu madre delante cada día como ejemplo de lo que no quieres ser. Que no quieres llegar a la vejez así. ¿Cuántos años tiene tu madre más que tú?”</blockquote>
+<p>Esa pregunta produce el compromiso real. La madre no es un dato — es el espejo de lo que Nuria tiene delante si no actúa. Ese activo debería haber viajado al precio.</p>
+<h4>FALLO 2 — “MI VIDA ES EL CANSANCIO” — EL DOLOR PRINCIPAL NO FUE EXCAVADO</h4>
+<p>En el minuto 30-36, Nuria describió el cansancio de forma muy específica: “Mi vida ahora mismo es intentar estudiar e irme a la cama lo más pronto posible. Vida social, cero. Duermo pero no descanso. Es ese círculo.”</p>
+<p>Eso es el dolor primario de Nuria. No los kilos — el cansancio que le está robando la vida. La analítica perfecta y el médico con melatonina es el Reframe perfecto: “el sistema médico te dice que estás bien. Tu cuerpo te dice que no. Y ambas tenéis razón — porque lo que tienes no aparece en una analítica. Aparece en la energía que no tienes para hacer nada cuando llegas a casa.”</p>
+<p>Nadia respondió: “Puede ser tantas cosas. Hombre, al final sí que es verdad que el tema de la alimentación hace mucho.” Y siguió.</p>
+<p>Ninguna pregunta de implicación sobre el cansancio. Ningún label sobre ese “círculo.” El dolor más profundo de Nuria — nombrado por ella misma con la frase más cargada de toda la llamada — pasó por la llamada sin ser explorado.</p>
+<h4>FALLO 3 — “ME HA QUEDADO BASTANTE CLARO” — NOVENA LLAMADA</h4>
+<p>En esta llamada aparece el mismo patrón aunque la frase varía. En torno al minuto 28: “Vale, vale, genial. Pues, Nadia, creo que ya me hago un poco de contexto, sobre todo de tu alimentación.” Transición para cerrar el bloque de alimentación.</p>
+<p>Minuto 44: “¿Tienes alguna duda con el tema de la alimentación? No, ninguna duda.” Cierre de ese bloque.</p>
+<p>El patrón está presente aunque la frase exacta varíe. El bloque de alimentación se cerró habiendo cubierto: desayuno (leche + cereales), media mañana (sándwich), almuerzo (pasta), merienda (yogur), cena (galletas con leche/proteína). Nada sobre el impacto emocional de la alimentación. Nada sobre la relación de Nuria con la comida bajo estrés de las oposiciones. Nada sobre qué pasa en los fines de semana con la pizza y el vino. Bloque cerrado antes de excavarlo.</p>
+<h4>FALLO 4 — REFRAME: NOVENA LLAMADA SIN ÉL</h4>
+<p>El Reframe de Nuria era el más específico y accionable de todas las llamadas de Nadia. Nuria fue al gimnasio 1 año, 2 veces por semana, dándolo todo. No vio resultados. Compañeros sí los veían. Ella no.</p>
+<p>¿Por qué? Porque tiene hipotiroidismo. Porque está en perimenopausia. Porque un entrenamiento funcional genérico de 2 días/semana sin personalización dietética no produce resultados en el perfil hormonal de Nuria.</p>
+<p>El Reframe:</p>
+<p>“Nuria, llevas un año en el funcional dándolo todo. Los demás veían resultados. Tú no. Y llevas culpándote de eso. Pues bien — no era culpa tuya. Era que ese programa no estaba diseñado para una mujer de 47 años con hipotiroidismo y posiblemente en perimenopausia. El funcional genérico funciona para el cuerpo de 30 años. Tu cuerpo ahora mismo responde a estímulos completamente diferentes. Nadie te lo dijo. Nadie lo tenía en cuenta. Eso es lo que cambia aquí.”</p>
+<p>Eso es lo que Nuria necesitaba escuchar para entender por qué este programa es diferente. Y si lo hubiera escuchado, el precio habría llegado con un contexto completamente diferente.</p>
+<p>Novena llamada. Cero Reframes. La frase “no es culpa tuya, es el sistema” llegó una vez de manera genérica pero sin la especificidad que produce la creencia.</p>
+<h4>FALLO 5 — SIN PRE-SUASIÓN ANTES DEL PRECIO — NOVENA LLAMADA</h4>
+<p>El precio llegó en el minuto 54:16. Sin frame emocional previo. Después de 17 minutos de pitch de plantilla sobre los tres pilares.</p>
+<p>Los activos que tenía disponibles:</p>
+<h4>ACTIVO 1 (más poderoso): “Yo no quiero llegar a lo de mi madre. 120 kilos. Las rodillas. La vejez así.”</h4>
+<h4>ACTIVO 2: “Mi vida es el cansancio. Vida social, cero.”</h4>
+<h4>ACTIVO 3: “Me siento fofa. Me falta definición.”</h4>
+<p>La Pre-Suasión antes del precio:</p>
+<p>“Nuria, antes del precio — me dijiste que tienes a tu madre delante cada día como espejo de lo que no quieres ser. Que no quieres esa vejez. Que ahora mismo tu vida es el cansancio y que vida social, cero. El programa son tres cuotas de 500 euros. ¿Cuánto vale no llegar a donde está tu madre?”</p>
+<p>El precio evaluado contra el miedo más concreto que tiene Nuria — no contra la descripción del programa. Nueve llamadas sin Pre-Suasión. Es el elemento más impactante que Nadia podría instalar y no ha llegado en nueve llamadas.</p>
+<h4>FALLO 6 — LA IMPLICACIÓN SE ABANDONÓ EN EL PRIMER “NO LO SÉ”</h4>
+<p>Minuto 32: Nadia preguntó qué pasaría en un año. Nuria respondió: “más flácida y más cansancio.” Nadia dijo “sí” y pasó al compromiso.</p>
+<p>La segunda implicación ancló en la evidencia específica:</p>
+<blockquote>“Nuria, llevas meses con este cansancio. Analítica perfecta, melatonina y ya. Si en un año sigues igual — sin ejercicio, sin alimentación corregida — ¿cuánto tiempo más crees que vas a poder seguir con las oposiciones a este nivel de energía?”</blockquote>
+<p>Esa pregunta conecta el cansancio (dolor primario) con el objetivo inmediato de Nuria (pasar las oposiciones). Eso habría producido un Impact Layer real. No llegó.</p>
+<h4>FALLO 7 — EL MANEJO DEL OBSTÁCULO ECONÓMICO FUE PASIVO</h4>
+<p>Cuando Nuria dijo que esperaba 150-160€/mes y el programa es 250€/mes, Nadia respondió: “Bueno, al final es tu economía, tú tienes que valorar al final cuáles son tus gastos, todo, si es importante esto para ti y podrías recortar algún otro lado.”</p>
+<p>Eso es rendirse con tacto. Esa frase equivale a decir “no puedo ayudarte.” Y después ofreció 6 cuotas de 250€ — que es exactamente 250€/mes, 90€ más de lo que Nuria puede destinar.</p>
+<p>La pregunta que nunca llegó — la que habría abierto alguna posibilidad:</p>
+<blockquote>“Nuria, entiendo perfectamente. Dime — ¿estás diciéndome que 250€/mes es imposible o es que simplemente es más de lo que esperabas y necesitas pensar cómo reorganizarlo?”</blockquote>
+<p>Hay una diferencia entre imposible (prospect descalificada) y inesperado (prospect que necesita más tiempo o reorganización). Nadia no hizo esa distinción.</p>
+<blockquote>Si la respuesta es imposible:</blockquote>
+<p>“Nuria, te respeto demasiado para presionarte. Lo que sí te pido es que cuando tu situación económica cambie — cuando pases las oposiciones en julio y tu plaza sea fija — me escribas. Porque lo que tú necesitas es exactamente lo que hacemos, y ese momento va a llegar.”</p>
+<blockquote>Si la respuesta es inesperado:</blockquote>
+<blockquote>“¿Qué necesitarías que pasara para que 250€/mes cupiera en tu presupuesto?”</blockquote>
+<p>Ninguna de esas frases llegó. La llamada murió con una broma sobre la lotería.</p>
+<h4>FALLO 8 — LA GARANTÍA SE MENCIONÓ MAL</h4>
+<blockquote>“Tenemos incluso una garantía también de 15 días al principio... y nunca nos ha pasado.” Eso fue dicho DESPUÉS del precio, cuando Nuria ya había dicho que no podía permitírselo.</blockquote>
+<p>La garantía como TRoT tiene que llegar ANTES del precio, como reductor de riesgo. Y nunca se debe decir “nunca nos ha pasado” — eso suena a presión.</p>
+<p>El correcto:</p>
+<p>“Nuria, los primeros 15 días funcionan como prueba con garantía de devolución. Si haces lo que te pedimos y no notas ningún cambio, te devolvemos el dinero. Lo decimos porque en estos años nunca ha tenido que activarse — pero existe para que no haya riesgo de tu parte.”</p>
+<p>Ese frame antes del precio cambia completamente cómo se evalúa el número.</p></div>
+    </section><section id="s7" class="panel sources">
+      <div class="section-kicker">07</div>
+      <h2>Las 13 fuentes — evaluación completa</h2>
+      <div class="content"><div class="accordion"><details open><summary><span>01</span>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss</summary><div class="detail-body"><blockquote>“Mi vida es el cansancio.” Esa frase llegó en el minuto 30. Nadia no la labeleó. No hizo mirroring. No hizo ninguna de las tres técnicas de Voss con la frase más cargada de la llamada.</blockquote>
+<p>El label correcto: “Parece que el cansancio no es solo físico — es que sientes que el cansancio te está robando la vida que quieres tener.”</p>
+<p>Ese label produce confirmación o corrección. Ambas son información. Nadia pasó.</p>
+<p>El label de la madre también faltó: “Parece que cuando piensas en tu madre, estás pensando en lo que no quieres ser tú dentro de 20 años.”</p>
+<p>Ese label habría llevado la madre al centro de la conversación en lugar de ser un dato lateral.</p></div></details><details ><summary><span>02</span>FUENTE 2 · GAP SELLING — Keenan</summary><div class="detail-body"><h4>ESTADO ACTUAL — parcialmente construido. Hipotiroidismo, cansancio, año parada, funcional sin resultados, 5-6 kg, fofa.</h4>
+<h4>IMPACT LAYER — el más importante fue abandonado:</h4>
+<blockquote>“Mi vida es el cansancio.” Eso no es un síntoma. Es la descripción del impacto del problema en la vida de Nuria. Nadia no preguntó cómo ese cansancio afecta su capacidad de estudiar, de socializar, de cuidarse.</blockquote>
+<p>La pregunta de Impact Layer que faltó: “Nuria, ese cansancio que me describes — ¿cuánto crees que está afectando a tu rendimiento en las oposiciones? Porque tienes el examen en mes y medio.”</p>
+<p>Conectar el cansancio con las oposiciones habría producido urgencia real — no urgencia fabricada sino urgencia que ya existía en Nuria.</p>
+<h4>CAUSA RAÍZ — no excavada. El Reframe del funcional sin resultados era la causa raíz perfecta. No llegó.</h4></div></details><details ><summary><span>03</span>FUENTE 3 · OBJECTIONS — Jeb Blount</summary><div class="detail-body"><p>El obstáculo económico de Nuria era genuino y estructural. No era una objeción de valor — era una limitación real de presupuesto.</p>
+<p>Blount distingue entre objeciones rebatibles (precio alto pero asequible si el valor es suficiente) y obstáculos de descalificación (presupuesto genuinamente incompatible).</p>
+<p>Nuria esperaba 150-160€. El mínimo es 250€. Ese gap de 90-100€/mes representa el 56-67% de lo que ella esperaba pagar. Eso no se cierra con valor añadido al final de una llamada — especialmente cuando el valor no fue construido correctamente durante la llamada.</p>
+<p>El LDA correcto CUANDO SE DESCUBRIÓ EN EL MINUTO 30:</p>
+<blockquote>Ledge: “Nuria, gracias por decírmelo directamente. Eso me ayuda mucho.”</blockquote>
+<blockquote>Disrupt: “Para que no perdamos el tiempo ni tú ni yo — ¿me puedes decir qué es lo máximo que podrías destinar mensualmente a algo así?”</blockquote>
+<blockquote>Ask: “Si el precio estuviera dentro de lo que puedes, ¿querrías seguir hablando?”</blockquote>
+<p>Si el número que da Nuria (150-160€) no alcanza ni el mínimo (250€) y no hay manera de reorganizarlo: agradecer la llamada, darle el seguimiento para cuando cambie su situación económica (oposiciones aprobadas → plaza fija → ingresos más estables), y terminar dignamente en 15 minutos. Sin pitch. Sin perder 40 minutos más.</p>
+<blockquote>Si hay margen: continuar con el diagnóstico con el objetivo de construir suficiente valor para que el gap económico sea solucionable.</blockquote>
+<p>Nada de esto ocurrió.</p></div></details><details ><summary><span>04</span>FUENTE 4 · VIRTUAL SELLING — Blount</summary><div class="detail-body"><p>Nuria llamó desde el móvil, sin buena iluminación. Nadia lo mencionó al principio (“tú vas a acabar como yo”) — bien gestionado el arranque técnico con humor.</p>
+<p>El problema técnico fue secundario. El problema real fue que 60 minutos en virtual con una prospect sin cualificación económica es un derroche de energía para ambas. Blount es claro: en virtual, el tiempo es un activo crítico. Una llamada de 60 minutos que termina en “si me toca la lotería” significa que los 60 minutos no estuvieron bien utilizados.</p></div></details><details ><summary><span>05</span>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna</summary><div class="detail-body"><p>El Omission Bias de Nuria era real pero diferente al de otras prospects: no era “¿y si me equivoco al comprar?” — era “no puedo económicamente aunque quiera.”</p>
+<p>JOLT distingue entre indecisión por miedo (tratable con TRoT) e imposibilidad genuina (no tratable). En el caso de Nuria, el obstáculo económico estaba en la frontera.</p>
+<p>La garantía de 15 días podría haber funcionado como TRoT si hubiera llegado antes del precio y antes de que el obstáculo económico se convirtiera en el foco de la conversación. Llegó después. Ya era tarde.</p>
+<p>La lección JOLT para esta llamada: el TRoT de la garantía tiene que ser el último argumento antes del precio, no el último argumento después de que el prospect ya dijo que no puede.</p></div></details><details ><summary><span>06</span>FUENTE 6 · SWITCH — Heath</summary><div class="detail-body"><h4>JINETE — motivado pero sin dirección: Nuria sabe que necesita cambiar. Sabe que la madre es el espejo. Sabe que el cansancio no es sostenible. Tiene todo el análisis correcto.</h4>
+<h4>ELEFANTE — agotado y con recursos limitados: el Elefante de Nuria estaba dispuesto pero tenía un obstáculo real — la economía. En Switch, el Camino tiene que ser compatible con la capacidad real del Elefante. Si el Camino cuesta 250€/mes y el Elefante solo puede cargar 150€, el Camino no funciona.</h4>
+<h4>BRIGHT SPOT disponible, no usado:</h4>
+<p>Nuria bajó 6 kilos hace 10 años con una nutricionista. Lo hizo. Con una dieta bastante básica y sin ejercicio. Eso es el Bright Spot: cuando tiene un sistema y alguien que la acompaña, lo ejecuta y funciona. El argumento: “Nuria, hace 10 años bajaste 6 kilos con una nutricionista básica. Imagínate lo que podrías hacer con un programa diseñado para tu hipotiroidismo y tu nivel hormonal actual.”</p>
+<p>No apareció.</p></div></details><details ><summary><span>07</span>FUENTE 7 · WHY SHE BUYS — Brennan</summary><div class="detail-body"><p>La compra de identidad de Nuria era doble:</p>
+<h4>CAPA 1 — “apretadita y definida” — estética concreta y específica.</h4>
+<h4>CAPA 2 — “yo no quiero llegar a lo de mi madre” — prevención de un futuro concreto y terrorífico.</h4>
+<p>La segunda capa es incomparablemente más poderosa. Brennan documenta que las mujeres que tienen un referente negativo cercano (madre, hermana, compañera) compran contra ese futuro más que hacia ningún ideal positivo.</p>
+<p>Nuria tiene a su madre delante todos los días. Trae sus tuppers. Ve lo que le pasa a los 120 kilos en las rodillas. Eso habría sido el motor de compra — si hubiera sido el centro del argumento.</p>
+<p>No lo fue. Pasó en 45 segundos.</p></div></details><details ><summary><span>08</span>FUENTE 8 · THE MOM TEST — Fitzpatrick</summary><div class="detail-body"><p>Pregunta hipotética que debería haber sido de comportamiento real (min 11:46): “¿Qué es lo que tú sientes que necesitas o que te ayudaría con el tema del ejercicio ahora mismo?” — Eso es una pregunta de opinión. Mom Test: “Cuando estabas en el funcional y veías que los demás sí tenían resultados y tú no, ¿qué hacías?” — Comportamiento real, no opinión.</p>
+<p>Dato de comportamiento importante no recogido: ¿Qué hace Nuria con el cansancio en los días de estudio intensivo? ¿Cómo gestiona la alimentación cuando está saturada con las oposiciones? Esos son los comportamientos que el nutri va a necesitar para personalizar el plan. No se preguntaron.</p></div></details><details ><summary><span>09</span>FUENTE 9 · PRE-SUASIÓN — Cialdini</summary><div class="detail-body"><p>Novena llamada. Cero Pre-Suasión antes del precio.</p>
+<p>El precio llegó en el minuto 54 después de 17 minutos de pitch. Sin frame emocional. Sin activo de Nuria inmediatamente antes del número.</p>
+<p>Los activos estaban disponibles — la madre, el cansancio, el año de funcional sin resultados. Ninguno fue el frame del precio.</p>
+<p>Este es el elemento que más impacto tendría en los cierres de Nadia si lo instalara. Nueve llamadas de espera. Es el elemento más urgente de instalar.</p></div></details><details ><summary><span>10</span>FUENTE 10 · INFLUENCE — Cialdini</summary><div class="detail-body"><h4>PRUEBA SOCIAL — no utilizada. Nuria estuvo 1 año en un funcional sin resultados. La prueba social perfecta: “Nuria, tienes muchas mujeres que vinieron al programa exactamente desde donde estás tú — haciendo ejercicio durante meses y sin ver resultados porque el entrenamiento no estaba adaptado a su perfil hormonal. Seis meses después, la diferencia es visible.”</h4>
+<p>Esa frase habría resonado directamente con la experiencia de Nuria. No llegó.</p>
+<h4>ESCASEZ — no utilizada. Con la analítica perfecta y el cansancio sin explicación médica, el argumento de escasez legítima habría sido: “Nuria, la perimenopausia hace que cada año que pasa el cuerpo responda peor a los mismos estímulos. Lo que funciona ahora puede no funcionar en dos años. No te lo digo para asustarte — te lo digo porque tú misma me lo dijiste cuando hablaste de tu madre.”</h4></div></details><details ><summary><span>11</span>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson</summary><div class="detail-body"><p>Novena llamada sin Reframe.</p>
+<p>El Reframe más específico del proyecto de Nadia estaba disponible en esta llamada: el funcional de un año sin resultados cuando los compañeros sí los veían. Eso tiene una causa raíz específica y nombrable — y Nadia no la nombró.</p>
+<p>“Nuria, llevas culpándote un año de no tener resultados cuando entrenabas. De que quizás fue poco, o que quizás necesitabas más días. Pero no era eso. Era que un entrenamiento funcional genérico está diseñado para el cuerpo estándar. Tú tienes hipotiroidismo, estás en perimenopausia y tienes 47 años. Ese programa no fue diseñado para tu cuerpo. El tuyo responde a protocolos completamente diferentes. No era culpa tuya — era el sistema equivocado.”</p>
+<p>Esa frase habría producido en Nuria algo que ninguna explicación del programa puede producir: el alivio de entender por qué. Y ese alivio es el que abre la cartera.</p></div></details><details ><summary><span>12</span>FUENTE 12 · SPIN SELLING — Rackham</summary><div class="detail-body"><h4>SITUACIÓN ✅ — bien cubierta: hipotiroidismo, oposiciones, sola, cansancio, funcional sin resultados, alimentación básica.</h4>
+<h4>PROBLEMA ✅ — identificado superficialmente: fofa, 5-6 kilos, cansancio, falta de rutina.</h4>
+<h4>IMPLICACIÓN ✗ — preguntada una vez, abandonada al primer “más flácida y más cansancio.”</h4>
+<p>La segunda Implicación que faltaba:</p>
+<blockquote>“Nuria, ese cansancio que describes — que duermes pero no descansas, que tu vida es estudiar e irte a la cama — ¿cómo está afectando a tu rendimiento en las oposiciones? Porque tienes el examen en mes y medio.”</blockquote>
+<p>Esa conexión habría hecho el cansancio urgente en lugar de solo molesto.</p>
+<h4>NECESIDAD-BENEFICIO ✗ — no construida. Nuria no verbalizó en ningún momento cómo sería su vida si el cansancio desapareciera. Esa es la imagen que precede al precio.</h4></div></details><details ><summary><span>13</span>FUENTE 13 · EXACTLY WHAT TO SAY — Jones</summary><div class="detail-body"><p>La frase de Jones que habría cambiado esta llamada, en el minuto 30 cuando Nuria dijo que le preocupaba el dinero:</p>
+<blockquote>“Antes de que te cuente cualquier cosa del programa, una pregunta directa: ¿hay alguna cantidad mensual que para ti, si el programa es todo lo que necesitas, sería un sí automático?”</blockquote>
+<p>Esa pregunta pone el número encima de la mesa antes de que Nadia invierta 40 minutos más. Si el número que da Nuria (150-160€) no alcanza el mínimo viable: gestión directa. Si hay margen: continuar con diagnóstico dirigido a construir el valor necesario para justificar la diferencia.</p>
+<p>La frase de Jones para el cierre cuando el obstáculo es económico real:</p>
+<blockquote>“Nuria, tengo clarísimo que esto es lo que necesitas. Y entiendo que ahora mismo el timing económico no cuadra. ¿Qué tendría que pasar para que en septiembre, después del examen, esto fuera posible?”</blockquote>
+<p>Eso no es rendirse — es plantar la semilla para una llamada de seguimiento real después de que pase el examen.</p></div></details></div></div>
+    </section><section id="s8" class="panel coach">
+      <div class="section-kicker">08</div>
+      <h2>Para Nadia — la conversación que necesita tener consigo misma</h2>
+      <div class="content"><p>Nadia, llevas 9 llamadas. Tu nota más alta fue 5.8 con Elena. Tu nota más baja fue 3.2 con Begoña. Esta llamada con Nuria es 4.1. Has bajado.</p>
+<p>El progreso que mostraste en las llamadas 6, 7 y 8 (Elena, primera reserva de plaza, primera reagendación concreta) no se sostuvo. Esta llamada es una regresión.</p>
+<p>Hay algo que ocurrió en esta llamada que no había ocurrido antes con esta claridad: invertiste 60 minutos completos en una prospect que te dijo en el minuto 30 que tenía limitaciones económicas, y no preguntaste cuáles eran hasta el minuto 55. Y cuando las preguntaste, la brecha era de 90-100€/mes — insalvable en el tiempo que quedaba y con el valor que había sido construido hasta ese punto.</p>
+<p>Eso no es mala suerte. Es falta de sistema.</p>
+<p>En 9 llamadas, la cualificación económica no ha aparecido en ninguna. Ni una sola vez has preguntado “¿tienes en mente cuánto puedes destinar mensualmente a esto?” antes de que el prospect lo pusiera él mismo sobre la mesa. Eso es una omisión sistemática — y tiene consecuencias sistemáticas.</p>
+<p>Lo segundo que necesitas escuchar: el diagnóstico emocional que demostraste en Elena (llegaste a “la Elena que era”) no apareció aquí. Nuria te dijo “mi vida es el cansancio” y “yo no quiero llegar a lo de mi madre” — dos frases que valían todo el pitch. Ninguna fue excavada. Ninguna viajó al precio.</p>
+<p>Eso significa que el progreso en diagnóstico emocional que mostraste en Elena todavía no está instalado. Fue un destello en una llamada — no un hábito.</p>
+<p>Lo tercero: nueve llamadas sin Reframe. Nueve llamadas sin Pre-Suasión antes del precio. Nueve llamadas con “me ha quedado bastante claro.” La llamada de Elena mostró que puedes llegar a profundidad emocional cuando te lo propones. Pero propóntelo todas las llamadas, no solo cuando la prospect es especialmente emotiva.</p>
+<p>El problema no es que no tengas capacidad. El problema es que no tienes un sistema pre-llamada que te obligue a llegar preparada. El Post-It con los tres activos antes del pitch no existe en ninguna de las 9 llamadas. La Pre-Suasión antes del precio no existe en ninguna. La cualificación económica temprana no existe en ninguna.</p>
+<p>Eso no se soluciona con más auditorías. Se soluciona con un ritual de 5 minutos antes de cada llamada:</p>
+<p>1. ¿Qué sé de esta prospect? (perfil, dolor probable, obstáculos posibles)<br>2. ¿Cuál es la pregunta económica que voy a hacer en los primeros 15 minutos?<br>3. Post-It en blanco para los 3 activos más poderosos del diagnóstico<br>4. La frase de Pre-Suasión que voy a decir antes del precio: “Antes del precio, me dijiste [ACTIVO 1].”</p>
+<p>Sin esas 4 cosas escritas antes de entrar a la llamada, las herramientas no se instalan. Seguirán siendo buenas intenciones.</p></div>
+    </section><section id="s9" class="panel plan">
+      <div class="section-kicker">09</div>
+      <h2>Plan de acción — Nuria — seguimiento</h2>
+      <div class="content"><p>Nuria no está perdida para siempre. El examen es el 18 de julio. Si lo aprueba, consolida su plaza de funcionaria. Con plaza fija, su situación económica mejora.</p>
+<p>El mensaje de seguimiento correcto para agosto:</p>
+<p>“Nuria, soy Nadia. Espero que el examen del 18 haya ido bien. Te escribo porque no se me ha olvidado lo que me dijiste: que tu vida ahora mismo es el cansancio, y que no quieres llegar a lo que ves en tu madre. ¿Cómo estás? ¿Pudiste descansar después del examen?”</p>
+<p>No mencionar el precio. No mencionar el programa. Solo retomar el hilo emocional. Si Nuria responde, explorar si la situación económica ha cambiado. Si ha aprobado y tiene plaza fija — llamada. Con el Reframe, la Pre-Suasión y la cualificación económica hechos correctamente esta vez.</p></div>
+    </section><section id="s10" class="panel summary">
+      <div class="section-kicker">10</div>
+      <h2>Resumen ejecutivo</h2>
+      <div class="content"><h4>NOTA: 4.1 / 10</h4>
+<h4>RESULTADO: “Si me gana la lotería te llamo” — NO cerrable en este momento</h4>
+<h4>PARA NADIA, LA FRASE DE ESTA AUDITORÍA:</h4>
+<p>“Nueve llamadas. En la séptima llegaste a la Elena que era y fue la mejor de tus llamadas. En la novena bajaste a 4.1 — la segunda peor del proyecto. No porque esta prospect fuera difícil. Sino porque pasaste 60 minutos haciendo el diagnóstico y el pitch sin preguntarle en los primeros 15 minutos qué presupuesto tenía. Nuria te dijo en el minuto 30 que le preocupaba el dinero. Tú lo escuchaste y seguiste. Esa decisión costó 30 minutos de llamada que terminaron con una broma sobre la lotería. El problema no es tu capacidad — tienes rapport natural, llegas a momentos reales cuando te quedas. El problema es que no tienes un sistema pre-llamada. Sin la pregunta económica en los primeros 15 minutos, sin el Post-It con los activos, sin la Pre-Suasión escrita antes de entrar, las herramientas no llegan. Y llevan nueve llamadas sin llegar. La décima tiene que ser diferente. No porque lo intentes más — sino porque lo preparas antes de entrar.”</p></div>
+    </section></div>
+</main>
+<script>
+document.querySelectorAll('.nav a').forEach(a=>{a.addEventListener('click',()=>{document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')})});
+</script>
+</body>
+</html>

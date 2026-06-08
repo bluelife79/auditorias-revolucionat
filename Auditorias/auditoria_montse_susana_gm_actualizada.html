@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría Forense · Montse · Susana GM</title>
+  <style>
+    :root{
+      --bg:#070A0F;
+      --panel:#101722;
+      --panel2:#121C2A;
+      --panel3:#0D1320;
+      --text:#EEF4FF;
+      --muted:#9FB0C7;
+      --soft:#D7E2F2;
+      --line:rgba(255,255,255,.10);
+      --gold:#F6C95B;
+      --green:#36D399;
+      --blue:#65A8FF;
+      --red:#FF6B6B;
+      --orange:#FFB86B;
+      --purple:#B994FF;
+      --cyan:#67E8F9;
+      --shadow: 0 24px 70px rgba(0,0,0,.42);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(101,168,255,.22), transparent 35%),
+        radial-gradient(circle at 90% 10%, rgba(246,201,91,.14), transparent 32%),
+        radial-gradient(circle at 30% 90%, rgba(54,211,153,.12), transparent 34%),
+        var(--bg);
+      line-height:1.55;
+    }
+    body:before{
+      content:"";
+      position:fixed; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px);
+      background-size:42px 42px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.18));
+    }
+    a{color:inherit}
+    .layout{display:grid; grid-template-columns:310px 1fr; min-height:100vh}
+    aside{
+      position:sticky; top:0; height:100vh; overflow:auto;
+      border-right:1px solid var(--line);
+      background:rgba(8,12,19,.78);
+      backdrop-filter:blur(18px);
+      padding:24px 18px;
+    }
+    main{padding:34px 36px 80px; max-width:1220px; width:100%; margin:0 auto}
+    .brand{
+      display:flex; align-items:center; gap:12px; margin-bottom:20px;
+      padding:12px; border:1px solid var(--line); border-radius:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .mark{
+      width:42px; height:42px; border-radius:14px;
+      background:linear-gradient(135deg, var(--gold), var(--orange));
+      display:flex; align-items:center; justify-content:center;
+      color:#111; font-weight:900;
+      box-shadow:0 12px 30px rgba(246,201,91,.22);
+    }
+    .brand small{display:block; color:var(--muted); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:10px}
+    .brand strong{display:block; font-size:14px; line-height:1.2}
+    .nav-title{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.14em; margin:20px 10px 10px}
+    nav a{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 11px; margin:4px 0; border-radius:14px;
+      color:var(--soft); text-decoration:none; font-size:13px; border:1px solid transparent;
+    }
+    nav a:hover{background:rgba(255,255,255,.06); border-color:var(--line)}
+    nav a .dot{width:8px;height:8px;border-radius:50%; background:var(--blue); opacity:.75; flex:0 0 auto}
+    .aside-card{
+      margin-top:18px; padding:14px; border:1px solid var(--line); border-radius:18px;
+      background:rgba(255,255,255,.045);
+    }
+    .aside-card .big{font-size:36px; font-weight:900; line-height:1; color:var(--gold)}
+    .aside-card .label{font-size:12px; color:var(--muted); margin-top:4px}
+    .hero{
+      position:relative; overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:30px; padding:34px;
+      background:
+        linear-gradient(135deg, rgba(101,168,255,.16), rgba(246,201,91,.08) 42%, rgba(54,211,153,.08)),
+        rgba(12,18,28,.84);
+      box-shadow:var(--shadow);
+      margin-bottom:26px;
+    }
+    .hero:after{
+      content:""; position:absolute; right:-130px; top:-130px; width:340px; height:340px; border-radius:50%;
+      background:radial-gradient(circle, rgba(246,201,91,.35), transparent 68%);
+    }
+    .kicker{font-size:12px; color:var(--gold); font-weight:900; text-transform:uppercase; letter-spacing:.16em}
+    h1{font-size:clamp(34px, 5vw, 58px); line-height:.96; margin:10px 0 16px; letter-spacing:-.04em}
+    h2{font-size:30px; line-height:1.05; margin:0 0 16px; letter-spacing:-.025em}
+    h3{font-size:19px; margin:0 0 10px; letter-spacing:-.01em}
+    p{margin:0 0 13px}
+    .hero p{max-width:900px; color:var(--soft); font-size:17px}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px}
+    .badge{
+      padding:9px 12px; border-radius:999px; border:1px solid var(--line);
+      background:rgba(255,255,255,.06); color:var(--soft); font-size:13px; font-weight:700;
+    }
+    .badge.green{background:rgba(54,211,153,.12); color:#B7F7DC; border-color:rgba(54,211,153,.25)}
+    .badge.gold{background:rgba(246,201,91,.12); color:#FFE3A0; border-color:rgba(246,201,91,.25)}
+    .badge.red{background:rgba(255,107,107,.12); color:#FFC0C0; border-color:rgba(255,107,107,.25)}
+    .section{
+      margin:24px 0;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(14,20,31,.78);
+      box-shadow:0 18px 50px rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+    .section-head{
+      padding:22px 24px;
+      background:linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px;
+    }
+    .section-head .sub{color:var(--muted); font-size:13px; margin-top:4px}
+    .section-body{padding:24px}
+    .grid{display:grid; gap:16px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{
+      border:1px solid var(--line); border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+      padding:18px;
+    }
+    .card.highlight{border-color:rgba(246,201,91,.34); background:linear-gradient(180deg, rgba(246,201,91,.12), rgba(255,255,255,.025))}
+    .card.good{border-color:rgba(54,211,153,.30); background:linear-gradient(180deg, rgba(54,211,153,.10), rgba(255,255,255,.025))}
+    .card.warn{border-color:rgba(255,184,107,.34); background:linear-gradient(180deg, rgba(255,184,107,.11), rgba(255,255,255,.025))}
+    .card.bad{border-color:rgba(255,107,107,.30); background:linear-gradient(180deg, rgba(255,107,107,.10), rgba(255,255,255,.025))}
+    .meta{
+      display:grid; grid-template-columns: 190px 1fr; gap:10px 16px; font-size:14px;
+    }
+    .meta dt{color:var(--muted); font-weight:800}
+    .meta dd{margin:0; color:var(--text)}
+    .score-wrap{overflow:auto}
+    table{width:100%; border-collapse:separate; border-spacing:0; min-width:760px}
+    th,td{padding:13px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; font-size:14px}
+    th{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.1em; background:rgba(255,255,255,.04)}
+    tr:last-child td{border-bottom:0}
+    .score{font-weight:900; font-size:18px}
+    .score.good{color:var(--green)} .score.mid{color:var(--gold)} .score.low{color:var(--red)}
+    .change.up{color:var(--green); font-weight:900}
+    .pill{
+      display:inline-flex; align-items:center; gap:6px;
+      border:1px solid var(--line); border-radius:999px; padding:5px 9px;
+      font-size:12px; color:var(--soft); background:rgba(255,255,255,.05); font-weight:800;
+    }
+    .quote{
+      border-left:4px solid var(--gold);
+      padding:14px 16px;
+      background:rgba(246,201,91,.08);
+      border-radius:0 16px 16px 0;
+      color:#FFF4D1;
+      font-weight:750;
+      margin:14px 0;
+    }
+    .quote.blue{border-left-color:var(--blue); background:rgba(101,168,255,.09); color:#DDEBFF}
+    .quote.green{border-left-color:var(--green); background:rgba(54,211,153,.09); color:#DDFCEA}
+    .timeline{position:relative; padding-left:28px}
+    .timeline:before{content:""; position:absolute; left:8px; top:4px; bottom:4px; width:2px; background:linear-gradient(var(--gold), var(--blue), var(--green))}
+    .titem{position:relative; margin:0 0 18px; padding:14px 16px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.04)}
+    .titem:before{content:""; position:absolute; left:-25px; top:18px; width:12px; height:12px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(246,201,91,.16)}
+    .titem strong{display:block; margin-bottom:4px}
+    .accordion{display:grid; gap:12px}
+    details{
+      border:1px solid var(--line); border-radius:18px;
+      background:rgba(255,255,255,.04); overflow:hidden;
+    }
+    summary{
+      cursor:pointer; padding:17px 18px; font-weight:900; display:flex; align-items:center; gap:10px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"+"; margin-left:auto; color:var(--gold); font-size:20px}
+    details[open] summary:after{content:"–"}
+    .detail-body{padding:0 18px 18px; color:var(--soft)}
+    .tag{
+      display:inline-block; margin:3px 4px 3px 0; padding:6px 9px; border-radius:10px;
+      background:rgba(101,168,255,.10); color:#DCEAFF; border:1px solid rgba(101,168,255,.20);
+      font-size:12px; font-weight:800;
+    }
+    .mini-title{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; font-weight:900; margin-bottom:8px}
+    .stat{
+      padding:18px; border:1px solid var(--line); border-radius:20px; background:rgba(255,255,255,.045)
+    }
+    .stat .num{font-size:34px; line-height:1; font-weight:950; color:var(--gold)}
+    .stat .cap{font-size:13px; color:var(--muted); margin-top:6px}
+    .progress{
+      height:9px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:10px
+    }
+    .bar{height:100%; border-radius:999px; background:linear-gradient(90deg, var(--blue), var(--green)); width:var(--w)}
+    .script{
+      white-space:pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:13px; line-height:1.55;
+      background:#070B12; color:#EAF2FF;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:18px; padding:16px; overflow:auto;
+    }
+    .sticky-actions{
+      position:fixed; right:22px; bottom:22px; z-index:10;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .btn{
+      border:1px solid var(--line); background:rgba(16,23,34,.88); color:var(--text);
+      border-radius:999px; padding:11px 14px; cursor:pointer; font-weight:900; backdrop-filter:blur(12px);
+      box-shadow:0 12px 30px rgba(0,0,0,.25);
+    }
+    .btn:hover{border-color:rgba(246,201,91,.35)}
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr}
+      aside{position:relative; height:auto}
+      main{padding:22px 16px 70px}
+      .grid.two,.grid.three,.grid.four{grid-template-columns:1fr}
+      .hero{padding:24px}
+      .meta{grid-template-columns:1fr}
+      .sticky-actions{display:none}
+    }
+    @media print{
+      body{background:#fff;color:#111}
+      aside,.sticky-actions{display:none}
+      .layout{display:block}
+      main{max-width:none;padding:0}
+      .section,.hero,.card,details{break-inside:avoid; box-shadow:none; background:#fff; color:#111; border-color:#ddd}
+      .section-head{background:#f5f5f5}
+      .detail-body,.section-head .sub,.meta dt,.card p{color:#222}
+      table{min-width:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <div class="mark">R</div>
+        <div>
+          <small>Revoluciona-T</small>
+          <strong>Auditoría Forense · Montse / Susana GM</strong>
+        </div>
+      </div>
+
+      <div class="aside-card">
+        <div class="big">7.3</div>
+        <div class="label">Nota global actualizada</div>
+      </div>
+      <div class="aside-card">
+        <div class="big" style="color:var(--green)">CERRADA</div>
+        <div class="label">250€ · mes de prueba · Stripe en llamada</div>
+      </div>
+
+      <div class="nav-title">Navegación</div>
+      <nav>
+        <a href="#actualizacion"><span>Actualización</span><span class="dot"></span></a>
+        <a href="#ficha"><span>Ficha del caso</span><span class="dot"></span></a>
+        <a href="#operativa"><span>Nota operativa</span><span class="dot"></span></a>
+        <a href="#lectura"><span>Lectura honesta</span><span class="dot"></span></a>
+        <a href="#scoreboard"><span>Scoreboard</span><span class="dot"></span></a>
+        <a href="#funciono"><span>Lo que funcionó</span><span class="dot"></span></a>
+        <a href="#critico"><span>Análisis crítico</span><span class="dot"></span></a>
+        <a href="#riesgo"><span>Riesgo comercial</span><span class="dot"></span></a>
+        <a href="#fuentes"><span>13 fuentes</span><span class="dot"></span></a>
+        <a href="#evolucion"><span>Evolución Montse</span><span class="dot"></span></a>
+        <a href="#seguimiento"><span>Seguimiento mes prueba</span><span class="dot"></span></a>
+        <a href="#plan"><span>Plan de entrenamiento</span><span class="dot"></span></a>
+        <a href="#resumen"><span>Resumen ejecutivo</span><span class="dot"></span></a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <div class="kicker">Auditoría forense · Edición actualizada</div>
+        <h1>Montse · Susana GM</h1>
+        <p><strong>Esta auditoría reemplaza completamente a la anterior.</strong> La Parte 2 cambia el resultado: de seguimiento con 7.0 a cierre con 7.3, mes de prueba de 250€ pagado por Stripe y conversión pendiente al programa completo.</p>
+        <div class="badges">
+          <span class="badge green">✅ Cerrada</span>
+          <span class="badge gold">250€ mes de prueba</span>
+          <span class="badge">95 minutos totales</span>
+          <span class="badge">Maputo · Mozambique</span>
+          <span class="badge red">Reframe ausente</span>
+          <span class="badge gold">Primera Pre-Suasión real de Montse</span>
+        </div>
+      </section>
+
+      <section id="actualizacion" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Actualización respecto a la auditoría anterior</h2>
+            <div class="sub">La Parte 2 cambia el resultado, la nota y varias conclusiones críticas.</div>
+          </div>
+          <span class="pill">Reemplaza auditoría previa</span>
+        </div>
+        <div class="section-body">
+          <div class="card highlight">
+            <p>La auditoría anterior fue hecha solo con la Parte 1 y concluyó <strong>EN SEGUIMIENTO</strong> con nota <strong>7.0</strong>.</p>
+            <p>La Parte 2 cambia el resultado y obliga a revisar varios elementos del análisis. Esta auditoría reemplaza a la anterior completamente.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="ficha" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Ficha del caso</h2>
+            <div class="sub">Datos completos de la llamada, prospecto, contexto, resultado y bloqueadores.</div>
+          </div>
+          <span class="pill">Parte 1 + Parte 2</span>
+        </div>
+        <div class="section-body">
+          <div class="grid two">
+            <div class="card">
+              <h3>Datos de la videollamada</h3>
+              <dl class="meta">
+                <dt>Prospecto</dt><dd>Susana GM · Maputo, Mozambique · 41 años · española</dd>
+                <dt>Closer</dt><dd>Montse</dd>
+                <dt>Fecha</dt><dd>27 mayo 2025</dd>
+                <dt>Duración</dt><dd>66 min Parte 1 + 29 min Parte 2 = 95 minutos totales</dd>
+                <dt>Resultado</dt><dd><strong>✅ CERRADA — 250€ mes de prueba · Stripe en llamada</strong></dd>
+                <dt>Nota global</dt><dd><strong>7.3 / 10</strong></dd>
+                <dt>Historial Montse</dt><dd>Emma (SEG. 6.4) · Gladys (SEG. 7.1) · Katherine (SEG. 6.7) · Susanna (S/CIE. 5.5) · Lydia (SEG. 6.5 → entró) · Virginia (CER. 6.5) · Susana (CER. 7.3)</dd>
+              </dl>
+            </div>
+            <div class="card good">
+              <h3>Perfil de Susana</h3>
+              <dl class="meta">
+                <dt>Ubicación</dt><dd>Maputo, Mozambique · 7 años viviendo allí</dd>
+                <dt>Trabajo</dt><dd>Mundo diplomático / gobierno · horario 8:30-16h</dd>
+                <dt>Familia</dt><dd>Marido Pablo, apoyo total y también quiere mejorar · hijos Carlos (5 años) y Sofía (2,5 años)</dd>
+                <dt>Objetivo físico</dt><dd>58 kg / 1,54m · quiere 53 kg, bajar 5-6 kg</dd>
+                <dt>Contexto corporal</dt><dd>Post-embarazo de Sofía no recuperado</dd>
+                <dt>Actividad</dt><dd>Natación retomada hace 1 semana + pilates 1-2x/semana desde hace 6 meses</dd>
+                <dt>Fuerza</dt><dd>Nunca ha hecho entrenamiento de fuerza</dd>
+                <dt>Casa</dt><dd>Cocina muy bien: sin azúcar, sin fritos, legumbres, proteína</dd>
+                <dt>Punto débil</dt><dd>Vida social muy activa: eventos diplomáticos y cenas en casas</dd>
+                <dt>Dato digestivo</dt><dd>Gases recientes</dd>
+                <dt>Antecedente</dt><dd>Bióloga antiinflamatoria: aprendió cosas pero sin resultados ni sistema de ejercicio</dd>
+                <dt>Madre</dt><dd>Presión con imagen/peso · Susana se queda "cogida, pequeñita" cuando la critica</dd>
+                <dt>Decisión</dt><dd>Autónoma · Pablo aliado, no obstáculo</dd>
+                <dt>Compromiso</dt><dd>10/10</dd>
+                <dt>Obstáculo real</dt><dd>Fraude reciente por constructor · desconfianza activa hacia nuevos proveedores · miedo a comprometer importes grandes sin experiencia previa con el programa</dd>
+              </dl>
+            </div>
+          </div>
+
+          <div class="grid four" style="margin-top:16px">
+            <div class="stat"><div class="num">95'</div><div class="cap">Duración total</div></div>
+            <div class="stat"><div class="num">10/10</div><div class="cap">Compromiso declarado</div></div>
+            <div class="stat"><div class="num">250€</div><div class="cap">Pago realizado</div></div>
+            <div class="stat"><div class="num">30d</div><div class="cap">Ventana de conversión</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="operativa" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Nota operativa para el equipo</h2>
+            <div class="sub">Información que nutrición, coaching y ventas deben tener antes de arrancar.</div>
+          </div>
+          <span class="pill">Acción necesaria</span>
+        </div>
+        <div class="section-body">
+          <div class="grid two">
+            <div class="card warn">
+              <h3>Primera semana: festival en Eswatini</h3>
+              <p>Susana viaja este fin de semana a <strong>Eswatini</strong> — antes Suazilandia — a un festival de música. Empieza el lunes. El nutri y el coach deben saber esto para la primera semana.</p>
+              <p>La primera semana será de festival. Eso no es un obstáculo si el equipo lo gestiona bien desde el inicio.</p>
+            </div>
+            <div class="card">
+              <h3>Gases recientes</h3>
+              <p>Hay gases recientes sin origen identificado. El nutri debe recoger esto en la entrevista inicial y evaluar posibilidad de intolerancia o problema de combinación.</p>
+            </div>
+            <div class="card highlight">
+              <h3>Conversión del mes de prueba</h3>
+              <p>El mes de prueba de 250€ termina aproximadamente el <strong>27 de junio</strong>. La decisión de convertir a 6 meses o 1 año debe gestionarse activamente antes de que finalice. Montse debe agendarlo.</p>
+            </div>
+            <div class="card bad">
+              <h3>Riesgo comercial</h3>
+              <p>El mes de prueba reduce el riesgo percibido de Susana, pero aumenta el riesgo comercial para Revoluciona-T si no se convierte a programa completo. Hay una sección específica más abajo.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lectura" class="section">
+        <div class="section-head">
+          <div>
+            <h2>La lectura honesta de esta llamada</h2>
+            <div class="sub">Qué cambia con la Parte 2 y por qué la nota sube a 7.3.</div>
+          </div>
+          <span class="pill">Diagnóstico + cierre</span>
+        </div>
+        <div class="section-body">
+          <p>Esta es la mejor llamada de Montse en ocho. Y a diferencia de Virginia — donde el cierre fue mayormente obra de una prospect extraordinariamente fácil — esta tiene más mérito técnico genuino.</p>
+          <div class="grid three">
+            <div class="card good">
+              <h3>1 · Pre-Suasión parcial</h3>
+              <p>En la Parte 2 apareció una Pre-Suasión parcial antes del precio. Montse dijo: <strong>"antes de hablarte de la inversión, me has dicho que en este momento no te ves como te querrías ver. Esta sensación de sentirte perdida."</strong></p>
+              <p>No fue perfecta: no usó "cogida, pequeñita" ni el episodio de Sofía y el bizcocho, que eran los activos más potentes. Pero apareció el frame antes del número. Octava llamada, primera Pre-Suasión real. Progreso.</p>
+            </div>
+            <div class="card good">
+              <h3>2 · Mes de prueba como JOLT</h3>
+              <p>Cuando Susana expresó su miedo real — haber sido engañada por un constructor y no querer comprometer dinero sin experiencia previa — Montse no presionó. Escuchó, validó, y ofreció el mes de prueba de 250€.</p>
+              <p>La solución fue creativa y directamente dirigida al obstáculo real de Susana. Eso es JOLT aplicado.</p>
+            </div>
+            <div class="card good">
+              <h3>3 · Pago en llamada</h3>
+              <p>Susana pagó en la llamada. 250€ vía Stripe. El "Thanks for your payment" lo confirma.</p>
+            </div>
+          </div>
+          <div class="quote">
+            Lo que no cambió: el Reframe sigue ausente — octava llamada. "Me queda claro" x2 en la Parte 1. El pitch fue comprimido con Susana distraída. La Pre-Suasión fue parcial: los activos más potentes del diagnóstico no viajaron al frame del precio.
+          </div>
+        </div>
+      </section>
+
+      <section id="scoreboard" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Scoreboard actualizado — los 13 libros como jueces</h2>
+            <div class="sub">Cambios respecto a la auditoría anterior y razón de cada ajuste.</div>
+          </div>
+          <span class="pill">Global 7.3 / 10</span>
+        </div>
+        <div class="section-body score-wrap">
+          <table>
+            <thead>
+              <tr><th>Bloque</th><th>Nota</th><th>Cambio</th><th>Razón</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Apertura / Agenda</td><td class="score good">7.5</td><td>=</td><td>Sin cambio. Natural, profesional, buen rapport.</td></tr>
+              <tr><td>Diagnóstico calidad</td><td class="score good">7.5</td><td>=</td><td>"Me queda claro" x2 pero diagnóstico amplio y real.</td></tr>
+              <tr><td>Diagnóstico profundidad</td><td class="score good">8.0</td><td>=</td><td>Mejor de las 8 llamadas de Montse. "Cogida, pequeñita."</td></tr>
+              <tr><td>Construcción de valor</td><td class="score mid">5.5</td><td class="change up">↑ (5.0)</td><td>Pre-Suasión parcial apareció. Sin Reframe. Pitch comprimido.</td></tr>
+              <tr><td>Manejo de objeciones</td><td class="score good">8.0</td><td class="change up">↑ (7.5)</td><td>El mes de prueba como TRoT fue preciso para el obstáculo real.</td></tr>
+              <tr><td>Cierre</td><td class="score good">7.5</td><td class="change up">↑↑ (5.5)</td><td>CERRADA. Susana pagó en llamada. Gestión de la duda honesta.</td></tr>
+              <tr><td>Lenguaje / Tono</td><td class="score good">8.5</td><td>=</td><td>El más cálido de sus 8 llamadas. Post-pago rapport excelente.</td></tr>
+              <tr><td>Estructura</td><td class="score mid">5.5</td><td class="change up">↑ (5.0)</td><td>Pre-Suasión parcial compensa parcialmente la decisión del pitch comprimido.</td></tr>
+              <tr><td><strong>GLOBAL</strong></td><td class="score good"><strong>7.3 / 10</strong></td><td class="change up">↑ (7.0)</td><td>La Parte 2 confirma cierre, pago y mejor gestión de objeción.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="funciono" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Lo que funcionó — con precisión quirúrgica</h2>
+            <div class="sub">Siete avances concretos que explican por qué esta llamada sube a 7.3.</div>
+          </div>
+          <span class="pill">7 aciertos</span>
+        </div>
+        <div class="section-body">
+          <div class="timeline">
+            <div class="titem">
+              <strong>BIEN 1 — El diagnóstico emocional de la madre (P1, min 43-47)</strong>
+              <p>El mejor momento de las ocho llamadas de Montse. Cuando Susana mencionó a su madre casi de pasada, Montse no siguió adelante. Se quedó. <strong>"Me ha chocado cuando te he preguntado por tu madre y me has dicho, sí, me deja... cogida, pequeñita."</strong></p>
+              <p>La reconstrucción fue exacta. Susana lo confirmó de inmediato. Luego Montse conectó hacia adelante: <strong>"¿cómo crees que podría afectar a una Sofía adolescente?"</strong> — produjo el episodio del bizcocho y el comentario de la madre en el chat familiar.</p>
+              <p>Dos activos excepcionales emergieron de una sola decisión de quedarse en el momento. Eso es Voss ejecutado.</p>
+            </div>
+            <div class="titem">
+              <strong>BIEN 2 — La Pre-Suasión parcial (P2, min 1:40-3:00)</strong>
+              <p>Primera Pre-Suasión en ocho llamadas de Montse. <strong>"Antes de hablarte de la inversión, me has dicho que en este momento no te ves como te querrías ver. Esta sensación de sentirte perdida."</strong></p>
+              <p>Llegó antes del precio. Frame correcto aunque no con el activo más poderoso disponible. Cialdini: el precio no llegó frío.</p>
+            </div>
+            <div class="titem">
+              <strong>BIEN 3 — El mes de prueba como TRoT (P2, min 19:41)</strong>
+              <p>Cuando Susana propuso una semana de prueba, Montse respondió con el mes de prueba de 250€. Fue instintivamente correcto.</p>
+              <p>El obstáculo de Susana no era el precio en sí: era la desconfianza derivada de haber sido engañada recientemente por un constructor. <strong>"Dos mil euros ahora es un poco de sopetón sin haber tenido una amiga que me diga que esto es fijo."</strong></p>
+              <p>El mes de prueba redujo el riesgo percibido a 250€: una cantidad que Susana podía "perder" sin problema si el programa no cumplía. JOLT — Take Risk off the Table ejecutado intuitivamente.</p>
+            </div>
+            <div class="titem">
+              <strong>BIEN 4 — La autenticidad ante la duda (P2, min 15:48)</strong>
+              <p>Cuando Susana expresó desconfianza, Montse respondió con honestidad: <strong>"por mucho que yo te diga, tú no vas a ver lo que es el programa hasta que no entres."</strong></p>
+              <p>Eso es lo contrario de la presión artificial. Montse no prometió resultados imposibles ni minimizó la duda: la validó y luego añadió prueba social concreta con la chica que acababa de entrar ese mismo día. Voss — autenticidad que genera más confianza que cualquier argumento de venta.</p>
+            </div>
+            <div class="titem">
+              <strong>BIEN 5 — El cierre post-pago (P2, min 23-29)</strong>
+              <p>Después de que Susana pagó, la conversación se volvió completamente humana: Italia, Venecia, hijos, tercero o no. Ese cierre fue perfecto: la relación quedó sellada con conexión personal, no con una lista de next steps.</p>
+              <p>Susana terminó la llamada como cliente y como persona que confía en Montse. Eso determina la retención.</p>
+            </div>
+            <div class="titem">
+              <strong>BIEN 6 — Cualificación de Pablo (P1, min 47-48)</strong>
+              <p>Cuarta llamada seguida con cualificación correcta del decisor. Pablo es aliado, no obstáculo. Confirmado.</p>
+            </div>
+            <div class="titem">
+              <strong>BIEN 7 — Reagendación de la reconexión (P1, min 1:04)</strong>
+              <p>Cuando la llamada se cortó por la reunión de Susana, Montse acordó reconectar por WhatsApp cuando terminara. No "te llamo cuando pueda" — acuerdo concreto. Susana escribió cuando terminó su reunión y se reconectaron.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="critico" class="section">
+        <div class="section-head">
+          <div>
+            <h2>El análisis crítico — lo que aún no estaba bien</h2>
+            <div class="sub">Cinco errores concretos que no costaron el cierre, pero sí calidad y dinero potencial.</div>
+          </div>
+          <span class="pill">5 errores</span>
+        </div>
+        <div class="section-body">
+          <div class="grid two">
+            <div class="card bad">
+              <h3>ERROR 1 — Pitch comprimido al final de la Parte 1</h3>
+              <p>A los 54 minutos, Susana avisó que tenía una reunión en 6 minutos. La decisión correcta era parar y reagendar el pitch + precio para la reconexión.</p>
+              <p>Montse dijo <strong>"voy a por ello"</strong> y comprimió el pitch en 9 minutos mientras Susana gestionaba simultáneamente a su jefe llamando y a sus compañeros entrando a la reunión.</p>
+              <p>Susana lo confirmó: <strong>"va a doble velocidad."</strong> La Parte 2 tuvo que repetir parcialmente el resumen porque Susana no había procesado bien el pitch.</p>
+            </div>
+            <div class="card warn">
+              <h3>ERROR 2 — "Me queda claro" x2</h3>
+              <p><strong>P1 min 9:37:</strong> "Me queda claro todo lo que me acabas de comentar." Cortó el diagnóstico de alimentación antes de profundizar en los gases y en la dinámica exacta de las cenas sociales.</p>
+              <p><strong>P1 min 25:36:</strong> "Me queda claro todo el tema de la alimentación." Misma señal, mismo efecto.</p>
+              <p>Dos apariciones en la misma llamada. La frase sigue instalada en todas las llamadas de Montse.</p>
+            </div>
+            <div class="card bad">
+              <h3>ERROR 3 — Reframe ausente</h3>
+              <p>El Reframe de Susana era el más específico de las ocho llamadas de Montse y siguió sin aparecer.</p>
+              <div class="quote blue">Susana come bien en casa. Sus problemas vienen de la vida social diplomática de Mozambique: eventos, cenas en casas de amigos, lasañas y aperitivos improvisados. La bióloga antiinflamatoria le dio un sistema para una vegetariana en laboratorio, no para una española en el mundo diplomático africano.</div>
+              <p>Sin ese Reframe, el pitch fue "programa personalizado" — lo que dicen todos. Con él habría sido la explicación de por qué todos los anteriores fallaron.</p>
+            </div>
+            <div class="card warn">
+              <h3>ERROR 4 — Activos potentes ausentes del precio</h3>
+              <p>La Pre-Suasión de la Parte 2 usó activos genéricos: "no te ves como quieres". No usó los activos específicos excavados:</p>
+              <span class="tag">"Cogida, pequeñita"</span>
+              <span class="tag">Bizcocho de Sofía</span>
+              <span class="tag">Comentario de la madre en el chat</span>
+              <span class="tag">"Quiero ser esa que yo era"</span>
+              <p style="margin-top:10px">El frame correcto antes del precio habría llegado al corazón: no solo los 5 kilos, sino quién quiere ser delante de su hija.</p>
+            </div>
+            <div class="card bad" style="grid-column:1/-1">
+              <h3>ERROR 5 — Susana propuso algo comercialmente mejor y Montse lo ignoró</h3>
+              <p>En el minuto 17:00 de la Parte 2, Susana hizo una propuesta creativa e inteligente: pagar los <strong>1.300€ de 6 meses ahora</strong>, y tras una semana de confianza consolidada, pagar la diferencia hasta los <strong>2.100€ del año completo</strong>.</p>
+              <p>Esa propuesta era mejor para Revoluciona-T que el mes de prueba: garantizaba 1.300€ comprometidos desde el primer día. El mes de prueba de 250€ solo garantiza 250€.</p>
+              <p>Montse no evaluó esa opción. Respondió con el mes de prueba de 250€ sin explorar si la propuesta de Susana era posible con Jonathan.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="riesgo" class="section">
+        <div class="section-head">
+          <div>
+            <h2>El riesgo comercial del mes de prueba</h2>
+            <div class="sub">Éxito de cierre, pero con una variable que Jonathan debe decidir.</div>
+          </div>
+          <span class="pill">Decisión de negocio</span>
+        </div>
+        <div class="section-body">
+          <div class="card highlight">
+            <p>Susana pagó 250€. Es un éxito de cierre. Pero el riesgo es real: si Susana no convierte al finalizar el mes de prueba, el ingreso real de esta llamada de 95 minutos es <strong>250€</strong> en lugar de <strong>1.300€</strong> o <strong>2.100€</strong>.</p>
+            <p>El mes de prueba reduce el riesgo de Susana pero aumenta el riesgo comercial del programa.</p>
+          </div>
+          <div class="grid three" style="margin-top:16px">
+            <div class="card">
+              <h3>Pregunta 1</h3>
+              <p>¿Es una opción formalizada con criterios claros?</p>
+            </div>
+            <div class="card">
+              <h3>Pregunta 2</h3>
+              <p>¿Los 250€ se descuentan del programa final o van aparte?</p>
+            </div>
+            <div class="card">
+              <h3>Pregunta 3</h3>
+              <p>¿Quién es responsable de la conversión al finalizar el mes?</p>
+            </div>
+          </div>
+          <div class="quote green">
+            La propuesta de Susana — 1.300€ ahora + diferencia en una semana — era estructuralmente más sólida. El equipo debería explorar esa opción para casos futuros similares.
+          </div>
+        </div>
+      </section>
+
+      <section id="fuentes" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Las 13 fuentes — evaluación completa Partes 1 y 2</h2>
+            <div class="sub">Análisis por marco: qué se ejecutó, qué faltó y qué aplicar después.</div>
+          </div>
+          <span class="pill">13 fuentes activas</span>
+        </div>
+        <div class="section-body">
+          <div class="accordion">
+            <details open>
+              <summary>Fuente 1 · Never Split the Difference — Chris Voss</summary>
+              <div class="detail-body">
+                <p>La Parte 1 tuvo el mejor uso de Voss en las ocho llamadas de Montse: el label de <strong>"cogida, pequeñita"</strong>.</p>
+                <p>La Parte 2 mostró el uso correcto del silencio y la no-presión cuando Susana expresó su duda.</p>
+                <p>La autenticidad ante la desconfianza de Susana fue aplicación directa del principio de Voss de "no presionar, validar": <strong>"por mucho que yo te diga, tú no vas a ver lo que es el programa hasta que no entres."</strong></p>
+                <p>Eso no es rendirse: es establecer que la confianza genuina solo viene de la experiencia directa. Susana lo recibió exactamente así y eligió invertir 250€ para obtener esa experiencia.</p>
+                <p><strong>Lo que sigue faltando:</strong> la reconexión de la Parte 2 no empezó desde el activo emocional. Montse dijo "vamos a por ello" y fue directo al precio. El arranque correcto habría sido el label que relanzaba desde "cogida, pequeñita." Ese hilo emocional quedó en la Parte 1 sin ser retomado.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 2 · Gap Selling — Keenan</summary>
+              <div class="detail-body">
+                <p><strong>Estado actual:</strong> construido sólidamente: Mozambique + sedentarismo estructural, vida social diplomática que escapa al control, 5-6 kg no recuperados desde segundo embarazo, sin fuerza nunca, sistema anterior de la bióloga sin resultados por ser incompatible con su vida real.</p>
+                <p><strong>Impact Layer:</strong> "quiero ser esa que yo era" y "cogida, pequeñita" son los dos activos disponibles más potentes. El primero es identidad. El segundo es herida emocional. Ninguno llegó al precio.</p>
+                <p><strong>Causa raíz:</strong> disponible, no convertida en Reframe. La causa raíz de por qué no funciona lo que Susana intenta es que Mozambique no es Madrid. Ningún sistema genérico resuelve una vida diplomática en África. Ese Reframe sigue pendiente en la octava llamada.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 3 · Objections — Jeb Blount</summary>
+              <div class="detail-body">
+                <p>La objeción de Susana en la Parte 2 no era de precio ni de compromiso. Era de confianza específica: acaban de ser engañados por un constructor y no quieren comprometer dinero antes de tener experiencia directa con el proveedor.</p>
+                <div class="quote blue">"Todo muy buena gente, pero sabes que en la vida hay personas que a ti seguro que te han engañado y a mí también."</div>
+                <p>Eso es una objeción de credibilidad personal, no de precio. Montse la manejó correctamente: validación, prueba social de una prospect entrante ese mismo día y honestidad sobre la duda.</p>
+                <p><strong>LDA aplicado intuitivamente:</strong></p>
+                <p><strong>Ledge:</strong> "Te entiendo perfectamente, eso que me cuentas del constructor es muy difícil."</p>
+                <p><strong>Disrupt:</strong> "La única manera de disipar esa duda es entrar y verlo tú misma."</p>
+                <p><strong>Ask:</strong> "¿Qué necesitas para sentirte cómoda dando el primer paso?"</p>
+                <p>Susana respondió con su propia propuesta: 1.300€ + diferencia en una semana. Montse ofreció el mes de prueba. Susana eligió. El resultado fue el pago.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 4 · Virtual Selling — Jeb Blount</summary>
+              <div class="detail-body">
+                <p>Dos cortes/interrupciones en 95 minutos: el técnico de la Parte 1 — batería del ordenador de Susana en el minuto 37 — y la interrupción de la reunión de Susana en el minuto 54.</p>
+                <p>Montse gestionó ambas correctamente: esperó mientras Susana buscaba el cable, sin drama; y acordó reconectar por WhatsApp tras la reunión.</p>
+                <p>La reconexión de la Parte 2 fue fluida. Susana ya tenía el programa fresco y las preguntas que hizo — cómo es una semana normal, cuántas mujeres lleváis — son preguntas de prospect comprometida, no de prospect dudosa.</p>
+                <p><strong>Problema persistente:</strong> el pitch se comprimió en 9 minutos al final de la Parte 1 cuando Susana ya no estaba presente. Eso sigue siendo un error de juicio.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 5 · The JOLT Effect — Dixon y McKenna</summary>
+              <div class="detail-body">
+                <p>El mes de prueba de 250€ fue el mejor TRoT de todas las llamadas de Montse — incluso mejor que la reserva de 100€ porque fue diseñado específicamente para el Omission Bias de Susana.</p>
+                <p>El Omission Bias de Susana no era "¿y si no funciona?" Era: <strong>"¿y si esta gente me decepciona como el constructor?"</strong> Esa es una pérdida potencial relacional y económica, más cargada emocionalmente que la pérdida genérica.</p>
+                <p>El mes de prueba resolvió exactamente eso: 250€ y 30 días para verificar si confías en este equipo. Esa reducción del riesgo estaba calibrada al miedo específico de Susana.</p>
+                <p><strong>Lo que Montse no hizo:</strong> usar el Judge the indecision antes de ofrecer el TRoT.</p>
+                <div class="quote">"Susana, lo que me parece que está pasando no es que dudes del programa — es que acabas de ser traicionada por alguien en quien confiabas y eso ha activado tu radar. ¿Es eso?"</div>
+                <p>Si Susana dice sí, el TRoT llega con más fuerza porque está nombrado correctamente.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 6 · Switch — Chip y Dan Heath</summary>
+              <div class="detail-body">
+                <p><strong>Jinete:</strong> activo y claro. Sabe qué quiere — 53 kg, tonificación, hábito de fuerza — y por qué no lo ha conseguido: sin sistema, vida en Mozambique.</p>
+                <p><strong>Elefante:</strong> motivado con dirección. 10/10 de compromiso. El Elefante de Susana no era perezoso: era temeroso. El mes de prueba fue la herramienta que le permitió moverse sin sentir que se lanzaba al vacío.</p>
+                <p><strong>Camino:</strong> un único bloqueador real: la desconfianza post-constructor. El mes de prueba despejó ese bloqueador.</p>
+                <p><strong>Bright Spot:</strong> bien usado en la Parte 2 cuando Montse habló de una mujer que entró "sin plan B" como prueba social. Fue un Bright Spot externo aplicado al mismo obstáculo de Susana.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 7 · Why She Buys — Bridget Brennan</summary>
+              <div class="detail-body">
+                <p>La compra de identidad de Susana era: <strong>"quiero ser esa que yo era."</strong> Esa frase apareció en el minuto 36:22 de la Parte 1 y no fue usada en el frame del precio.</p>
+                <p>Lo que Montse sí usó en Pre-Suasión fue el genérico "no te ves como te querrías ver." Correcto en dirección, insuficiente en especificidad.</p>
+                <p>Lo que funcionó en la Parte 2 desde Why She Buys fue el rapport post-pago: Italia, Venecia, hijos, el tercer bebé. Esa conversación convirtió la transacción en relación. Susana salió de la llamada como cliente y como persona que siente conexión con Montse. Eso aumenta la probabilidad de conversión al finalizar el mes de prueba.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 8 · The Mom Test — Rob Fitzpatrick</summary>
+              <div class="detail-body">
+                <p>Preguntas de comportamiento real bien ejecutadas a lo largo de la Parte 1: cómo come en casa, cómo come en los eventos sociales, qué hace en España vs Mozambique, si adelgaza cuando va a España y por qué.</p>
+                <p>Faltó una pregunta más precisa: <strong>"¿cuándo en la semana no dependes de eventos sociales?"</strong> Habría dado datos más precisos sobre disponibilidad real de entrenamiento.</p>
+                <p><strong>Leading question en Parte 1, min 32:32:</strong> "¿tendrías al menos una hora tres veces a la semana?" Sigue siendo hipotética. La respuesta de Susana fue más informativa que la pregunta — describió cómo reorganizaría natación + gimnasio + casa — pero la pregunta como tal viola Mom Test.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 9 · Pre-Suasión — Robert Cialdini</summary>
+              <div class="detail-body">
+                <p>Primera aparición en las ocho llamadas de Montse — aunque parcial.</p>
+                <p><strong>Lo que apareció, P2 min 1:40:</strong></p>
+                <div class="quote blue">"Antes de hablarte de la inversión, me has dicho que en este momento no te ves como te querrías ver. Esta sensación de sentirte perdida. Quieres sentirte como con 20 años, fuerte, tonificada, los gases, la celulitis, también el futuro, estar fuerte para lo que viene, envejecer mejor. ¿Es importante para ti todo esto que he dicho? ¿Es lo que necesitas?"</div>
+                <p>Susana confirmó: <strong>"Mi día a día no estoy cómoda conmigo."</strong></p>
+                <p>Eso es Pre-Suasión. El precio llegó después de ese frame, no frío.</p>
+                <p><strong>Lo que podría haber sido:</strong></p>
+                <div class="quote">"Susana, antes del precio — me dijiste que tu madre te deja cogida y pequeñita cuando habla del peso. Y me contaste lo del bizcocho con Sofía y el comentario en el chat familiar. Eso es lo que Sofía va a ver crecer si esto no cambia. El programa son 1.300 euros."</div>
+                <p>La diferencia entre ambas es la diferencia entre una Pre-Suasión genérica y una Pre-Suasión que activa identidad materna.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 10 · Influence — Robert Cialdini</summary>
+              <div class="detail-body">
+                <p><strong>Prueba social:</strong> primera vez en las ocho llamadas de Montse usada correctamente.</p>
+                <div class="quote green">"Ahora mismo, antes de que tú entraras, ha entrado una chica que lleva toda la vida luchando... al final ha entrado porque me ha dicho, es que no tengo un plan B y llevo toda la vida sola intentando de todo."</div>
+                <p>Esa prueba social era pertinente al obstáculo de Susana: no una historia genérica de resultados físicos, sino una mujer con la misma resistencia y el mismo punto de decisión.</p>
+                <p><strong>Consistencia:</strong> bien usada. El 10/10 fue referenciado en la Parte 2 de forma implícita. Montse no presionó con "me dijiste 10", sino que lo usó como marco tranquilizador: estás muy interesada, vamos a encontrar la manera.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 11 · The Challenger Sale — Dixon y Adamson</summary>
+              <div class="detail-body">
+                <p>Octava llamada sin Reframe.</p>
+                <p>El Reframe de Susana era el más específico y más inmediatamente utilizable de las ocho llamadas de Montse. Susana lleva 7 años en Mozambique, donde la vida social diplomática hace que todos los sistemas genéricos fallen en el punto exacto en que más importa.</p>
+                <p>Ese insight habría diferenciado el programa de todos los anteriores intentos de Susana.</p>
+                <div class="quote">El pitch siguió siendo "programa personalizado" — correcto pero no diferenciador.</div>
+                <p>Montse tiene diagnósticos cada vez más ricos. Lo que no tiene todavía es el hábito de convertir esos diagnósticos en el insight que cambia el frame antes del pitch.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 12 · SPIN Selling — Neil Rackham</summary>
+              <div class="detail-body">
+                <p><strong>Situación:</strong> completa: Mozambique, vida sedentaria, diplomacia, hijos, bióloga antecedente, gases, natación + pilates.</p>
+                <p><strong>Problema:</strong> identificado: 5-6 kg sin recuperar, flacidez, sin fuerza, vida social que escapa al control.</p>
+                <p><strong>Implicación:</strong> mejor de las ocho llamadas. Tres preguntas de implicación encadenadas — min 48:55-54:17:</p>
+                <ul>
+                  <li>"Imagínate que no haces nada. ¿Cómo te ves en un año?" → Susana: "No me sentiría mejor. Tengo que cambiar algo."</li>
+                  <li>"¿Sientes que ahora es el momento?" → Susana explicó por qué: Sofía duerme, tiene energía, trabajo estable.</li>
+                  <li>"¿Qué impacto tendría en tu tranquilidad ver resultados y saber que lo estás haciendo bien?" → Susana: "Mejoraría mi estado de ánimo."</li>
+                </ul>
+                <p>Eso es SPIN-Need-Payoff ejecutado. Mejor que cualquier otra llamada de Montse.</p>
+                <p><strong>Necesidad-Beneficio:</strong> bien construida. La pregunta del futuro — min 52:24 — produjo la respuesta correcta: "me sentiría súper realizada."</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>Fuente 13 · Exactly What to Say — Phil M. Jones</summary>
+              <div class="detail-body">
+                <p>La frase de Jones que Montse usó intuitivamente: ante <strong>"¿podría hacer los 6 meses y después upgradear?"</strong>, Montse respondió con el mes de prueba — una versión de "¿qué necesitas para sentirte segura dando el primer paso?" Sin decirlo exactamente, lo ejecutó.</p>
+                <p>Para la gestión del cierre del mes de prueba, la frase de Jones para el seguimiento:</p>
+                <div class="quote green">"Susana, llevamos X semanas. ¿Cómo te estás encontrando? ¿Lunes seguimos o necesitas más tiempo para decidir el año completo?"</div>
+                <p>Esa frase debe ir de Montse a Susana antes de que termine el mes, no esperando que Susana decida sola.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="evolucion" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Evolución de Montse — 8 llamadas completo</h2>
+            <div class="sub">Qué mejora y qué sigue sin moverse.</div>
+          </div>
+          <span class="pill">Historial completo</span>
+        </div>
+        <div class="section-body score-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Dimensión</th><th>EMM</th><th>GLA</th><th>KAT</th><th>SUS</th><th>LYD</th><th>VIR</th><th>SUS2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Nota global</td><td>6.4</td><td>7.1</td><td>6.7</td><td>5.5</td><td>6.5</td><td>6.5</td><td><strong>7.3</strong></td></tr>
+              <tr><td>Resultado</td><td>SEG</td><td>SEG</td><td>SEG</td><td>S/C</td><td>SEG→ENT</td><td>CER</td><td><strong>CER</strong></td></tr>
+              <tr><td>"Me queda claro"</td><td>Sí</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí×2</td><td>Sí×2</td></tr>
+              <tr><td>Diagnóstico emocional</td><td>Lim</td><td>Bno</td><td>Lim</td><td>No</td><td>MB</td><td>Bno</td><td>MB</td></tr>
+              <tr><td>Decisor cualificado</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+              <tr><td>Implicación encadenada</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Par</td><td>No</td><td>Sí×3</td></tr>
+              <tr><td>Pre-Suasión</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí parcial</td></tr>
+              <tr><td>Activos en pitch</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+              <tr><td>Reframe</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+              <tr><td>TRoT / Reserva plaza</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí · mes prueba</td></tr>
+              <tr><td>Resultado cerrado</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
+            </tbody>
+          </table>
+          <div class="grid two" style="margin-top:16px">
+            <div class="card good">
+              <h3>Lo que ha mejorado en las últimas tres llamadas</h3>
+              <p><strong>Diagnóstico emocional:</strong> mejora constante — Lydia, Susana Parte 1 y Susana Parte 2.</p>
+              <p><strong>Cualificación del decisor:</strong> instalada en las últimas cuatro llamadas.</p>
+              <p><strong>Implicación:</strong> Susana es la primera llamada con tres implicaciones encadenadas.</p>
+              <p><strong>Pre-Suasión:</strong> primera aparición en 8 llamadas, aunque parcial.</p>
+              <p><strong>TRoT:</strong> el mes de prueba fue el TRoT más preciso del proyecto.</p>
+            </div>
+            <div class="card bad">
+              <h3>Lo que no ha cambiado en ocho llamadas</h3>
+              <p><strong>Reframe:</strong> cero apariciones.</p>
+              <p><strong>"Me queda claro":</strong> presente en todas las llamadas.</p>
+              <p><strong>Activos específicos en pitch:</strong> los activos excavados — madre, identidad, momento específico — no llegan al pitch ni al precio.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="seguimiento" class="section">
+        <div class="section-head">
+          <div>
+            <h2>El seguimiento del mes de prueba — plan concreto</h2>
+            <div class="sub">El cierre real no es el 250€: es la conversión al programa completo en 30 días.</div>
+          </div>
+          <span class="pill">Conversión pendiente</span>
+        </div>
+        <div class="section-body">
+          <div class="timeline">
+            <div class="titem">
+              <strong>Semana 2 · aprox. 10 de junio</strong>
+              <div class="script">"Susana, ¿cómo va la primera semana? ¿El equipo ha contactado bien? ¿Alguna duda?"</div>
+            </div>
+            <div class="titem">
+              <strong>Semana 3 · aprox. 17 de junio</strong>
+              <div class="script">"¿Cómo te estás encontrando? ¿Ya empiezas a notar algo diferente?"</div>
+            </div>
+            <div class="titem">
+              <strong>Semana 4 · antes de terminar el mes · aprox. 23-24 de junio</strong>
+              <div class="script">"Susana, esta semana se acaba el mes de prueba. ¿Cómo lo tienes? ¿Seguimos con el año completo o prefieres los seis meses?"</div>
+            </div>
+          </div>
+          <div class="card highlight" style="margin-top:16px">
+            <h3>Pre-Suasión correcta para convertir</h3>
+            <div class="script">"Susana, me dijiste que tu madre te deja cogida y pequeñita cuando habla del peso. Y que no quieres que Sofía crezca con esa misma presión encima. Llevas un mes. ¿Cómo lo ves ahora?"</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="plan" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Plan de entrenamiento — Montse, Iteración 8</h2>
+            <div class="sub">Qué mantener y qué corregir desde esta llamada.</div>
+          </div>
+          <span class="pill">Aplicable desde ya</span>
+        </div>
+        <div class="section-body">
+          <div class="grid two">
+            <div class="card good">
+              <h3>Lo que no se toca</h3>
+              <p><strong>El diagnóstico emocional:</strong> la mejor de sus ocho llamadas. Seguir en esa dirección.</p>
+              <p><strong>La cualificación del decisor:</strong> cuatro llamadas seguidas correcta.</p>
+              <p><strong>La implicación encadenada:</strong> primera vez que aparecen tres seguidas. Replicar.</p>
+              <p><strong>La autenticidad ante la duda:</strong> bien gestionada con Susana.</p>
+              <p><strong>El TRoT del mes de prueba:</strong> instintivamente correcto. Formalizarlo como herramienta.</p>
+            </div>
+            <div class="card warn">
+              <h3>Lo que cambia</h3>
+              <p><strong>Gestión del tiempo disponible:</strong> si el prospect dice que tiene menos de 10 minutos, el pitch y el precio se mueven a la reconexión. Sin excepciones.</p>
+              <p><strong>Reframe:</strong> octava llamada sin él. En preparación previa, identificar creencia limitante + insight que la rompe. Escribirlo. Decirlo antes del pitch.</p>
+              <p><strong>Pre-Suasión:</strong> apareció parcialmente. Consolidar con activos específicos, no genéricos.</p>
+              <p><strong>"Me queda claro":</strong> sustitución permanente: "¿Hay algo más de esto que creas importante que yo sepa?"</p>
+            </div>
+          </div>
+          <div class="card highlight" style="margin-top:16px">
+            <h3>Reframe pendiente para Susana</h3>
+            <div class="script">"Susana, llevas 7 años en Mozambique con sistemas diseñados para otra persona. Ahora tienes uno diseñado para ti."</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="resumen" class="section">
+        <div class="section-head">
+          <div>
+            <h2>Resumen ejecutivo</h2>
+            <div class="sub">Lectura final para Montse y para el equipo.</div>
+          </div>
+          <span class="pill">7.3 / 10</span>
+        </div>
+        <div class="section-body">
+          <div class="grid three">
+            <div class="card good">
+              <h3>Nota</h3>
+              <p><strong>7.3 / 10</strong> — la más alta de sus 8 llamadas.</p>
+            </div>
+            <div class="card good">
+              <h3>Resultado</h3>
+              <p><strong>✅ CERRADA</strong> — 250€ mes de prueba. Conversión al programa pendiente en aproximadamente 30 días.</p>
+            </div>
+            <div class="card highlight">
+              <h3>Qué cerró la venta</h3>
+              <p>El diagnóstico emocional de la madre, la autenticidad ante la duda y el mes de prueba como solución calibrada al miedo específico de Susana.</p>
+            </div>
+          </div>
+
+          <div class="card bad" style="margin-top:16px">
+            <h3>Lo que sigue pendiente en ocho llamadas</h3>
+            <p>El Reframe, los activos específicos en la Pre-Suasión y la eliminación de "me queda claro".</p>
+          </div>
+
+          <div class="quote">
+            <strong>Para Montse:</strong><br>
+            "Ocho llamadas. Esta es la tuya más alta. Y lo merece. Llegaste a 'cogida, pequeñita' porque te quedaste cuando otras veces habrías seguido. La Pre-Suasión apareció por primera vez — parcial, pero apareció. Y cuando Susana te dijo que habían sido engañados por un constructor y no podían lanzarse a ciegas, no presionaste — encontraste la herramienta exacta para su miedo exacto. Eso es lo mejor que has hecho en ocho llamadas. Lo que falta es convertir lo que excavas en el diagnóstico en el argumento que Susana escucha antes del precio. Tenías 'cogida, pequeñita' y el bizcocho de Sofía. Con esos dos activos antes del precio, ese mes de prueba podría haber sido directamente el año completo. En el seguimiento de dentro de tres semanas tienes esa segunda oportunidad. Úsala."
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="sticky-actions">
+    <button class="btn" onclick="window.print()">Imprimir / PDF</button>
+    <button class="btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">Arriba</button>
+  </div>
+
+  <script>
+    const sections = [...document.querySelectorAll('main .section, main .hero')];
+    const links = [...document.querySelectorAll('nav a')];
+    const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          links.forEach(a => a.style.background = '');
+          const id = entry.target.id;
+          if(byId.has(id)) byId.get(id).style.background = 'rgba(246,201,91,.12)';
+        }
+      });
+    }, {rootMargin:'-35% 0px -55% 0px', threshold:0});
+    sections.forEach(s => { if(s.id) obs.observe(s); });
+  </script>
+</body>
+</html>

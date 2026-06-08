@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría · Ana · Isabel Lecertua</title>
+  <style>
+    :root{
+      --bg:#070A12; --panel:#101625; --panel2:#141C2E; --panel3:#0C1120;
+      --text:#EAF0FF; --muted:#9AA7C7; --soft:#C9D4F2;
+      --gold:#FFD166; --red:#FF5C7A; --green:#4ADE80; --blue:#60A5FA; --purple:#A78BFA; --orange:#FB923C;
+      --line:rgba(255,255,255,.11); --shadow:0 18px 60px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;background:
+      radial-gradient(circle at 10% -10%, rgba(96,165,250,.26), transparent 28%),
+      radial-gradient(circle at 90% 0%, rgba(167,139,250,.22), transparent 30%),
+      radial-gradient(circle at 50% 110%, rgba(255,209,102,.12), transparent 35%), var(--bg); color:var(--text); line-height:1.58}
+    .wrap{max-width:1180px;margin:0 auto;padding:36px 18px 80px}
+    .hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:30px;background:linear-gradient(135deg,rgba(16,22,37,.94),rgba(20,28,46,.86));box-shadow:var(--shadow);padding:34px}
+    .hero:before{content:"";position:absolute;inset:-2px;background:linear-gradient(120deg,rgba(255,209,102,.13),transparent 34%,rgba(96,165,250,.13));pointer-events:none}
+    .hero > *{position:relative}
+    .kicker{display:inline-flex;gap:10px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(255,209,102,.12);border:1px solid rgba(255,209,102,.26);color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:clamp(30px,5vw,58px);line-height:1.02;margin:18px 0 10px;letter-spacing:-.04em}
+    .subtitle{font-size:18px;color:var(--soft);max-width:900px;margin:0}
+    .heroGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+    .metric{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .metric .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+    .metric .value{font-size:22px;font-weight:900;margin-top:6px}.value.green{color:var(--green)}.value.red{color:var(--red)}.value.gold{color:var(--gold)}.value.blue{color:var(--blue)}
+    .nav{position:sticky;top:0;z-index:20;margin:18px 0 28px;padding:10px;border:1px solid var(--line);background:rgba(7,10,18,.8);backdrop-filter:blur(16px);border-radius:18px;display:flex;gap:8px;overflow:auto}
+    .nav a{white-space:nowrap;text-decoration:none;color:var(--soft);font-weight:800;font-size:13px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid transparent}.nav a:hover{border-color:rgba(255,255,255,.18);color:white}
+    section{margin:24px 0}.card{background:linear-gradient(180deg,rgba(16,22,37,.95),rgba(12,17,32,.95));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;overflow:hidden}.card.alt{background:linear-gradient(180deg,rgba(20,28,46,.96),rgba(16,22,37,.95))}
+    .sectionTitle{display:flex;align-items:center;gap:14px;margin:0 0 18px}.sectionTitle .num{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--gold),#FF8A4C);color:#191207;display:grid;place-items:center;font-weight:950}.sectionTitle h2{margin:0;font-size:24px;letter-spacing:-.02em}.sectionTitle p{margin:4px 0 0;color:var(--muted)}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .info{padding:16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045)}.info b{color:white}.info .small{font-size:13px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}.info p{margin:0;color:var(--soft)}
+    .tag{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:7px 10px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:var(--soft);font-size:13px;font-weight:800;margin:4px 4px 4px 0}.tag.red{border-color:rgba(255,92,122,.35);color:#ffd5dd;background:rgba(255,92,122,.10)}.tag.green{border-color:rgba(74,222,128,.35);color:#d9ffe7;background:rgba(74,222,128,.10)}.tag.gold{border-color:rgba(255,209,102,.35);color:#fff0bf;background:rgba(255,209,102,.10)}.tag.blue{border-color:rgba(96,165,250,.35);color:#dcebff;background:rgba(96,165,250,.10)}
+    table{width:100%;border-collapse:collapse;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.035)}th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:rgba(255,255,255,.07);color:white;font-size:12px;text-transform:uppercase;letter-spacing:.07em}td{color:var(--soft)}tr:last-child td{border-bottom:0}.score{font-weight:950;color:var(--gold);font-size:18px}.up{color:var(--green);font-weight:900}.down{color:var(--red);font-weight:900}.same{color:var(--blue);font-weight:900}
+    .quote{border-left:4px solid var(--gold);padding:14px 16px;background:rgba(255,209,102,.08);border-radius:0 16px 16px 0;color:#FFF3C4;font-weight:750;margin:14px 0}.quote.red{border-left-color:var(--red);background:rgba(255,92,122,.08);color:#FFD7DF}.quote.blue{border-left-color:var(--blue);background:rgba(96,165,250,.08);color:#DCEBFF}.quote.green{border-left-color:var(--green);background:rgba(74,222,128,.08);color:#DFFFEA}
+    .source{border:1px solid var(--line);border-radius:20px;margin:14px 0;background:rgba(255,255,255,.035);overflow:hidden}.source summary{cursor:pointer;padding:18px 20px;font-weight:950;color:white;list-style:none;display:flex;justify-content:space-between;align-items:center}.source summary::-webkit-details-marker{display:none}.source summary:after{content:"+";color:var(--gold);font-size:24px}.source[open] summary:after{content:"–"}.sourceBody{padding:0 20px 20px;color:var(--soft)}
+    .callout{padding:18px;border-radius:20px;border:1px solid rgba(255,209,102,.28);background:linear-gradient(135deg,rgba(255,209,102,.12),rgba(255,255,255,.035));margin:14px 0}.callout.red{border-color:rgba(255,92,122,.28);background:linear-gradient(135deg,rgba(255,92,122,.12),rgba(255,255,255,.035))}.callout.green{border-color:rgba(74,222,128,.28);background:linear-gradient(135deg,rgba(74,222,128,.12),rgba(255,255,255,.035))}.callout.blue{border-color:rgba(96,165,250,.28);background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(255,255,255,.035))}.callout h3{margin:0 0 8px}.callout p{margin:0;color:var(--soft)}
+    .timeline{position:relative;padding-left:24px}.timeline:before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),var(--blue))}.tl{position:relative;margin:18px 0;padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}.tl:before{content:"";position:absolute;left:-23px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(255,209,102,.12)}.tl h4{margin:0 0 8px;color:white}.tl p{margin:0;color:var(--soft)}
+    .script{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#050814;border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:18px;color:#EAF0FF;white-space:pre-wrap}.footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+    @media(max-width:900px){.heroGrid,.grid4{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}.card{padding:20px}.hero{padding:24px}.nav{position:relative}.wrap{padding:20px 12px 60px}}
+    @media(max-width:560px){.heroGrid,.grid4{grid-template-columns:1fr}h1{font-size:34px}th,td{font-size:13px;padding:10px}}
+    @media print{body{background:white;color:#111}.nav{display:none}.card,.hero,.info,.source,.callout{box-shadow:none;background:white;color:#111;border-color:#ddd}.subtitle,.info p,td,.sourceBody,.tl p{color:#333}.quote{color:#111;background:#fff8db}.metric .value{color:#111!important}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">REVOLUCIONA-T · CLOSER ANA · PROSPECTO ISABEL LECERTUA</div>
+    <h1>Auditoría forense · Isabel Lecertua</h1>
+    <p class="subtitle">Diagnóstico excepcional, primer Reframe real en doce llamadas de Ana, pero cierre frágil por pitch largo, precio frío y ausencia de TRoT / reserva de plaza.</p>
+    <div class="heroGrid">
+      <div class="metric"><div class="label">Resultado</div><div class="value gold">En seguimiento</div></div>
+      <div class="metric"><div class="label">Nota global</div><div class="value blue">6.5 / 10</div></div>
+      <div class="metric"><div class="label">Duración</div><div class="value">109 min</div></div>
+      <div class="metric"><div class="label">Próximo paso</div><div class="value green">Lunes AM</div></div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="#ficha">Ficha</a><a href="#lectura">Lectura</a><a href="#scoreboard">Scoreboard</a><a href="#funciono">Funcionó</a><a href="#errores">Errores</a><a href="#fuentes">13 fuentes</a><a href="#evolucion">Evolución</a><a href="#lunes">Lunes</a><a href="#plan">Plan</a><a href="#resumen">Resumen</a>
+  </nav>
+
+  <section id="ficha" class="card">
+    <div class="sectionTitle"><div class="num">01</div><div><h2>Ficha del caso</h2><p>Datos operativos, perfil, contexto y obstáculo principal.</p></div></div>
+    <div class="grid2">
+      <div class="info"><div class="small">Prospecto</div><p><b>Isabel Lecertua (Ixa)</b> · pueblo a 30 min de San Sebastián · 55 años en diciembre · capricornio.</p></div>
+      <div class="info"><div class="small">Closer</div><p><b>Ana</b> · 28 mayo 2026 · 58 min Parte 1 + 51 min Parte 2 = <b>109 minutos totales</b>.</p></div>
+      <div class="info"><div class="small">Resultado</div><p><b>EN SEGUIMIENTO</b> · Ana escribe el lunes por la mañana · sin ancla económica.</p></div>
+      <div class="info"><div class="small">Historial Ana</div><p>Miryam (CER. 6.6) · Katia (SEG. 6.5) · Beatriz (SEG. 6.3) · Mari (REV. 5.8) · Iria (S/CIE. 5.8) · Mariona (CER. 7.0) · Sandra (SEG. 6.5) · Mónica (SEG. 6.5) · Gloria (N/CER. 6.3) · Cristina (SEG. 5.8) · Marta (N/CER. 5.3) · Isabel (SEG. 6.5).</p></div>
+    </div>
+    <div class="callout blue"><h3>Perfil Isabel</h3><p>Oficina en San Sebastián · horario 8h-15:45h con buena disponibilidad de tardes. Hijos: Markel (20) y Laia (16), sola con ellos. Madre mayor a cargo: visitas, compras y acompañamiento. Decisión autónoma, sin necesidad de consultar con nadie.</p></div>
+    <div class="grid3">
+      <div class="info"><div class="small">Actividad física</div><p>Deportista de base: jumping los lunes, zumba + tonificación los martes, funcional los jueves, viernes opcional y canal de YouTube María los fines de semana.</p></div>
+      <div class="info"><div class="small">Limitaciones físicas</div><p>Doble rotura de meniscos; ya nota deterioro al correr. Ligamento de hombro tocado.</p></div>
+      <div class="info"><div class="small">Alimentación actual</div><p>Puré de verduras + proteína hervida de lunes a viernes. Come en el trabajo. Sistema bastante estructurado entre semana.</p></div>
+      <div class="info"><div class="small">Fallo conocido</div><p>Fines de semana y planes sociales → binge de dulce → efecto todo o nada.</p></div>
+      <div class="info"><div class="small">Antecedentes</div><p>Nutricionista previa: le dijo lo mismo que ya hace. No cambió nada. Compañera 3 años mayor como espejo de lo que cree que le viene.</p></div>
+      <div class="info"><div class="small">Miedo principal</div><p>Que los meniscos fallen, no pueda hacer deporte y entre en una espiral irreversible.</p></div>
+    </div>
+    <div style="margin-top:14px">
+      <span class="tag red">Rehuye vida social y planes familiares para controlar comida</span>
+      <span class="tag gold">Compromiso 8/10</span>
+      <span class="tag blue">Obstáculo económico secundario</span>
+      <span class="tag green">Prefiere 6 meses + fraccionado</span>
+      <span class="tag">Viaje con amiga en ~2 semanas</span>
+    </div>
+  </section>
+
+  <section id="lectura" class="card alt">
+    <div class="sectionTitle"><div class="num">02</div><div><h2>La lectura honesta</h2><p>La paradoja central: diagnóstico excepcional, cierre frágil.</p></div></div>
+    <p>Esta es la llamada más larga del proyecto de Ana — <b>109 minutos</b> — y no se cerró.</p>
+    <p>La paradoja es que el diagnóstico fue excepcional. Ana excavó un activo que no había aparecido en ninguna de sus once llamadas anteriores con tanta claridad: <b>“rehuyo de vida social y planes en familia por el tema de la alimentación”</b>. Eso es el Impact Layer más poderoso de toda la llamada, y Ana lo identificó con una sola pregunta.</p>
+    <p>El Reframe también apareció por primera vez en forma reconocible: <b>“El problema no está en lo que haces — el problema es el sistema que no está diseñado para Isabel.”</b></p>
+    <div class="grid3">
+      <div class="callout"><h3>1 · Pitch demasiado largo</h3><p>Más de 20 minutos continuos sin pausa activa. Cuando llegó el precio, Isabel estaba en escucha pasiva y la emoción del diagnóstico se había diluido.</p></div>
+      <div class="callout red"><h3>2 · Precio frío</h3><p>Los activos excavados — vida social, compañera espejo, meniscos — no fueron el frame inmediato antes del número.</p></div>
+      <div class="callout"><h3>3 · Sin TRoT</h3><p>Cuando Isabel dijo “no soy lanzada, me lo tengo que pensar”, Ana aceptó sin reserva, sin LDA y sin paso reversible.</p></div>
+    </div>
+  </section>
+
+  <section id="scoreboard" class="card">
+    <div class="sectionTitle"><div class="num">03</div><div><h2>Scoreboard</h2><p>Evaluación por bloques comparada con Marta.</p></div></div>
+    <table>
+      <thead><tr><th>Bloque</th><th>Nota</th><th>Vs. Marta</th><th>Razón</th></tr></thead>
+      <tbody>
+        <tr><td>Apertura / Agenda</td><td class="score">8.0</td><td class="up">↑↑ 5.5</td><td>Rapport natural, hijos compartidos, agenda clara.</td></tr>
+        <tr><td>Diagnóstico calidad</td><td class="score">8.5</td><td class="up">↑↑ 6.0</td><td>Mejor diagnóstico de todas las llamadas de Ana.</td></tr>
+        <tr><td>Diagnóstico profundidad</td><td class="score">8.0</td><td class="up">↑↑ 5.5</td><td>“Rehuyo vida social” excavado. Compañera espejo. Meniscos.</td></tr>
+        <tr><td>Construcción de valor</td><td class="score">6.0</td><td class="up">↑ 5.5</td><td>Reframe apareció. Pitch de más de 20 minutos sin pausas. Sin Pre-Suasión antes del precio.</td></tr>
+        <tr><td>Manejo de objeciones</td><td class="score">5.5</td><td class="up">↑ 4.5</td><td>“Cerrar la boca” bien rebatido. TRoT ausente. Reserva ausente. LDA incompleto.</td></tr>
+        <tr><td>Cierre</td><td class="score">5.0</td><td class="same">= 5.0</td><td>En seguimiento. Igual de frágil que Marta. Sin ancla económica.</td></tr>
+        <tr><td>Lenguaje / Tono</td><td class="score">8.5</td><td class="up">↑↑ 6.5</td><td>El más cálido y natural de Ana. Madre a madre. Sin presión.</td></tr>
+        <tr><td>Estructura</td><td class="score">6.0</td><td class="up">↑ 4.0</td><td>Reframe presente. Pre-Suasión llegó después del precio, no antes. Pitch monólogo.</td></tr>
+        <tr><td><b>GLOBAL</b></td><td class="score">6.5 / 10</td><td class="up">↑ 5.3</td><td>Mejora clara respecto a Marta, pero cierre aún frágil.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="funciono" class="card alt">
+    <div class="sectionTitle"><div class="num">04</div><div><h2>Lo que funcionó</h2><p>Reconocimiento real con ejemplos exactos.</p></div></div>
+    <div class="timeline">
+      <div class="tl"><h4>BIEN 1 — Excavó el activo más poderoso de toda la llamada · P1, min 20:54</h4><p>Isabel mencionó casi de pasada que a veces rehúye vida social para no tener que gestionar la comida. Ana la detuvo: <b>“Me quedo con una cosa. Me has dicho, rehuyo de vida social y planes en familia incluso por el tema de la alimentación. ¿Cómo es eso?”</b> De ahí salió el Impact Layer real: organiza comidas familiares en casa para controlar, evita restaurantes, evita planes y a veces rechaza salidas con amigas de toda la vida.</p></div>
+      <div class="tl"><h4>BIEN 2 — El Reframe apareció · P2, min 17:43</h4><p><b>“El problema es que el sistema que tú estás llevando a cabo es que no está diseñado para ti, no está diseñado para Isabel.”</b> Primera vez en doce llamadas de Ana que el Reframe aparece con estructura correcta: creencia limitante → insight disruptivo.</p></div>
+      <div class="tl"><h4>BIEN 3 — La compañera como espejo · P1, min 32:31-33:59</h4><p>Ana conectó el miedo de Isabel con su compañera de trabajo: <b>“Tú estás viendo tu espejo, por así decirlo, en tu compañera de trabajo.”</b> Isabel lo confirmó. Gap Selling ejecutado: coste de inacción con evidencia diaria.</p></div>
+      <div class="tl"><h4>BIEN 4 — El reto de “cerrar la boca” · P2, min 11:12</h4><p>Isabel sugirió que quizá era tirar dinero en algo tan sencillo como cerrar la boca. Ana respondió: <b>“¿Tú crees que es solo cerrar la boca? Fíjate, todo lo que me has contado.”</b> Isabel admitió que no. La objeción empezó a desmontarse desde su propia boca.</p></div>
+      <div class="tl"><h4>BIEN 5 — Madre a madre</h4><p>Ana compartió que también tiene hijos, Marta y Guillermo, de 11 y 12 años. Eso creó autenticidad: <b>“Como me decía antes yo también soy madre y al final pues las prioridades son los hijos en todos los aspectos.”</b> Isabel se abrió más a partir de esos momentos.</p></div>
+      <div class="tl"><h4>BIEN 6 — “Las cosas tienen que tener un día uno” · P2, min 7:27</h4><p>Ante la postergación hasta después del viaje, Ana respondió con firmeza sin presión: <b>“Isabel, las cosas tienen que tener un día uno.”</b> Sin FOMO, sin urgencia fabricada.</p></div>
+      <div class="tl"><h4>BIEN 7 — Sin presión encubierta cuando Isabel dudó</h4><p>En Cristina y Marta, Ana usó múltiples variantes de presión. Aquí no. Cuando Isabel dijo que necesitaba pensarlo, Ana no presionó con siete preguntas seguidas. Hay aprendizaje real. El error fue no ofrecer TRoT.</p></div>
+    </div>
+  </section>
+
+  <section id="errores" class="card">
+    <div class="sectionTitle"><div class="num">05</div><div><h2>Los errores</h2><p>Directos, con fuente y script correcto.</p></div></div>
+    <details class="source" open><summary>ERROR 1 — Pitch de 20 minutos sin pausa activa</summary><div class="sourceBody"><p><b>P2, min 17:43 a 37:40.</b> Veinte minutos de monólogo. Isabel respondió “sí, sí, sí” durante toda esa sección: señal de escucha pasiva.</p><div class="quote red">El diagnóstico había producido activos emocionales excepcionales. El pitch los enterró debajo de 20 minutos de información. Para cuando llegó el precio, la emoción del diagnóstico era un recuerdo lejano.</div><p><b>Pausa 1 — después de alimentación:</b> “Isabel, lo de las cenas — llegas del gimnasio a las 10, los demás ya han recogido, no han dejado nada. Eso que me describes del ‘ya total, si he fallado, fallo del todo’ — ¿con qué frecuencia te pasa eso a la semana?”</p><p><b>Pausa 2 — después de entrenamiento:</b> “Con lo del jumping y el funcional que estás haciendo — ¿notas que aunque sigas yendo el peso no se mueve, o es que los resultados han cambiado desde que tienes los meniscos peor?”</p></div></details>
+    <details class="source"><summary>ERROR 2 — “Me queda claro” x3 · doceava llamada</summary><div class="sourceBody"><p><b>P1, min 24:59:</b> “Con respecto a la alimentación lo tengo claro, Isabel.”</p><p><b>P1, min 37:38:</b> sin frase exacta, pero mismo efecto: cierra el hilo emocional antes del siguiente bloque.</p><p><b>P2, min 17:23:</b> implícito en la transición al pitch.</p><div class="quote">Sustitución definitiva: “¿Hay algo más de esto que creas importante que yo sepa antes de seguir?”</div></div></details>
+    <details class="source"><summary>ERROR 3 — Reframe correcto pero incompleto</summary><div class="sourceBody"><p>El Reframe que llegó fue correcto: <b>“el sistema no está diseñado para ti.”</b> Faltó especificidad clínica y operativa.</p><div class="script">Isabel, llevas años haciendo lo correcto entre semana. Purés, proteína, sin pasarte. Y llevas años viendo que eso no alcanza. No es que estés fallando — es que ningún sistema que has probado estaba diseñado para la Isabel de los viernes por la noche con sus amigas en un restaurante. Ni para los meniscos que tiene Isabel, que no puede correr dos días seguidos. Ni para la mujer que cuida a su madre, lleva a sus hijos y sale del trabajo a las 4. Todos esos sistemas asumen condiciones que tú no tienes. Eso es lo que cambia aquí.</div></div></details>
+    <details class="source"><summary>ERROR 4 — Sin Pre-Suasión antes del precio</summary><div class="sourceBody"><p>El precio llegó en P2, minuto 36:29, sin frame emocional previo.</p><div class="grid3"><div class="callout red"><h3>Activo 1 · Vida social</h3><p>“Isabel, me dijiste que a veces rechazas planes con amigas y familia por no tener que gestionar lo que comes. El programa son tres cuotas de 500€. ¿Cuántos planes has rechazado desde navidades?”</p></div><div class="callout red"><h3>Activo 2 · Compañera espejo</h3><p>“Ves a tu compañera, tres años más que tú, y dices: detrás voy yo. El programa son 2.100€ al año. ¿Cuánto tiempo tienes antes de que ese espejo seas tú?”</p></div><div class="callout red"><h3>Activo 3 · Meniscos</h3><p>“Lo que más te preocupa no es engordar: es que los meniscos se vayan y ya no puedas hacer deporte. El programa son 500€/mes. ¿Cuánto vale evitar esa espiral?”</p></div></div></div></details>
+    <details class="source"><summary>ERROR 5 — Implicación superficial</summary><div class="sourceBody"><p><b>P2, min 0:16-7:27.</b> “Imagínate que decides no hacer nada. ¿Cómo te verías en septiembre?” Isabel respondió: “No lo sé, supongo que como ahora.”</p><div class="script">Isabel, llevas desde navidades con este run run — tus propias palabras. Seis meses de run run no te han movido. Y tu compañera lleva un año haciendo ejercicio y la cosa no para. Si de aquí al próximo verano pasa lo mismo, ¿cuántas navidades más puedes hacer esto?</div><p>La Implicación no se acepta ante el primer “no lo sé”.</p></div></details>
+    <details class="source"><summary>ERROR 6 — “Me lo tengo que pensar” no fue tratado como lo que era</summary><div class="sourceBody"><p>Cuando Isabel dijo <b>“no soy lanzada, me lo tengo que pensar, no me gusta decidir así”</b>, Ana validó y acordó escribir el lunes. No exploró qué significaba exactamente “pensarlo”.</p><div class="script">Isabel, te conozco ya y eso que me dices es muy tuyo, te lo noto desde el principio. No eres lanzada. No es un defecto — es un rasgo.
+
+Llevas desde navidades dándole vueltas a esto. Seis meses de vueltas no te han dado más claridad que estas dos horas. Lo que da claridad no es pensar más — es ver los primeros resultados. Porque una vez que estás dentro, en dos semanas sabes si esto va a funcionar para ti.
+
+¿Qué necesitarías ver el lunes para poder decirme que sí?</div></div></details>
+    <details class="source"><summary>ERROR 7 — Sin reserva de plaza</summary><div class="sourceBody"><p>La llamada terminó con <b>“Te escribo el lunes”</b>. Sin reserva de plaza. Sin compromiso. Sin ancla.</p><div class="script">Isabel, para que no perdamos la plaza mientras tú le das la vuelta este fin de semana, lo que hacemos es reservarla con 100 euros ahora. Si el lunes decides que no, te lo devuelvo completamente. Así lo tienes asegurado sin presión.</div></div></details>
+    <details class="source"><summary>ERROR 8 — Nutricionista anterior no fue Reframeada completamente</summary><div class="sourceBody"><p>Isabel dijo: <b>“Fui a una nutricionista y me dijo lo mismo que yo ya hago.”</b> Ese era un Reframe potentísimo.</p><div class="script">Isabel, fíjate qué curioso. Fuiste a una nutricionista. Te dijo exactamente lo que ya hacías. No añadió nada. Y la razón es que te dio un plan genérico, el mismo que le da a la mujer que trabaja 8 horas en oficina y tiene pareja que cocina. Un plan que no tiene en cuenta que tú comes en el trabajo de lunes a viernes, que los fines de semana convives con dos hijos y que si llega el dulce no paras hasta terminar el paquete. Eso no es falta de fuerza de voluntad — es que ningún plan genérico sobrevive a tu realidad específica. Eso es exactamente lo que diferencia esto de la nutricionista.</div></div></details>
+  </section>
+
+  <section id="fuentes" class="card alt">
+    <div class="sectionTitle"><div class="num">06</div><div><h2>Las 13 fuentes — evaluación completa</h2><p>Una por una, con lectura táctica aplicada.</p></div></div>
+
+    <details class="source" open><summary>FUENTE 1 · Never Split the Difference — Chris Voss</summary><div class="sourceBody"><p>El mejor uso de Voss de todas las llamadas de Ana: el momento de <b>“rehuyo de vida social”</b>. Isabel mencionó algo de pasada y Ana lo capturó con una pregunta directa. Eso es mirroring + seguimiento.</p><div class="quote">No hay nada más potente en una llamada que hacer que el prospect desarrolle algo que él mismo no sabía que era tan importante.</div><p>Lo que faltó fue el label del cierre. Cuando Isabel dijo que no le gusta decidir estas cosas así y se sentía un poco presionada, el label correcto era:</p><div class="script">Parece que para ti comprometerte con algo sin haberlo girado del todo se siente como tirarte a la piscina sin saber la temperatura del agua.</div><p>Ese label abre la puerta al TRoT: poder meter el pie antes de tirarse.</p></div></details>
+
+    <details class="source"><summary>FUENTE 2 · Gap Selling — Keenan</summary><div class="sourceBody"><p><b>Estado actual:</b> construido con excelencia: purés + proteína entre semana, fines de semana sin control, efecto todo-o-nada con el dulce, nutricionista que no añadió nada, rehuye vida social, meniscos en deterioro, compañera como espejo.</p><p><b>Impact Layer:</b> “rehuyo de vida social” es el más poderoso. Fue excavado, pero no viajó al precio.</p><p>Segundo Impact Layer: <b>“No quiero llegar a ser una persona obesa con las rodillas mal que no me pueda mover.”</b> Apareció una vez y no fue retomado.</p><p><b>Causa raíz:</b> identificada parcialmente. El Reframe conectó “sistema no diseñado para ti” con la nutricionista, pero no con la realidad operativa específica de Isabel.</p></div></details>
+
+    <details class="source"><summary>FUENTE 3 · Objections — Jeb Blount</summary><div class="sourceBody"><p><b>Obstáculo 1 — “Me lo tengo que pensar / no soy lanzada”:</b> objeción de proceso decisional, no de contenido. Isabel no dudaba del programa; dudaba de su forma de decidir.</p><p>El TRoT transforma “¿me lanzo 1.500€?” en “¿invierto 100€ para proteger la plaza mientras lo pienso bien?”</p><p><b>Obstáculo 2 — “Igual estoy tirando el dinero en algo como cerrar la boca”:</b> Ana lo manejó bien al preguntar si realmente creía que era solo cerrar la boca. Faltó el remate:</p><div class="script">Si fuera solo cerrar la boca, ya lo habrías conseguido hace seis meses, ¿verdad?</div></div></details>
+
+    <details class="source"><summary>FUENTE 4 · Virtual Selling — Jeb Blount</summary><div class="sourceBody"><p>109 minutos con dos cortes de conexión: P1 min 55:26 y P2 no documentado. Ana gestionó bien las reconexiones.</p><p>El problema fue la duración: Isabel ya tenía temas activos al inicio — coche, garaje, mecánico — y había pensado cancelar. En virtual, después de 80 minutos la atención cae. El pitch llegó en minutos 70-90, justo cuando la atención estaba más baja.</p><div class="quote red">Regla virtual: el pitch debe estar en los primeros 60 minutos. Los minutos 60-109 son para objeciones, Pre-Suasión y cierre.</div></div></details>
+
+    <details class="source"><summary>FUENTE 5 · The JOLT Effect — Dixon y McKenna</summary><div class="sourceBody"><p>El Omission Bias de Isabel: <b>“yo no soy lanzada”</b>. Necesita control del proceso decisional antes de comprometerse.</p><div class="script">Isabel, lo que me parece que está pasando no es que tengas dudas sobre el programa. Es que tú no tomas decisiones importantes de golpe — y eso es una cualidad, no un defecto. ¿Es eso?
+
+Perfecto. Entonces lo que necesitamos no es que decidas en 5 minutos — es que puedas tomarte el fin de semana con la plaza asegurada. ¿Eso lo cambiaría?</div><p>El TRoT ideal: reserva de 100€ con devolución garantizada.</p></div></details>
+
+    <details class="source"><summary>FUENTE 6 · Switch — Chip y Dan Heath</summary><div class="sourceBody"><p><b>Jinete:</b> hiperactivo. Sabe qué hace mal, qué le funciona, por qué el nutricionista no funcionó, y entiende el equilibrio restricción-capricho.</p><p><b>Elefante:</b> motivado pero cauteloso. Necesita ver el camino antes de moverse.</p><p><b>Bright Spot disponible:</b> Isabel perdió 10 kilos hace cinco años cuando se fue al extremo contrario. Cuando tiene estructura, la sigue.</p><div class="script">Isabel, cuando tienes una estructura, la sigues. Lo demostraste cuando recuperaste los 10 kilos. El problema no es que no tengas capacidad — es que hasta ahora no tenías el sistema diseñado para que la estructura sobreviviera al fin de semana.</div></div></details>
+
+    <details class="source"><summary>FUENTE 7 · Why She Buys — Bridget Brennan</summary><div class="sourceBody"><p>La compra de identidad de Isabel no era estética. Era autonomía y control: <b>“No quiero ser una persona que no puede moverse.”</b> <b>“Quiero que esto no se desmadre.”</b> <b>“Quiero poder ir a los planes sin tener que gestionarlo todo en mi cabeza.”</b></p><p>El argumento más poderoso para Isabel no era entrar en una talla. Era ir al restaurante con amigas sin calcular si puede o no puede comer lo que le apetece.</p></div></details>
+
+    <details class="source"><summary>FUENTE 8 · The Mom Test — Rob Fitzpatrick</summary><div class="sourceBody"><p>Bien explorados los datos de comportamiento real: cómo cocina, cómo gestiona la comida del trabajo, qué hace con hambre a las 10:30, efecto todo-o-nada con chocolate.</p><p>Pregunta hipotética a corregir: <b>“¿Tendrías al menos una hora tres veces a la semana para entrenarte?”</b></p><div class="script">En las últimas dos semanas, con las clases que tienes contratadas y el canal de YouTube, ¿cuántos días has entrenado?</div><p>Dato no recogido: fechas exactas del viaje de vacaciones. Afecta al plan de inicio.</p></div></details>
+
+    <details class="source"><summary>FUENTE 9 · Pre-Suasión — Robert Cialdini</summary><div class="sourceBody"><p>La Pre-Suasión apareció después del precio, no antes. Ana usó el activo de los planes sociales cuando Isabel ya estaba pensando.</p><div class="script">Isabel — antes del precio — me dijiste que a veces rechazas planes con tus amigas para no tener que gestionar lo que comes. Que te da pena pero lo haces. Que eso es un peso. El programa son tres cuotas de 500 euros. ¿Cuánto vale que ese peso no esté en tu cabeza la próxima vez que tus amigas te inviten a salir?</div><p>Precio evaluado contra libertad social, no contra coste del programa.</p></div></details>
+
+    <details class="source"><summary>FUENTE 10 · Influence — Robert Cialdini</summary><div class="sourceBody"><p><b>Consistencia:</b> 8/10 bien anclado. Isabel reconoció que esos dos puntos dependían de lo fácil que el sistema se lo pusiera.</p><p><b>Prueba social:</b> ausente. Isabel habló de mujeres que adelgazan 30 y tantos kilos y se preguntó cómo lo han hecho. Eso pedía prueba social específica.</p><div class="script">Tenemos mujeres exactamente como tú — que hacían cardio sin ver resultados, que se cuidaban entre semana y los fines de semana perdían todo — y en tres meses les ha desaparecido la tripa y han dejado de rehuir restaurantes.</div><p><b>Escasez legítima:</b> Ana mencionó admisión por plazas, pero faltó concretar: <b>“Ahora mismo hay dos plazas disponibles para mayo. Una puede ser la tuya. ¿Reservamos?”</b></p></div></details>
+
+    <details class="source"><summary>FUENTE 11 · The Challenger Sale — Dixon y Adamson</summary><div class="sourceBody"><p>El Reframe más completo de las doce llamadas de Ana. Primer Reframe con estructura reconocible.</p><p>Lo que llegó: <b>“El sistema no está diseñado para ti.”</b> Lo que faltó: por qué su caso específico no funciona con sistemas genéricos.</p><div class="script">Isabel, llevas años haciendo lo correcto entre semana. El nutricionista te confirmó que lo que haces está bien. Y sin embargo no funciona. Voy a decirte algo que quizás no has pensado así: ningún plan de alimentación estándar está diseñado para la mujer que come sola en el trabajo cinco días, tiene dos hijos en casa, cuida a su madre por las tardes, y llega a casa a las 10 de la noche del gimnasio con hambre. Eso no es descuido — es una logística que ningún plan genérico puede resolver. Y ninguno te va a resolver el sábado a las 11 de la noche cuando llega el chocolate. Eso es lo que hace diferente lo que vamos a hacer contigo.</div></div></details>
+
+    <details class="source"><summary>FUENTE 12 · SPIN Selling — Neil Rackham</summary><div class="sourceBody"><p><b>Situación:</b> excelente. Trabajo, horarios, hijos, madre, meniscos, sistema actual, nutricionista, compañera espejo.</p><p><b>Problema:</b> muy bien construido: todo-o-nada con dulce, ropa del año pasado, laterales y tripa, rehuye vida social.</p><p><b>Implicación:</b> la más débil de la llamada. “¿Cómo te verías en septiembre?” produjo “no lo sé, supongo que igual.” Faltó segunda pregunta.</p><div class="script">Isabel, llevas desde navidades con el run run — seis meses. Tu compañera lleva un año haciendo ejercicio y no para. Tus meniscos ya no aguantan correr dos días seguidos. Si de aquí a las siguientes navidades pasa lo mismo, ¿qué te va a quedar por intentar?</div><p><b>Necesidad-beneficio:</b> parcial. “Volverte a ver al espejo como la Isabel que tú quieres ver” fue articulado, pero para Isabel era más potente: ir al restaurante sin gestionar mentalmente la comida.</p></div></details>
+
+    <details class="source"><summary>FUENTE 13 · Exactly What to Say — Phil M. Jones</summary><div class="sourceBody"><p>La pregunta de auto-venta no llegó. En Lidia produjo el mejor argumento de toda la sesión. Con Isabel podía haber funcionado aún mejor:</p><div class="script">¿Por qué te gustaría entrar en el programa con Jonathan?</div><p>Para el lunes:</p><div class="script">Isabel, una pregunta rápida antes de contarte nada. Desde el jueves que hablamos, ¿has pensado en algo de lo que hablamos?</div><p>Para aislar obstáculo real:</p><div class="script">Isabel, si el tema económico estuviera resuelto y pudieras probarlo sin riesgo, ¿lo harías?</div></div></details>
+  </section>
+
+  <section id="evolucion" class="card">
+    <div class="sectionTitle"><div class="num">07</div><div><h2>Evolución de Ana — 12 llamadas</h2><p>Qué ha mejorado y qué sigue igual.</p></div></div>
+    <table>
+      <thead><tr><th>Dimensión</th><th>MIR</th><th>KAT</th><th>BEA</th><th>MAR</th><th>IRI</th><th>MAR</th><th>SAN</th><th>MON</th><th>GLO</th><th>CRI</th><th>MAR2</th><th>ISA</th></tr></thead>
+      <tbody>
+        <tr><td>Nota global</td><td>6.6</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.8</td><td>7.0</td><td>6.5</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.3</td><td>6.5</td></tr>
+        <tr><td>Resultado</td><td>CER</td><td>SEG</td><td>SEG</td><td>REV</td><td>S/C</td><td>CER</td><td>SEG</td><td>SEG</td><td>N/C</td><td>SEG</td><td>N/C</td><td>SEG</td></tr>
+        <tr><td>“Me queda claro”</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí×3</td></tr>
+        <tr><td>Diagnóstico emocional</td><td>MB</td><td>Bno</td><td>Lim</td><td>Par</td><td>Lim</td><td>MB</td><td>Bno</td><td>Bno</td><td>Lim</td><td>MB</td><td>Par</td><td>MB</td></tr>
+        <tr><td>Decisor cualificado</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+        <tr><td>Implicación profunda</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Pre-Suasión</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Post-precio</td></tr>
+        <tr><td>Activos en pitch</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Parcial</td></tr>
+        <tr><td>Reframe</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí(p)</td></tr>
+        <tr><td>TRoT / Reserva plaza</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+        <tr><td>Auto-venta prospect</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+      </tbody>
+    </table>
+    <div class="grid2" style="margin-top:16px">
+      <div class="callout green"><h3>Lo que ha mejorado</h3><p>Diagnóstico emocional consistentemente excelente en las últimas cuatro llamadas. Decisor instalado en las últimas siete. Primera aparición de Reframe. Tono/autenticidad en su mejor punto. Sin presión encubierta ante la duda.</p></div>
+      <div class="callout red"><h3>Lo que sigue igual</h3><p>“Me queda claro” en todas. Implicación abandonada ante primer “no lo sé” en doce llamadas. Pre-Suasión antes del precio: cero. TRoT / reserva de plaza: nunca ofrecida. Activos específicos sin llegar al pitch.</p></div>
+    </div>
+  </section>
+
+  <section id="lunes" class="card alt">
+    <div class="sectionTitle"><div class="num">08</div><div><h2>El seguimiento del lunes</h2><p>Script concreto para convertir el seguimiento en cierre.</p></div></div>
+    <p>El lunes es una oportunidad real. Isabel no cerró por falta de interés, sino por proceso decisional. Está en el <b>“podría ser una posibilidad, ¿por qué no?”</b></p>
+    <div class="script">MENSAJE WHATSAPP LUNES POR LA MAÑANA:
+
+Isabel, buenos días. Ana. Espero que hayas tenido buen fin de semana. ¿Cómo está todo?
+
+[Esperar respuesta]
+
+Oye, una pregunta. Después de todo lo que hablamos el jueves, ¿qué fue lo que más te resonó de todo? ¿Hay algo que te haya rondado por la cabeza estos días?</div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="callout blue"><h3>Si responde con algo específico</h3><p>“Exactamente eso es lo que cambia. ¿Tienes diez minutos ahora o prefieres esta tarde?”</p></div>
+      <div class="callout gold"><h3>Si responde “sigo sin saber”</h3><p>“Isabel, antes de que me digas nada más, una sola pregunta: si el tema económico no existiera y pudieras probarlo sin riesgo, ¿lo harías?”</p></div>
+    </div>
+    <div class="callout green"><h3>Si dice sí</h3><p>“Entonces lo que vamos a hacer es que reservas tu plaza con 100 euros ahora mismo. Si esta semana lo ves de otra manera, te lo devuelvo. Así lo tienes asegurado y sigues teniendo tu tiempo para decidir. ¿Te mando el link?”</p></div>
+  </section>
+
+  <section id="plan" class="card">
+    <div class="sectionTitle"><div class="num">09</div><div><h2>Plan de entrenamiento — Ana, iteración 12</h2><p>Cinco elementos. No hay más espera.</p></div></div>
+    <div class="callout green"><h3>Lo que no se toca</h3><p>Diagnóstico emocional profundo. Rapport y autenticidad madre a madre. Cualificación del decisor instalada. Capacidad de capturar activos de pasada que el prospect no sabe que son importantes.</p></div>
+    <div class="grid2">
+      <div class="info"><div class="small">1 · Pre-Suasión antes del precio</div><p>El activo más poderoso del diagnóstico va inmediatamente antes del número. Ejercicio: escribir en papel los tres activos más poderosos antes del pitch. El precio no llega hasta que uno se haya repetido en palabras del prospect.</p></div>
+      <div class="info"><div class="small">2 · Segunda pregunta de Implicación</div><p>Cuando el prospect responde “no lo sé” o “supongo que igual”: segunda pregunta anclada en historial específico. Sin excepción.</p></div>
+      <div class="info"><div class="small">3 · TRoT / reserva obligatoria</div><p>Cuando no decide en llamada y no hay obstáculo económico insuperable: reserva de 100€ antes del primer “lo necesito pensar”.</p></div>
+      <div class="info"><div class="small">4 · Pitch máximo 10 minutos</div><p>Dos preguntas de activación dentro del pitch. Nunca más de siete minutos continuos de monólogo.</p></div>
+      <div class="info"><div class="small">5 · Eliminar “me queda claro”</div><p>Sustitución permanente: “¿Hay algo más de esto que creas importante que yo sepa?”</p></div>
+    </div>
+  </section>
+
+  <section id="resumen" class="card alt">
+    <div class="sectionTitle"><div class="num">10</div><div><h2>Resumen ejecutivo</h2><p>Conclusión operativa de la auditoría.</p></div></div>
+    <div class="grid4">
+      <div class="metric"><div class="label">Nota</div><div class="value blue">6.5 / 10</div></div>
+      <div class="metric"><div class="label">Resultado</div><div class="value gold">Seguimiento</div></div>
+      <div class="metric"><div class="label">Mejor activo</div><div class="value">Vida social</div></div>
+      <div class="metric"><div class="label">Fallo cierre</div><div class="value red">Sin TRoT</div></div>
+    </div>
+    <div class="callout green"><h3>Mejores elementos</h3><p>Diagnóstico emocional: “rehuye vida social” excavado con una sola pregunta. Reframe parcial por primera vez en doce llamadas. Tono madre a madre genuino. Sin presión encubierta ante la duda.</p></div>
+    <div class="callout red"><h3>Lo que impidió el cierre</h3><p>Pitch de 20 minutos que diluyó la emoción del diagnóstico, precio frío sin Pre-Suasión, TRoT ausente y seguimiento sin ancla.</p></div>
+    <div class="quote gold">Doce llamadas. Esta es la que tiene el mejor diagnóstico y el primer Reframe real. Captaste “rehuyo de vida social” con una sola pregunta cuando Isabel lo dijo de pasada — y ese activo vale todo el pitch. El problema es que lo enterraste bajo 20 minutos de explicación del programa y el precio llegó sin ese activo como frame. Isabel estaba en el “podría ser una posibilidad” — eso es una prospect cerrable. La perdiste en el cierre, no en el diagnóstico. Tu diagnóstico ya es de élite. Lo que necesitas ahora es aprender a cerrar con la misma precisión con la que diagnosticas. La Pre-Suasión antes del precio. El TRoT antes del “me lo tengo que pensar”. La reserva antes del “te llamo el lunes”. El lunes tienes otra oportunidad con Isabel. Esta vez, antes de decirle nada, pregúntale qué resonó. Y si dice que sí le gustó, dile: “Entonces reservamos tu plaza con 100 euros ahora mientras terminas de decidir.” No le expliques más. El lunes no es para diagnosticar — es para cerrar lo que ya diagnosticaste el jueves.</div>
+  </section>
+
+  <div class="footer">REVOLUCIONA-T · Auditoría forense · Ana · Isabel Lecertua</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Auditoría · Ana · Silvia Fernández</title>
+<style>
+:root{
+  --bg:#070812; --panel:#0f1224; --panel2:#151a31; --text:#f4f5fb; --muted:#a7acc4;
+  --line:rgba(255,255,255,.12); --gold:#ffd166; --red:#ff5c7a; --green:#53e6a5; --blue:#7dd3fc;
+  --violet:#a78bfa; --orange:#fb923c; --shadow:0 24px 70px rgba(0,0,0,.45);
+  --radius:26px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 20% 0%,rgba(167,139,250,.22),transparent 35%),radial-gradient(circle at 90% 10%,rgba(125,211,252,.16),transparent 35%),linear-gradient(135deg,#070812,#0c1020 45%,#070812);color:var(--text);}
+body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.75),transparent 90%);pointer-events:none;z-index:-1}.app{display:grid;grid-template-columns:310px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:24px 18px;border-right:1px solid var(--line);background:rgba(7,8,18,.82);backdrop-filter:blur(20px);overflow:auto}.brand{padding:18px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));box-shadow:var(--shadow)}.brand .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800}.brand h1{font-size:25px;line-height:1;margin:10px 0 6px}.brand p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}.score-ring{width:118px;height:118px;border-radius:50%;margin:18px auto 4px;display:grid;place-items:center;background:conic-gradient(var(--green) 0 71%,rgba(255,255,255,.08) 71% 100%);position:relative}.score-ring:after{content:"";position:absolute;inset:10px;border-radius:50%;background:#11162a}.score-ring b{position:relative;z-index:1;font-size:29px}.score-ring span{position:relative;z-index:1;font-size:12px;color:var(--muted);display:block;text-align:center}.nav{margin-top:18px;display:flex;flex-direction:column;gap:8px}.nav a{color:var(--muted);text-decoration:none;padding:11px 12px;border-radius:14px;border:1px solid transparent;font-size:13px;transition:.2s}.nav a:hover,.nav a.active{color:var(--text);background:rgba(255,255,255,.07);border-color:var(--line)}.main{padding:32px;max-width:1320px;width:100%;margin:0 auto}.hero{border:1px solid var(--line);border-radius:34px;padding:32px;background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.035));box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-160px;top:-180px;background:radial-gradient(circle,rgba(255,209,102,.18),transparent 65%)}.kicker{color:var(--gold);font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}.hero h2{font-size:48px;line-height:.98;margin:14px 0 14px;max-width:900px}.hero p{color:var(--muted);font-size:17px;line-height:1.6;max-width:980px}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.06);border-radius:999px;padding:9px 13px;color:#dfe3f5;font-size:13px}.chip.good{border-color:rgba(83,230,165,.35);color:#baf7d9}.chip.warn{border-color:rgba(255,209,102,.35);color:#ffe7a3}.chip.bad{border-color:rgba(255,92,122,.35);color:#ffb5c3}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:18px}.card{grid-column:span 12;border:1px solid var(--line);border-radius:var(--radius);background:rgba(15,18,36,.78);box-shadow:var(--shadow);padding:24px;backdrop-filter:blur(18px)}.card.half{grid-column:span 6}.card.third{grid-column:span 4}.card.two{grid-column:span 8}.card h3{margin:0 0 14px;font-size:24px;display:flex;align-items:center;gap:10px}.card h4{margin:20px 0 8px;color:#fff;font-size:17px}.card p,.card li{color:#d2d6e8;line-height:1.68;font-size:15px}.muted{color:var(--muted)}.section-title{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:900;margin-bottom:8px}.case-table{display:grid;grid-template-columns:190px 1fr;gap:8px 16px}.case-table div{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);color:#dfe3f5}.case-table div:nth-child(odd){color:var(--muted);font-weight:700}.scoreboard{width:100%;border-collapse:separate;border-spacing:0 8px}.scoreboard th{color:var(--muted);font-size:12px;text-align:left;text-transform:uppercase;letter-spacing:.12em;padding:0 12px}.scoreboard td{background:rgba(255,255,255,.055);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 12px;color:#e7e9f6;vertical-align:top}.scoreboard td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px;font-weight:800}.scoreboard td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.bar{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:7px}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--red),var(--gold),var(--green));}.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:800;border:1px solid var(--line);background:rgba(255,255,255,.06)}.tag.good{color:var(--green)}.tag.bad{color:var(--red)}.tag.warn{color:var(--gold)}.quote{border-left:4px solid var(--gold);background:rgba(255,209,102,.07);padding:14px 16px;border-radius:0 18px 18px 0;margin:14px 0;color:#fff}.danger{border-color:rgba(255,92,122,.32);background:linear-gradient(135deg,rgba(255,92,122,.12),rgba(255,255,255,.03))}.success{border-color:rgba(83,230,165,.30);background:linear-gradient(135deg,rgba(83,230,165,.10),rgba(255,255,255,.03))}.warning{border-color:rgba(255,209,102,.30);background:linear-gradient(135deg,rgba(255,209,102,.10),rgba(255,255,255,.03))}.source{border:1px solid var(--line);background:rgba(255,255,255,.045);border-radius:22px;margin:12px 0;overflow:hidden}.source button{width:100%;text-align:left;border:0;background:transparent;color:var(--text);padding:17px 18px;font-weight:900;font-size:15px;cursor:pointer;display:flex;justify-content:space-between;gap:16px}.source .body{display:none;padding:0 18px 18px;color:#d5d9ea;line-height:1.65}.source.open .body{display:block}.timeline{position:relative;padding-left:20px}.timeline:before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--blue),var(--violet),var(--gold))}.tl{position:relative;margin:0 0 18px;padding:15px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045)}.tl:before{content:"";position:absolute;left:-20px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(255,209,102,.12)}.matrix{overflow:auto}.matrix table{min-width:980px;width:100%;border-collapse:collapse}.matrix td,.matrix th{border:1px solid rgba(255,255,255,.10);padding:10px;text-align:center;color:#e3e6f4}.matrix th{background:rgba(255,255,255,.07);color:#fff;position:sticky;top:0}.script{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#070a15;border:1px solid rgba(125,211,252,.22);padding:16px;border-radius:18px;color:#eaf7ff;white-space:pre-wrap;line-height:1.55}.float-actions{position:fixed;right:22px;bottom:22px;display:flex;gap:10px;z-index:20}.float-actions button{border:1px solid var(--line);background:rgba(15,18,36,.86);color:#fff;padding:12px 14px;border-radius:999px;cursor:pointer;backdrop-filter:blur(14px)}mark{background:rgba(255,209,102,.22);color:#fff;border-radius:4px;padding:0 3px}.search{width:100%;margin-top:14px;background:rgba(255,255,255,.07);border:1px solid var(--line);color:white;border-radius:14px;padding:12px 14px;outline:none}.manual{border-left:4px solid var(--red);padding-left:14px}.manual b{color:#ffb5c3}@media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.main{padding:18px}.hero h2{font-size:34px}.card.half,.card.third,.card.two{grid-column:span 12}.case-table{grid-template-columns:1fr}.case-table div:nth-child(odd){border-bottom:0;padding-bottom:0}.case-table div:nth-child(even){padding-top:0}}
+@media print{.sidebar,.float-actions{display:none}.app{display:block}.main{max-width:none}.card,.hero{box-shadow:none;break-inside:avoid}body{background:#fff;color:#111}.card,.hero{background:#fff;color:#111;border-color:#ddd}.card p,.card li,.case-table div,.scoreboard td{color:#111}.source .body{display:block}.source button{color:#111}.source{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="eyebrow">RevolucionaT · Auditoría Forense</div>
+      <h1>Ana × Silvia Fernández</h1>
+      <p>1 junio 2026 · 72 minutos · Seguimiento a mediodía</p>
+      <div class="score-ring"><div><b>7.1</b><span>/ 10</span></div></div>
+      <input class="search" id="search" placeholder="Buscar en la auditoría…" />
+    </div>
+    <nav class="nav" id="nav">
+      <a href="#ficha">Ficha del caso</a>
+      <a href="#lectura">Lectura</a>
+      <a href="#scoreboard">Scoreboard</a>
+      <a href="#evolucion">Evolución</a>
+      <a href="#funciono">Lo que funcionó</a>
+      <a href="#errores">Errores</a>
+      <a href="#fuentes">13 fuentes</a>
+      <a href="#seguimiento">Seguimiento mediodía</a>
+      <a href="#plan">Plan de entrenamiento</a>
+      <a href="#resumen">Resumen ejecutivo</a>
+    </nav>
+  </aside>
+
+  <main class="main" id="content">
+    <section class="hero">
+      <div class="kicker">REVOLUCIONA-T · CLOSER ANA · PROSPECTO SILVIA FERNÁNDEZ</div>
+      <h2>La mejor llamada de Ana: el salto técnico llegó, pero el cierre se escapó en los detalles.</h2>
+      <p>He revisado el Manual Operativo de Closers de RevolucionaT. Tiene 8 errores críticos documentados. Ana cometió tres en esta llamada. Este documento también establece que el pitch debe durar 7-9 minutos y debe incluir preguntas de visión después de cada pilar. Ninguno de los dos cumple en esta llamada.</p>
+      <div class="chips">
+        <span class="chip warn">EN SEGUIMIENTO · “me lo pienso hasta mediodía”</span>
+        <span class="chip good">Nota global 7.1 / 10</span>
+        <span class="chip">50 min P1 + 22 min P2 = 72 min</span>
+        <span class="chip good">Pre-Suasión antes del precio: primera vez</span>
+        <span class="chip bad">3 errores del Manual</span>
+      </div>
+    </section>
+
+    <section class="grid" id="ficha">
+      <div class="card two">
+        <div class="section-title">Ficha del caso</div>
+        <h3>Datos críticos de Silvia</h3>
+        <div class="case-table">
+          <div>Prospecto</div><div>Silvia Fernández · Zaragoza · mañica</div>
+          <div>Closer</div><div>Ana</div>
+          <div>Fecha</div><div>1 junio 2026</div>
+          <div>Duración</div><div>50 min (P1) + 22 min (P2) = 72 minutos</div>
+          <div>Resultado</div><div>EN SEGUIMIENTO · “me lo pienso hasta mediodía”</div>
+          <div>Nota global</div><div>7.1 / 10 — la más alta de Ana en 13 llamadas</div>
+          <div>Historial Ana</div><div>Miryam (CER. 6.6) · Katia (SEG. 6.5) · Beatriz (SEG. 6.3) · Mari (REV. 5.8) · Iria (S/CIE. 5.8) · Mariona (CER. 7.0) · Sandra (SEG. 6.5) · Mónica (SEG. 6.5) · Gloria (N/CER. 6.3) · Cristina (SEG. 5.8) · Marta (N/CER. 5.3) · Isabel (SEG. 6.5) · Silvia (SEG. 7.1)</div>
+        </div>
+      </div>
+      <div class="card third success">
+        <div class="section-title">Veredicto rápido</div>
+        <h3>Nota más alta de Ana</h3>
+        <p>Primera vez en 13 llamadas que aparecen juntas: Pre-Suasión antes del precio, cualificación económica antes del pitch, LDA, TRoT y auto-venta del prospect.</p>
+      </div>
+      <div class="card">
+        <h3>Perfil Silvia</h3>
+        <div class="chips">
+          <span class="chip">Funcionaria Zaragoza · gestión web</span><span class="chip">8h-15h · 2 días teletrabajo</span><span class="chip">Marido David: aliado, “lastre” en salidas</span><span class="chip">Sin hijos</span><span class="chip bad">Fractura grave tobillo/peroné/tibia 2022</span><span class="chip bad">4 operaciones totales</span><span class="chip warn">Prótesis de tobillo en diciembre</span><span class="chip">Baja laboral · sueldo completo</span><span class="chip good">Rehabilitación terminada la semana anterior</span><span class="chip bad">Dejó de viajar desde 2022</span><span class="chip bad">Dolor nocturno que impedía dormir</span><span class="chip">Yoga / bikram</span><span class="chip">Fuerza en gimnasio especializado el año pasado</span><span class="chip">Parada desde junio</span><span class="chip">Material casa: bici, cinta, pesas, cintas</span><span class="chip bad">Dietas: Coca-Cola zero / naturista extrema / ninguna sostenida</span><span class="chip">Siempre muy delgada → rebote → peso progresivo</span><span class="chip bad">Fallo: fines de semana + salidas con David</span><span class="chip warn">Prótesis condiciona perder peso por salud</span><span class="chip">Compromiso 8/10</span><span class="chip bad">Obstáculo económico: fisio + piscina + esto</span><span class="chip warn">Esperaba ~150€/mes</span><span class="chip good">Decisión autónoma</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="lectura">
+      <div class="card">
+        <div class="section-title">La lectura</div>
+        <h3>El salto técnico llegó. El cierre se quedó en la grieta.</h3>
+        <p>Esta es la llamada más completa técnicamente de las 13 de Ana. Primera vez en 13 llamadas que la Pre-Suasión llega ANTES del precio. Reframe presente y específico. Cualificación económica hecha antes del pitch. LDA aislando el obstáculo. TRoT de las 6 cuotas. Auto-venta del prospect. Eso es un salto real.</p>
+        <p>Y sin embargo, la llamada no cerró. Silvia se fue con un “lo pienso hasta mediodía” que es frágil por definición.</p>
+        <p>La razón es que los avances llegaron, pero con grietas en los detalles que se notan cuando uno mira con lupa. La Pre-Suasión usó activos que no eran de Silvia — Ana inventó el vestido que David le iba a piropear cuando Silvia nunca habló de ningún vestido específico. Después del precio, Ana llenó el silencio en lugar de dejarlo caer. Y dijo exactamente lo que el Manual prohíbe en su Error 8: “es imposible que no consigas los resultados que quieres.”</p>
+        <div class="quote">La diferencia entre 7.1 y 8.5 está en esos detalles. Y el cierre está exactamente en esa grieta.</div>
+      </div>
+    </section>
+
+    <section class="grid" id="scoreboard">
+      <div class="card">
+        <div class="section-title">Scoreboard</div>
+        <h3>Evaluación por bloques</h3>
+        <table class="scoreboard">
+          <thead><tr><th>Bloque</th><th>Nota</th><th>Vs. Isabel</th><th>Razón</th></tr></thead>
+          <tbody>
+            <tr><td>Apertura / Agenda<div class="bar"><div class="fill" style="width:80%"></div></div></td><td>8.0</td><td>↑(8.0)</td><td>Igual. “Mañica”, David qualificado en minuto 2. Natural.</td></tr>
+            <tr><td>Diagnóstico calidad<div class="bar"><div class="fill" style="width:75%"></div></div></td><td>7.5</td><td>↑(8.5)</td><td>Menor que Isabel — Silvia tuvo menos espacio para abrirse, Ana dirigió más. Pero prótesis/4 años en casa no excavados.</td></tr>
+            <tr><td>Diagnóstico profundidad<div class="bar"><div class="fill" style="width:65%"></div></div></td><td>6.5</td><td>↓(8.0)</td><td>El activo más profundo (4 años sin viajar, dolor nocturno, vida restringida) reconocido pero no excavado.</td></tr>
+            <tr><td>Construcción de valor<div class="bar"><div class="fill" style="width:65%"></div></div></td><td>6.5</td><td>↑(6.0)</td><td>Reframe limpio. Sin visión questions. Pitch 15+ minutos vs 7-9 del manual. Errores 6 y 8 del Manual.</td></tr>
+            <tr><td>Manejo de objeciones<div class="bar"><div class="fill" style="width:75%"></div></div></td><td>7.5</td><td>↑(5.5)</td><td>Pre-cualificación económica ANTES del pitch. LDA correcto. TRoT 6 cuotas. Nuevo nivel.</td></tr>
+            <tr><td>Cierre<div class="bar"><div class="fill" style="width:65%"></div></div></td><td>6.5</td><td>↑(5.0)</td><td>EN SEGUIMIENTO con mediodía deadline. Sin reserva para anclarlo. Silencio llenado.</td></tr>
+            <tr><td>Lenguaje / Tono<div class="bar"><div class="fill" style="width:85%"></div></div></td><td>8.5</td><td>=(8.5)</td><td>El mejor de Ana. Sin presión, ético, natural, “mañica”.</td></tr>
+            <tr><td>Estructura<div class="bar"><div class="fill" style="width:70%"></div></div></td><td>7.0</td><td>↑(6.0)</td><td>Pre-Suasión ANTES del precio — primera en 13 llamadas. Pero activos inventados. 3 errores del Manual.</td></tr>
+            <tr><td><b>GLOBAL</b></td><td><b>7.1 / 10</b></td><td colspan="2"><b>Nota más alta de Ana</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid" id="evolucion">
+      <div class="card">
+        <div class="section-title">Evolución Ana — 13 llamadas</div>
+        <h3>Lo que llegó por primera vez</h3>
+        <div class="matrix">
+          <table>
+            <tr><th>Dimensión</th><th>MIR</th><th>MAR</th><th>IRI</th><th>MAR</th><th>SAN</th><th>MON</th><th>GLO</th><th>CRI</th><th>MAR2</th><th>ISA</th><th>SIL</th></tr>
+            <tr><td>Nota global</td><td>6.6</td><td>5.8</td><td>5.8</td><td>7.0</td><td>6.5</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.3</td><td>6.5</td><td>7.1</td></tr>
+            <tr><td>Resultado</td><td>CER</td><td>REV</td><td>S/C</td><td>CER</td><td>SEG</td><td>SEG</td><td>N/C</td><td>SEG</td><td>N/C</td><td>SEG</td><td>SEG</td></tr>
+            <tr><td>“Me queda claro”</td><td>Sí</td><td>Sí</td><td>Sí</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+            <tr><td>Decisor cualificado</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí ✅</td></tr>
+            <tr><td>Cualif. económica</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí ✅</td></tr>
+            <tr><td>Reframe</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
+            <tr><td>Pre-Suasión (antes $)</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí ✅</td></tr>
+            <tr><td>Visión questions pitch</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No ✗</td></tr>
+            <tr><td>TRoT / Reserva</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí(6C)</td></tr>
+            <tr><td>LDA en obstáculo</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí ✅</td></tr>
+            <tr><td>Auto-venta prospect</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
+            <tr><td>Error 8 Manual</td><td colspan="10">—</td><td>“imposible” apareció</td></tr>
+          </table>
+        </div>
+        <div class="chips">
+          <span class="chip good">Pre-Suasión antes del precio: llegó</span>
+          <span class="chip good">Cualificación económica antes del pitch</span>
+          <span class="chip good">LDA para aislar obstáculo</span>
+          <span class="chip warn">TRoT 6 cuotas con deadline</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="funciono">
+      <div class="card success">
+        <div class="section-title">Lo que funcionó</div>
+        <h3>8 avances reales con ejemplos exactos</h3>
+        <div class="timeline">
+          <div class="tl"><h4>BIEN 1 — Decisor cualificado en el minuto 2</h4><p>“¿David sabe que estás aquí hoy conmigo?” — Preguntado antes de que empezara el diagnóstico. Silvia confirmó que toma las decisiones sola. Eso despejó el camino para todo lo que vino después. Bien instalado y bien ejecutado.</p></div>
+          <div class="tl"><h4>BIEN 2 — Cualificación económica antes del pitch (P1, min 36:58)</h4><p>“Imagínate que cuando te presente el programa tú entiendes que es la solución perfecta, ¿tendrías alguna limitación para decir, mira, ahora no podría?”</p><p>Eso es exactamente lo que faltó en la llamada de Nuria. Aquí llegó antes. Silvia fue honesta: estoy cobrando mi sueldo pero tengo gastos de fisio y piscina y esperaba un precio menor. Con esa información, Ana supo que el obstáculo era económico y ajustó el pitch en consecuencia. Eso es inteligencia de llamada.</p></div>
+          <div class="tl"><h4>BIEN 3 — Reframe limpio y conectado a Silvia (P1, min 42:00)</h4><p>“El problema no es lo que haces, ¿vale? Que no es que lo estés haciendo mal. Es que como lo estás haciendo no está diseñado específicamente para Silvia.”</p><p>Y lo conectó directamente con el año en el gimnasio especializado donde Silvia tonificó pero no bajó peso en báscula. Eso es Challenger Sale ejecutado: creyó en ella cuando le dijeron que fallaba. Ana le quitó la culpa y le dio el diagnóstico correcto.</p><div class="quote">La versión del manual que encajaba perfectamente en Silvia: “Y sobre todo, no va de intentar hacer lo mismo que te funcionaba hace diez años. Tu cuerpo ahora funciona diferente. No es que hayas fallado. Es que lo que hacías antes ya no es lo que necesitas ahora.” Ana llegó muy cerca de eso.</div></div>
+          <div class="tl"><h4>BIEN 4 — Pre-Suasión antes del precio: primera vez en 13 llamadas (P2, min 0:16)</h4><p>“Antes de contarte el precio, Ana, yo quiero hacer una recapitulación: tú me decías, ni quiero una dieta restrictiva, para mí es importante que no tenga ese efecto rebote, que lo pueda mantener en el tiempo y que se adapte a mí.”</p><p>Eso es Pre-Suasión. El precio llegó después de un frame emocional, no frío. Trece llamadas esperando este momento. Llegó.</p></div>
+          <div class="tl"><h4>BIEN 5 — LDA correcto para aislar el obstáculo (P2, min 8:49)</h4><p>“¿Es un tema económico o es un tema a lo mejor de confianza, de decir, es que no sé si al final, si lo voy a conseguir, o de compromiso contigo?”</p><p>Silvia confirmó: “Principalmente económico.” Con esa información, Ana sabía que la confianza y el compromiso no eran el problema. Solo el dinero. Eso es Blount LDA. Primera vez en 13 llamadas aplicado limpiamente.</p></div>
+          <div class="tl"><h4>BIEN 6 — TRoT con deadline concreto (P2, min 18:13)</h4><p>6 cuotas de 250€ — presentado como excepcional y con plazo hasta mediodía. Eso crea urgencia sin presión artificial y hace que el obstáculo económico sea parcialmente salvable (250€ vs los 500€ que le asustaban inicialmente). El plazo fuerza una decisión en el mismo día en lugar de dejarlo abierto indefinidamente.</p></div>
+          <div class="tl"><h4>BIEN 7 — Auto-venta del prospect (P2, min 1:25)</h4><p>“¿Por qué te gustaría a ti entrar en el programa con Jonathan?” — Silvia respondió con su propia razón: “no estoy buscando algo que está de moda y que en dos meses adelgazas y luego te engordas más probablemente.” Eso es mejor que cualquier argumento que Ana pudiera dar — porque viene de Silvia.</p></div>
+          <div class="tl"><h4>BIEN 8 — Ética en el cierre (P2, min 18:46)</h4><p>“Yo no estoy aquí ni para meterte presión ni para nada, yo estoy por aquí para ayudaros.” Sin urgencias falsas, sin escasez inventada, sin manipulación. El Manual lo dice claramente y Ana lo ejecuta así.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="errores">
+      <div class="card danger">
+        <div class="section-title">Errores con el Manual en la mano</div>
+        <h3>6 grietas que separaron el 7.1 del cierre</h3>
+        <div class="source open"><button>ERROR 1 — La Pre-Suasión usó activos inventados <span>−</span></button><div class="body"><p>Ana dijo antes del precio: “que David te diga, ostras, qué guapa estás con ese vestido que hacía tiempo que no te ponías.”</p><p>Silvia nunca habló de ningún vestido. Nunca mencionó a David piropéandola. Ana construyó un activo imaginado en lugar de usar los activos reales de Silvia.</p><div class="manual"><p><b>Manual:</b> “Usa sus palabras. Las que usó ella en el diagnóstico para describir su dolor y su objetivo. No las tuyas.” El Error 3 también aplica: “Todas necesitan frases de seguridad diferentes.”</p></div><p>Activos reales de Silvia para la Pre-Suasión:</p><ul><li>“Siempre fui muy delgada y llevo años que no.” — Identidad.</li><li>“Quiero algo que pueda mantener en el tiempo” — dicho 4 veces, es la compra real.</li><li>“El médico me dijo que hay que mantener el peso por la prótesis.” — Urgencia de salud real.</li><li>“Ya estoy cansada de empezar y volver al mismo punto con más culpa.” — Ciclo emocional.</li></ul><div class="script">Pre-Suasión correcta:
+“Silvia, antes del precio — me dijiste que llevas años sin reconocerte como siempre fuiste. Que lo que necesitas más que cualquier otra cosa es encontrar algo que se quede, que no sea otro intento que acaba igual. Y que el médico te dijo que la prótesis necesita que mantengas el peso. El programa son seis meses, tres cuotas de 500 euros o 1.300 de pago único. ¿Cuánto vale no volver a estar en el mismo sitio dentro de seis meses?”</div></div></div>
+        <div class="source"><button>ERROR 2 — El Manual prohíbe prometer “es imposible” (P2, min 19:03) <span>+</span></button><div class="body"><p>Ana dijo: “si haces lo que te decimos, es imposible que no consigas los resultados que quieres.”</p><div class="manual"><p><b>Manual, Error 8:</b> “NO: ‘Es imposible que no lo consigas.’ SÍ: ‘Con lo que me has contado, tengo claro que podemos ayudarte. Y si haces el proceso como toca, no hay ningún motivo para que sigas igual que ahora.’”</p></div><p>“Es imposible” es una promesa que nadie puede garantizar. Si Silvia entra, paga y por alguna razón médica relacionada con la prótesis los avances son lentos, esa frase puede volverse en contra del programa. Además, Silvia ha fallado antes en la constancia por sus propias palabras — prometerte que es imposible fallar no aborda su Omission Bias real.</p></div></div>
+        <div class="source"><button>ERROR 3 — El precio se llenó con justificaciones (P2, min 6:17-7:52) <span>+</span></button><div class="body"><p>Después del precio, Silvia dijo: “Pensaba que iba a ser un poco más rato, la verdad.” Ese fue el momento del silencio.</p><div class="manual"><p><b>Manual, Error 6:</b> “El silencio después del precio es parte del cierre. No lo rellenes. Espera.”</p></div><p>Ana respondió inmediatamente con una justificación de por qué cobran ese precio: “nosotros queremos seleccionar a las personas, porque no podemos ayudar a todo el mundo...”</p><p>El silencio habría puesto la pelota en Silvia para que procesara y respondiera. La justificación sacó a Silvia del procesamiento y la puso en modo evaluación racional. Eso es lo contrario de lo que produce el silencio.</p></div></div>
+        <div class="source"><button>ERROR 4 — Sin preguntas de visión durante el pitch <span>+</span></button><div class="body"><p>El Manual establece que el pitch no es una lista de características — es una secuencia de “lo que ella dijo + por qué lo anterior no funcionó + qué hacemos + qué consigue + pregunta de visión.”</p><p>Las preguntas de visión tienen que “pintar un momento concreto de su vida real que solo necesite un sí.” El pitch de Ana (P2, min 2:34-6:09) fue un monólogo de 3-4 minutos sin ninguna pregunta de visión.</p><div class="script">Para alimentación:
+“¿Te imaginas salir el viernes con David, compartir esos platos como siempre, tomarte tu vino, y no llegar el lunes con la sensación de que lo has echado todo a perder?”
+
+Para acompañamiento:
+“¿Te imaginas que esta vez, cuando venga esa semana en la que normalmente lo habrías dejado, haya alguien que no te deje desaparecer?”</div></div></div>
+        <div class="source"><button>ERROR 5 — El activo más profundo no fue excavado <span>+</span></button><div class="body"><p>En el minuto 33-34, Silvia describió algo que ningún prospect de Ana había dicho antes con esa claridad: “Llevo desde el 22 sin viajar fuera porque hay muchas cosas que no puedo hacer que antes hacía. Y ahora ya puede, ya he terminado la rehabilitación y ahora todo vuelve a ir para adelante.”</p><p>Cuatro años. Cuatro operaciones. Sin viajar. Dolor nocturno que impedía dormir. Aplazando cosas. Mucho tiempo en casa. La imagen de la vida que se paralizó y que ahora se puede retomar.</p><p>Ana lo escuchó y dijo: “¿Ahora estás durmiendo mejor?” Y siguió adelante.</p><div class="script">Label que habría cambiado todo:
+“Silvia, llevas desde 2022 con esto. Cuatro operaciones. Sin poder viajar. Aplazando cosas. Y ahora acabas de terminar la rehabilitación y me dices, por fin, ahora voy para adelante. Eso es lo que hay que cuidar. Esta oportunidad de arrancar bien.”</div></div></div>
+        <div class="source"><button>ERROR 6 — Sin reserva para anclar el mediodía <span>+</span></button><div class="body"><p>Ana dio un deadline excelente: “si para ti es un tema económico, te propongo hacerlo en 6 cuotas, me dices algo a mediodía.”</p><p>Pero no puso ningún ancla económica. Si Silvia llega al mediodía y dice “no”, la llamada fue a cero. Una reserva de 100€ habría convertido el mediodía en “confirmar o recuperar 100€” en lugar de “sí o no desde cero.”</p><div class="script">“Silvia, para que mientras haces las cuentas la plaza quede asegurada, son 100 euros ahora mismo. Si al mediodía ves que no encaja, te los devuelvo completamente. Así no pierdes la plaza mientras te organizas.”</div></div></div>
+      </div>
+    </section>
+
+    <section class="grid" id="fuentes">
+      <div class="card">
+        <div class="section-title">Las 13 fuentes — evaluación completa</div>
+        <h3>Una por una</h3>
+        <div class="source open"><button>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss <span>−</span></button><div class="body"><p>Buen rapport. El “mañica” fue instintivo y genuino — Ana lo dice porque sí, no como técnica. Eso conectó.</p><p>El Label que faltó fue en el momento más cargado de la llamada. Cuando Silvia describió los 4 años con la lesión, el dolor nocturno, el no poder viajar, el aplazar cosas — Ana no labeleó. Lo reconoció, preguntó por el sueño y siguió.</p><div class="script">Label que habría producido apertura:
+“Silvia, parece que estos cuatro años han sido mucho más que un tobillo. Han sido cuatro años de vida pausada que ahora quieres retomar de verdad.”</div><p>Ese Label habría conectado la prótesis con la urgencia de empezar ahora — que es exactamente lo que Silvia verbalizó: “si no es junio, luego es diciembre.”</p></div></div>
+        <div class="source"><button>FUENTE 2 · GAP SELLING — Keenan <span>+</span></button><div class="body"><p><b>Estado actual:</b> bien construido: baja laboral, prótesis, dietas rebote históricas, fines de semana que deshacen la semana, gimnasio bueno pero sin resultados en báscula, esperando 4 años para retomar la vida.</p><p><b>Impact Layer:</b> el más poderoso no fue explotado: los 4 años sin viajar. Las 4 operaciones. El dolor nocturno. La vida pausada que ahora se puede retomar. Eso no es estético — es recuperar quien era. Y la prótesis como urgencia médica real.</p><p><b>Causa raíz:</b> bien identificada en el Reframe. Silvia tonificó en el gimnasio del año pasado y no bajó peso porque solo entrenaba sin sistema nutricional paralelo. El Reframe lo capturó bien.</p></div></div>
+        <div class="source"><button>FUENTE 3 · OBJECTIONS — Jeb Blount <span>+</span></button><div class="body"><p>Primera llamada de Ana con el LDA completo. “¿Es un tema económico o de confianza o de compromiso?” — Silvia respondió: principalmente económico. Eso es Ledge + Ask ejecutados.</p><p>Lo que faltó fue el Disrupt antes del Ask.</p><div class="script">Disrupt correcto:
+“Silvia, llevas desde 2022 pagando fisio, rehabilitación, gimnasio con entrenadores, dos operaciones. ¿Cuánto llevas gastando para recuperarte desde 2022? Compáralo con 1.300 euros para que el cuerpo funcione como quieres para siempre.”</div><p>Ese Disrupt ancla el precio en el contexto de lo que ya ha invertido Silvia en recuperarse — haciendo que 1.300€ parezcan una inversión coherente con todo lo anterior, no un gasto nuevo.</p></div></div>
+        <div class="source"><button>FUENTE 4 · VIRTUAL SELLING — Blount <span>+</span></button><div class="body"><p>El corte en el minuto 50 (octavo del proyecto) fue gestionado bien — Ana propuso salir y entrar, Silvia aceptó, la reconexión fue fluida.</p><p>Sin embargo, el corte en el minuto 50 llegó justo cuando Ana iba a entrar al cierre de la Parte 1. La reconexión de Parte 2 empezó directamente con Pre-Suasión + precio — lo que es estructuralmente correcto pero que habría funcionado mejor si el diagnóstico emocional más profundo (los 4 años) hubiera sido excavado en la Parte 1 antes del corte.</p><div class="quote">ZOOM PRO o Google Meet Workspace. Ocho cortes en el proyecto. Hasta que esto no se solucione, cada llamada corre el riesgo de perder el hilo en el momento más cargado emocionalmente.</div></div></div>
+        <div class="source"><button>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna <span>+</span></button><div class="body"><p>El Omission Bias de Silvia tenía dos capas:</p><ul><li><b>Capa 1:</b> “He pagado y siempre vuelvo al mismo punto. ¿Y si me pasa lo mismo otra vez?”</li><li><b>Capa 2:</b> “No sé exactamente qué tiene el programa — es un salto a ciegas.”</li></ul><p>La Capa 1 fue parcialmente abordada por el Reframe y la mención del acompañamiento.</p><p>La Capa 2 no fue abordada. Silvia dijo en el minuto 8:49: “no lo estoy viendo exactamente porque si en qué va, aunque me ha gustado mucho todo lo que hemos hablado.” Eso es JOLT — Silvia tenía Omission Bias de información concreta. No sobre si funciona — sino sobre si entiende cómo funciona en la práctica.</p><div class="script">Respuesta correcta:
+“Silvia, imagínate que el lunes que viene te llega un WhatsApp de tu nutricionista preguntándote qué te gusta comer para diseñar tu plan. ¿Qué pasaría con esa sensación de no saber qué estás comprando?”</div></div></div>
+        <div class="source"><button>FUENTE 6 · SWITCH — Heath <span>+</span></button><div class="body"><p><b>Jinete:</b> muy claro: sabe exactamente lo que no quiere (dietas rebote, efecto yo-yo, cosas que no duren). Sabe lo que quiere (mantenerlo en el tiempo). El problema no es no saber — es no haber encontrado el sistema.</p><p><b>Elefante:</b> motivado y listo: Silvia dijo “aunque sea junio, aunque vengan el verano y las fiestas del Pilar y las Navidades, por eventos siempre va a haber.” Eso es un Elefante que ha tomado la decisión de moverse. Solo necesita el Camino correcto.</p><p><b>Bright Spot disponible y no usado:</b> el año en el gimnasio especializado. Silvia tonificó, la gente le decía que había adelgazado aunque en báscula no bajó más de un kilo.</p><div class="script">Argumento:
+“Silvia, el año pasado en el gimnasio, sin sistema nutricional y con la distracción de las operaciones pendientes, tu cuerpo respondió. La gente lo notó. Eso con un sistema nutricional paralelo habría producido un resultado completamente diferente. Ya demostraste que cuando hay fuerza, funciona. Lo que faltaba era el otro lado.”</div></div></div>
+        <div class="source"><button>FUENTE 7 · WHY SHE BUYS — Brennan <span>+</span></button><div class="body"><p>La compra de Silvia tenía tres capas desde el Manual:</p><ul><li><b>Primera capa — identidad:</b> “Antes era siempre muy delgada.” Brennan: esta mujer compra recuperar una versión anterior de sí misma.</li><li><b>Segunda capa — control:</b> “Quiero algo que pueda mantener en el tiempo.” No quiere perder peso — quiere dejar de empezar y fallar.</li><li><b>Tercera capa — desde el Manual:</b> “No acabar sintiéndote que la comida te domina” + “Dejar de empezar y abandonar” + “Sentir que esta vez hay alguien detrás cuando flojee.”</li></ul><p>El pitch de Ana mencionó estas tres capas pero en lenguaje abstracto. El Manual especifica que hay que pintarlas con situaciones concretas de su vida real.</p><div class="script">“¿Te imaginas que esta vez, cuando llegue esa semana donde siempre lo has dejado, haya alguien que no te deje desaparecer?”</div></div></div>
+        <div class="source"><button>FUENTE 8 · THE MOM TEST — Fitzpatrick <span>+</span></button><div class="body"><p>Buen diagnóstico de comportamiento real en la alimentación. Ana preguntó cómo es la alimentación entre semana, cómo son los fines de semana, si hay rumrum después de salir. Todas preguntas de comportamiento real.</p><p>La pregunta hipotética que sigue apareciendo: “¿Tendrías una hora tres veces a la semana?” en el minuto 24. Silvia respondió “sí” porque está de baja.</p><div class="script">Pregunta de comportamiento real:
+“Silvia, en las últimas dos semanas que acabaste la rehab, ¿qué has hecho en casa de ejercicio?”</div></div></div>
+        <div class="source"><button>FUENTE 9 · PRE-SUASIÓN — Cialdini <span>+</span></button><div class="body"><p>Primera Pre-Suasión ANTES del precio en 13 llamadas de Ana. Eso es el avance técnico más importante de este proyecto.</p><p><b>Lo que llegó:</b> “tú me decías: ni quiero una dieta restrictiva, que no tenga efecto rebote, que lo pueda mantener en el tiempo, que se adapte a mí, que David te diga ostras qué guapa estás con ese vestido que hacía tiempo que no te ponías.”</p><p><b>Lo que debió llegar:</b></p><div class="script">“Silvia, antes del precio — me dijiste que llevas desde 2022 con la vida pausada y que ahora por fin empieza lo que viene. Que llevas años sin reconocerte como siempre fuiste. Que lo que más necesitas es que esto se quede, no otro ciclo. Y que el médico te dijo que la prótesis necesita que mantengas el peso. El programa son 500 euros hoy. ¿Cuánto cuesta un año más en el mismo punto?”</div><p>La diferencia: una usa las palabras de Silvia y su historia específica. La otra mezcla palabras reales con un activo inventado. El Manual es explícito: “Usa sus palabras. Las que usó ella.”</p></div></div>
+        <div class="source"><button>FUENTE 10 · INFLUENCE — Cialdini <span>+</span></button><div class="body"><p><b>Consistencia:</b> bien anclada: “Tu 8 se puede convertir en ese 10 si esto es lo que buscabas.” Cuando Silvia confirmó que sí era lo que buscaba, Ana conectó el 8 con el commit. Bien ejecutado.</p><p><b>Prueba social:</b> no utilizada. Para Silvia, la prueba social más relevante habría sido una mujer con historial de dietas rebote que encontró algo que se quedó. O una mujer con lesión que empezó con el programa adaptado a su realidad. Ninguna apareció.</p><p><b>Error 8 cometido:</b> “es imposible que no consigas los resultados que quieres.” Cialdini — las promesas absolutas activan el escepticismo, no la confianza. El Manual lo prohíbe expresamente.</p></div></div>
+        <div class="source"><button>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson <span>+</span></button><div class="body"><p>El Reframe fue el segundo más limpio del proyecto (después del parcial de Lidia). Conectó directamente con la experiencia de Silvia en el gimnasio — bien hecho.</p><div class="script">Reframe del Manual que encajaba:
+“Y sobre todo, no va de intentar hacer lo mismo que te funcionaba hace diez años. Tu cuerpo ahora funciona diferente. No es que hayas fallado. Es que lo que hacías antes ya no es lo que necesitas ahora.”</div><p>Ana llegó a eso con sus propias palabras. La próxima iteración: añadir la especificidad de la prótesis y el sistema hormonal de los 40.</p></div></div>
+        <div class="source"><button>FUENTE 12 · SPIN SELLING — Rackham <span>+</span></button><div class="body"><p><b>Situación:</b> completa.</p><p><b>Problema:</b> bien identificado.</p><p><b>Implicación:</b> presente (P1 min 39:37) y Silvia respondió bien.</p><p><b>Necesidad-beneficio:</b> “mantenerlo en el tiempo” verbalizado por Silvia.</p><div class="script">Segunda implicación para anclar salud:
+“Silvia, me dijiste que el médico te indicó que la prótesis necesita que mantengas el peso porque cada kilo extra carga directamente sobre ella. Si en seis meses sigues igual o has cogido más, ¿qué crees que está pasando con esa prótesis?”</div><p>Esa pregunta conecta la urgencia estética con la urgencia médica real. No es miedo artificial — es la realidad que Silvia ya conoce. No llegó.</p></div></div>
+        <div class="source"><button>FUENTE 13 · EXACTLY WHAT TO SAY — Jones <span>+</span></button><div class="body"><p>La pregunta de auto-venta “¿por qué te gustaría entrar en el programa con Jonathan?” funcionó bien en P2.</p><p>Para el seguimiento del mediodía, la frase de Jones:</p><div class="script">“Silvia, cuando hayas hecho las cuentas — una pregunta: si el dinero encajara, ¿entrarías hoy?”</div><p>Si dice sí: obstáculo solo económico. Reserva inmediata de 100€.</p><p>Si duda: hay más obstáculos que explorar antes del mediodía.</p><div class="script">Frase para anclar si Silvia dice que sí:
+“Perfecto. Entonces aseguramos la plaza con 100 euros ahora. Las otras 5 cuotas de 250 empiezan cuando arranques el programa. Así no perdemos el día.”</div></div></div>
+      </div>
+    </section>
+
+    <section class="grid" id="seguimiento">
+      <div class="card warning">
+        <div class="section-title">Seguimiento del mediodía</div>
+        <h3>Guion exacto</h3>
+        <div class="script">PASO 1 — ACTIVAR EL ACTIVO CORRECTO:
+“Silvia, soy Ana. Espero que estés bien. Antes de que me digas nada, quería recordarte algo que me dijiste esta mañana: que llevas desde 2022 con la vida pausada y que ahora, por fin, esto empieza a ir para adelante. ¿Has podido hacer las cuentas?”
+
+PASO 2 — SI DICE QUE SÍ PERO DUDA:
+“Silvia, solo una pregunta: si el dinero encajara perfectamente, ¿entrarías hoy?”
+
+PASO 3 — SI CONFIRMA:
+“Perfecto. Reservamos la plaza con 100 euros ahora mismo. Las otras 5 cuotas de 250 empiezan con el programa. Te mando el enlace.”
+
+PASO 4 — SILENCIO.</div>
+      </div>
+    </section>
+
+    <section class="grid" id="plan">
+      <div class="card">
+        <div class="section-title">Plan de entrenamiento — Ana, iteración 13</div>
+        <h3>Lo que no se toca</h3>
+        <ul>
+          <li>La cualificación económica antes del pitch — instalada. Siempre.</li>
+          <li>El LDA para aislar obstáculos — instalado. Siempre.</li>
+          <li>La auto-venta del prospect — instalada.</li>
+          <li>La Pre-Suasión antes del precio — instalada. Ahora los activos tienen que ser de la prospect, no inventados.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Lo que cambia en la próxima llamada — tres elementos</h3>
+        <div class="source open"><button>1. Pre-Suasión con activos reales — no inventados <span>−</span></button><div class="body"><p>Antes del precio: abrir el Post-It. Los tres activos más cargados emocionalmente de la llamada, en las palabras exactas de la prospect. El precio llega después de uno de esos tres activos, no después de uno inventado por Ana.</p><div class="quote">Ejercicio de práctica: al final del diagnóstico, antes de entrar al pitch, escribir tres frases en papel que empiecen por “ella dijo exactamente...” Esas son las únicas que pueden aparecer en la Pre-Suasión.</div></div></div>
+        <div class="source"><button>2. Preguntas de visión en el pitch — obligatorias <span>+</span></button><div class="body"><p>El Manual es claro: 7-9 minutos de pitch, con preguntas de visión después de cada pilar. Una pregunta de visión pinta un momento concreto de la vida de la prospect — no un concepto.</p><p>Para la próxima llamada: al terminar cada pilar, preguntar “¿te imaginas [momento concreto de su vida que resolvería su dolor específico]?”</p></div></div>
+        <div class="source"><button>3. Llenar el silencio después del precio — prohibido <span>+</span></button><div class="body"><p>El Manual, Error 6: el silencio después del precio es parte del cierre. Ana lo llenó en esta llamada. En la siguiente, el precio llega, y después solo hay espera. Lo que venga de la prospect es información. Lo que Ana ponga en ese silencio es interferencia.</p></div></div>
+      </div>
+    </section>
+
+    <section class="grid" id="resumen">
+      <div class="card success">
+        <div class="section-title">Resumen ejecutivo</div>
+        <h3>Nota 7.1 / 10 — la más alta de Ana en 13 llamadas</h3>
+        <p><b>Resultado:</b> EN SEGUIMIENTO · mediodía del 1 de junio.</p>
+        <div class="quote">“Trece llamadas. Esta es la mejor que has hecho. Por primera vez la Pre-Suasión llegó antes del precio. Por primera vez la cualificación económica llegó antes del pitch. Por primera vez el LDA aisló el obstáculo correctamente. Eso no es coincidencia — es que algo está cambiando en cómo preparas las llamadas. Ahora viene la parte incómoda: la Pre-Suasión que construiste usó un vestido de David que Silvia nunca mencionó. Llevabas 13 llamadas esperando ese momento y cuando llegó, pusiste activos tuyos en lugar de los suyos. Silvia te dio activos extraordinarios — 4 años sin viajar, 4 operaciones, una prótesis que le obliga médicamente a controlar el peso, la vida que se pausó y que ahora empieza. Con eso antes del precio, la conversación es completamente diferente. La brecha entre tu nota actual y un 8.5 está en los detalles del cierre: activos reales en la Pre-Suasión, visión questions en el pitch, silencio después del precio, reserva antes del mediodía. El diagnóstico de Ana ya es de élite — lo demostró con Isabel, lo demostró con Silvia. Ahora lo que falta es que el cierre esté a la misma altura.”</div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="float-actions"><button onclick="window.print()">Imprimir / PDF</button><button onclick="window.scrollTo({top:0,behavior:'smooth'})">Arriba</button></div>
+<script>
+const sources=[...document.querySelectorAll('.source button')];
+sources.forEach(btn=>btn.addEventListener('click',()=>{const box=btn.parentElement;box.classList.toggle('open');btn.querySelector('span').textContent=box.classList.contains('open')?'−':'+';}));
+const sections=[...document.querySelectorAll('main section[id]')]; const links=[...document.querySelectorAll('.nav a')];
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-30% 0px -60% 0px'}); sections.forEach(s=>io.observe(s));
+const search=document.getElementById('search'); const content=document.getElementById('content'); const original=content.innerHTML;
+function escapeRegExp(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+search.addEventListener('input',e=>{const q=e.target.value.trim(); content.innerHTML=original; if(q.length>2){const reg=new RegExp('('+escapeRegExp(q)+')','gi'); content.innerHTML=content.innerHTML.replace(reg,'<mark>$1</mark>');}
+  [...document.querySelectorAll('.source button')].forEach(btn=>btn.addEventListener('click',()=>{const box=btn.parentElement;box.classList.toggle('open');btn.querySelector('span').textContent=box.classList.contains('open')?'−':'+';}));
+});
+</script>
+</body>
+</html>

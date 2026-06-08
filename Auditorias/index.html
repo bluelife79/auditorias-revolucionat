@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Auditorías Públicas</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 40px; background: #f4f7f6; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { border-bottom: 2px solid #2ea44f; padding-bottom: 10px; color: #24292e; }
+        .instrucciones { background: #dcffe4; padding: 15px; border-radius: 5px; font-size: 0.9em; margin-bottom: 20px; border-left: 5px solid #2ea44f; color: #1a7f37; }
+        ul { list-style: none; padding: 0; }
+        li { background: white; margin: 8px 0; padding: 12px 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+        a { text-decoration: none; color: #0969da; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+        .btn-copiar { background: #f6f8fa; color: #24292e; border: 1px solid #d0d7de; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .btn-copiar:hover { background: #f3f4f6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Panel de Control Automático de Auditorías</h1>
+        <div class="instrucciones">
+            <strong>¡Modo Inteligente Activado!</strong> La lista se actualiza sola. Cada vez que subas archivos a GitHub, aparecerán aquí automáticamente en unos segundos.
+        </div>
+        
+        <ul id="lista-auditorias">
+            <li>Buscando nuevos archivos en el servidor...</li>
+        </ul>
+    </div>
+
+    <script>
+        // === CONFIGURACIÓN AUTOMÁTICA ===
+        const USUARIO_GITHUB = "bluelife79";  
+        const NOMBRE_PROYECTO = "auditorias";     
+        // ============================
+
+        async function obtenerArchivos() {
+            const lista = document.getElementById('lista-auditorias');
+            try {
+                const urlApi = `https://github.com{USUARIO_GITHUB}/${NOMBRE_PROYECTO}/contents`;
+                const respuesta = await fetch(urlApi);
+                const archivos = await respuesta.json();
+                
+                lista.innerHTML = '';
+
+                // Filtra solo los .html y descarta el index.html
+                const archivosHtml = archivos.filter(item => 
+                    item.name.endsWith('.html') && item.name.toLowerCase() !== 'index.html'
+                );
+
+                if (archivosHtml.length === 0) {
+                    lista.innerHTML = '<li>No se encontraron archivos todavía. Asegúrate de subirlos a la carpeta.</li>';
+                    return;
+                }
+
+                archivosHtml.forEach(archivo => {
+                    const li = document.createElement('li');
+                    const enlaceWeb = `https://${USUARIO_GITHUB}.github.io/${NOMBRE_PROYECTO}/${archivo.name}`;
+                    
+                    const a = document.createElement('a');
+                    a.href = enlaceWeb;
+                    a.target = '_blank';
+                    a.textContent = '📄 ' + archivo.name.replace('.html', '').replace(/_/g, ' ');
+                    
+                    const btn = document.createElement('button');
+                    btn.className = 'btn-copiar';
+                    btn.textContent = 'Copiar Enlace';
+                    btn.onclick = () => {
+                        navigator.clipboard.writeText(enlaceWeb);
+                        btn.textContent = '¡Copiado!';
+                        btn.style.background = '#dcffe4';
+                        setTimeout(() => { 
+                            btn.textContent = 'Copiar Enlace'; 
+                            btn.style.background = '#f6f8fa';
+                        }, 2000);
+                    };
+                    
+                    li.appendChild(a);
+                    li.appendChild(btn);
+                    lista.appendChild(li);
+                });
+            } catch (error) {
+                lista.innerHTML = '<li>Error al conectar con el servidor de archivos.</li>';
+            }
+        }
+
+        obtenerArchivos();
+    </script>
+</body>
+</html>

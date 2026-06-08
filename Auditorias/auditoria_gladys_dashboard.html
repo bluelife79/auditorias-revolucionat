@@ -1,0 +1,617 @@
+<h2 class="sr-only">Auditoría forense interactiva — Gladys Riverola · Closer Montse · Revoluciona-T</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.app{display:flex;min-height:100vh;font-family:var(--font-sans);font-size:14px}
+.sb{width:196px;flex-shrink:0;border-right:.5px solid var(--color-border-tertiary);padding:0 0 24px}
+.sb-header{padding:14px 16px 12px;border-bottom:.5px solid var(--color-border-tertiary)}
+.sb-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.sb-sub{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.sb-group{margin-top:8px}
+.sb-gl{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-tertiary);padding:8px 16px 3px}
+.nav-item{display:flex;align-items:center;gap:7px;padding:7px 12px;margin:1px 8px;font-size:12.5px;color:var(--color-text-secondary);cursor:pointer;border-radius:6px}
+.nav-item:hover{background:var(--color-background-secondary);color:var(--color-text-primary)}
+.nav-item.on{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500}
+.nav-item .ti{font-size:14px}
+.main{flex:1;min-width:0;padding:24px 28px}
+.sec{display:none}.sec.on{display:block}
+.pg-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.pg-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:18px;margin-bottom:14px}
+.card-t{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.stat-l{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.stat-v{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1.2}
+.stat-s{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.callout{border-left:3px solid;padding:13px 15px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin-bottom:14px}
+.callout p{font-size:13px;line-height:1.6;margin-bottom:5px}.callout p:last-child{margin-bottom:0}
+.sb-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:13px;padding-bottom:13px;border-bottom:.5px solid var(--color-border-tertiary)}
+.sb-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.sb-lbl{font-size:12.5px;color:var(--color-text-primary);flex:0 0 175px;padding-top:2px}
+.sb-wrap{flex:1;height:6px;background:var(--color-border-tertiary);border-radius:3px;overflow:hidden;margin-top:6px}
+.sb-bar{height:6px;border-radius:3px}
+.sb-num{font-size:13px;font-weight:500;flex:0 0 30px;text-align:right}
+.sb-note{font-size:11px;color:var(--color-text-secondary);margin-top:3px;line-height:1.4}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-secondary);padding:7px 10px;border-bottom:.5px solid var(--color-border-tertiary);text-align:left}
+.tbl td{padding:9px 10px;border-bottom:.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top;line-height:1.5}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--color-background-secondary)}
+.badge{display:inline-block;font-size:10.5px;font-weight:500;padding:2px 7px;border-radius:20px}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;display:inline-block}
+.dg{background:#16A34A}.da{background:#D97706}.dr{background:#DC2626}
+.cg{color:#16A34A}.ca{color:#D97706}.cr{color:#DC2626}.cv{color:#7C3AED}
+.bg-g{background:#F0FDF4;border-color:#BBF7D0}
+.bg-a{background:#FFFBEB;border-color:#FDE68A}
+.bg-r{background:#FEF2F2;border-color:#FECACA}
+.bg-v{background:#F5F3FF;border-color:#C4B5FD}
+.bl-g{border-left-color:#16A34A}.bl-a{border-left-color:#D97706}
+.bl-r{border-left-color:#DC2626}.bl-v{border-left-color:#7C3AED}
+.ae{display:flex;gap:9px;margin-bottom:11px}
+.ae .ti{font-size:14px;flex-shrink:0;margin-top:1px}
+.ae-t{font-size:12px;font-weight:500;margin-bottom:2px}
+.ae-d{font-size:12.5px;color:var(--color-text-secondary);line-height:1.5}
+.filter-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.fb{padding:5px 12px;font-size:12px;cursor:pointer;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary)}
+.fb.on{background:var(--color-background-secondary);color:var(--color-text-primary);font-weight:500;border-color:var(--color-border-primary)}
+.tl{padding-left:22px;position:relative}
+.tl::before{content:'';position:absolute;left:5px;top:4px;bottom:4px;width:1px;background:var(--color-border-tertiary)}
+.tl-item{position:relative;margin-bottom:18px}
+.tl-dot{position:absolute;left:-22px;top:3px;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-background-primary)}
+.tl-t{font-size:10.5px;font-weight:500;color:var(--color-text-secondary);margin-bottom:2px}
+.tl-s{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.tl-d{font-size:12.5px;color:var(--color-text-secondary);line-height:1.5}
+.script-card{margin-bottom:14px}
+.sc-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:10px}
+.sc-t{font-size:13.5px;font-weight:500;color:var(--color-text-primary)}
+.sc-c{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.sc-body{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px;font-size:12.5px;line-height:1.75;color:var(--color-text-primary);font-family:var(--font-mono);white-space:pre-wrap}
+.copy-btn{font-size:11.5px;padding:5px 11px;cursor:pointer;white-space:nowrap;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-secondary);flex-shrink:0}
+.copy-btn:hover{background:var(--color-background-secondary)}
+.obj-c{border-left:3px solid;padding:14px 16px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;margin-bottom:14px}
+.obj-hdr{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.obj-n{font-size:10.5px;font-weight:500;padding:2px 8px;border-radius:20px}
+.obj-tl{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.obj-body{font-size:12.5px;line-height:1.6;color:var(--color-text-secondary)}
+.obj-body p{margin-bottom:7px}.obj-body strong{color:var(--color-text-primary);font-weight:500}
+.ideal{margin-top:10px;padding:11px 13px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-family:var(--font-mono);font-size:12px;line-height:1.75;white-space:pre-wrap;color:var(--color-text-primary)}
+.turn-card{margin-bottom:16px;padding:16px;border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg)}
+.turn-n{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:10px}
+.turn-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.turn-lbl{font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-secondary);margin-bottom:5px}
+.turn-txt{font-size:12.5px;color:var(--color-text-primary);line-height:1.5}
+.train-s{margin-bottom:22px}
+.train-bdg{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:10px}
+.train-item{display:flex;gap:8px;margin-bottom:10px;align-items:flex-start}
+.train-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.train-tx{font-size:12.5px;color:var(--color-text-secondary);line-height:1.5}
+.sum-row{display:flex;align-items:center;gap:0;padding:14px 18px;border-radius:var(--border-radius-lg);margin-bottom:18px;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);flex-wrap:wrap;gap:12px}
+.sum-div{width:1px;height:50px;background:var(--color-border-tertiary)}
+.top5-item{display:flex;gap:10px;margin-bottom:11px}
+.top5-n{font-size:12.5px;font-weight:500;color:var(--color-text-secondary);flex-shrink:0;width:18px}
+.top5-t{font-size:12.5px;color:var(--color-text-primary);line-height:1.5}
+.prof-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:14px}
+.prof-item{padding:13px;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-tertiary)}
+.prof-lbl{font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;color:var(--color-text-secondary);margin-bottom:5px}
+.prof-tx{font-size:12.5px;line-height:1.6;color:var(--color-text-primary)}
+.seed{padding:13px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:10px}
+.seed-lbl{font-size:10.5px;font-weight:500;margin-bottom:5px}
+.seed-q{font-size:12.5px;font-style:italic;margin-bottom:6px;color:var(--color-text-primary)}
+.seed-a{font-size:11.5px;color:var(--color-text-secondary);font-family:var(--font-mono);line-height:1.65}
+</style>
+
+<div class="app">
+<nav class="sb">
+  <div class="sb-header">
+    <div class="sb-title">Auditoría forense</div>
+    <div class="sb-sub">Gladys Riverola · Montse</div>
+  </div>
+  <div class="sb-group">
+    <div class="sb-gl">Visión general</div>
+    <div class="nav-item on" data-sec="dashboard"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</div>
+    <div class="nav-item" data-sec="scorecard"><i class="ti ti-chart-bar" aria-hidden="true"></i>Scorecard</div>
+    <div class="nav-item" data-sec="evolucion"><i class="ti ti-arrows-transfer-up" aria-hidden="true"></i>Evolución Emma→Gladys</div>
+  </div>
+  <div class="sb-group">
+    <div class="sb-gl">Señales</div>
+    <div class="nav-item" data-sec="semaforo"><i class="ti ti-traffic-lights" aria-hidden="true"></i>Semáforo</div>
+    <div class="nav-item" data-sec="timeline"><i class="ti ti-timeline" aria-hidden="true"></i>Timeline del cierre</div>
+    <div class="nav-item" data-sec="fbf"><i class="ti ti-movie" aria-hidden="true"></i>Frame-by-frame</div>
+  </div>
+  <div class="sb-group">
+    <div class="sb-gl">Fases de la llamada</div>
+    <div class="nav-item" data-sec="apertura"><i class="ti ti-door-enter" aria-hidden="true"></i>Fase 1: Apertura</div>
+    <div class="nav-item" data-sec="diagnostico"><i class="ti ti-stethoscope" aria-hidden="true"></i>Fase 2: Diagnóstico</div>
+    <div class="nav-item" data-sec="cierre"><i class="ti ti-target" aria-hidden="true"></i>Fase 3: Cierre</div>
+  </div>
+  <div class="sb-group">
+    <div class="sb-gl">Análisis profundo</div>
+    <div class="nav-item" data-sec="perfil"><i class="ti ti-brain" aria-hidden="true"></i>Perfil psicológico</div>
+    <div class="nav-item" data-sec="objeciones"><i class="ti ti-shield-question" aria-hidden="true"></i>Objeciones</div>
+    <div class="nav-item" data-sec="giros"><i class="ti ti-rotate" aria-hidden="true"></i>Momentos de giro</div>
+  </div>
+  <div class="sb-group">
+    <div class="sb-gl">Acción</div>
+    <div class="nav-item" data-sec="entrenamiento"><i class="ti ti-barbell" aria-hidden="true"></i>Plan entrenamiento</div>
+    <div class="nav-item" data-sec="scripts"><i class="ti ti-writing" aria-hidden="true"></i>Scripts</div>
+    <div class="nav-item" data-sec="resumen"><i class="ti ti-clipboard-check" aria-hidden="true"></i>Resumen ejecutivo</div>
+  </div>
+</nav>
+
+<div class="main">
+
+<div id="s-dashboard" class="sec on">
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-l">Nota global</div><div class="stat-v cg">7.1</div><div class="stat-s">+0.7 vs Emma (6.4)</div></div>
+    <div class="stat"><div class="stat-l">Resultado</div><div class="stat-v ca" style="font-size:16px;padding-top:4px">En seguimiento</div><div class="stat-s">WhatsApp hoy mismo</div></div>
+    <div class="stat"><div class="stat-l">Señales captadas</div><div class="stat-v">3/10</div><div class="stat-s cr">4 parciales · 3 ignoradas</div></div>
+    <div class="stat"><div class="stat-l">Compromiso declarado</div><div class="stat-v cg">10/10</div><div class="stat-s cr">No usado en el cierre</div></div>
+  </div>
+  <div class="callout bg-v bl-v">
+    <p><strong>Diagnóstico del cirujano:</strong> Mejor llamada estructurada de Montse hasta ahora. Agenda en el min 3:30. Nombre correcto. Rapport de 3.5 min. Reencuadre de constancia vuelve a funcionar.</p>
+    <p>Pero Gladys entregó tres activos de cierre de primer nivel que no aparecieron al final: el marido como testimonio vivo del programa (34:56), el "me sentía bien a 63 kilos" como estado deseado concreto (40:38), y el 10/10 de compromiso.</p>
+    <p><strong style="color:#7C3AED">Fallo raíz: Montse no usa en el cierre lo que construye en el diagnóstico. Dos llamadas. Mismo patrón.</strong></p>
+  </div>
+  <div class="grid2">
+    <div class="card"><div class="card-t">Scores por bloque</div><div id="db-scores"></div></div>
+    <div class="card"><div class="card-t">Ficha del prospecto</div>
+      <table class="tbl"><tbody>
+        <tr><td style="color:var(--color-text-secondary);width:38%">Nombre</td><td><strong>Gladys Riverola</strong></td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Ubicación</td><td>Vancouver, Canadá</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Edad</td><td>51 años · perimenopáusica</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Trabajo</td><td>Manager clínica optometrista</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Objetivo</td><td>Perder 7-8 kg (70 → 62 kg)</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Contexto clave</td><td>Marido hizo programa similar con éxito. Paga en CAD.</td></tr>
+        <tr><td style="color:var(--color-text-secondary)">Compromiso</td><td class="cg"><strong>10/10 declarado</strong></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</div>
+
+<div id="s-scorecard" class="sec">
+  <div class="pg-title">Scorecard global</div>
+  <div class="pg-sub">Evolución Emma (6.4) → Gladys (7.1) · mejora real de +0.7 puntos</div>
+  <div class="card"><div id="sc-full"></div></div>
+  <div class="grid2">
+    <div class="card bg-g">
+      <div class="card-t cg">Qué mejoró</div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Agenda formal en min 3:30 — Emma no tenía</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Nombre correcto toda la llamada</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Rapport: 5.5 → 3.5 min</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Pitch: 11 → 9 min</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Reencuadre de constancia aplicado de nuevo</div></div>
+    </div>
+    <div class="card bg-r">
+      <div class="card-t cr">Qué sigue igual o empeoró</div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Activo emocional central no usado en cierre</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Palanca única del prospecto no usada (esposo)</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Compromiso 10/10 no apareció en el cierre</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Barrera EUR/CAD no resuelta en llamada</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">"Nunca más recuperarás el peso" — se repite</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="s-evolucion" class="sec">
+  <div class="pg-title">Evolución de Montse</div>
+  <div class="pg-sub">Comparativa directa entre llamada Emma Ferrández y llamada Gladys Riverola</div>
+  <div class="card" style="padding:0;overflow:hidden"><table class="tbl" id="evo-tbl"><thead><tr><th style="width:35%">Dimensión</th><th>Emma</th><th>Gladys</th><th>Tendencia</th></tr></thead><tbody></tbody></table></div>
+  <div class="callout bg-v bl-v"><p><strong>Síntesis:</strong> Montse mejoró lo estructural: nombre, agenda, rapport. El techo está en el cierre. Los activos más poderosos del prospecto nunca aparecen al final. Dos llamadas, mismo patrón, diferente prospecto.</p></div>
+</div>
+
+<div id="s-semaforo" class="sec">
+  <div class="pg-title">Semáforo de señales de compra</div>
+  <div class="pg-sub">10 señales emitidas por Gladys · estado de captación y potencial de cierre perdido</div>
+  <div style="display:flex;gap:16px;margin-bottom:16px;align-items:center">
+    <div style="display:flex;align-items:center;gap:6px"><div class="dot dg"></div><span style="font-size:12.5px">Captada</span></div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="dot da"></div><span style="font-size:12.5px">Parcial</span></div>
+    <div style="display:flex;align-items:center;gap:6px"><div class="dot dr"></div><span style="font-size:12.5px">Ignorada</span></div>
+    <div style="margin-left:auto;font-size:12px;color:var(--color-text-secondary)">3 ignoradas = dinero sobre la mesa</div>
+  </div>
+  <div id="sem-cards"></div>
+</div>
+
+<div id="s-timeline" class="sec">
+  <div class="pg-title">Timeline del cierre</div>
+  <div class="pg-sub">Cuando la venta estaba viva, cuando empezó a enfriarse y qué pasó en el medio</div>
+  <div class="card"><div class="tl" id="tl-items"></div></div>
+  <div class="callout bg-r bl-r"><p><strong>Conclusión:</strong> Hubo dos picos — el esposo (34:56) y el "me sentía bien a 63 kg" (40:38) — ambos en el diagnóstico. El cierre correcto debía anclar esos dos momentos. Sin ellos, el cierre fue técnicamente correcto pero emocionalmente vacío.</p></div>
+</div>
+
+<div id="s-fbf" class="sec">
+  <div class="pg-title">Frame-by-frame</div>
+  <div class="pg-sub">16 momentos clave de la llamada · filtrable por tipo</div>
+  <div class="filter-bar">
+    <button class="fb on" data-f="all">Todos</button>
+    <button class="fb" data-f="SUMA">Solo positivos</button>
+    <button class="fb" data-f="RESTA">Solo errores</button>
+    <button class="fb" data-f="AVANZA">Avanza</button>
+    <button class="fb" data-f="ESTANCA">Estanca</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden"><table class="tbl" id="fbf-tbl"><thead><tr><th style="width:55px">Tiempo</th><th style="width:65px">Quién</th><th>Cita</th><th style="width:65px">Vered.</th><th style="width:65px">Efecto</th><th>Fix — Closer de élite</th></tr></thead><tbody id="fbf-body"></tbody></table></div>
+</div>
+
+<div id="s-apertura" class="sec">
+  <div class="pg-title">Fase 1 — Apertura y agenda</div>
+  <div class="pg-sub">0:00 – 5:32 · La mejor apertura de Montse en las dos llamadas auditadas</div>
+  <div class="grid2">
+    <div class="card bg-g">
+      <div class="card-t cg">Aciertos</div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div><div class="ae-t" style="color:#15803D">Agenda formal en el minuto 3:30</div><div class="ae-d">"Lo primero, Gladys, es entender qué te está pasando... y ver si encajas en el programa." Correcto, claro y estructurado. Gran mejora vs Emma.</div></div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div><div class="ae-t" style="color:#15803D">Rapport de 3.5 min — tendencia correcta</div><div class="ae-d">Emma fue 5.5 min. El calor de Montse no desaparece, se concentra. Objetivo: llegar al minuto 2.</div></div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div><div class="ae-t" style="color:#15803D">Nombre correcto siempre</div><div class="ae-d">Gladys es Gladys durante toda la llamada. El protocolo de preparación previa funciona.</div></div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div><div class="ae-t" style="color:#15803D">Pregunta de razón principal (5:19)</div><div class="ae-d">"¿Cuál es la razón principal por la que has agendado hoy esta llamada conmigo?" Directa y clara.</div></div></div>
+    </div>
+    <div class="card bg-a">
+      <div class="card-t ca">Áreas de mejora</div>
+      <div class="ae"><i class="ti ti-alert-triangle ca"></i><div><div class="ae-t" style="color:#92400E">La agenda incluye "o un no" al final</div><div class="ae-d">"Sea sí o sea un no." Reduce levemente la presión de decisión. Mejor: "y al final decidimos juntas si arrancamos" — sin el "o no".</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="s-diagnostico" class="sec">
+  <div class="pg-title">Fase 2 — Diagnóstico profundo</div>
+  <div class="pg-sub">5:32 – 44:44 · Fase más larga y técnicamente sólida · Dos momentos de oro no anclados</div>
+  <div class="card bg-r"><div class="card-t cr"><i class="ti ti-alarm" aria-hidden="true"></i> El activo más potente de la llamada — 34:56 (El esposo)</div>
+    <p style="font-size:12.5px;line-height:1.6;color:var(--color-text-primary);margin-bottom:10px">Gladys revela que su marido hizo una dieta con un coach español y adelgazó muy bien. Y que fue <strong>el marido quien le sugirió contratar un entrenador personal.</strong> No es un obstáculo — es el primer defensor del programa en esa casa.</p>
+    <div class="ideal">"Gladys, tu marido ya vivió esto desde dentro y sabe que funciona."
+"Fue él quien te dijo que necesitabas un entrenador personal."
+"Cuando se lo expliques esta noche, ¿qué crees que te va a decir?"</div>
+  </div>
+  <div class="card bg-r"><div class="card-t cr"><i class="ti ti-alarm" aria-hidden="true"></i> El activo emocional central — 40:38 (Los 63 kg)</div>
+    <p style="font-size:12.5px;line-height:1.6;color:var(--color-text-primary);margin-bottom:8px">Gladys dice: <em>"Me sentía bien, me sentía que me veía bonita, me sentía que me gustaba... era lo que quería, era eso, exactamente lo que quería."</em> No es una promesa abstracta. Ya fue a 63 kg. Sabe exactamente cómo quiere sentirse porque lo vivió.</p>
+    <div class="ideal">"Gladys, para. Acabas de describir exactamente cómo quieres sentirte."
+"Y lo sabes porque ya lo viviste a 63 kilos."
+"Este programa no te promete algo nuevo — te lleva de vuelta a donde ya estuviste."
+"¿Qué falta para arrancar?"</div>
+  </div>
+  <div class="grid2">
+    <div class="card bg-g"><div class="card-t cg">Aciertos del diagnóstico</div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Reencuadre de "no tengo constancia" (38:00): "¿Puede ser que no hayas encontrado el método adecuado?" Gladys: "100%." Excelente.</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Pregunta de consecuencias futuras (39:23): "¿Cómo te verías si no tomas acción?" Genera urgencia real.</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Compromiso 10/10 obtenido y cuantificado (39:37).</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Recapitulación del diagnóstico (43:35). Gladys: "Tomaste unas buenas notas."</div></div>
+    </div>
+    <div class="card bg-a"><div class="card-t ca">Errores del diagnóstico</div>
+      <div class="ae"><i class="ti ti-alert-triangle ca"></i><div class="ae-d">El esposo como testimonio vivo no anclado ni usado en el cierre.</div></div>
+      <div class="ae"><i class="ti ti-alert-triangle ca"></i><div class="ae-d">"Me sentía bien a 63 kilos" — activo emocional central no usado en el cierre.</div></div>
+      <div class="ae"><i class="ti ti-alert-triangle ca"></i><div class="ae-d">"Hay dos cosas que tenemos que trabajar" (10:03) — patrón que viola Gap Selling.</div></div>
+      <div class="ae"><i class="ti ti-alert-triangle ca"></i><div class="ae-d">La abdominoplastia (31:40) no fue integrada al pitch posterior.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="s-cierre" class="sec">
+  <div class="pg-title">Fase 3 — Pitch y cierre</div>
+  <div class="pg-sub">44:44 – fin · Pitch bien personalizado · Cierre sin activos del diagnóstico</div>
+  <div class="grid2">
+    <div class="card bg-g"><div class="card-t cg">Aciertos</div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Pitch personalizado: media hora para comer, comida en familia, pesas en casa.</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Conecta con los brazos: "tonificar los brazos, que me dijiste que están gordos."</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">Mes de prueba ofrecido como solución a la barrera (P2, 2:01).</div></div>
+      <div class="ae"><i class="ti ti-circle-check cg"></i><div class="ae-d">"Esto es un pago y cierras la puerta a años de frustración" — mejor reencuadre de precio de las dos llamadas.</div></div>
+    </div>
+    <div class="card bg-r"><div class="card-t cr">Errores</div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Cierre sin activos del diagnóstico: ni esposo, ni 63 kg, ni 10/10.</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Barrera EUR/CAD no abordada. 1.300 EUR ≈ 1.950 CAD. Gladys sale a calcular sola.</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">"Nunca más vas a recuperarlos" — promesa absoluta que se repite en ambas llamadas.</div></div>
+      <div class="ae"><i class="ti ti-circle-x cr"></i><div class="ae-d">Monólogo ~9 min sin check-in (mejor que Emma, sigue largo).</div></div>
+    </div>
+  </div>
+  <div class="card bg-a"><div class="card-t ca"><i class="ti ti-world" aria-hidden="true"></i> Protocolo EUR → CAD para llamadas internacionales</div>
+    <p style="font-size:12.5px;line-height:1.6;margin-bottom:10px">Cuando la prospecto necesita convertir el precio, dar el número en su moneda de inmediato:</p>
+    <div class="ideal">"Gladys, te hago el cálculo ahora mismo."
+"1.300 euros son aproximadamente 1.950 dólares canadienses."
+"O el fraccionado: tres pagos de 500 euros, unos 750 dólares cada mes."
+"¿Con esos números, cabe en el presupuesto de este mes?"</div>
+    <p style="font-size:11.5px;color:var(--color-text-secondary);margin-top:10px"><i class="ti ti-info-circle" aria-hidden="true"></i> Tener un conversor de divisas abierto en cada llamada con prospectos fuera de España.</p>
+  </div>
+</div>
+
+<div id="s-perfil" class="sec">
+  <div class="pg-title">Perfil psicológico — Gladys Riverola</div>
+  <div class="pg-sub">Lo que sabe, lo que siente, lo que necesita para comprar</div>
+  <div class="prof-grid">
+    <div class="prof-item bg-v"><div class="prof-lbl" style="color:#5B21B6">Perfil único</div><div class="prof-tx">Venezolana en Vancouver. Paga en CAD. Abdominoplastia (ya invirtió quirúrgicamente). Marido hizo programa similar. 3 hijas adultas. Trabaja 4 días/semana con mañanas libres.</div></div>
+    <div class="prof-item bg-g"><div class="prof-lbl" style="color:#15803D">Estado deseado (CLAVE)</div><div class="prof-tx">"Me sentía bien, me sentía que me veía bonita... era lo que quería, exactamente lo que quería." Gladys ya sabe cómo quiere sentirse — lo vivió. No es promesa abstracta, es un recuerdo.</div></div>
+    <div class="prof-item bg-g"><div class="prof-lbl" style="color:#15803D">Palanca del esposo (CLAVE)</div><div class="prof-tx">El marido hizo programa similar con éxito y fue el primero en sugerirle contratar a alguien. No es obstáculo — es el primer defensor del programa en esa casa.</div></div>
+    <div class="prof-item bg-a"><div class="prof-lbl" style="color:#92400E">Bloqueo para el ejercicio</div><div class="prof-tx">"Flojera" = miedo al compromiso de la mañana. Tiene mañanas libres, pesas en casa y tiempo. La barrera no es material — es el hábito de arrancar.</div></div>
+    <div class="prof-item bg-r"><div class="prof-lbl" style="color:#991B1B">Historial de peso</div><div class="prof-tx">Ciclo de dietas desde siempre. Última: paquetes sobres, cero carbos, 1000 kcal — bajó a 63 kg, recuperó todo. Estancada en 69-70 kg. Siempre ha querido "ser flaca" (cultura venezolana).</div></div>
+    <div class="prof-item" style="background:#EFF6FF;border-color:#BFDBFE"><div class="prof-lbl" style="color:#1D4ED8">Tipo de cliente</div><div class="prof-tx">Alta disposición con barrera práctica de divisa. El programa encaja al 100%. La única objeción es calcular 1.300 EUR en CAD y confirmarlo con el marido — que ya fue a decirle que sí.</div></div>
+  </div>
+  <div class="card"><div class="card-t">Frases semilla — cómo usarlas en el cierre</div>
+    <div class="seed"><div class="seed-lbl cg">Frase semilla</div><div class="seed-q">"Me sentía bien, me sentía que me veía bonita... era lo que quería, exactamente lo que quería."</div><div class="seed-a">→ CIERRE: "Gladys, ya sabes cómo quieres sentirte — lo viviste a 63 kilos. Este programa te lleva de vuelta ahí. ¿Qué falta para arrancar?"</div></div>
+    <div class="seed"><div class="seed-lbl cv">Frase semilla</div><div class="seed-q">El esposo hizo programa similar y fue el primero en sugerirle contratar un entrenador.</div><div class="seed-a">→ CIERRE: "Tu marido ya vivió esto y fue el primero en decírtelo. Cuando se lo expliques esta noche, ¿qué crees que te va a decir?"</div></div>
+    <div class="seed"><div class="seed-lbl" style="color:#1D4ED8">Frase semilla</div><div class="seed-q">"Yo creo que 10. De verdad que sí."</div><div class="seed-a">→ CIERRE: "Dijiste 10 sobre 10. El mes de prueba son 250 euros. ¿Empezamos esta semana?"</div></div>
+  </div>
+</div>
+
+<div id="s-objeciones" class="sec">
+  <div class="pg-title">Mapa de objeciones</div>
+  <div class="pg-sub">3 objeciones identificadas · la causa real detrás de cada una · respuesta ideal con script exacto</div>
+  <div class="obj-c bg-a bl-a">
+    <div class="obj-hdr"><span class="obj-n" style="background:#FDE68A;color:#78350F">OBJ-01</span><span class="obj-tl">Conversión EUR → CAD — la única objeción real</span></div>
+    <div class="obj-body">
+      <p><strong>Cita:</strong> "Voy a tener que pensarlo referente al precio. Son euros, tengo que convertirlo a canadiense y conversarlo con mi esposo."</p>
+      <p><strong>Qué significa:</strong> No es resistencia al precio. Es una barrera práctica de cálculo. Sin el número en CAD, cualquier cifra en euros parece alta por incertidumbre. 1.300 EUR ≈ 1.950 CAD hoy.</p>
+      <div class="ideal">"Gladys, te hago el cálculo ahora mismo."
+"1.300 euros son aproximadamente 1.950 dólares canadienses."
+"O el fraccionado: tres pagos de 500 euros, unos 750 dólares cada mes."
+"¿Con esos números, cabe en el presupuesto de este mes?"</div>
+    </div>
+  </div>
+  <div class="obj-c bg-v bl-v">
+    <div class="obj-hdr"><span class="obj-n" style="background:#DDD6FE;color:#4C1D95">OBJ-02</span><span class="obj-tl">El marido — aliado, no obstáculo</span></div>
+    <div class="obj-body">
+      <p><strong>Cita:</strong> "Tengo que conversarlo con mi esposo, ver si podemos ahorita en el presupuesto."</p>
+      <p><strong>Qué significa:</strong> El marido ya hizo un programa similar con éxito. Fue él quien le recomendó contratar a alguien. No es un escéptico — es un testimonio vivo. Cuando Gladys lo consulte, va a decir que sí.</p>
+      <div class="ideal">"Gladys, tu marido ya sabe que esto funciona. Lo vivió."
+"Y fue él quien te dijo que necesitabas un entrenador personal."
+"Cuando se lo expliques esta noche, ¿qué crees que te va a decir?"</div>
+    </div>
+  </div>
+  <div class="obj-c bg-r bl-r">
+    <div class="obj-hdr"><span class="obj-n" style="background:#FECACA;color:#7F1D1D">OBJ-03</span><span class="obj-tl">"¿Funcionará para mí?" — ciclo de yo-yo</span></div>
+    <div class="obj-body">
+      <p><strong>Cita:</strong> "Yo creo que sí, por lo que he visto, pero bueno, tengo que ver la dieta y los ejercicios."</p>
+      <p><strong>Qué significa:</strong> Ha hecho dietas que funcionaron a corto plazo y fallaron a largo. La duda no es si el programa es bueno — es si puede mantener los resultados.</p>
+      <div class="ideal">"Gladys, tu marido no hizo una dieta estricta."
+"Hizo algo equilibrado que le cambió los hábitos. Mira cómo está."
+"Eso es exactamente lo que hacemos aquí."</div>
+    </div>
+  </div>
+</div>
+
+<div id="s-giros" class="sec">
+  <div class="pg-title">Momentos de giro</div>
+  <div class="pg-sub">4 oportunidades perdidas · lo que se dijo · lo que debía decirse · por qué cambia todo</div>
+  <div id="giros-list"></div>
+</div>
+
+<div id="s-entrenamiento" class="sec">
+  <div class="pg-title">Plan de entrenamiento — Montse 2ª iteración</div>
+  <div class="pg-sub">No repite lo ya corregido. Parte de la comparativa Emma → Gladys.</div>
+  <div class="train-s"><span class="train-bdg" style="background:#DCFCE7;color:#14532D">Consolidado</span>
+    <div class="train-item"><div class="train-dot" style="background:#16A34A"></div><div class="train-tx"><strong>Agenda formal antes del minuto 5:</strong> Emma: ausente. Gladys: min 3:30. Objetivo siguiente: antes del minuto 2.</div></div>
+    <div class="train-item"><div class="train-dot" style="background:#16A34A"></div><div class="train-tx"><strong>Nombre correcto siempre:</strong> Zero errores en Gladys. El protocolo de preparación funciona.</div></div>
+    <div class="train-item"><div class="train-dot" style="background:#16A34A"></div><div class="train-tx"><strong>Reencuadre de creencias limitantes:</strong> "No es que no tengas constancia, es que no encontraste el método." Aplicado bien en Emma y en Gladys. Sistematizarlo para todo el equipo.</div></div>
+    <div class="train-item"><div class="train-dot" style="background:#16A34A"></div><div class="train-tx"><strong>Rapport más eficiente:</strong> 5.5 min → 3.5 min. Tendencia correcta.</div></div>
+  </div>
+  <div class="train-s"><span class="train-bdg" style="background:#FEE2E2;color:#7F1D1D">Urgente — corregir</span>
+    <div class="callout bg-r bl-r"><p><strong>El patrón de Montse en dos palabras: diagnóstico brillante, cierre vacío.</strong> Con Emma: el Slow y el 20/10 no aparecieron. Con Gladys: el esposo, los 63 kg y el 10/10 no aparecieron. Dos llamadas. Mismo patrón.</p></div>
+    <div class="train-item"><div class="train-dot" style="background:#DC2626"></div><div class="train-tx"><strong>Activo emocional central no aparece en el cierre.</strong> Siempre escuchado, nunca usado. Emma: Slow. Gladys: esposo + 63 kg.</div></div>
+    <div class="train-item"><div class="train-dot" style="background:#DC2626"></div><div class="train-tx"><strong>"Nunca más recuperarás el peso":</strong> Promesa absoluta en ambas llamadas. Versión segura: "sabrás exactamente cómo gestionarlo para que no vuelva a pasarte."</div></div>
+    <div class="train-item"><div class="train-dot" style="background:#DC2626"></div><div class="train-tx"><strong>"Hay dos cosas que tenemos que trabajar":</strong> Sigue en ambas llamadas. Viola Gap Selling.</div></div>
+  </div>
+  <div class="train-s"><span class="train-bdg" style="background:#EDE9FE;color:#4C1D95">Drill de la semana</span>
+    <div class="card bg-v"><div style="font-size:13px;line-height:1.75;font-family:var(--font-mono)"><strong>"[NOMBRE], me dijiste [ACTIVO 1 — frase más poderosa del diagnóstico]."</strong><br><strong>"Me describiste [ACTIVO 2 — imagen del futuro deseado]."</strong><br><strong>"Y me dijiste [ACTIVO 3 — número de compromiso]."</strong><br><strong>"¿Empezamos?"</strong></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:.5px solid #C4B5FD"><div style="font-size:10.5px;font-weight:500;color:#5B21B6;margin-bottom:5px">Con Gladys hubiera sido</div>
+    <div style="font-size:12.5px;line-height:1.75;font-family:var(--font-mono);color:var(--color-text-secondary)">"Gladys, tu marido ya sabe que funciona — fue el primero en decírtelo."<br>"Me describiste exactamente cómo te sientes a 63 kilos: guapa, contenta, era lo que querías."<br>"Y me dijiste 10 sobre 10 de compromiso."<br>"El mes de prueba son 250 euros. ¿Empezamos esta semana?"</div></div></div>
+  </div>
+</div>
+
+<div id="s-scripts" class="sec">
+  <div class="pg-title">Scripts accionables</div>
+  <div class="pg-sub">5 scripts listos para usar · clic en "Copiar" para llevarlo al portapapeles</div>
+  <div id="scripts-list"></div>
+</div>
+
+<div id="s-resumen" class="sec">
+  <div class="pg-title">Resumen ejecutivo</div>
+  <div class="pg-sub">Diagnóstico final · errores que costaron dinero · aciertos para conservar</div>
+  <div class="sum-row">
+    <div><div class="stat-l">Nota global</div><div style="font-size:32px;font-weight:500" class="cg">7.1</div></div>
+    <div class="sum-div"></div>
+    <div><div class="stat-l">Resultado</div><div style="font-size:14px;font-weight:500;color:#D97706">En seguimiento</div><div class="stat-s">WhatsApp hoy mismo</div></div>
+    <div class="sum-div"></div>
+    <div><div class="stat-l">Evolución</div><div style="font-size:14px;font-weight:500">Emma 6.4 → Gladys 7.1</div><div class="stat-s cg">Mejora real +0.7</div></div>
+    <div class="sum-div"></div>
+    <div><div class="stat-l">Diagnóstico aprendizaje</div><div style="font-size:14px;font-weight:500">Superficial</div><div class="stat-s">Estructura mejorada · cierre sin activos</div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><div class="card-t cr">Top 5 errores que costaron dinero</div>
+      <div class="top5-item"><span class="top5-n">1.</span><div class="top5-t">El esposo como testimonio vivo (34:56) — nunca usado. El argumento de cierre más potente de la llamada.</div></div>
+      <div class="top5-item"><span class="top5-n">2.</span><div class="top5-t">"Me sentía bien a 63 kilos" (40:38) — estado deseado concreto y vivido nunca apareció en el cierre.</div></div>
+      <div class="top5-item"><span class="top5-n">3.</span><div class="top5-t">Conversión EUR → CAD no realizada. Gladys sale a calcular sola.</div></div>
+      <div class="top5-item"><span class="top5-n">4.</span><div class="top5-t">Compromiso 10/10 no usado en el cierre.</div></div>
+      <div class="top5-item"><span class="top5-n">5.</span><div class="top5-t">"Hay dos cosas que tenemos que trabajar" — sigue en ambas llamadas.</div></div>
+    </div>
+    <div class="card"><div class="card-t cg">Top 5 aciertos para conservar</div>
+      <div class="top5-item"><span class="top5-n">1.</span><div class="top5-t">Agenda formal en el minuto 3:30 — gran mejora. Consolidar.</div></div>
+      <div class="top5-item"><span class="top5-n">2.</span><div class="top5-t">Nombre correcto durante toda la llamada. El protocolo de preparación funciona.</div></div>
+      <div class="top5-item"><span class="top5-n">3.</span><div class="top5-t">"No es que no tengas constancia, es que no encontraste el método." Activo escalable.</div></div>
+      <div class="top5-item"><span class="top5-n">4.</span><div class="top5-t">"Esto es un pago y cierras la puerta a años de frustración." Mejor reencuadre de precio.</div></div>
+      <div class="top5-item"><span class="top5-n">5.</span><div class="top5-t">Recapitulación del diagnóstico antes del pitch. Gladys: "Tomaste unas buenas notas."</div></div>
+    </div>
+  </div>
+  <div class="callout bg-v bl-v"><p><strong style="color:#7C3AED">Para Montse:</strong></p><p>"La agenda, el nombre, el rapport — ya los tienes. Ahora el trabajo es uno solo: lo que construyes en el diagnóstico tiene que aparecer en el cierre. Siempre. Sin excepción."</p><p style="font-style:italic;margin-top:6px">"El cierre no es convencer. Es recordarle lo que ya te dijo."</p></div>
+</div>
+
+</div></div>
+
+<script>
+const SCORES=[
+  {l:'Apertura / Agenda',s:8.0,n:'Mejor apertura de Montse. Agenda en min 3:30. Nombre correcto.',c:'#16A34A'},
+  {l:'Diagnóstico',s:7.5,n:'Sólido. El esposo (34:56) y los 63 kg (40:38) escuchados pero no anclados.',c:'#16A34A'},
+  {l:'Construcción de valor',s:7.0,n:'Pitch personalizado. Monólogo ~9 min (mejor que 11 min de Emma).',c:'#16A34A'},
+  {l:'Manejo de objeciones',s:6.0,n:'Barrera EUR/CAD no abordada. Esposo no convertido en aliado.',c:'#D97706'},
+  {l:'Cierre',s:6.0,n:'10/10 compromiso no usado. "63 kilos" no usado. "Esposo" no usado.',c:'#D97706'},
+  {l:'Lenguaje / Tono',s:7.5,n:'Natural, cálido, sin errores. Reencuadre de constancia bien aplicado.',c:'#16A34A'},
+  {l:'Estructura',s:7.5,n:'Mejor estructura de las dos llamadas. Agenda+diagnóstico+recap+pitch+cierre.',c:'#16A34A'},
+];
+const EVO=[
+  {d:'Error de nombre',e:'✗ "María"',g:'✓ Correcto',t:'Mejoró',tc:'#16A34A',tBg:'#DCFCE7'},
+  {d:'Agenda formal antes min 5',e:'✗ Ausente',g:'✓ Min 3:30',t:'Mejoró',tc:'#16A34A',tBg:'#DCFCE7'},
+  {d:'Duración rapport',e:'5.5 min',g:'3.5 min',t:'Mejoró',tc:'#16A34A',tBg:'#DCFCE7'},
+  {d:'Reencuadre creencia limitante',e:'✓ Excelente',g:'✓ Bien',t:'Igual ✓',tc:'#16A34A',tBg:'#DCFCE7'},
+  {d:'Activo emocional en el cierre',e:'✗ No usado',g:'✗ No usado',t:'Igual ✗',tc:'#DC2626',tBg:'#FEE2E2'},
+  {d:'Palanca única del prospecto',e:'Slow → tarde',g:'Esposo → sin usar',t:'Empeoró',tc:'#DC2626',tBg:'#FEE2E2'},
+  {d:'Compromiso usado en cierre',e:'20/10 → no',g:'10/10 → no',t:'Igual ✗',tc:'#DC2626',tBg:'#FEE2E2'},
+  {d:'Duración monólogo pitch',e:'~11 min',g:'~9 min',t:'Mejoró parcial',tc:'#D97706',tBg:'#FEF3C7'},
+  {d:'Barrera específica abordada',e:'Psic. de pago',g:'EUR/CAD → no',t:'Empeoró',tc:'#DC2626',tBg:'#FEE2E2'},
+  {d:'Promesa absoluta "nunca más"',e:'✗ Presente',g:'✗ Presente',t:'Igual ✗',tc:'#DC2626',tBg:'#FEE2E2'},
+];
+const SEM=[
+  {t:'33:40',s:'"Claro, le hice todo ese esfuerzo y aparte invertí dinero"',tip:'Historial inversión',st:'PARCIAL',imp:'Gladys ya ha pagado por dietas. Conectar: "Esta vez el dinero no se va solo — va con apoyo."'},
+  {t:'34:56',s:'Marido hizo dieta similar (estilo Jonathan) y adelgazó muy bien. Fue él quien le sugirió contratar un entrenador.',tip:'Testimonio familiar DIRECTO',st:'IGNORADA',imp:'EL ACTIVO MÁS POTENTE DE LA LLAMADA. "Gladys, tu marido ya sabe cómo funciona esto. ¿Qué crees que te va a decir esta noche?"'},
+  {t:'37:24',s:'"A lo mejor la constancia, a lo mejor lo empiezo pero lo dejo"',tip:'Autocrítica → apertura reencuadre',st:'CAPTADA',imp:'Montse aplica el reencuadre correctamente: "No me parece que no tengas constancia." Bien.'},
+  {t:'39:55',s:'"Yo creo que 10. De verdad que sí."',tip:'Compromiso máximo declarado',st:'PARCIAL',imp:'Obtenido. No usado en cierre. "Dijiste 10 sobre 10. ¿Qué falta para empezar hoy?"'},
+  {t:'40:38',s:'"Me sentía bien, me sentía que me veía bonita, me sentía que me gustaba... era lo que quería, exactamente lo que quería."',tip:'Estado deseado vivido en 1ª persona',st:'IGNORADA',imp:'SEGUNDO ACTIVO MÁS POTENTE. Gladys ya sabe cómo quiere sentirse porque lo vivió. No apareció en el cierre.'},
+  {t:'41:17',s:'"Yo creo que sí, por lo que he visto"',tip:'Compra tentativa',st:'CAPTADA',imp:'Montse sigue adelante correctamente.'},
+  {t:'42:08',s:'Menciona el precio antes de que Montse lo explique',tip:'Pre-emption de precio',st:'PARCIAL',imp:'Montse responde: "Lo veremos todo ahora." Correcto. Sin ancla de valor previa.'},
+  {t:'54:08',s:'"Sí, claro que sí. Porque yo creo que es lo que necesito realmente"',tip:'Confirmación máxima del valor',st:'CAPTADA',imp:'Bien. Gladys confirma el encaje total. Solo queda el precio.'},
+  {t:'57:31',s:'"Voy a tener que pensarlo referente al precio. Voy a tener que convertirlo a canadiense"',tip:'Barrera práctica de divisa',st:'IGNORADA',imp:'Barrera concreta y resoluble. 1.300 EUR ≈ 1.950 CAD. Montse no dio el número convertido.'},
+  {t:'P2 1:35',s:'"Sería lo económico, nada más que sería"',tip:'Precio = único obstáculo',st:'CAPTADA',imp:'Bien. Gladys confirma que solo queda el precio. Montse ofrece mes de prueba. Correcto.'},
+];
+const TL=[
+  {t:'0:00–37:00',s:'Construyendo',d:'Diagnóstico rico. Gladys muy abierta. Confianza creciente.',c:'#2563EB'},
+  {t:'34:56',s:'PICO 1 — El esposo',d:'Gladys revela que su marido hizo programa similar con éxito. Activo de cierre más potente. No usado.',c:'#16A34A'},
+  {t:'40:38',s:'PICO 2 — Los 63 kilos',d:'"Me sentía bien, me veía bonita, era lo que quería." Gladys sabe exactamente lo que quiere porque lo vivió. No anclado.',c:'#16A34A'},
+  {t:'39:55–43:35',s:'10/10 + Recapitulación',d:'Compromiso 10/10 declarado. Gladys: "Tomaste unas buenas notas." La venta sigue activa y fuerte.',c:'#0F766E'},
+  {t:'44:44–54:08',s:'Monólogo ~9 minutos',d:'Pitch largo. Gladys escucha. El momentum del pico ya pasó.',c:'#D97706'},
+  {t:'54:08',s:'Confirmación 100%',d:'"Es lo que necesito realmente." Solo queda el precio.',c:'#16A34A'},
+  {t:'57:31',s:'Barrera EUR/CAD',d:'Objeción práctica: convertir a dólares canadienses. Montse no da el número convertido. Gladys sale a calcular sola.',c:'#DC2626'},
+  {t:'P2 2:01',s:'Mes de prueba ofrecido',d:'250 EUR como opción. Gladys lo recibe bien. La venta sigue viva.',c:'#0F766E'},
+];
+const FBF=[
+  {t:'3:30',q:'Montse',c:'Establece la agenda correctamente',v:'SUMA',e:'AVANZA',f:'MEJORA REAL vs Emma. Consolidar este hábito en todas las llamadas.'},
+  {t:'5:19',q:'Montse',c:'"¿Cuál es la razón principal por la que has agendado hoy esta llamada conmigo?"',v:'SUMA',e:'AVANZA',f:'Bien. Gladys responde con precisión. Buena apertura del diagnóstico.'},
+  {t:'10:03',q:'Montse',c:'"Para conseguir bajar estos 8 kilos... hay dos cosas que tenemos que trabajar."',v:'RESTA',e:'ESTANCA',f:'Patrón "dos cosas" sigue. Viola Gap Selling. No vende el estado futuro — vende el proceso.'},
+  {t:'20:42',q:'Montse',c:'"¿Pero qué te da flojera concretamente? Dime."',v:'SUMA',e:'AVANZA',f:'Buena pregunta calibrada. Gladys explica el compromiso de la mañana. Útil para el diagnóstico.'},
+  {t:'22:23',q:'Montse',c:'"Si empiezas a ver resultados rápidos... ¿tú crees que esto te motivaría a seguir?"',v:'SUMA',e:'AVANZA',f:'Bien. Usa los resultados como motor de continuidad.'},
+  {t:'33:21',q:'Montse',c:'"¿Cómo te afectó emocionalmente recuperar todo ese peso perdido?"',v:'SUMA',e:'AVANZA',f:'Buena pregunta emocional. Gladys da respuesta rica sobre tristeza y decepción.'},
+  {t:'34:56',q:'Gladys',c:'Revela que su marido hizo programa similar con éxito y fue quien le sugirió contratar un entrenador.',v:'SUMA',e:'AVANZA',f:'SEÑAL DE CIERRE MÁXIMA. Montse la escucha y continúa sin usarla. El esposo es el aliado más poderoso.'},
+  {t:'38:00',q:'Montse',c:'"A mí no me parece que no tengas constancia. ¿Puede ser que no hayas encontrado el método adecuado?"',v:'SUMA',e:'AVANZA',f:'EXCELENTE. Mismo reencuadre que con Emma. Activo sólido de Montse.'},
+  {t:'39:37',q:'Montse',c:'"¿Cuánto de comprometida estás, del 1 al 10?"',v:'SUMA',e:'AVANZA',f:'Buen hábito. Gladys da 10/10. No usado en el cierre.'},
+  {t:'40:38',q:'Gladys',c:'"Me sentía bien, me sentía que me veía bonita, me sentía que me gustaba... era lo que quería, exactamente lo que quería."',v:'SUMA',e:'AVANZA',f:'ACTIVO EMOCIONAL CENTRAL. Gladys sabe exactamente cómo quiere sentirse porque lo vivió. No apareció en el cierre.'},
+  {t:'43:35',q:'Montse',c:'Recapitulación completa del diagnóstico',v:'SUMA',e:'AVANZA',f:'Bien ejecutado. Gladys: "Tomaste unas buenas notas." Excelente señal de confianza.'},
+  {t:'44:44',q:'Montse',c:'Monólogo del programa ~9 minutos',v:'RESTA',e:'ESTANCA',f:'Mejor que Emma (11 min) pero sigue largo. Regla: 90 seg + check-in. Gladys interrumpe solo una vez.'},
+  {t:'54:08',q:'Gladys',c:'"Sí, claro que sí. Porque yo creo que es lo que necesito realmente"',v:'SUMA',e:'AVANZA',f:'SEÑAL DE COMPRA MÁXIMA. El único obstáculo que queda es el precio.'},
+  {t:'57:31',q:'Gladys',c:'"Voy a tener que pensarlo referente al precio. Voy a tener que convertirlo a canadiense"',v:'SUMA',e:'ESTANCA',f:'La barrera es concreta y resoluble. Dar el número en CAD de inmediato elimina la incertidumbre.'},
+  {t:'P2 2:01',q:'Montse',c:'"¿Te ayudaría si entras un mes de prueba?"',v:'SUMA',e:'AVANZA',f:'Bien aplicado. 250 EUR = menor barrera de entrada. Gladys lo recibe positivamente.'},
+  {t:'P2 3:26',q:'Montse',c:'"Solo piensa que esto es un pago y cierras la puerta a años de frustración"',v:'SUMA',e:'AVANZA',f:'El mejor reencuadre de precio de las dos llamadas de Montse. Directo y sin exageración.'},
+];
+const SCRIPTS=[
+  {t:'Script 01 — Cierre con 3 activos propios (plantilla universal)',c:'Al llegar al cierre, en todas las llamadas',col:'#7C3AED',
+  body:`"[NOMBRE], me dijiste [ACTIVO 1 — frase más poderosa del diagnóstico]."
+"Me describiste [ACTIVO 2 — imagen del futuro deseado]."
+"Y me dijiste [ACTIVO 3 — número de compromiso]."
+"¿Empezamos?"
+
+— Con Gladys:
+"Tu marido ya sabe que funciona — fue el primero en decírtelo."
+"Me describiste cómo te sentías a 63 kilos: guapa, contenta, era lo que querías."
+"Y me dijiste 10 sobre 10."
+"El mes de prueba son 250 euros. ¿Empezamos esta semana?"`},
+  {t:'Script 02 — El esposo como aliado',c:'Cuando la pareja hizo algo similar al programa',col:'#0F766E',
+  body:`"Gladys, tu marido ya vivió esto desde dentro y sabe que funciona."
+"Fue él quien te dijo que necesitabas un entrenador personal."
+"Cuando se lo expliques esta noche, ¿qué crees que te va a decir?"`},
+  {t:'Script 03 — Barrera EUR/CAD (y cualquier otra divisa)',c:'Cuando la prospecto necesita convertir el precio',col:'#D97706',
+  body:`"Gladys, te hago el cálculo ahora mismo."
+"1.300 euros son aproximadamente 1.950 dólares canadienses."
+"O el fraccionado: tres pagos de 500 euros, unos 750 dólares canadienses cada mes."
+"¿Con esos números, cabe en el presupuesto de este mes?"`},
+  {t:'Script 04 — Anclar el estado deseado vivido',c:'Cuando la prospecto describe cómo se sintió en su peso objetivo',col:'#16A34A',
+  body:`"Gladys, para. Lo que acabas de describir es exactamente lo que vamos a hacer."
+"Tú ya sabes cómo quieres sentirte porque ya lo viviste a 63 kilos."
+"No te estoy prometiendo algo nuevo — te llevo de vuelta a donde ya estuviste."
+"¿Qué falta para arrancar esta semana?"`},
+  {t:'Script 05 — Reencuadre de "no tengo constancia"',c:'Cuando la prospecto dice que es floja o inconstante',col:'#2563EB',
+  body:`"Gladys, llevas desde siempre haciendo mil dietas, mil pruebas, mil cosas."
+"Y hoy estás aquí conmigo."
+"A mí eso no me parece que no tengas constancia."
+"¿Puede ser que no hayas encontrado el método adecuado para cómo funciona tu cabeza?"`},
+];
+const GIROS=[
+  {n:'01',nBg:'#FEE2E2',nC:'#7F1D1D',dicho:'Continúa el diagnóstico — ante la revelación del esposo (34:56)',debia:'"Gladys, para. Tu marido ya vivió esto y sabe que funciona. ¿Qué le pareció?" Y en el cierre: "Tu marido fue el primero en decírtelo. ¿Qué crees que te va a decir esta noche?"',porque:'El esposo como aliado transforma la "consulta al marido" de obstáculo en argumento de cierre. Montse nunca activó esta palanca.'},
+  {n:'02',nBg:'#FEE2E2',nC:'#7F1D1D',dicho:'Escucha "me sentía bien a 63 kilos" y pregunta si cree que puede conseguirlo (40:38)',debia:'"Gladys, para. Acabas de describir exactamente cómo quieres sentirte. Y lo sabes porque ya lo viviste. ¿Cuánto tiempo llevas sin sentirte así?"',porque:'No es una promesa abstracta: Gladys ya fue a 63 kg. El programa no promete algo nuevo — la lleva de vuelta a un lugar que ya conoce.'},
+  {n:'03',nBg:'#FEE2E2',nC:'#7F1D1D',dicho:'No convierte el precio a dólares canadienses (57:31)',debia:'"Gladys, te lo calculo: 1.300 euros son aproximadamente 1.950 dólares canadienses. El fraccionado son tres pagos de unos 750 dólares. ¿Ese número cabe en el presupuesto?"',porque:'Sin el número en CAD, Gladys sale a calcular sola. Cualquier conversión solitaria, sin contexto, parece más cara.'},
+  {n:'04',nBg:'#FEE2E2',nC:'#7F1D1D',dicho:'Cierra sin los 3 activos del diagnóstico',debia:'"Gladys, tu marido ya sabe que funciona. Tú ya viviste cómo te quieres sentir a 63 kilos. Y me dijiste 10 sobre 10. El mes de prueba son 250 euros. ¿Empezamos esta semana?"',porque:'El cierre con activos propios del prospecto es irrefutable porque son sus propias palabras. Sin ellos, el cierre es persuasión externa.'},
+];
+
+function scoreBar(s,c,pct){return`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:.5px solid var(--color-border-tertiary)"><div style="font-size:12.5px;color:var(--color-text-primary);flex:0 0 165px">${s.l}</div><div style="flex:1;height:6px;background:var(--color-border-tertiary);border-radius:3px;overflow:hidden"><div style="height:6px;width:${pct}%;background:${s.c};border-radius:3px"></div></div><div style="font-size:13px;font-weight:500;color:${s.c};flex:0 0 28px;text-align:right">${s.s.toFixed(1)}</div><div style="font-size:11px;color:var(--color-text-secondary);flex:1;padding-left:10px">${s.n}</div></div>`;}
+
+function renderScores(containerId,compact){
+  const el=document.getElementById(containerId);if(!el)return;
+  el.innerHTML=SCORES.map((s,i)=>{
+    const pct=s.s*10;
+    if(compact)return`<div class="sb-row"><div class="sb-lbl">${s.l}</div><div><div class="sb-wrap"><div class="sb-bar" style="width:${pct}%;background:${s.c}"></div></div></div><div class="sb-num" style="color:${s.c}">${s.s.toFixed(1)}</div></div>`;
+    return scoreBar(s,s.c,pct);
+  }).join('');
+  if(!compact){const last=el.querySelector('.sb-row:last-child,.ae:last-child,[style*="border-bottom"]');if(last)last.style.borderBottom='none';}
+}
+
+function renderEvo(){
+  const tb=document.querySelector('#evo-tbl tbody');if(!tb)return;
+  tb.innerHTML=EVO.map(r=>`<tr><td style="font-size:12.5px">${r.d}</td><td style="font-size:12.5px">${r.e}</td><td style="font-size:12.5px">${r.g}</td><td><span style="font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;background:${r.tBg};color:${r.tc}">${r.t}</span></td></tr>`).join('');
+}
+
+function renderSem(){
+  const el=document.getElementById('sem-cards');if(!el)return;
+  const dotMap={CAPTADA:'dg',PARCIAL:'da',IGNORADA:'dr'};
+  el.innerHTML=SEM.map(s=>{
+    const dc=dotMap[s.st]||'da';
+    const cardBg=s.st==='IGNORADA'?'background:#FEF2F2;border-color:#FECACA':s.st==='PARCIAL'?'background:#FFFBEB;border-color:#FDE68A':'background:#F0FDF4;border-color:#BBF7D0';
+    return`<div class="card" style="margin-bottom:10px;${cardBg}"><div style="display:flex;align-items:flex-start;gap:10px"><div style="flex:0 0 52px"><div style="font-size:10.5px;color:var(--color-text-secondary)">${s.t}</div><div style="margin-top:5px;display:flex;align-items:center;gap:5px"><div class="dot ${dc}"></div><span style="font-size:11px;font-weight:500">${s.st}</span></div></div><div style="flex:1"><div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:3px">${s.tip}</div><div style="font-size:13px;color:var(--color-text-primary);margin-bottom:6px;line-height:1.5">${s.s}</div><div style="font-size:12px;color:var(--color-text-secondary);line-height:1.5">${s.imp}</div></div></div></div>`;
+  }).join('');
+}
+
+function renderTL(){
+  const el=document.getElementById('tl-items');if(!el)return;
+  el.innerHTML=TL.map(item=>`<div class="tl-item"><div class="tl-dot" style="background:${item.c}"></div><div class="tl-t">${item.t}</div><div class="tl-s" style="color:${item.c}">${item.s}</div><div class="tl-d">${item.d}</div></div>`).join('');
+}
+
+let currentFilter='all';
+function renderFBF(filter){
+  currentFilter=filter;
+  const body=document.getElementById('fbf-body');if(!body)return;
+  const filtered=filter==='all'?FBF:FBF.filter(r=>r.v===filter||r.e===filter);
+  const vCol={SUMA:'#DCFCE7',RESTA:'#FEE2E2'};
+  const eCol={AVANZA:'#DCFCE7',ESTANCA:'#FEF3C7',RETROCEDE:'#FEE2E2'};
+  body.innerHTML=filtered.map(r=>`<tr><td style="font-size:11px;color:var(--color-text-secondary)">${r.t}</td><td style="font-size:12px">${r.q}</td><td style="font-size:12.5px">${r.c}</td><td><span class="badge" style="background:${vCol[r.v]||'#F3F4F6'};color:${r.v==='SUMA'?'#14532D':'#7F1D1D'}">${r.v}</span></td><td><span class="badge" style="background:${eCol[r.e]||'#F3F4F6'};color:${r.e==='AVANZA'?'#14532D':r.e==='ESTANCA'?'#78350F':'#7F1D1D'}">${r.e}</span></td><td style="font-size:12px;color:var(--color-text-secondary)">${r.f}</td></tr>`).join('');
+}
+
+function renderScripts(){
+  const el=document.getElementById('scripts-list');if(!el)return;
+  el.innerHTML=SCRIPTS.map((s,i)=>`<div class="script-card card"><div class="sc-hdr"><div><div class="sc-t">${s.t}</div><div class="sc-c">${s.c}</div></div><button class="copy-btn" id="copy-${i}" onclick="copyScript(${i})"><i class="ti ti-copy" aria-hidden="true"></i> Copiar</button></div><div class="sc-body" id="script-body-${i}">${s.body}</div></div>`).join('');
+}
+
+window.copyScript=function(i){
+  const text=SCRIPTS[i].body;
+  navigator.clipboard.writeText(text).catch(()=>{});
+  const btn=document.getElementById('copy-'+i);
+  if(btn){btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i> Copiado!';btn.style.color='#16A34A';setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" aria-hidden="true"></i> Copiar';btn.style.color='';},2000);}
+};
+
+function renderGiros(){
+  const el=document.getElementById('giros-list');if(!el)return;
+  el.innerHTML=GIROS.map(g=>`<div class="turn-card"><span class="turn-n" style="background:${g.nBg};color:${g.nC}">Giro ${g.n}</span><div class="turn-cols"><div><div class="turn-lbl">Lo que dijo Montse</div><div class="turn-txt">${g.dicho}</div></div><div><div class="turn-lbl" style="color:#16A34A">Lo que debía decir</div><div class="turn-txt" style="font-family:var(--font-mono);font-size:12px;line-height:1.65">${g.debia}</div></div><div><div class="turn-lbl">Por qué cambia todo</div><div class="turn-txt">${g.porque}</div></div></div></div>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  renderScores('db-scores',true);
+  renderScores('sc-full',false);
+  renderEvo();renderSem();renderTL();renderFBF('all');renderScripts();renderGiros();
+
+  document.querySelectorAll('.nav-item').forEach(function(item){
+    item.addEventListener('click',function(){
+      const sec=this.dataset.sec;
+      document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+      document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('on'));
+      const target=document.getElementById('s-'+sec);
+      if(target)target.classList.add('on');
+      this.classList.add('on');
+    });
+  });
+
+  document.querySelectorAll('.fb').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+      this.classList.add('on');
+      renderFBF(this.dataset.f);
+    });
+  });
+});
+</script>

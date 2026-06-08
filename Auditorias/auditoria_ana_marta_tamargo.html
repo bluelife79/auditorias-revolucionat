@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría Forense · Ana · Marta Tamargo</title>
+  <style>
+    :root{
+      --bg:#f5f2ec;
+      --ink:#171717;
+      --muted:#6b6258;
+      --card:#fffaf2;
+      --card2:#ffffff;
+      --line:rgba(23,23,23,.12);
+      --red:#d8432e;
+      --amber:#d88b00;
+      --green:#247b4b;
+      --blue:#3157d5;
+      --purple:#6c3dd6;
+      --black:#171717;
+      --shadow:0 18px 50px rgba(28,22,12,.10);
+      --radius:26px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(216,139,0,.14), transparent 32%),
+        radial-gradient(circle at 88% 8%, rgba(49,87,213,.10), transparent 31%),
+        radial-gradient(circle at 50% 100%, rgba(108,61,214,.08), transparent 38%),
+        var(--bg);
+      line-height:1.55;
+    }
+    .progress{position:fixed;top:0;left:0;width:0;height:5px;background:linear-gradient(90deg,var(--red),var(--amber),var(--blue));z-index:50}
+    .wrap{max-width:1220px;margin:0 auto;padding:26px 22px 80px}
+    .hero{
+      position:relative;overflow:hidden;border:1px solid var(--line);border-radius:36px;padding:36px;
+      background:linear-gradient(135deg,#171717 0%,#30261c 52%,#6d321d 100%);color:#fff;box-shadow:var(--shadow)
+    }
+    .hero:before{content:"";position:absolute;inset:-80px -100px auto auto;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.10);filter:blur(4px)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    h1{font-size:clamp(36px,5vw,72px);line-height:.95;margin:22px 0 16px;letter-spacing:-.06em;max-width:980px}
+    .subtitle{font-size:clamp(17px,2vw,23px);max-width:840px;color:rgba(255,255,255,.84);margin:0}
+    .hero-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+    .metric{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.17);border-radius:22px;padding:16px;backdrop-filter:blur(8px)}
+    .metric .k{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.65);font-weight:800}.metric .v{font-size:22px;font-weight:900;margin-top:5px}.metric .s{font-size:13px;color:rgba(255,255,255,.72);margin-top:3px}
+    .nav{position:sticky;top:10px;z-index:20;margin:18px 0;display:flex;gap:8px;overflow:auto;padding:10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,250,242,.82);backdrop-filter:blur(14px);box-shadow:0 10px 25px rgba(28,22,12,.06)}
+    .nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:800;font-size:13px;padding:10px 14px;border-radius:999px}.nav a:hover{background:#fff;border:1px solid var(--line)}
+    section{margin:26px 0}.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 14px}.section-title h2{font-size:clamp(25px,3vw,42px);line-height:1;margin:0;letter-spacing:-.04em}.section-title p{margin:0;color:var(--muted);font-weight:650;max-width:520px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{background:rgba(255,250,242,.9);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}.card.white{background:rgba(255,255,255,.88)}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-7{grid-column:span 7}.span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-3{grid-column:span 3}
+    h3{font-size:22px;line-height:1.1;margin:0 0 12px;letter-spacing:-.025em}.label{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:900;margin-bottom:8px}.pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;border:1px solid var(--line);background:#fff;margin:3px 4px 3px 0}.pill.red{color:var(--red);background:#fff2ef}.pill.green{color:var(--green);background:#eefaf3}.pill.amber{color:#925e00;background:#fff5de}.pill.blue{color:var(--blue);background:#eef2ff}.pill.purple{color:var(--purple);background:#f4efff}
+    .big-number{font-size:58px;font-weight:950;letter-spacing:-.08em;line-height:.9}.score-ring{width:138px;height:138px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--red) 0 53%,#eadfd2 53% 100%);margin:auto}.score-ring div{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:#fffaf2;font-size:30px;font-weight:950}
+    .table{width:100%;border-collapse:separate;border-spacing:0 8px}.table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:0 10px}.table td{background:#fff;padding:12px 10px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top}.table td:first-child{border-left:1px solid var(--line);border-radius:14px 0 0 14px;font-weight:850}.table td:last-child{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.bar{height:9px;border-radius:999px;background:#eadfd2;overflow:hidden;margin-top:6px}.bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--amber))}
+    .quote{font-size:22px;line-height:1.25;font-weight:900;letter-spacing:-.025em;padding:18px;border-left:5px solid var(--red);background:#fff;border-radius:18px;margin:12px 0}.small{font-size:14px;color:var(--muted)}.danger{border-color:rgba(216,67,46,.25);background:linear-gradient(180deg,#fff7f5,#fff)}.success{border-color:rgba(36,123,75,.25);background:linear-gradient(180deg,#f3fff7,#fff)}.warning{border-color:rgba(216,139,0,.28);background:linear-gradient(180deg,#fff8e6,#fff)}
+    .timeline{position:relative;padding-left:22px}.timeline:before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--red),var(--amber),var(--blue))}.tl{position:relative;margin:0 0 14px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:18px}.tl:before{content:"";position:absolute;left:-21px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px #fffaf2}.tl b{display:block;margin-bottom:4px}.source-card{position:relative;overflow:hidden}.source-card:before{content:attr(data-n);position:absolute;right:18px;top:10px;font-size:54px;font-weight:950;color:rgba(23,23,23,.055);letter-spacing:-.08em}.source-card h3{padding-right:48px}.script{background:#171717;color:#fff;border-radius:20px;padding:18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;white-space:pre-wrap;line-height:1.5;border:1px solid rgba(255,255,255,.1)}
+    details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin:10px 0}summary{cursor:pointer;font-weight:900}details p, details ul{margin-bottom:0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f0ebe3;border:1px solid var(--line);padding:2px 6px;border-radius:7px;font-size:.9em}.two-col{columns:2;column-gap:24px}.two-col p{break-inside:avoid}.footer{padding:26px;text-align:center;color:var(--muted);font-weight:800}
+    @media(max-width:920px){.hero-grid{grid-template-columns:repeat(2,1fr)}.span-8,.span-7,.span-6,.span-5,.span-4,.span-3{grid-column:span 12}.two-col{columns:1}.hero{padding:26px}.nav{border-radius:20px}.grid{gap:12px}}
+  </style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Auditoría forense · Edición definitiva · 13 fuentes activas</div>
+    <h1>Revoluciona‑T · Ana vs. Marta Tamargo</h1>
+    <p class="subtitle">50 minutos. Prospect con compromiso 6/10, obstáculo económico real, timeline septiembre y una frase emocional que contenía toda la llamada: “lo único que me retiene es mi cachorrita”.</p>
+    <div class="hero-grid">
+      <div class="metric"><div class="k">Resultado</div><div class="v">No cerrada</div><div class="s">Sin reagendación concreta · sin ancla</div></div>
+      <div class="metric"><div class="k">Nota global</div><div class="v">5.3 / 10</div><div class="s">La más difícil de Ana</div></div>
+      <div class="metric"><div class="k">Duración</div><div class="v">50 min</div><div class="s">Parte 1 · corte técnico al final</div></div>
+      <div class="metric"><div class="k">Timeline real</div><div class="v">Septiembre</div><div class="s">Verano + tratamientos Uxía</div></div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="#ficha">Ficha</a><a href="#postcall">Post-call</a><a href="#diagnostico">Diagnóstico</a><a href="#scoreboard">Scoreboard</a><a href="#funciono">Funcionó</a><a href="#fuentes">13 fuentes</a><a href="#errores">7 errores</a><a href="#comparativa">Comparativa</a><a href="#seguimiento">Seguimiento</a><a href="#plan">Plan</a><a href="#resumen">Resumen</a>
+  </nav>
+
+  <section id="ficha">
+    <div class="section-title"><h2>Ficha del caso</h2><p>La foto fría antes de interpretar la llamada.</p></div>
+    <div class="grid">
+      <div class="card span-8">
+        <h3>Marta Tamargo · Madrid · ~45+ años · perimenopausia activa</h3>
+        <p><b>Closer:</b> Ana · <b>Fecha:</b> 27 mayo 2025 · <b>Duración:</b> 50 min (Parte 1 · corte técnico Google Meet al final).</p>
+        <p><b>Resultado:</b> NO CERRADA — sin reagendación concreta · sin ancla.</p>
+        <p><b>Historial Ana:</b> Miryam (CER. 6.6) · Katia (SEG. 6.5) · Beatriz (SEG. 6.3) · Mari (REV. 5.8) · Iria (S/CIE. 5.8) · Mariona (CER. 7.0) · Sandra (SEG. 6.5) · Mónica (SEG. 6.5) · Gloria (N/CER. 6.3) · Cristina (SEG. 5.8) · Marta (N/CER. 5.3).</p>
+        <div>
+          <span class="pill red">Compromiso 6/10</span><span class="pill amber">Obstáculo económico real</span><span class="pill blue">Timeline septiembre</span><span class="pill purple">Sin ancla</span>
+        </div>
+      </div>
+      <div class="card span-4 warning">
+        <div class="label">Perfil crítico</div>
+        <p>Gestora de servicios, trabajo mixto oficina + visitas a centros, horario muy flexible. Vive con su madre tras dejar el alquiler por inestabilidad económica. Separada.</p>
+        <p>Hija Uxía, 11 años, TDAH + hiperactividad, tratamiento psicológico activo de coste alto partido con expareja.</p>
+      </div>
+      <div class="card span-12">
+        <div class="grid">
+          <div class="span-3"><div class="label">Situación personal</div><p>Vive con su madre. Custodia compartida semanas alternas. Separada. Obstáculos reales acumulados.</p></div>
+          <div class="span-3"><div class="label">Problema físico</div><p>Abdomen hinchado, más por la tarde, brazos, ganancia progresiva desde pandemia, aproximadamente 6 años.</p></div>
+          <div class="span-3"><div class="label">Entrenamiento</div><p>Nunca ha hecho ejercicio en su vida. Ninguna rutina deportiva.</p></div>
+          <div class="span-3"><div class="label">Alimentación</div><p>Irregular. Fines de semana “libre albedrío”. Cenas improvisadas semanas sin Uxía: patatas fritas, chetos, nuggets.</p></div>
+        </div>
+      </div>
+      <div class="card span-6">
+        <h3>El ciclo de Marta</h3>
+        <div class="timeline">
+          <div class="tl"><b>Lunes-viernes</b>Intento de hacerlo bien.</div>
+          <div class="tl"><b>Fin de semana</b>Libre albedrío: cervezas, aperitivos, improvisación.</div>
+          <div class="tl"><b>Lunes</b>“Empezar desde cero”. Culpa. Sensación de haberla cagado.</div>
+          <div class="tl"><b>Repetición</b>Seis años de ciclo desde pandemia.</div>
+        </div>
+      </div>
+      <div class="card span-6 danger">
+        <h3>Bloqueadores reales</h3>
+        <p><b>Económico:</b> máximo disponible declarado: 80–90€ frente a un programa de 500€/mes o 1.300€.</p>
+        <p><b>Timing:</b> verano encima + tratamientos de Uxía hasta septiembre.</p>
+        <p><b>Timeline propio:</b> septiembre. Llegó a informarse para llegar a septiembre “a tiro hecho”, no para decidir hoy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="postcall">
+    <div class="section-title"><h2>Post-call: lo que ocurrió después</h2><p>El comportamiento posterior confirma lo que ya se veía dentro de la llamada.</p></div>
+    <div class="grid">
+      <div class="card span-7 danger">
+        <h3>La desconexión no fue solo técnica</h3>
+        <p>Ana envió el nuevo enlace al cortar la llamada. Marta no entró. Ana llamó. Marta no cogió el teléfono.</p>
+        <p>Eso no es un malentendido técnico. Es una decisión. Una prospect que en la última parte dijo “no lo sé” ocho veces, con compromiso 6/10 y que declaró que venía a informarse para septiembre, encuentra en el corte técnico la salida perfecta para no tener que decir que no. Marta la usó.</p>
+      </div>
+      <div class="card span-5 warning">
+        <h3>Qué confirma</h3>
+        <p>Las siete preguntas de compromiso en quince minutos dejaron a Marta en una posición incómoda. No rechazó el programa, pero tampoco quería seguir siendo preguntada sobre cuándo se comprometería.</p>
+        <p>Una prospect que se siente comprendida entra al segundo enlace aunque tenga dudas. Una prospect que se siente presionada no coge el teléfono.</p>
+      </div>
+      <div class="card span-12 success">
+        <h3>Seguimiento correcto: agosto, corto y sin venta</h3>
+        <div class="script">Marta, soy Ana. Sé que se nos cortó la otra vez y luego no pudiste. Sin problema. Solo quería saber cómo están tú y Uxía. Cuando llegue septiembre y lo tengas más claro, aquí estoy.</div>
+        <p class="small">Nada más. Si Marta responde, ella abre la puerta. Si no responde, la puerta sigue cerrada hasta que ella decida abrir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagnostico">
+    <div class="section-title"><h2>El diagnóstico que define esta auditoría</h2><p>Con Marta, cerrar hoy era una posibilidad marginal. El objetivo era anclar septiembre.</p></div>
+    <div class="card span-12">
+      <p>Marta es la prospect más difícil de las once llamadas de Ana. No por hostilidad, sino por acumulación de obstáculos reales: compromiso bajo, economía ajustada, verano encima, tratamientos de la hija que prioriza, y una mentalidad declarada de “vengo a informarme para septiembre, no a decidir hoy”.</p>
+      <p>Con esa prospect, cerrar hoy era una posibilidad marginal. El objetivo correcto era diferente: hacer el mejor diagnóstico posible, instalar el Reframe que la acompañe durante el verano, y anclar septiembre con una fecha y un compromiso concreto.</p>
+      <p>Ana no hizo ninguna de las tres cosas bien. El diagnóstico fue bueno en comportamiento pero esquivó el componente emocional más importante de la llamada. El Reframe no apareció. Y la llamada terminó sin ningún ancla para septiembre: ni fecha, ni compromiso, ni seguimiento acordado.</p>
+      <div class="quote">El error estructural: cuando Ana se enfrenta a una prospect de bajo compromiso, intenta forzar la decisión presente en lugar de construir la decisión futura.</div>
+      <p>Con Marta se repitió el mismo patrón de Cristina: siete preguntas sobre compromiso en quince minutos que produjeron siete “no lo sé”.</p>
+    </div>
+  </section>
+
+  <section id="scoreboard">
+    <div class="section-title"><h2>Scoreboard</h2><p>Los 13 libros como jueces.</p></div>
+    <div class="grid">
+      <div class="card span-3"><div class="score-ring"><div>5.3</div></div><p style="text-align:center;font-weight:900;margin:12px 0 0">GLOBAL / 10</p></div>
+      <div class="card span-9">
+        <table class="table">
+          <thead><tr><th>Bloque</th><th>Nota</th><th>Libro y razón</th></tr></thead>
+          <tbody>
+            <tr><td>Apertura / Agenda<div class="bar"><span style="width:75%"></span></div></td><td><b>7.5</b></td><td>Blount: profesional, clara. Rapport de Madrid natural.</td></tr>
+            <tr><td>Diagnóstico calidad<div class="bar"><span style="width:60%"></span></div></td><td><b>6.0</b></td><td>Mom Test / SPIN: buenas preguntas de comportamiento. El componente emocional más potente fue esquivado.</td></tr>
+            <tr><td>Diagnóstico profundidad<div class="bar"><span style="width:50%"></span></div></td><td><b>5.0</b></td><td>Voss: la frase más importante de la llamada fue ignorada. Sin labels en momentos clave.</td></tr>
+            <tr><td>Construcción de valor<div class="bar"><span style="width:35%"></span></div></td><td><b>3.5</b></td><td>Challenger Sale: sin Reframe. Sin Pre-Suasión. El precio ni siquiera llegó.</td></tr>
+            <tr><td>Manejo de objeciones<div class="bar"><span style="width:50%"></span></div></td><td><b>5.0</b></td><td>Blount / JOLT: obstáculo económico real minimizado. Siete preguntas de compromiso sin resultado.</td></tr>
+            <tr><td>Cierre<div class="bar"><span style="width:30%"></span></div></td><td><b>3.0</b></td><td>Jones: sin ancla para septiembre. Sin reserva de plaza. Sin fecha de seguimiento.</td></tr>
+            <tr><td>Lenguaje / Tono<div class="bar"><span style="width:70%"></span></div></td><td><b>7.0</b></td><td>Why She Buys: natural en diagnóstico. Repetitivo y presionante en la segunda mitad.</td></tr>
+            <tr><td>Estructura<div class="bar"><span style="width:50%"></span></div></td><td><b>5.0</b></td><td>Sexto corte Google Meet. Sin Reframe. Sin Pre-Suasión. Sin plan para septiembre.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="funciono">
+    <div class="section-title"><h2>Lo que funcionó</h2><p>Reconocimiento real, sin maquillaje.</p></div>
+    <div class="grid">
+      <div class="card span-6 success"><h3>Bien 1 · Identificó el ciclo real (min 23-27)</h3><p>Ana exploró en detalle el ciclo lunes-viernes bien / fin de semana libre / lunes desde cero. Marta lo describió con sus palabras: “lo veo siempre como empezar de cero”, “la has cagado a mitad de semana, déjalo”. Diagnóstico de comportamiento preciso y relevante.</p></div>
+      <div class="card span-6 success"><h3>Bien 2 · Obstáculo económico antes del precio (min 44-47)</h3><p>Ana preguntó directamente si había “limitación económica”. Marta dijo 80-90€. Ana descubrió la brecha antes de perder tiempo en un pitch que Marta no podía asumir. Correcto tácticamente.</p></div>
+      <div class="card span-4 success"><h3>Bien 3 · Preferencias de entrenamiento</h3><p>Casa vs gym. Horario flexible. Sin compromisos fijos. Variables de personalización recogidas.</p></div>
+      <div class="card span-4 success"><h3>Bien 4 · Sin “dos cosas”</h3><p>Undécima llamada seguida sin esta frase. Consolidado.</p></div>
+      <div class="card span-4 success"><h3>Bien 5 · Obstáculo temporal</h3><p>La pregunta sobre si hay un pago que se resuelve en junio, agosto o septiembre era correcta. Marta confirmó que septiembre mejora liquidez. Era la apertura para anclar septiembre. No se usó.</p></div>
+    </div>
+  </section>
+
+  <section id="fuentes">
+    <div class="section-title"><h2>Las 13 fuentes · una por una</h2><p>Qué dice cada marco y cómo aplica a Marta.</p></div>
+    <div class="grid">
+      <div class="card source-card span-6" data-n="01"><h3>Never Split the Difference · Chris Voss</h3><p><b>La frase más importante de la llamada fue esquivada:</b> minuto 8:18, Marta dijo: “Ahora mismo vivimos mi hija y yo... yo cambiaría todo ahora mismo en mi vida, pero lo único que me retiene aquí es mi cachorrita.” Ana respondió: “Eso se abordará, ya verás.” Y siguió hacia el diagnóstico físico.</p><div class="quote">Label correcto: “Parece que estás en un momento en que muchas cosas en tu vida no están donde quieres que estén, y que lo que te sostiene es tu hija.”</div><p>Eso habría abierto separación, alquiler perdido, vivir con la madre, trabajo que no siente suyo e hija con TDAH. También faltó el label del ciclo de culpa: “Parece que llevas años sintiéndote culpable el lunes por algo que hiciste el sábado, y eso ya cansa.”</p></div>
+      <div class="card source-card span-6" data-n="02"><h3>Gap Selling · Keenan</h3><p><b>Estado actual:</b> alimentación irregular, ciclo de culpa lunes, fines de semana libre albedrío, cero ejercicio, perimenopausia activa, seis años de ganancia progresiva.</p><p><b>Impact Layer no profundizado:</b> pantalones y vestidos que ya no se pone; “botijo con patas en dos años” en min 10:01; madre de 81 años en mejor forma que Marta. Ana recogió con “vale, vale” y siguió.</p><p><b>Causa raíz sin Reframe:</b> los sistemas probados no fueron construidos para una vida con cerveza del sábado, aperitivos en el pueblo y semanas sin cocinar. No falla Marta: falla el sistema.</p></div>
+      <div class="card source-card span-6" data-n="03"><h3>Objections · Jeb Blount</h3><p><b>Timing/verano:</b> Ana lo reencuadró como algo que “nos pasa a todos”, pero sin Disrupt. Marta dijo que venía a informarse para septiembre.</p><div class="script">Ledge: Tienes razón en que el verano cambia los ritmos.
+Disrupt: Precisamente por eso, quien entra en verano llega a septiembre sabiendo qué funciona en barbacoa y chiringuito.
+Ask: ¿Eso cambiaría algo para ti?</div><p><b>Económico:</b> “tampoco me preocupa tanto” minimizó un dato real: 80-90€ frente a 500€/mes, viviendo con su madre y con tratamiento de Uxía.</p></div>
+      <div class="card source-card span-6" data-n="04"><h3>Virtual Selling · Jeb Blount</h3><p>Sexto corte técnico por Google Meet. La llamada terminó cuando Ana iba a explicar el programa. Marta dijo que sí quería continuar, pero no entró después.</p><p>Este ya no es un problema de suerte: es infraestructura. En prospects de bajo compromiso, un corte puede ser la excusa perfecta para salir sin reconectar. Aquí lo fue.</p></div>
+      <div class="card source-card span-6" data-n="05"><h3>The JOLT Effect · Dixon y McKenna</h3><p>El Omission Bias de Marta era el miedo a comprometerse antes del verano y fallar otra vez. Historial de dietas de dos semanas, ciclos de lunes y culpa.</p><div class="quote">“Marta, lo que parece que pasa no es que no quieras cambiar. Es que llevas seis años intentándolo y sintiéndote culpable cada lunes, y comprometerte ahora significa arriesgarte a otro ciclo de eso. ¿Lo estoy entendiendo bien?”</div><p>Ana no nombró el miedo. Preguntó repetidamente por compromiso, activando exactamente ese miedo.</p></div>
+      <div class="card source-card span-6" data-n="06"><h3>Switch · Chip y Dan Heath</h3><p><b>Jinete:</b> parcialmente activo. Sabe que el problema existe, que la perimenopausia empeora y que el ciclo se repite.</p><p><b>Elefante:</b> en el sofá. Disfrutona, cervezas, aperitivos, agotamiento de madre sola y gestora de conflictos.</p><p><b>Camino:</b> bloqueado por economía y verano. Se despeja en septiembre si baja el coste de tratamientos de Uxía.</p><p><b>Bright Spot no usado:</b> madre de 81 años que se cuida y tiene mejor cuerpo que Marta.</p></div>
+      <div class="card source-card span-6" data-n="07"><h3>Why She Buys · Brennan</h3><p>Marta es “la disfrutona”. No quiere ser la de ensalada y agua con gas cuando todos toman cerveza y aperitivo. El argumento no es disciplina: es compatibilidad con su vida.</p><div class="quote">“Marta, tú no vas a dejar de ser disfrutona. El programa no te pide eso. Te enseña qué hacer el lunes para que el aperitivo del sábado no tire todo por la borda.”</div></div>
+      <div class="card source-card span-6" data-n="08"><h3>The Mom Test · Fitzpatrick</h3><p><b>Bien:</b> Ana preguntó por comportamiento real: qué come cuando no tiene nada preparado, cómo son los fines de semana, si destruye todo o sale y come fuera, por qué abandona dietas. Correcto.</p><p><b>Fallo:</b> “lo único que me retiene es mi cachorrita” era una señal emocional masiva y fue cerrada con “eso se abordará”.</p><p><b>Fallo:</b> leading question en entrenamiento: “nos hablabas del ejercicio de fuerza”. Marta respondió desde lo que lee y ve, no desde disponibilidad real.</p></div>
+      <div class="card source-card span-6" data-n="09"><h3>Pre-Suasión · Cialdini</h3><p>El precio nunca llegó, pero el frame previo tampoco estaba construido. El activo central era “botijo con patas en dos años”.</p><div class="quote">“Marta, me dijiste que en dos años no quieres verte como un botijo con patas, y que tu madre a los 81 tiene mejor cuerpo que tú ahora. Llevas seis años con el mismo ciclo. El programa son…”</div><p>Sin ese frame, el precio habría sido solo un número.</p></div>
+      <div class="card source-card span-6" data-n="10"><h3>Influence · Cialdini</h3><p><b>Compromiso mal usado:</b> el 6/10 era honesto. Marta dijo que para llegar a 9/10 “tiene que pasar el verano”. Ana presionó con “¿y eso está en tus manos?” y Marta se mantuvo.</p><p>Uso correcto: “Ese 6 me dice que quieres el cambio pero el momento te pesa. Si septiembre fuera hoy, ¿sería un 9?”</p><p><b>Prueba social ausente:</b> mujeres con ciclo lunes bien / fin de semana libre / lunes desde cero que rompieron el ciclo sin dejar de disfrutar.</p></div>
+      <div class="card source-card span-6" data-n="11"><h3>The Challenger Sale · Dixon y Adamson</h3><p>El Reframe de Marta era el más claro y accionable de las once llamadas de Ana:</p><div class="script">Marta, me dices que has probado dietas y que siempre vuelves al mismo punto. Y me preguntas qué haces mal. La respuesta es: nada. El problema es que todos esos sistemas — las dietas de tu amiga, los menús de Instagram — fueron diseñados para alguien que no tiene cerveza los sábados, ni barbacoa en el pueblo, ni semanas en que no llegó a cocinar. Para una versión de ti que no existe. Este programa se construye para la Marta real — la que disfruta, la que tiene horarios locos, la que come chetos cuando llega tarde. No para la versión perfecta que nunca has sido y no tienes que ser.</div><p>Sin ese Reframe, el pitch era nutrición y ejercicio. Con él, era la respuesta específica a Marta.</p></div>
+      <div class="card source-card span-6" data-n="12"><h3>SPIN Selling · Rackham</h3><p><b>Situación:</b> bien cubierta: trabajo, horario, hija, separación, convivencia con madre, alimentación, cero ejercicio, pandemia.</p><p><b>Problema:</b> ciclo, barriga, brazos, ropa que no se pone, progresión que teme.</p><p><b>Implicación perdida:</b> “botijo con patas en dos años” pedía una segunda pregunta: “si en dos años sigues igual y la perimeno avanza, ¿qué es lo que más te preocupa que pase específicamente, más allá del peso?”</p><p><b>Necesidad-Beneficio:</b> varita mágica min 31 demasiado pronto. Marta no lo había pensado: señal de que faltaban implicaciones.</p></div>
+      <div class="card source-card span-12" data-n="13"><h3>Exactly What to Say · Phil M. Jones</h3><p>Faltó una frase para timeline claro pero no hoy:</p><div class="script">Marta, si en septiembre llegas con el sistema ya claro — sabiendo qué hacer en el chiringuito, en la barbacoa del pueblo y en las semanas de trabajo sin cocinar — ¿cambiaría algo para ti entrar en agosto en lugar de septiembre?</div><p>También faltó la condicional económica: “Si el dinero no fuera el tema, ¿entrarías al programa para septiembre?” Si dice sí, el obstáculo económico es único y se trabaja la reserva. Si dice no sabe, hay más diagnóstico.</p></div>
+    </div>
+  </section>
+
+  <section id="errores">
+    <div class="section-title"><h2>Los siete errores concretos</h2><p>El mapa de lo que hundió la llamada.</p></div>
+    <div class="grid">
+      <div class="card span-6 danger"><h3>Error 1 · “Eso se abordará, ya verás”</h3><p>La frase más importante — “lo único que me retiene es mi cachorrita” — fue cerrada. La carga emocional de separación, casa perdida, vivir con madre e hija como único ancla no emergió.</p></div>
+      <div class="card span-6 danger"><h3>Error 2 · Obstáculo económico minimizado</h3><p>80-90€ máximo frente a 1.300€ o 500€/mes. “Tampoco me preocupa tanto” evitó una conversación incómoda, pero real.</p></div>
+      <div class="card span-6 danger"><h3>Error 3 · Siete preguntas de compromiso</h3><p>“¿Ahora es el momento?”, “¿qué tiene que pasar para ser 9?”, “¿esto está en tus manos?”, “¿firmarías por quedarte así?”, “¿en qué momento?”, “¿darías el paso hoy?”, “¿tiene sentido avanzar?” Marta respondió “no lo sé” al menos ocho veces.</p></div>
+      <div class="card span-6 danger"><h3>Error 4 · Sin Reframe</h3><p>Undécima llamada. El Reframe era clarísimo: sistemas que se rompen al primer aperitivo del sábado porque fueron diseñados para otra persona.</p></div>
+      <div class="card span-4 danger"><h3>Error 5 · El botijo no fue ancla</h3><p>La imagen más potente de la llamada. Debió ser centro del cierre, Reframe y Pre-Suasión.</p></div>
+      <div class="card span-4 danger"><h3>Error 6 · Madre 81 no usada</h3><p>Bright Spot, prueba social e identidad aspiracional dentro de su familia. No usado.</p></div>
+      <div class="card span-4 danger"><h3>Error 7 · Septiembre sin ancla</h3><p>Timeline claro sin fecha, sin compromiso, sin seguimiento agendado. La conversación queda en el aire.</p></div>
+    </div>
+  </section>
+
+  <section id="comparativa">
+    <div class="section-title"><h2>Comparativa con llamadas anteriores de Ana</h2><p>Once llamadas muestran el patrón.</p></div>
+    <div class="card span-12">
+      <table class="table">
+        <thead><tr><th>Dimensión</th><th>MIR</th><th>KAT</th><th>BEA</th><th>MAR</th><th>IRI</th><th>MAR.</th><th>SAN</th><th>MÓN</th><th>GLO</th><th>CRI</th><th>MTA</th></tr></thead>
+        <tbody>
+          <tr><td>Nota global</td><td>6.6</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.8</td><td>7.0</td><td>6.5</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.3</td></tr>
+          <tr><td>Resultado</td><td>CER</td><td>SEG</td><td>SEG</td><td>REV</td><td>S/C</td><td>CER</td><td>SEG</td><td>SEG</td><td>N/C</td><td>SEG</td><td>N/C</td></tr>
+          <tr><td>“Dos cosas”</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Diagnóstico emocional</td><td>P</td><td>P</td><td>P</td><td>Bno</td><td>MB</td><td>MB</td><td>Bno</td><td>MB</td><td>Lim</td><td>MB</td><td>Deb</td></tr>
+          <tr><td>Decisor cualificado</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>N/A</td></tr>
+          <tr><td>Implicación profunda</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Par</td><td>Par</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Activos en cierre</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Par</td><td>Par</td><td>Par</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Reframe</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Pre-Suasión</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Obstáculo económico</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Sí</td><td>N/A</td><td>Min.</td></tr>
+          <tr><td>Timeline septiembre</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>Sep</td><td>Sin ancla</td></tr>
+        </tbody>
+      </table>
+      <p><b>Patrón:</b> el diagnóstico emocional de Ana es fuerte cuando el prospect es emotivo (Mónica Duque, Mariona, Cristina). Con prospects pragmáticas o racionales (Gloria, Marta), Ana confunde dejar hablar con excavar.</p>
+      <p><b>Nuevo patrón preocupante:</b> ante bajo compromiso, en Cristina y Marta aplicó siete preguntas de compromiso. Las dos veces produjo resistencia.</p>
+    </div>
+  </section>
+
+  <section id="seguimiento">
+    <div class="section-title"><h2>Lo que deberá pasar en el seguimiento</h2><p>No hay seguimiento agendado. La puerta hay que reabrir con inteligencia.</p></div>
+    <div class="card span-12 success">
+      <h3>Mensaje correcto a finales de agosto</h3>
+      <div class="script">Marta, soy Ana. ¿Qué tal el verano? ¿Cómo está Uxía? Me quedé pensando en lo que me dijiste — que para ti los septiembres son los eneros de todo el mundo. Este año eso puede ser real. ¿Hablamos la primera semana de septiembre?</div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="section-title"><h2>Plan de entrenamiento · Ana · Iteración 11</h2><p>Qué se mantiene y qué cambia ya.</p></div>
+    <div class="grid">
+      <div class="card span-5 success"><h3>Lo que no se toca</h3><p><b>“Dos cosas” eliminado:</b> once llamadas seguidas. Consolidado.</p><p><b>Descubrir obstáculo económico antes del precio:</b> bien hecho en esta llamada.</p><p><b>Preguntas de comportamiento real:</b> buena primera mitad del diagnóstico.</p></div>
+      <div class="card span-7 warning"><h3>Lo que cambia</h3><details open><summary>1 · Si dice “mi cachorrita”, parar</summary><p>No se esquiva. Se labela. Se explora. La carga emocional detrás era el diagnóstico real. Lo físico era la consecuencia.</p></details><details open><summary>2 · Si da 6/10, una sola pregunta</summary><p>“Si el verano y el dinero no fueran el obstáculo, ¿querrías esto para ti?” Si dice sí, anclar septiembre. Si dice no sabe, más diagnóstico.</p></details><details open><summary>3 · Obstáculo económico real se trata como real</summary><p>80-90€ vs 1.300€ no se minimiza. Se trabaja como obstáculo temporal que mejora en septiembre.</p></details><details open><summary>4 · Reframe obligatorio</summary><p>“Llevas seis años con sistemas que se rompen en el primer aperitivo del sábado porque fueron diseñados para otra persona. El problema no es tu fuerza de voluntad. Es que nunca has tenido el sistema diseñado para la Marta real.”</p></details><details open><summary>5 · Anclar septiembre</summary><p>“Marta, dame una fecha en septiembre — la primera semana — y hablamos. Así llegas a septiembre a tiro hecho, como tú dices.”</p></details></div>
+    </div>
+  </section>
+
+  <section id="resumen">
+    <div class="section-title"><h2>Resumen ejecutivo</h2><p>La verdad útil para mejorar.</p></div>
+    <div class="grid">
+      <div class="card span-4 danger"><h3>Nota</h3><div class="big-number">5.3</div><p>/ 10 · No cerrada · sin seguimiento agendado · sin ancla.</p></div>
+      <div class="card span-4 warning"><h3>La prospect más difícil</h3><p>Compromiso 6/10, obstáculo económico real, verano, hija con TDAH. Cerrar hoy era improbable. Anclar septiembre era posible y no ocurrió.</p></div>
+      <div class="card span-4 danger"><h3>Lo que se perdió</h3><p>La frase “lo único que me retiene es mi cachorrita”, el Reframe que habría acompañado a Marta durante el verano, y el ancla de septiembre con fecha y compromiso.</p></div>
+      <div class="card span-12">
+        <h3>Para Ana</h3>
+        <div class="quote">“Once llamadas. Dos notas por debajo de 5.5 seguidas — Cristina y Marta. Las dos con la misma causa: cuando una prospect declara que no es su momento, aplicaste siete preguntas de compromiso. Las dos veces produjo ‘no lo sé’ en bucle. El patrón está instalado y es el que hay que romper ahora mismo.”</div>
+        <p>La pregunta no es “¿cuándo te comprometes?”. La pregunta es: “¿si el obstáculo no existiera, querrías esto?”. Esa diferencia cambia todo. Marta quería el cambio pero tenía septiembre en la cabeza desde el primer minuto. El trabajo era instalar el Reframe que la acompañara todo el verano y darle una fecha de septiembre para hablar. Ninguna de las dos cosas ocurrió.</p>
+      </div>
+      <div class="card span-12 white">
+        <h3>Fin de la auditoría definitiva</h3>
+        <p><b>Marta Tamargo · Ana · 27 mayo 2025</b></p>
+        <p>13 fuentes · Sin concesiones · Para una closer que puede ser mucho mejor.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Revoluciona‑T · Auditoría forense dinámica · HTML 2026</div>
+</div>
+<script>
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

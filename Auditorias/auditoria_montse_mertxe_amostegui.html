@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REVOLUCIONA-T · CLOSER MONTSE · MERTXE AMOSTEGUI</title>
+<style>
+:root {
+  --paper:#fbf7ef; --paper2:#fffdf8; --ink:#191714; --muted:#6f675d; --line:#e6dac8;
+  --gold:#d79b28; --amber:#ffcf73; --blue:#245c73; --green:#2e8b57; --red:#bb3e3e;
+  --shadow:0 22px 55px rgba(83,54,18,.14);
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  color:var(--ink);
+  background:radial-gradient(circle at 8% 4%,rgba(255,207,115,.55),transparent 24%),
+             radial-gradient(circle at 88% 7%,rgba(36,92,115,.16),transparent 28%),
+             linear-gradient(180deg,#fbf1df 0%,#fffaf2 40%,#f7ead6 100%);
+  line-height:1.58;
+}
+.wrapper { max-width:1340px; margin:0 auto; padding:28px 20px 80px; }
+.hero {
+  position:relative; overflow:hidden; border:1px solid var(--line); border-radius:34px; padding:38px;
+  background:linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,246,223,.86)); box-shadow:var(--shadow);
+}
+.hero:after { content:"7.2"; position:absolute; right:34px; top:20px; font-size:120px; font-weight:1000; letter-spacing:-.08em; color:rgba(215,155,40,.12); }
+.kicker { font-size:12px; letter-spacing:.16em; text-transform:uppercase; font-weight:1000; color:var(--blue); }
+h1 { margin:12px 0 10px; max-width:980px; font-size:clamp(34px,5.2vw,64px); line-height:.94; letter-spacing:-.06em; }
+.hero p { max-width:880px; margin:0; font-size:18px; color:var(--muted); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.chips span { display:inline-flex; border:1px solid #eadcc6; background:#fffaf2; border-radius:999px; padding:9px 13px; font-size:13px; font-weight:900; color:#473c2d; }
+.metrics { display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin:18px 0; }
+.metric { min-height:128px; border:1px solid var(--line); border-radius:24px; padding:17px; background:rgba(255,253,248,.86); box-shadow:0 14px 34px rgba(83,54,18,.08); }
+.metric span { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:1000; }
+.metric strong { display:block; margin:8px 0; font-size:24px; letter-spacing:-.035em; }
+.metric em { font-style:normal; color:var(--muted); font-size:13px; font-weight:850; }
+.layout { display:grid; grid-template-columns:360px 1fr; gap:18px; align-items:start; }
+.sidebar { position:sticky; top:16px; border:1px solid var(--line); border-radius:28px; padding:18px; background:rgba(255,253,248,.92); box-shadow:var(--shadow); }
+.sidebar h2,.panel h2 { margin:0 0 14px; font-size:28px; letter-spacing:-.04em; }
+.bar-row { margin:13px 0; } .bar-head { display:flex; justify-content:space-between; gap:12px; font-size:13px; font-weight:950; } .bar-head b { color:var(--gold); }
+.bar-track { height:12px; background:#efe3d0; border-radius:999px; overflow:hidden; margin-top:7px; border:1px solid #eadcc6; }
+.bar-fill { height:100%; border-radius:999px; background:linear-gradient(90deg,var(--blue),var(--gold)); }
+.insight { margin-top:16px; padding:16px; border-radius:22px; border:1px solid rgba(215,155,40,.38); background:linear-gradient(135deg,#fff2cf,#fffdf8); color:#4a3511; font-weight:900; }
+.nav { display:flex; flex-direction:column; gap:8px; margin-top:16px; } .nav a { text-decoration:none; color:#403628; border:1px solid var(--line); border-radius:16px; padding:10px 12px; background:#fffaf2; font-weight:900; font-size:13px; }
+.panel { border:1px solid var(--line); border-radius:28px; background:rgba(255,253,248,.92); box-shadow:var(--shadow); padding:18px; }
+.section,.source-card { border:1px solid var(--line); border-radius:22px; overflow:hidden; margin:12px 0; background:#fffdf8; }
+.section[open],.source-card[open] { border-color:rgba(215,155,40,.55); box-shadow:0 12px 26px rgba(83,54,18,.08); }
+summary { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 20px; font-weight:1000; text-transform:uppercase; letter-spacing:.02em; }
+summary::-webkit-details-marker { display:none; }
+summary i { width:30px; height:30px; flex:0 0 auto; display:grid; place-items:center; border-radius:999px; color:#5f3c04; background:#ffe7af; border:1px solid #f0c46b; font-style:normal; font-size:22px; transition:.18s ease; }
+details[open] summary i { transform:rotate(45deg); }
+.section-body { padding:0 20px 22px; color:#302a22; }
+.section-body p { margin:12px 0; color:#302a22; }
+.section-body h4 { margin:24px 0 10px; font-size:15px; color:#111; letter-spacing:.02em; }
+.score-table-wrap { overflow:auto; border-radius:18px; border:1px solid var(--line); background:#fffaf2; }
+.score-table { width:100%; min-width:840px; border-collapse:collapse; }
+.score-table th { padding:13px 14px; text-align:left; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.1em; background:#f6ead8; }
+.score-table td { padding:13px 14px; border-top:1px solid var(--line); vertical-align:top; }
+.score-pill { min-width:48px; display:inline-flex; justify-content:center; padding:5px 9px; border-radius:999px; background:#ffe8b3; color:#7b4e05; font-weight:1000; }
+.global-score { margin-top:14px; padding:14px 16px; border-radius:18px; border:1px solid rgba(46,139,87,.28); background:#eaf8ef; color:#1d5d38; font-weight:1000; }
+.evo-list { display:grid; gap:7px; }
+.evo-list div { padding:10px 12px; border:1px solid var(--line); border-radius:14px; background:#fffaf2; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:13px; overflow:auto; }
+.card-grid { display:grid; grid-template-columns:1fr; gap:12px; }
+.item-card { border:1px solid var(--line); border-radius:20px; background:#fffaf2; overflow:hidden; }
+.item-card.win { border-color:rgba(46,139,87,.32); } .item-card.risk { border-color:rgba(187,62,62,.30); }
+.item-card summary { padding:15px 16px; text-transform:none; letter-spacing:0; }
+.item-card summary strong { width:28px; height:28px; display:grid; place-items:center; border-radius:999px; background:#ffe7af; color:#5f3c04; font-size:20px; }
+.item-index { display:inline-grid; place-items:center; width:34px; height:34px; margin-right:10px; border-radius:12px; background:#f6ead8; color:#7b4e05; font-size:12px; font-weight:1000; }
+.item-card > div { padding:0 16px 16px; }
+.source-number { display:inline-grid; place-items:center; width:34px; height:34px; margin-right:10px; border-radius:12px; background:#e7f1f4; color:var(--blue); font-weight:1000; }
+.goodtxt { color:var(--green); font-weight:1000; } .badtxt { color:var(--red); font-weight:1000; }
+.transcript-section { border:1px solid var(--line); background:#fffdf8; border-radius:22px; padding:18px 20px; margin:12px 0; }
+.transcript-section h3 { margin:0 0 12px; font-size:20px; letter-spacing:-.03em; color:#2a2115; }
+.footer { text-align:center; color:var(--muted); margin-top:28px; font-size:13px; font-weight:800; }
+@media(max-width:1060px) { .metrics { grid-template-columns:repeat(2,1fr); } .layout { grid-template-columns:1fr; } .sidebar { position:relative; top:auto; } }
+@media(max-width:640px) { .wrapper { padding:14px 10px 60px; } .hero { padding:22px; border-radius:24px; } .metrics { grid-template-columns:1fr; } .panel,.sidebar { padding:14px; border-radius:22px; } summary { padding:16px 14px; font-size:13px; } .section-body { padding:0 14px 18px; } }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="hero">
+    <div class="kicker">Auditoría dinámica · Revoluciona-T</div>
+    <h1>REVOLUCIONA-T · CLOSER MONTSE · MERTXE AMOSTEGUI</h1>
+    <p>Transcripción convertida en informe visual: ficha, diagnóstico, scoreboard, evolución, aciertos, errores, 13 fuentes, patrón de leads, plan de entrenamiento y frase final.</p>
+    <div class="chips"><span>Mertxe Amostegui</span><span>Pamplona</span><span>Montse</span><span>NO CERRABLE</span><span>7.2 / 10</span><span>Bright Spot memoria</span><span>Reframe más potente</span><span>6ª llamada sin cualif. económica</span><span>Visión questions 3ª vez</span><span>Brecha 5x</span></div>
+  </header>
+  <section class="metrics"><div class='metric'><span>Resultado</span><strong>NO CERRABLE</strong><em>Obstáculo económico real e inconmovible</em></div><div class='metric'><span>Nota global</span><strong>7.2 / 10</strong><em>Diagnóstico más completo de Montse</em></div><div class='metric'><span>Duración</span><strong>~55 min útiles</strong><em>13 + 46 con solape de reconexión</em></div><div class='metric'><span>Hallazgo clave</span><strong>Bright Spot memoria</strong><em>Primera vez en el proyecto</em></div><div class='metric'><span>Brecha económica</span><strong>5x</strong><em>100-200€/mes vs 500€/mes</em></div><div class='metric'><span>Seguimiento</span><strong>2 años</strong><em>Cuando sus hijos no estudien fuera</em></div></section>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Score visual</h2>
+<div class="bar-row">
+  <div class="bar-head"><span>Apertura / Agenda</span><b>8.0</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:80.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Diagnóstico calidad</span><b>8.5</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:85.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Diagnóstico profundidad</span><b>8.5</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:85.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Construcción de valor</span><b>8.0</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:80.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Manejo de objeciones</span><b>3.0</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:30.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Cierre</span><b>1.0</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:10.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Lenguaje / Tono</span><b>8.5</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:85.0%"></div></div>
+</div>
+
+<div class="bar-row">
+  <div class="bar-head"><span>Estructura</span><b>7.0</b></div>
+  <div class="bar-track"><div class="bar-fill" style="width:70.0%"></div></div>
+</div>
+
+      <div class="insight"><strong>Lectura clave:</strong> el gran avance fue pedirle a Mertxe que recordara lo que ya vivió. El gran agujero sigue siendo la cualificación económica temprana.</div>
+      <nav class="nav"><a href="#auditoria">Auditoría completa</a><a href="#fuentes">13 fuentes</a><a href="#transcripcion">Transcripción en HTML</a></nav>
+    </aside>
+    <main>
+      <section id="auditoria" class="panel"><h2>Auditoría completa</h2>
+    <details class="section" open>
+      <summary><span>FICHA DEL CASO</span><i>+</i></summary>
+      <div class="section-body"><p>Prospecto:       Mertxe Amostegui · Pamplona · edad ~50s<br>Closer:          Montse<br>Duración:        ~55 minutos útiles (13 + 46, con solape de reconexión)<br>Resultado:       NO CERRABLE · obstáculo económico real e inconmovible<br>Nota global:     7.2 / 10<br>Historial Montse: Emma(6.4)·Gladys(7.1)·Katherine(6.7)·SusannaQ(5.5)·Lydia(6.5)·Virginia(6.5)·SusanaGM(7.3)·Lidia(6.8)·Alicia(7.0)·Mireia(6.4)·Mariluz(7.0)·Mertxe(7.2)<br>Perfil Mertxe:   Trabaja limpiando (en un gimnasio) · turno de mañana<br>Casada · dos hijos (Aymar 23, Ollán 21) estudiando fuera (San Sebastián y Logroño) · vuelven los fines de semana<br>Tardes libres — pero las pasa en el sofá o haciendo tareas domésticas<br>Perdió 20 kg hace 12 años · mantuvo 8 años (2012-2020) · pandemia rompió rutina<br>Subida gradual: ~2 kg/año desde pandemia · objetivo declarado: -20 kg<br>&quot;Soy una antideporte, nunca me ha gustado&quot; — pero lo hacía porque tenía estructura<br>Picos de ansiedad/antojo media mañana y media tarde (máquina del trabajo)<br>Debilidad proximal severa en piernas · incapacidad de levantarse del suelo sin girar<br>Dolor continuo espalda izquierda · inestabilidad tobillos (tibia rota hace 3 años)<br>Fatiga crónica · desanimada · &quot;aburrida todo el rato&quot; por las tardes desde que los hijos se fueron<br>Compromiso inicial: 7/10 → sube a 9/10 con acompañamiento contemplado<br>Expectativa de precio: ~100-200€/mes (basada en nutricionista antigua)<br>Precio real: 500€/mes fraccionado → más de un tercio de su sueldo<br>Brecha: 5x lo que puede pagar<br>Timeline para replantearse: &quot;en dos años, cuando mis hijos no estudien fuera&quot;</p></div>
+    </details>
+    
+    <details class="section" open>
+      <summary><span>EL DIAGNÓSTICO REAL DE ESTA LLAMADA</span><i>+</i></summary>
+      <div class="section-body"><p>Esta es la tercera llamada consecutiva de Montse que es NO CERRABLE por obstáculo económico. Mireia, Mariluz y ahora Mertxe. Pero lo que sí es notable: esta llamada tiene el diagnóstico más completo y profundo de todas las 12 llamadas de Montse. El Reframe fue el mejor del proyecto. Las visión questions aparecieron por tercera llamada consecutiva. Y Montse usó por primera vez en todo el proyecto una técnica de memoria activa — pedir a Mertxe que recuerde cómo se sentía cuando lo tenía, en lugar de imaginar un futuro hipotético. Eso es Switch (Heath) en su versión más potente y no estaba en ningún manual. Salió solo.<br>Y aun así: la señal económica estaba disponible en el minuto 2:29 de la Parte 1. &quot;Están estudiando fuera.&quot; Esa frase, con una sola pregunta de seguimiento, habría revelado el obstáculo antes de invertir 50 minutos en el pitch.</p></div>
+    </details>
+    
+    <details class="section" open>
+      <summary><span>SCOREBOARD — 13 FUENTES + MANUAL OPERATIVO</span><i>+</i></summary>
+      <div class="section-body">
+<div class="score-table-wrap">
+<table class="score-table">
+<thead><tr><th>Bloque</th><th>Nota</th><th>Vs. Mariluz</th><th>Razón</th></tr></thead><tbody>
+<tr><td><b>Apertura / Agenda</b></td><td><span class='score-pill'>8.0</span></td><td>↑(7.5)</td><td>Natural, agenda clara. Sin la carga técnica de Mariluz.</td></tr><tr><td><b>Diagnóstico calidad</b></td><td><span class='score-pill'>8.5</span></td><td>↑(8.5)</td><td>El más completo de Montse. Físico + emocional + laboral.</td></tr><tr><td><b>Diagnóstico profundidad</b></td><td><span class='score-pill'>8.5</span></td><td>↑↑(8.0)</td><td>Memoria activada (Bright Spot). Mertxe nombró sus propios bloqueos.</td></tr><tr><td><b>Construcción de valor</b></td><td><span class='score-pill'>8.0</span></td><td>↑(8.0)</td><td>Reframe EXCELENTE. Visión questions tercera vez. Pitch largo.</td></tr><tr><td><b>Manejo de objeciones</b></td><td><span class='score-pill'>3.0</span></td><td>↓(4.0)</td><td>Obstáculo inconmovible. Artificial scarcity al final.</td></tr><tr><td><b>Cierre</b></td><td><span class='score-pill'>1.0</span></td><td>=(1.5)</td><td>NO CERRABLE. Cierre digno y sin presión.</td></tr><tr><td><b>Lenguaje / Tono</b></td><td><span class='score-pill'>8.5</span></td><td>=(8.5)</td><td>Empático. “Me queda bastante claro” presente.</td></tr><tr><td><b>Estructura</b></td><td><span class='score-pill'>7.0</span></td><td>=(7.0)</td><td>Pre-Suasión, auto-venta, visión questions. Sin cualif. económica.</td></tr>
+</tbody></table></div><div class="global-score">GLOBAL <b>7.2 / 10</b></div>
+</div>
+    </details>
+    
+    <details class="section">
+      <summary><span>TABLA EVOLUTIVA — MONTSE, 12 LLAMADAS</span><i>+</i></summary>
+      <div class="section-body"><div class='evo-list'><div>DIMENSIÓN              |SUS2|LID|ALI|MIR|MAR|MER</div><div>Nota global            |7.3|6.8|7.0|6.4|7.0|7.2</div><div>Resultado              |CER|SEG|SEG|S/C|N/C|N/C</div><div>&quot;Me queda claro&quot;       |Sí |Sí |Sí |Sí |Sí |Sí 🔴</div><div>Cualif. económica      |Sí |No |No |No |No |No 🔴 (6ª vez)</div><div>Reframe                |No |Sí |Sí |Sí |Sí |Sí ✅</div><div>Visión questions       |No |No |No |No |Sí |Sí ✅ (3ª vez)</div><div>Bright Spot memoria    |No |No |No |No |No |Sí 🟢 PRIMERO</div><div>Pre-Suasión            |Sí |Sí |Sí |No |No |Sí</div><div>Frase seguridad        |No |No |No |No |No |No 🔴</div><div>Auto-venta             |No |No |No |No |Sí |Sí ✅</div><div>Artificial scarcity    |No |No |No |No |No |Sí ✗</div><div>Diagnóstico emocional  |MB |Bno|MB |MB |MB |MB+</div><div>PATRÓN PREOCUPANTE: Últimas 3 llamadas de Montse son NO CERRABLES por obstáculo económico. ¿Calidad de leads? ¿Filtrado pre-llamada? Jonathan debe revisar la fuente de estas prospects.</div></div></div>
+    </details>
+    
+    <details class="section">
+      <summary><span>LO QUE FUNCIONÓ — CON TIMESTAMPS DE AMBAS PARTES</span><i>+</i></summary>
+      <div class="section-body"><div class='card-grid'>
+
+        <details class="item-card win">
+          <summary><span class="item-index">01</span><span>BIEN 1 — EL BRIGHT SPOT APLICADO A LA MEMORIA REAL (P2, MIN 24:30)</span><strong>+</strong></summary>
+          <div><p>Esta es la novedad más importante de la llamada y del proyecto. Cuando Mertxe describió cómo se sentía al salir del gimnasio con la profesora que le daba caña, Montse hizo algo que no ha hecho nadie en este proyecto:<br>&quot;Ahora quiero que hagas algo. Tú ya sabes lo que es sentirte así. Lo has hecho tú. Ya has pesado 20 kilos menos. Entonces no te estoy pidiendo que te imagines algo que no conoces. Imagínate, o recuerda — ¿cómo te sentías cuando tenías esa energía, esa fuerza en las piernas, esos 20 kilos menos y esa rutina instaurada?&quot;<br>Esa es la diferencia entre una visión question y el Bright Spot de Switch. La visión question pide imaginar algo que aún no existe. El Bright Spot pide RECORDAR algo que ya existió — que el cuerpo de Mertxe ya hizo, que ella ya vivió. No es aspiracional. Es un recuerdo.<br>Mertxe respondió desde la memoria real: habló de cómo salía &quot;empapada&quot; del gimnasio diciendo &quot;uy, qué bien&quot; incluso aunque la profesora Maite &quot;era una capulla que me hacía hacer abdominales.&quot; Eso es la prueba de que Mertxe CAN — no is able to imagine, sino que ha done. Esa es la diferencia que cierra el argumento de &quot;no puedo.&quot;<br>Esto fue instinto puro de Montse. No estaba en ningún guion. Es lo más valioso de toda la llamada y del proyecto hasta ahora en términos de técnica nueva.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">02</span><span>BIEN 2 — EL REFRAME MÁS ESPECÍFICO Y PODEROSO DEL PROYECTO (P2, MIN 10:00)</span><strong>+</strong></summary>
+          <div><p>&quot;Me has dicho que el problema eres tú. Pero Mertxe, una persona que perdió 20 kilos y los mantuvo durante años, eso no lo hace una persona que no tiene ni capacidad ni disciplina. Y eso tú lo hiciste. Lo que ha pasado en la pandemia es que se te rompió una estructura y sin estructura hasta la persona más disciplinada del mundo se cae. El problema no eres tú. Es que llevas años intentando retomar sola algo que la primera vez construiste con hábitos muy concretos.&quot;<br>Ese Reframe tiene tres capas:</p>
+<p>Desmonta el autodiagnóstico de Mertxe (&quot;el problema soy yo&quot;)<br>Usa su propio historial como evidencia de que SÍ tiene capacidad<br>Identifica la causa real: sin estructura hasta el más disciplinado cae</p>
+<p>Y lo hizo en el momento exacto — justo cuando Mertxe dijo &quot;el problema soy yo&quot; (min 9:06). No lo esperó para el pre-pitch. Lo disparó en el diagnóstico.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">03</span><span>BIEN 3 — &quot;LA MOTIVACIÓN AL REVÉS&quot; — CHALLENGER SALE EN TIEMPO REAL (P2, MIN 11:35)</span><strong>+</strong></summary>
+          <div><p>&quot;Mucha gente piensa que primero tienen que motivarse para entonces lograr resultados. Escúchalo: me estabas diciendo tú que empezaste y como veías resultados. Entonces es que normalmente ocurre al revés. No es que primero nos motivamos y luego llegan los resultados. Es completamente al revés.&quot;<br>Eso es Teach del Challenger Sale con el argumento opuesto a la creencia convencional. Y Montse lo usó en el momento exacto — cuando Mertxe reconoció que la primera vez empezó sin ganas y los resultados le generaron motivación. Montse lo escuchó, lo guardó, y lo devolvió cinco minutos después como insight.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">04</span><span>BIEN 4 — VISIÓN QUESTIONS: TERCERA LLAMADA CONSECUTIVA (P2, MIN 23:21-24:30)</span><strong>+</strong></summary>
+          <div><p>&quot;¿Qué cosas tendrían que haberte pasado en 3-4 meses para decir que entrar en el programa fue una de las mejores decisiones que tomaste en años?&quot;<br>Bien calibrada para Mertxe: le pregunta por situaciones concretas (sentirte bien, verte mejor, energía). Y la respuesta de Mertxe fue genuina: no dijo &quot;perder 20 kilos&quot; — dijo &quot;verte bien, sentirte bien... salir empapada del gimnasio y decir uy qué bien.&quot;<br>Tres llamadas consecutivas con visión questions. Eso ya no es experimento — es hábito emergente.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">05</span><span>BIEN 5 — LA ESCALADA DE COMPROMISO DEL 7 AL 9 (P2, MIN 22:07-23:20)</span><strong>+</strong></summary>
+          <div><p>Cuando Mertxe dio un 7 con importante reserva (&quot;casi te diría que hasta mucho&quot;), Montse no lo aceptó ni lo rebatió. Lo exploró: &quot;Si tuvieras un plan estructurado y acompañamiento, ¿crees que tu compromiso podría crecer?&quot; — Mertxe: &quot;Sí, lo tengo clarísimo.&quot;<br>Entonces Montse hizo el cierre del escalamiento: &quot;Ponte en esa situación. Si estuvieras en un programa así, ¿cuánto sería?&quot; — Mertxe: 9/10.<br>Ese movimiento del 7 al 9 es Motivational Interviewing puro: no convencer al prospect de que está comprometida, sino ayudarla a descubrir su compromiso real cuando las condiciones son las correctas.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">06</span><span>BIEN 6 — EXCAVACIÓN EMOCIONAL DEL IMPACTO LABORAL Y COTIDIANO (P2, MIN 18-19)</span><strong>+</strong></summary>
+          <div><p>Cuando Mertxe describió que hay días en que no puede limpiar las máquinas del gimnasio por la espalda, Montse usó el Label exacto:<br>&quot;Entonces hay momentos en que sientes que toda esta situación ya no es solo el peso, es mucho más, ¿no?&quot;<br>Y lo completó con el resumen (min 19:00): &quot;Las piernas están flojas, te cuesta mantener el ritmo de subir escaleras, por la mañana ya te sientes así...&quot; — lo que provocó que Mertxe añadiera el dato más escalofriante de toda la llamada: no poder levantarse del suelo sin darse la vuelta.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">07</span><span>BIEN 7 — LA PRE-SUASIÓN PRESENTE ANTES DEL PRECIO (P2, MIN 37:03)</span><strong>+</strong></summary>
+          <div><p>&quot;Antes de hablarte de la inversión, quiero recordarte una cosa. Que tú me has dicho que desde la pandemia perdiste esta rutina, que te sientes continuamente sin energía, sin fuerza en las piernas, atrapada en este ciclo y que llevas años intentando retomar y no lo consigues sola. También me has dicho que quieres sentirte activa, con fuerza, con energía y recuperar esa versión tuya que ya existió.&quot;<br>Presencia de Pre-Suasión: sí. Activos usados: reales pero genéricos (se explica en errores).</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">08</span><span>BIEN 8 — AUTO-VENTA DEL PROSPECT ANTES DEL PRECIO (P2, MIN 38:02)</span><strong>+</strong></summary>
+          <div><p>&quot;¿Por qué te gustaría entrar en el programa?&quot; — Mertxe respondió con algo genuino: &quot;es como que es a tu libertad, tienes tus días pero no es obligatorio o no tal, entonces me parece que es como más llevadero.&quot;<br>Ese activo — la sensación de libertad sin obligatoriedad rígida — es exactamente lo contrario de lo que le generó la dieta de lechuga y pavo. Montse lo produjo con la pregunta correcta.</p></div>
+        </details>
+
+        <details class="item-card win">
+          <summary><span class="item-index">09</span><span>BIEN 9 — CIERRE DIGNO SIN PRESIÓN (P2, MIN 45:34)</span><strong>+</strong></summary>
+          <div><p>&quot;Tranquila, lo siento yo por ti, porque sé que quieres mejorar, que quieres estar bien... entiendo también que cada uno tiene su vida, sus prioridades.&quot;<br>Sin presión. Sin urgencia fabricada adicional más allá del error de &quot;plazas limitadas&quot; (que ya aparece en el análisis de errores). Montse aceptó el no con gracia y dejó la puerta abierta de forma natural. Mertxe se fue con una buena experiencia.</p></div>
+        </details>
+</div></div>
+    </details>
+    
+    <details class="section">
+      <summary><span>LOS ERRORES — CON PRECISIÓN Y SCRIPTS ALTERNATIVOS</span><i>+</i></summary>
+      <div class="section-body"><div class='card-grid'>
+
+        <details class="item-card risk">
+          <summary><span class="item-index">01</span><span>ERROR CENTRAL — CUALIFICACIÓN ECONÓMICA: SEXTA LLAMADA CONSECUTIVA SIN ELLA</span><strong>+</strong></summary>
+          <div><p>La señal disponible estaba en el minuto 2:29 de la Parte 1:<br>Montse preguntó: &quot;¿Y aún viven en casa contigo o ya están fuera?&quot;<br>Mertxe: &quot;Sí, están estudiando fuera.&quot;<br>Montse: &quot;Ah, vale. Bueno, están fuera pero no están muy lejos, tampoco los tienen.&quot;<br>Y siguió con la conversación.<br>Con una sola pregunta ahí:<br>&quot;Mertxe, dos hijos estudiando fuera, eso tiene un coste mensual importante, ¿no? Si el programa te encajara, ¿tendrías margen económico para algo así ahora mismo?&quot;<br>Mertxe habría respondido con la misma claridad que dio al final: &quot;Más de un tercio de mi sueldo se va en mis hijos. Ahora mismo, imposible.&quot;<br>Con eso, Montse sabe en el minuto 3 de la Parte 1 que no hay presupuesto real. La llamada habría durado 25-30 minutos: diagnóstico completo, sin pitch completo, cierre honesto con una fecha futura, y Mertxe como futura prospect activa para dentro de dos años.<br>En cambio: 55 minutos, pitch de 10 minutos, negociación imposible de 500 a 250 a &quot;ni 250 ni 100&quot;, y el mismo resultado que habría llegado en el minuto 3.<br>Seis llamadas consecutivas. Los leads donde el obstáculo era económico y podría haberse sabido antes: Mireia, Mariluz, Mertxe. Tres en tres. El coste en tiempo es mayor que el de ninguna otra habilidad pendiente.</p></div>
+        </details>
+
+        <details class="item-card risk">
+          <summary><span class="item-index">02</span><span>ERROR 2 — LA PRE-SUASIÓN USÓ LOS ACTIVOS CORRECTOS PERO NO LOS MÁS CARGADOS</span><strong>+</strong></summary>
+          <div><p>La Pre-Suasión de Montse (P2, min 37) usó: energía, fuerza en piernas, ciclo atrapada, versión que ya existió.<br>Correcto. Pero los activos más cargados disponibles no llegaron:</p>
+<h4>ACTIVO 1 — La memoria del gimnasio (el Bright Spot que ella misma activó):</h4>
+<p>&quot;Salía empapada y decía, uy qué bien.&quot;</p>
+<h4>ACTIVO 2 — El trabajo en el gimnasio y la impotencia:</h4>
+<p>&quot;Hay días que no puedo limpiar las máquinas porque la espalda no me da.&quot;</p>
+<h4>ACTIVO 3 — La escalera de un escalón:</h4>
+<p>&quot;No puedo subir un escalón si no me agarro muy alto.&quot;<br>La Pre-Suasión que habría correspondido:<br>&quot;Mertxe, antes del precio — me dijiste que no puedes subir un escalón sin agarrarte, que hay días que en el trabajo donde estás rodeada de máquinas de ejercicio no puedes limpiarlas porque la espalda no te da. Y que llevas cinco años así, cada año un poco peor. Y que tú ya sabes lo que es sentirte bien porque lo fuiste durante ocho años. El programa son 1.300 euros. Eso que tenías, eso que recuerdas, tiene precio. ¿Cuánto vale recuperarlo?&quot;<br>Esa Pre-Suasión usa las imágenes más concretas y dolorosas de Mertxe. No tiene respuesta fácil — aun para un obstáculo económico real, crea un frame diferente para el precio.</p></div>
+        </details>
+
+        <details class="item-card risk">
+          <summary><span class="item-index">03</span><span>ERROR 3 — &quot;ME QUEDA BASTANTE CLARO LA ALIMENTACIÓN&quot; (P2, MIN 6:39)</span><strong>+</strong></summary>
+          <div><p>&quot;Vale, me queda bastante claro el tema de la alimentación.&quot;<br>Doce llamadas. Doce. Sin excepción.<br>Y en esta llamada se sumó el impacto técnico: inmediatamente después, Montse preguntó &quot;¿Cómo crees que nosotros podríamos ayudarte en la alimentación?&quot; — Mertxe respondió &quot;No lo sé&quot; — lo que reveló que Ana no había excavado suficientemente antes de cerrar el bloque.<br>La pregunta correcta para ese momento, en lugar del cierre prematuro:<br>&quot;Mertxe, de todo lo que me has contado sobre la alimentación — los picos de la máquina del trabajo, el momento de la mañana que dices que sí y el rato que terminas de trabajar que cedes — ¿tú crees que el problema es qué comes o cuándo llegas a esos momentos de antojo?&quot;<br>Eso habría dado información adicional y habría evitado el &quot;me queda bastante claro&quot; que cierra prematuramente.</p></div>
+        </details>
+
+        <details class="item-card risk">
+          <summary><span class="item-index">04</span><span>ERROR 4 — EL PITCH DURÓ ~11 MINUTOS — EL DOBLE DEL TARGET</span><strong>+</strong></summary>
+          <div><p>El pitch (P2, min 27:20 a 36:50) duró aproximadamente 10-11 minutos. El Manual: 7-9 minutos.<br>Con tres visión questions instaladas en el pitch, el mismo contenido se comprime significativamente porque cada pilar se cierra con el compromiso de Mertxe en lugar de desarrollarse en monólogo.<br>Las que correspondían:<br>Para alimentación (picos media mañana/tarde):<br>&quot;¿Te imaginas que a las 11 de la mañana, cuando llega ese momento de la máquina, tu cuerpo ya no lo pide porque has desayunado de una manera que te llega? ¿Y que en lugar de la culpa después del donuts, llegas a casa a comer sin esa deuda emocional?&quot;<br>Para entrenamiento (antideporte que necesita estructura):<br>&quot;¿Te imaginas que tres veces a la semana, en tu rato de la tarde que ahora mismo es sofá, tienes una tabla de 45 minutos que sabes exactamente qué hacer, cómo hacerlo, y que al terminar sientes eso que me contaste — esa sensación de la profesora Maite?&quot;<br>Para acompañamiento (lleva años cayendo sola):<br>&quot;¿Te imaginas que el día en que se instala la excusa de &#x27;uff, qué pereza, hace calor&#x27;, hay alguien al otro lado que ya te conoce y que te escribe: Mertxe, ¿qué ha pasado hoy?&quot;<br>Con esas tres preguntas, el pitch de 11 minutos se convierte en 7, y Mertxe confirma activamente en lugar de escuchar pasivamente.</p></div>
+        </details>
+
+        <details class="item-card risk">
+          <summary><span class="item-index">05</span><span>ERROR 5 — ESCASEZ ARTIFICIAL AL FINAL (P2, MIN 44:47)</span><strong>+</strong></summary>
+          <div><p>&quot;Este programa no es para todo el mundo. Hay mujeres a las cuales no podemos ayudar. También tenemos plazas muy limitadas precisamente porque hacemos este seguimiento tan personal.&quot;<br>Este error apareció en la misma sesión en Ana (Mar Serrano). Probablemente ambas lo aprendieron del mismo sitio. Y en ambas llamadas aparece en el mismo contexto: cuando el obstáculo ya es inconmovible y queda intentar lo que sea.<br>El problema: la escasez artificial dirigida a alguien que acaba de decir tres veces &quot;no lo tengo, es imposible&quot; no funciona. Solo genera incomodidad. Y si Mertxe lo recuerda cuando regrese en dos años y comprueba que las plazas no eran tan limitadas, la confianza se erosiona.<br>La frase correcta para ese momento era simplemente:<br>&quot;Mertxe, lo entiendo perfectamente. En dos años, cuando cambie la situación con los hijos, me llamas y arrancamos. Todo lo que me has contado hoy lo guardo. Ya sabes lo que te podemos dar.&quot;</p></div>
+        </details>
+</div></div>
+    </details>
+    
+    <details class="section">
+      <summary><span>SOBRE EL PATRÓN DE TRES LLAMADAS NO CERRABLES</span><i>+</i></summary>
+      <div class="section-body"><p>Mireia, Mariluz, Mertxe. Tres seguidas. Tres con obstáculo económico real e inconmovible. Eso requiere un análisis que va más allá de la técnica de cierre de Montse.<br>Preguntas para Jonathan:<br>¿De dónde vienen estos leads? ¿Hay filtrado de cualificación económica antes de agendar la videollamada? ¿El formulario de inscripción pregunta algo sobre presupuesto disponible? Un filtro básico — &quot;¿tienes actualmente presupuesto disponible para invertir en tu salud?&quot; con una rango orientativo — evitaría un porcentaje significativo de estas llamadas que son correctas en técnica pero incorrectas en prospect.<br>El tiempo de Montse y el tiempo de estas mujeres vale. Tres horas invertidas en diagnósticos que no podían cerrarse es un sistema que se puede optimizar antes de la llamada.</p></div>
+    </details>
+    
+    <details class="section">
+      <summary><span>PLAN DE ENTRENAMIENTO — MONTSE, ITERACIÓN 12</span><i>+</i></summary>
+      <div class="section-body"><h4>LO QUE NO SE TOCA:</h4>
+<p>El Reframe — seis llamadas seguidas. El mejor del proyecto.<br>Las visión questions — tres consecutivas. Se están consolidando.<br>El Bright Spot de memoria — apareció por instinto. Montse tiene que saber que lo hizo y hacerlo consciente.<br>El Challenger Sale natural — &quot;motivación al revés&quot; fue un hallazgo genuino.</p>
+<h4>DOS CAMBIOS QUE MONTSE NECESITA ANTES DE LA PRÓXIMA LLAMADA:</h4>
+<h4>CUALIFICACIÓN ECONÓMICA EN EL MINUTO 10 — SEXTA LLAMADA SIN ELLA, SE ACABÓ LA TOLERANCIA</h4>
+<p>Después del rapport inicial y cuando aparece cualquier señal de contexto financiero — hijos fuera, autónoma, divorciada, situación laboral frágil — la pregunta va:<br>&quot;[NOMBRE], con todo lo que tienes, ¿si el programa te encajara tendrías margen económico para algo así ahora mismo o hay alguna limitación que debamos tener en cuenta?&quot;<br>Esa pregunta tiene que llegar antes del minuto 15. Sin excepción. Sin importar lo bien que fluya el diagnóstico. Sin importar lo motivada que parezca la prospect.</p>
+<h4>EL BRIGHT SPOT COMO PROTOCOLO CONSCIENTE</h4>
+<p>Lo que hizo Montse con Mertxe en el minuto 24 fue extraordinario y casual. Tiene que convertirse en intencional. Cuando una prospect tiene historial de éxito anterior — perdió 20 kilos, mantuvo el peso, fue deportista, tuvo épocas buenas — la pregunta correcta no es &quot;¿te imaginas cómo sería?&quot; sino &quot;¿recuerdas cómo eras?&quot; La diferencia es la diferencia entre el futuro hipotético y la memoria corporal real. El cuerpo recuerda lo que ya hizo. Y esa memoria es el argumento más potente que existe.</p></div>
+    </details>
+    
+    <details class="section">
+      <summary><span>PARA MONTSE — LA FRASE DE ESTA AUDITORÍA</span><i>+</i></summary>
+      <div class="section-body"><p>&quot;Doce llamadas. En esta hiciste algo que no ha hecho nadie en el proyecto: le pediste a Mertxe que recordara, no que imaginara. &#x27;Tú ya sabes lo que es sentirte así. Lo has hecho.&#x27; Y eso cambió la conversación. Eso es instinto de closers avanzados, no principiantes. Tienes el Reframe más potente del proyecto, las visión questions se están consolidando, y ahora tienes el Bright Spot de memoria. El diagnóstico de Mertxe fue el mejor que has hecho. Y aun así: la señal de los hijos estudiando fuera estaba ahí en el minuto dos de la primera parte. Una sola pregunta en ese momento ahorra 50 minutos y protege el tiempo de Mertxe y el tuyo. Seis llamadas seguidas sin esa pregunta. No es que no sepas hacerla — es que no la estás haciendo. Eso tiene que cambiar mañana, en la siguiente llamada. Todo lo demás está llegando solo.&quot;</p></div>
+    </details>
+    </section>
+      <section id="fuentes" class="panel" style="margin-top:18px"><h2>Las 13 fuentes</h2>
+<details class="source-card">
+  <summary><span class="source-number">01</span><span>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss</span><i>+</i></summary>
+  <div class="section-body"><p>Labels que funcionaron:<br>&quot;Hay momentos en que sientes que toda esta situación ya no es solo el peso, es mucho más, ¿no?&quot; (P2, min 18:47) — Label perfecto. Abrió la revelación de no poder levantarse del suelo.<br>&quot;Entonces llevas desde la pandemia sin muchas ganas, también te voy a decir&quot; (P2, min 25:34) — Honesto y directo. Mertxe lo confirmó sin defensividad: &quot;Bueno, bueno.&quot;<br>El Label que habría añadido otra capa después de la revelación del escalón (P2, min 19:44):<br>&quot;Mertxe, lo que me describes con el escalón y levantarte del suelo — eso no es pereza. Es que tu cuerpo lleva cinco años mandando señales y nadie le ha dado lo que necesita. ¿Es así como lo sientes?&quot;<br>Con ese Label, Mertxe habría salido del marco mental de &quot;soy débil de mente&quot; para entrar en el marco de &quot;mi cuerpo lleva años sin el sistema correcto.&quot;</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">02</span><span>FUENTE 2 · GAP SELLING — Keenan</span><i>+</i></summary>
+  <div class="section-body"><h4>ESTADO ACTUAL — el más completo del proyecto de Montse: debilidad muscular severa, dolor espalda crónico, tobillo inestable, picos de ansiedad/antojo en el trabajo, fatiga crónica, ciclo sofá-casa, desánimo activo.</h4>
+<h4>CAUSA RAÍZ — correctamente identificada en el Reframe: estructura rota en pandemia, no falta de voluntad.</h4>
+<h4>IMPACT LAYER — bien construido: trabajo físico comprometido (no puede limpiar máquinas), no puede subir un escalón, no puede levantarse del suelo, piernas &quot;de plastilina.&quot; Eso no es estético — es funcional. Y funcional importa más que estético para el argumento de urgencia.</h4>
+<p>La segunda Implicación que habría añadido peso:<br>&quot;Mertxe, con la tibia rota hace tres años y los esguinces que sigues teniendo, y con las piernas cada vez más débiles, ¿qué crees que puede pasar en el trabajo si esto sigue avanzando dos años más?&quot;<br>Mertxe trabaja físicamente. La debilidad progresiva tiene implicaciones laborales reales. Esa pregunta hace que el obstáculo no sea &quot;quiero estar más delgada&quot; sino &quot;necesito seguir siendo funcional.&quot;</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">03</span><span>FUENTE 3 · OBJECTIONS — Blount</span><i>+</i></summary>
+  <div class="section-body"><p>El obstáculo de Mertxe era inconmovible y honesto: &quot;de donde no hay no se puede sacar.&quot; No hay TRoT posible cuando la brecha es 5x. Mertxe fue transparente: 500€ es más de un tercio de su sueldo.<br>No hay Disrupt que funcione aquí. Lo que sí correspondía era un LDA rápido para confirmar que el obstáculo era solo económico (y no había otra duda):<br>&quot;Mertxe, el programa te encaja, me has dicho que sí. El único obstáculo es económico, ¿correcto?&quot; — Para cerrar dignamente antes de entrar en la negociación de 250.<br>La negociación de 250 no tenía sentido una vez que Mertxe dijo &quot;ni 250, ni es que te diría casi 100.&quot; Montse debería haber parado ahí: &quot;Entendido. Cuando la situación con los hijos cambie, aquí estoy.&quot; Sin el &quot;plazas limitadas.&quot;</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">04</span><span>FUENTE 4 · VIRTUAL SELLING — Blount</span><i>+</i></summary>
+  <div class="section-body"><p>Treceavo corte de Google Meet del proyecto. Este fue especialmente costoso: ocurrió durante el diagnóstico de alimentación, interrumpiendo el flujo en un momento crítico.<br>La duración total fue de ~55 minutos útiles. Con la cualificación económica en el minuto 3, hubiera sido 25. Sin la cualificación, 55 minutos para el mismo NO.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">05</span><span>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna</span><i>+</i></summary>
+  <div class="section-body"><p>El Omission Bias de Mertxe no era decisional — era financiero real. JOLT no aplica cuando el obstáculo no es miedo a equivocarse sino ausencia real de recursos.<br>Lo que sí aplica del JOLT: el Judge para identificar rápidamente si es obstáculo real o disfrazado. En el minuto 40:30, cuando Mertxe dijo &quot;no dispongo del dinero,&quot; la pregunta Judge que habría cerrado en 30 segundos:<br>&quot;Mertxe, si el dinero no fuera un obstáculo, ¿entrarías?&quot; — Mertxe: &quot;Sí, claro.&quot; → Confirmar fecha futura y cerrar limpiamente.<br>En cambio Montse siguió negociando cuotas durante cinco minutos en una negociación que no tenía solución.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">06</span><span>FUENTE 6 · SWITCH — Heath</span><i>+</i></summary>
+  <div class="section-body"><h4>JINETE — informado pero desorganizado. Mertxe sabe que necesita deporte, sabe que le falta estructura, sabe que sus picos de ansiedad son el mayor problema. El Jinete tiene el diagnóstico correcto.</h4>
+<h4>ELEFANTE — agotado y desanimado. Cinco años de decadencia progresiva. &quot;Hasta ahora parece que sí ha sido aceptable&quot; — el Elefante se ha rendido al estatus quo.</h4>
+<h4>BRIGHT SPOT — aquí está la contribución más importante de Montse a toda la sesión del proyecto. En lugar de pedirle a Mertxe que imagine un futuro hipotético, le pidió que activara una memoria real: los ocho años que mantuvo el peso, la Maite con sus abdominales, salir &quot;empapada&quot; diciendo &quot;uy qué bien.&quot;</h4>
+<p>El Bright Spot activa la evidencia de que Mertxe CAN — no necesita creer que puede porque ya lo hizo. Ese es el argumento más poderoso posible contra la parálisis de &quot;creo que estoy débil de mente.&quot;<br>Lo que faltó: hacer que Mertxe fuera más específica con la memoria. &quot;¿Recuerdas cómo era tu energía en el trabajo en aquellos años? ¿Podías subir escalones sin problema? ¿Cómo te levantabas del suelo?&quot; Conectar la memoria de energía con la discapacidad física actual. Eso hace que el Bright Spot sea el argumento de urgencia más poderoso.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">07</span><span>FUENTE 7 · WHY SHE BUYS — Brennan</span><i>+</i></summary>
+  <div class="section-body"><p>La compra de identidad de Mertxe es específica y sorprendente: no es la mujer que quiere verse guapa. Es la mujer que quiere ser funcional. Que quiere subir un escalón sola. Que quiere aguantar un día de trabajo sin que la espalda falle.<br>Brennan: &quot;Las mujeres no compran el producto. Compran la versión de sí mismas que el producto hace posible.&quot;<br>La versión que Mertxe quiere comprar no es la de la foto en bañador. Es la Mertxe que sale empapada del gimnasio y dice &quot;uy qué bien&quot; aunque la Maite le haya dado caña. Es la Mertxe que puede limpiar todas las máquinas un martes por la mañana sin parar a mitad por la espalda.<br>El pitch de Montse conectó parcialmente con esto (mencionó las piernas y la espalda). Pero la Pre-Suasión y el cierre deberían haber estado completamente anclados ahí, no en la energía genérica.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">08</span><span>FUENTE 8 · THE MOM TEST — Fitzpatrick</span><i>+</i></summary>
+  <div class="section-body"><p>Excelente recogida de comportamientos reales: la máquina del trabajo (picos), los donuts antes de llegar a comer, la dieta de lechuga-pavo, el historial de mantenimiento de 8 años, la Maite del gimnasio.<br>La pregunta hipotética que se coló (P2, min 12): &quot;¿Podrías bloquear una hora tres veces a la semana?&quot; — Mertxe dijo sí sin dudarlo. La pregunta de comportamiento real sería: &quot;Mertxe, en la última semana, ¿qué conseguiste hacer de ejercicio?&quot; — probablemente nada. Pero eso habría dado información sobre el gap real entre intención y comportamiento.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">09</span><span>FUENTE 9 · PRE-SUASIÓN — Cialdini</span><i>+</i></summary>
+  <div class="section-body"><p>Pre-Suasión presente: bien. Activos usados: reales pero genéricos como ya se analizó.<br>La distancia entre la Pre-Suasión que llegó y la que correspondía se resume en una imagen:<br>Lo que llegó: &quot;llevas sin energía, sin fuerza, atrapada.&quot;<br>Lo que correspondía: &quot;no puedes subir un escalón sin agarrarte. Y tú ya sabes lo que es poder.&quot;<br>La primera es descriptiva. La segunda es concreta y tiene la memoria activada de los 8 años.<br>Para el futuro, el protocolo que Montse necesita: al final del diagnóstico, antes del pitch, escribir las tres frases más cargadas de la prospect textualmente. No su resumen de ellas — sus palabras exactas. De esas tres, la Pre-Suasión usa la más visual y la más dolorosa.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">10</span><span>FUENTE 10 · INFLUENCE — Cialdini</span><i>+</i></summary>
+  <div class="section-body"><h4>CONSISTENCIA bien usada: la escalada del compromiso de 7 a 9 fue anclada y recordada en la Pre-Suasión. &quot;Primero has dicho un 7, pero luego me has dicho un 9.&quot; Bien.</h4>
+<h4>ESCASEZ — el error ya analizado. &quot;Plazas limitadas&quot; después de un obstáculo inconmovible. No funciona y puede dañar confianza futura.</h4>
+<p>La única escasez ética disponible aquí era temporal-personal: &quot;Mertxe, en dos años cuando se gradúen los chicos, aquí estoy. Pero la Mertxe de dentro de dos años va a tener dos años más de debilidad en esas piernas si no hace nada. Eso sí es real.&quot;</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">11</span><span>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson</span><i>+</i></summary>
+  <div class="section-body"><p>El &quot;motivación al revés&quot; fue el Teach más limpio de todas las llamadas del proyecto. Ningún close de este proyecto había invertido el mito de la motivación con evidencia tomada directamente de las palabras de la prospect en la misma llamada. Eso no es una técnica aprendida — es escucha activa convertida en insight en tiempo real.<br>El Teach adicional disponible que no llegó:<br>&quot;Mertxe, trabajas en un gimnasio. Estás rodeada de máquinas de ejercicio ocho horas al día. Y llevas cinco años sin poder usarlas para ti. ¿Hay algo más Challenger Sale que eso? El entorno no falta. El conocimiento no falta. Lo que falta es que alguien te diga exactamente qué hacer con la situación específica que tienes — la tibia, la espalda, los tobillos, las piernas. Eso no lo da el gimnasio donde trabajas. Lo da alguien que te diseña el plan para ti.&quot;<br>Ese Teach conecta su entorno laboral con el gap de manera directa y sin crueldad.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">12</span><span>FUENTE 12 · SPIN SELLING — Rackham</span><i>+</i></summary>
+  <div class="section-body"><h4>SITUACIÓN ✅ — completa</h4>
+<h4>PROBLEMA ✅ — múltiple y bien capturado: picos de ansiedad, sedentarismo post-pandemia, debilidad física, desánimo</h4>
+<h4>IMPLICACIÓN ✅ — &quot;¿Cómo crees que te verás en un año si no haces nada?&quot; → Mertxe: &quot;Cada vez peor. Que es lo que me está pasando desde hace 5 años.&quot;</h4>
+<h4>NECESIDAD-BENEFICIO ✅ — Mertxe verbalizó: estructura, acompañamiento, resultados que generen motivación</h4>
+<p>La segunda Implicación que habría añadido urgencia funcional (no cosmética):<br>&quot;Mertxe, tu trabajo es físico. Hay días que ya no puedes limpiar todas las máquinas. Si las piernas siguen como están en dos años, ¿qué pasa con tu capacidad de trabajar?&quot;<br>Eso traslada el objetivo de cosmético a funcional-laboral. El dolor más profundo de Mertxe no es estético — es sentirse inútil en el trabajo que le da sustento.</p></div>
+</details>
+
+<details class="source-card">
+  <summary><span class="source-number">13</span><span>FUENTE 13 · EXACTLY WHAT TO SAY — Jones</span><i>+</i></summary>
+  <div class="section-body"><p>La auto-venta del prospect fue producida con la pregunta correcta. Mertxe respondió con &quot;es como más llevadero&quot; — su palabra exacta para describir el programa. Eso es Jones: encontrar el activo que la prospect misma genera.<br>Para el seguimiento en dos años (si el equipo tiene la información guardada):<br>&quot;Mertxe, hace dos años hablamos. Me dijiste que cuando los chicos terminaran de estudiar fuera, te lo replantearías. ¿Ha cambiado algo?&quot;<br>Esa apertura usa la consistencia de lo que ella misma prometió. No es presión — es devolver su propia palabra.</p></div>
+</details>
+</section>
+      <section id="transcripcion" class="panel" style="margin-top:18px"><h2>Transcripción en formato HTML</h2>
+<article class="transcript-section">
+  <h3>FICHA DEL CASO</h3>
+  <p>Prospecto:       Mertxe Amostegui · Pamplona · edad ~50s<br>Closer:          Montse<br>Duración:        ~55 minutos útiles (13 + 46, con solape de reconexión)<br>Resultado:       NO CERRABLE · obstáculo económico real e inconmovible<br>Nota global:     7.2 / 10<br>Historial Montse: Emma(6.4)·Gladys(7.1)·Katherine(6.7)·SusannaQ(5.5)·Lydia(6.5)·Virginia(6.5)·SusanaGM(7.3)·Lidia(6.8)·Alicia(7.0)·Mireia(6.4)·Mariluz(7.0)·Mertxe(7.2)<br>Perfil Mertxe:   Trabaja limpiando (en un gimnasio) · turno de mañana<br>Casada · dos hijos (Aymar 23, Ollán 21) estudiando fuera (San Sebastián y Logroño) · vuelven los fines de semana<br>Tardes libres — pero las pasa en el sofá o haciendo tareas domésticas<br>Perdió 20 kg hace 12 años · mantuvo 8 años (2012-2020) · pandemia rompió rutina<br>Subida gradual: ~2 kg/año desde pandemia · objetivo declarado: -20 kg<br>&quot;Soy una antideporte, nunca me ha gustado&quot; — pero lo hacía porque tenía estructura<br>Picos de ansiedad/antojo media mañana y media tarde (máquina del trabajo)<br>Debilidad proximal severa en piernas · incapacidad de levantarse del suelo sin girar<br>Dolor continuo espalda izquierda · inestabilidad tobillos (tibia rota hace 3 años)<br>Fatiga crónica · desanimada · &quot;aburrida todo el rato&quot; por las tardes desde que los hijos se fueron<br>Compromiso inicial: 7/10 → sube a 9/10 con acompañamiento contemplado<br>Expectativa de precio: ~100-200€/mes (basada en nutricionista antigua)<br>Precio real: 500€/mes fraccionado → más de un tercio de su sueldo<br>Brecha: 5x lo que puede pagar<br>Timeline para replantearse: &quot;en dos años, cuando mis hijos no estudien fuera&quot;</p>
+</article>
+
+<article class="transcript-section">
+  <h3>EL DIAGNÓSTICO REAL DE ESTA LLAMADA</h3>
+  <p>Esta es la tercera llamada consecutiva de Montse que es NO CERRABLE por obstáculo económico. Mireia, Mariluz y ahora Mertxe. Pero lo que sí es notable: esta llamada tiene el diagnóstico más completo y profundo de todas las 12 llamadas de Montse. El Reframe fue el mejor del proyecto. Las visión questions aparecieron por tercera llamada consecutiva. Y Montse usó por primera vez en todo el proyecto una técnica de memoria activa — pedir a Mertxe que recuerde cómo se sentía cuando lo tenía, en lugar de imaginar un futuro hipotético. Eso es Switch (Heath) en su versión más potente y no estaba en ningún manual. Salió solo.<br>Y aun así: la señal económica estaba disponible en el minuto 2:29 de la Parte 1. &quot;Están estudiando fuera.&quot; Esa frase, con una sola pregunta de seguimiento, habría revelado el obstáculo antes de invertir 50 minutos en el pitch.</p>
+</article>
+
+<article class="transcript-section">
+  <h3>SCOREBOARD — 13 FUENTES + MANUAL OPERATIVO</h3>
+  <h4>BLOQUE                      NOTA    VS. MARILUZ    RAZÓN</h4>
+<p>Apertura / Agenda           8.0     ↑(7.5)         Natural, agenda clara. Sin la carga técnica de Mariluz.<br>Diagnóstico calidad         8.5     ↑(8.5)         El más completo de Montse. Físico + emocional + laboral.<br>Diagnóstico profundidad     8.5     ↑↑(8.0)        Memoria activada (Bright Spot). Mertxe nombró sus propios bloqueos.<br>Construcción de valor       8.0     ↑(8.0)         Reframe EXCELENTE. Visión questions tercera vez. Pitch largo.<br>Manejo de objeciones        3.0     ↓(4.0)         Obstáculo inconmovible. Artificial scarcity al final.<br>Cierre                      1.0     =(1.5)         NO CERRABLE. Cierre digno y sin presión.<br>Lenguaje / Tono             8.5     =(8.5)         Empático. &quot;Me queda bastante claro&quot; presente.<br>Estructura                  7.0     =(7.0)         Pre-Suasión, auto-venta, visión questions. Sin cualif. económica.</p>
+<h4>GLOBAL                      7.2 / 10</h4>
+</article>
+
+<article class="transcript-section">
+  <h3>TABLA EVOLUTIVA — MONTSE, 12 LLAMADAS</h3>
+  <p>DIMENSIÓN              |SUS2|LID|ALI|MIR|MAR|MER<br>Nota global            |7.3|6.8|7.0|6.4|7.0|7.2<br>Resultado              |CER|SEG|SEG|S/C|N/C|N/C<br>&quot;Me queda claro&quot;       |Sí |Sí |Sí |Sí |Sí |Sí <span class='badtxt'>🔴</span><br>Cualif. económica      |Sí |No |No |No |No |No <span class='badtxt'>🔴</span> (6ª vez)<br>Reframe                |No |Sí |Sí |Sí |Sí |Sí <span class='goodtxt'>✅</span><br>Visión questions       |No |No |No |No |Sí |Sí <span class='goodtxt'>✅</span> (3ª vez)<br>Bright Spot memoria    |No |No |No |No |No |Sí <span class='goodtxt'>🟢</span> PRIMERO<br>Pre-Suasión            |Sí |Sí |Sí |No |No |Sí<br>Frase seguridad        |No |No |No |No |No |No <span class='badtxt'>🔴</span><br>Auto-venta             |No |No |No |No |Sí |Sí <span class='goodtxt'>✅</span><br>Artificial scarcity    |No |No |No |No |No |Sí <span class='badtxt'>✗</span><br>Diagnóstico emocional  |MB |Bno|MB |MB |MB |MB+</p>
+<h4>PATRÓN PREOCUPANTE: Últimas 3 llamadas de Montse son NO CERRABLES por obstáculo económico. ¿Calidad de leads? ¿Filtrado pre-llamada? Jonathan debe revisar la fuente de estas prospects.</h4>
+</article>
+
+<article class="transcript-section">
+  <h3>LO QUE FUNCIONÓ — CON TIMESTAMPS DE AMBAS PARTES</h3>
+  <h4>BIEN 1 — EL BRIGHT SPOT APLICADO A LA MEMORIA REAL (P2, MIN 24:30)</h4>
+<p>Esta es la novedad más importante de la llamada y del proyecto. Cuando Mertxe describió cómo se sentía al salir del gimnasio con la profesora que le daba caña, Montse hizo algo que no ha hecho nadie en este proyecto:<br>&quot;Ahora quiero que hagas algo. Tú ya sabes lo que es sentirte así. Lo has hecho tú. Ya has pesado 20 kilos menos. Entonces no te estoy pidiendo que te imagines algo que no conoces. Imagínate, o recuerda — ¿cómo te sentías cuando tenías esa energía, esa fuerza en las piernas, esos 20 kilos menos y esa rutina instaurada?&quot;<br>Esa es la diferencia entre una visión question y el Bright Spot de Switch. La visión question pide imaginar algo que aún no existe. El Bright Spot pide RECORDAR algo que ya existió — que el cuerpo de Mertxe ya hizo, que ella ya vivió. No es aspiracional. Es un recuerdo.<br>Mertxe respondió desde la memoria real: habló de cómo salía &quot;empapada&quot; del gimnasio diciendo &quot;uy, qué bien&quot; incluso aunque la profesora Maite &quot;era una capulla que me hacía hacer abdominales.&quot; Eso es la prueba de que Mertxe CAN — no is able to imagine, sino que ha done. Esa es la diferencia que cierra el argumento de &quot;no puedo.&quot;<br>Esto fue instinto puro de Montse. No estaba en ningún guion. Es lo más valioso de toda la llamada y del proyecto hasta ahora en términos de técnica nueva.</p>
+<h4>BIEN 2 — EL REFRAME MÁS ESPECÍFICO Y PODEROSO DEL PROYECTO (P2, MIN 10:00)</h4>
+<p>&quot;Me has dicho que el problema eres tú. Pero Mertxe, una persona que perdió 20 kilos y los mantuvo durante años, eso no lo hace una persona que no tiene ni capacidad ni disciplina. Y eso tú lo hiciste. Lo que ha pasado en la pandemia es que se te rompió una estructura y sin estructura hasta la persona más disciplinada del mundo se cae. El problema no eres tú. Es que llevas años intentando retomar sola algo que la primera vez construiste con hábitos muy concretos.&quot;<br>Ese Reframe tiene tres capas:</p>
+<p>Desmonta el autodiagnóstico de Mertxe (&quot;el problema soy yo&quot;)<br>Usa su propio historial como evidencia de que SÍ tiene capacidad<br>Identifica la causa real: sin estructura hasta el más disciplinado cae</p>
+<p>Y lo hizo en el momento exacto — justo cuando Mertxe dijo &quot;el problema soy yo&quot; (min 9:06). No lo esperó para el pre-pitch. Lo disparó en el diagnóstico.</p>
+<h4>BIEN 3 — &quot;LA MOTIVACIÓN AL REVÉS&quot; — CHALLENGER SALE EN TIEMPO REAL (P2, MIN 11:35)</h4>
+<p>&quot;Mucha gente piensa que primero tienen que motivarse para entonces lograr resultados. Escúchalo: me estabas diciendo tú que empezaste y como veías resultados. Entonces es que normalmente ocurre al revés. No es que primero nos motivamos y luego llegan los resultados. Es completamente al revés.&quot;<br>Eso es Teach del Challenger Sale con el argumento opuesto a la creencia convencional. Y Montse lo usó en el momento exacto — cuando Mertxe reconoció que la primera vez empezó sin ganas y los resultados le generaron motivación. Montse lo escuchó, lo guardó, y lo devolvió cinco minutos después como insight.</p>
+<h4>BIEN 4 — VISIÓN QUESTIONS: TERCERA LLAMADA CONSECUTIVA (P2, MIN 23:21-24:30)</h4>
+<p>&quot;¿Qué cosas tendrían que haberte pasado en 3-4 meses para decir que entrar en el programa fue una de las mejores decisiones que tomaste en años?&quot;<br>Bien calibrada para Mertxe: le pregunta por situaciones concretas (sentirte bien, verte mejor, energía). Y la respuesta de Mertxe fue genuina: no dijo &quot;perder 20 kilos&quot; — dijo &quot;verte bien, sentirte bien... salir empapada del gimnasio y decir uy qué bien.&quot;<br>Tres llamadas consecutivas con visión questions. Eso ya no es experimento — es hábito emergente.</p>
+<h4>BIEN 5 — LA ESCALADA DE COMPROMISO DEL 7 AL 9 (P2, MIN 22:07-23:20)</h4>
+<p>Cuando Mertxe dio un 7 con importante reserva (&quot;casi te diría que hasta mucho&quot;), Montse no lo aceptó ni lo rebatió. Lo exploró: &quot;Si tuvieras un plan estructurado y acompañamiento, ¿crees que tu compromiso podría crecer?&quot; — Mertxe: &quot;Sí, lo tengo clarísimo.&quot;<br>Entonces Montse hizo el cierre del escalamiento: &quot;Ponte en esa situación. Si estuvieras en un programa así, ¿cuánto sería?&quot; — Mertxe: 9/10.<br>Ese movimiento del 7 al 9 es Motivational Interviewing puro: no convencer al prospect de que está comprometida, sino ayudarla a descubrir su compromiso real cuando las condiciones son las correctas.</p>
+<h4>BIEN 6 — EXCAVACIÓN EMOCIONAL DEL IMPACTO LABORAL Y COTIDIANO (P2, MIN 18-19)</h4>
+<p>Cuando Mertxe describió que hay días en que no puede limpiar las máquinas del gimnasio por la espalda, Montse usó el Label exacto:<br>&quot;Entonces hay momentos en que sientes que toda esta situación ya no es solo el peso, es mucho más, ¿no?&quot;<br>Y lo completó con el resumen (min 19:00): &quot;Las piernas están flojas, te cuesta mantener el ritmo de subir escaleras, por la mañana ya te sientes así...&quot; — lo que provocó que Mertxe añadiera el dato más escalofriante de toda la llamada: no poder levantarse del suelo sin darse la vuelta.</p>
+<h4>BIEN 7 — LA PRE-SUASIÓN PRESENTE ANTES DEL PRECIO (P2, MIN 37:03)</h4>
+<p>&quot;Antes de hablarte de la inversión, quiero recordarte una cosa. Que tú me has dicho que desde la pandemia perdiste esta rutina, que te sientes continuamente sin energía, sin fuerza en las piernas, atrapada en este ciclo y que llevas años intentando retomar y no lo consigues sola. También me has dicho que quieres sentirte activa, con fuerza, con energía y recuperar esa versión tuya que ya existió.&quot;<br>Presencia de Pre-Suasión: sí. Activos usados: reales pero genéricos (se explica en errores).</p>
+<h4>BIEN 8 — AUTO-VENTA DEL PROSPECT ANTES DEL PRECIO (P2, MIN 38:02)</h4>
+<p>&quot;¿Por qué te gustaría entrar en el programa?&quot; — Mertxe respondió con algo genuino: &quot;es como que es a tu libertad, tienes tus días pero no es obligatorio o no tal, entonces me parece que es como más llevadero.&quot;<br>Ese activo — la sensación de libertad sin obligatoriedad rígida — es exactamente lo contrario de lo que le generó la dieta de lechuga y pavo. Montse lo produjo con la pregunta correcta.</p>
+<h4>BIEN 9 — CIERRE DIGNO SIN PRESIÓN (P2, MIN 45:34)</h4>
+<p>&quot;Tranquila, lo siento yo por ti, porque sé que quieres mejorar, que quieres estar bien... entiendo también que cada uno tiene su vida, sus prioridades.&quot;<br>Sin presión. Sin urgencia fabricada adicional más allá del error de &quot;plazas limitadas&quot; (que ya aparece en el análisis de errores). Montse aceptó el no con gracia y dejó la puerta abierta de forma natural. Mertxe se fue con una buena experiencia.</p>
+</article>
+
+<article class="transcript-section">
+  <h3>LOS ERRORES — CON PRECISIÓN Y SCRIPTS ALTERNATIVOS</h3>
+  <h4>ERROR CENTRAL — CUALIFICACIÓN ECONÓMICA: SEXTA LLAMADA CONSECUTIVA SIN ELLA</h4>
+<p>La señal disponible estaba en el minuto 2:29 de la Parte 1:<br>Montse preguntó: &quot;¿Y aún viven en casa contigo o ya están fuera?&quot;<br>Mertxe: &quot;Sí, están estudiando fuera.&quot;<br>Montse: &quot;Ah, vale. Bueno, están fuera pero no están muy lejos, tampoco los tienen.&quot;<br>Y siguió con la conversación.<br>Con una sola pregunta ahí:<br>&quot;Mertxe, dos hijos estudiando fuera, eso tiene un coste mensual importante, ¿no? Si el programa te encajara, ¿tendrías margen económico para algo así ahora mismo?&quot;<br>Mertxe habría respondido con la misma claridad que dio al final: &quot;Más de un tercio de mi sueldo se va en mis hijos. Ahora mismo, imposible.&quot;<br>Con eso, Montse sabe en el minuto 3 de la Parte 1 que no hay presupuesto real. La llamada habría durado 25-30 minutos: diagnóstico completo, sin pitch completo, cierre honesto con una fecha futura, y Mertxe como futura prospect activa para dentro de dos años.<br>En cambio: 55 minutos, pitch de 10 minutos, negociación imposible de 500 a 250 a &quot;ni 250 ni 100&quot;, y el mismo resultado que habría llegado en el minuto 3.<br>Seis llamadas consecutivas. Los leads donde el obstáculo era económico y podría haberse sabido antes: Mireia, Mariluz, Mertxe. Tres en tres. El coste en tiempo es mayor que el de ninguna otra habilidad pendiente.</p>
+<h4>ERROR 2 — LA PRE-SUASIÓN USÓ LOS ACTIVOS CORRECTOS PERO NO LOS MÁS CARGADOS</h4>
+<p>La Pre-Suasión de Montse (P2, min 37) usó: energía, fuerza en piernas, ciclo atrapada, versión que ya existió.<br>Correcto. Pero los activos más cargados disponibles no llegaron:</p>
+<h4>ACTIVO 1 — La memoria del gimnasio (el Bright Spot que ella misma activó):</h4>
+<p>&quot;Salía empapada y decía, uy qué bien.&quot;</p>
+<h4>ACTIVO 2 — El trabajo en el gimnasio y la impotencia:</h4>
+<p>&quot;Hay días que no puedo limpiar las máquinas porque la espalda no me da.&quot;</p>
+<h4>ACTIVO 3 — La escalera de un escalón:</h4>
+<p>&quot;No puedo subir un escalón si no me agarro muy alto.&quot;<br>La Pre-Suasión que habría correspondido:<br>&quot;Mertxe, antes del precio — me dijiste que no puedes subir un escalón sin agarrarte, que hay días que en el trabajo donde estás rodeada de máquinas de ejercicio no puedes limpiarlas porque la espalda no te da. Y que llevas cinco años así, cada año un poco peor. Y que tú ya sabes lo que es sentirte bien porque lo fuiste durante ocho años. El programa son 1.300 euros. Eso que tenías, eso que recuerdas, tiene precio. ¿Cuánto vale recuperarlo?&quot;<br>Esa Pre-Suasión usa las imágenes más concretas y dolorosas de Mertxe. No tiene respuesta fácil — aun para un obstáculo económico real, crea un frame diferente para el precio.</p>
+<h4>ERROR 3 — &quot;ME QUEDA BASTANTE CLARO LA ALIMENTACIÓN&quot; (P2, MIN 6:39)</h4>
+<p>&quot;Vale, me queda bastante claro el tema de la alimentación.&quot;<br>Doce llamadas. Doce. Sin excepción.<br>Y en esta llamada se sumó el impacto técnico: inmediatamente después, Montse preguntó &quot;¿Cómo crees que nosotros podríamos ayudarte en la alimentación?&quot; — Mertxe respondió &quot;No lo sé&quot; — lo que reveló que Ana no había excavado suficientemente antes de cerrar el bloque.<br>La pregunta correcta para ese momento, en lugar del cierre prematuro:<br>&quot;Mertxe, de todo lo que me has contado sobre la alimentación — los picos de la máquina del trabajo, el momento de la mañana que dices que sí y el rato que terminas de trabajar que cedes — ¿tú crees que el problema es qué comes o cuándo llegas a esos momentos de antojo?&quot;<br>Eso habría dado información adicional y habría evitado el &quot;me queda bastante claro&quot; que cierra prematuramente.</p>
+<h4>ERROR 4 — EL PITCH DURÓ ~11 MINUTOS — EL DOBLE DEL TARGET</h4>
+<p>El pitch (P2, min 27:20 a 36:50) duró aproximadamente 10-11 minutos. El Manual: 7-9 minutos.<br>Con tres visión questions instaladas en el pitch, el mismo contenido se comprime significativamente porque cada pilar se cierra con el compromiso de Mertxe en lugar de desarrollarse en monólogo.<br>Las que correspondían:<br>Para alimentación (picos media mañana/tarde):<br>&quot;¿Te imaginas que a las 11 de la mañana, cuando llega ese momento de la máquina, tu cuerpo ya no lo pide porque has desayunado de una manera que te llega? ¿Y que en lugar de la culpa después del donuts, llegas a casa a comer sin esa deuda emocional?&quot;<br>Para entrenamiento (antideporte que necesita estructura):<br>&quot;¿Te imaginas que tres veces a la semana, en tu rato de la tarde que ahora mismo es sofá, tienes una tabla de 45 minutos que sabes exactamente qué hacer, cómo hacerlo, y que al terminar sientes eso que me contaste — esa sensación de la profesora Maite?&quot;<br>Para acompañamiento (lleva años cayendo sola):<br>&quot;¿Te imaginas que el día en que se instala la excusa de &#x27;uff, qué pereza, hace calor&#x27;, hay alguien al otro lado que ya te conoce y que te escribe: Mertxe, ¿qué ha pasado hoy?&quot;<br>Con esas tres preguntas, el pitch de 11 minutos se convierte en 7, y Mertxe confirma activamente en lugar de escuchar pasivamente.</p>
+<h4>ERROR 5 — ESCASEZ ARTIFICIAL AL FINAL (P2, MIN 44:47)</h4>
+<p>&quot;Este programa no es para todo el mundo. Hay mujeres a las cuales no podemos ayudar. También tenemos plazas muy limitadas precisamente porque hacemos este seguimiento tan personal.&quot;<br>Este error apareció en la misma sesión en Ana (Mar Serrano). Probablemente ambas lo aprendieron del mismo sitio. Y en ambas llamadas aparece en el mismo contexto: cuando el obstáculo ya es inconmovible y queda intentar lo que sea.<br>El problema: la escasez artificial dirigida a alguien que acaba de decir tres veces &quot;no lo tengo, es imposible&quot; no funciona. Solo genera incomodidad. Y si Mertxe lo recuerda cuando regrese en dos años y comprueba que las plazas no eran tan limitadas, la confianza se erosiona.<br>La frase correcta para ese momento era simplemente:<br>&quot;Mertxe, lo entiendo perfectamente. En dos años, cuando cambie la situación con los hijos, me llamas y arrancamos. Todo lo que me has contado hoy lo guardo. Ya sabes lo que te podemos dar.&quot;</p>
+</article>
+
+<article class="transcript-section">
+  <h3>LAS 13 FUENTES — EVALUACIÓN COMPLETA</h3>
+  <h4>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss</h4>
+<p>Labels que funcionaron:<br>&quot;Hay momentos en que sientes que toda esta situación ya no es solo el peso, es mucho más, ¿no?&quot; (P2, min 18:47) — Label perfecto. Abrió la revelación de no poder levantarse del suelo.<br>&quot;Entonces llevas desde la pandemia sin muchas ganas, también te voy a decir&quot; (P2, min 25:34) — Honesto y directo. Mertxe lo confirmó sin defensividad: &quot;Bueno, bueno.&quot;<br>El Label que habría añadido otra capa después de la revelación del escalón (P2, min 19:44):<br>&quot;Mertxe, lo que me describes con el escalón y levantarte del suelo — eso no es pereza. Es que tu cuerpo lleva cinco años mandando señales y nadie le ha dado lo que necesita. ¿Es así como lo sientes?&quot;<br>Con ese Label, Mertxe habría salido del marco mental de &quot;soy débil de mente&quot; para entrar en el marco de &quot;mi cuerpo lleva años sin el sistema correcto.&quot;</p>
+<h4>FUENTE 2 · GAP SELLING — Keenan</h4>
+<h4>ESTADO ACTUAL — el más completo del proyecto de Montse: debilidad muscular severa, dolor espalda crónico, tobillo inestable, picos de ansiedad/antojo en el trabajo, fatiga crónica, ciclo sofá-casa, desánimo activo.</h4>
+<h4>CAUSA RAÍZ — correctamente identificada en el Reframe: estructura rota en pandemia, no falta de voluntad.</h4>
+<h4>IMPACT LAYER — bien construido: trabajo físico comprometido (no puede limpiar máquinas), no puede subir un escalón, no puede levantarse del suelo, piernas &quot;de plastilina.&quot; Eso no es estético — es funcional. Y funcional importa más que estético para el argumento de urgencia.</h4>
+<p>La segunda Implicación que habría añadido peso:<br>&quot;Mertxe, con la tibia rota hace tres años y los esguinces que sigues teniendo, y con las piernas cada vez más débiles, ¿qué crees que puede pasar en el trabajo si esto sigue avanzando dos años más?&quot;<br>Mertxe trabaja físicamente. La debilidad progresiva tiene implicaciones laborales reales. Esa pregunta hace que el obstáculo no sea &quot;quiero estar más delgada&quot; sino &quot;necesito seguir siendo funcional.&quot;</p>
+<h4>FUENTE 3 · OBJECTIONS — Blount</h4>
+<p>El obstáculo de Mertxe era inconmovible y honesto: &quot;de donde no hay no se puede sacar.&quot; No hay TRoT posible cuando la brecha es 5x. Mertxe fue transparente: 500€ es más de un tercio de su sueldo.<br>No hay Disrupt que funcione aquí. Lo que sí correspondía era un LDA rápido para confirmar que el obstáculo era solo económico (y no había otra duda):<br>&quot;Mertxe, el programa te encaja, me has dicho que sí. El único obstáculo es económico, ¿correcto?&quot; — Para cerrar dignamente antes de entrar en la negociación de 250.<br>La negociación de 250 no tenía sentido una vez que Mertxe dijo &quot;ni 250, ni es que te diría casi 100.&quot; Montse debería haber parado ahí: &quot;Entendido. Cuando la situación con los hijos cambie, aquí estoy.&quot; Sin el &quot;plazas limitadas.&quot;</p>
+<h4>FUENTE 4 · VIRTUAL SELLING — Blount</h4>
+<p>Treceavo corte de Google Meet del proyecto. Este fue especialmente costoso: ocurrió durante el diagnóstico de alimentación, interrumpiendo el flujo en un momento crítico.<br>La duración total fue de ~55 minutos útiles. Con la cualificación económica en el minuto 3, hubiera sido 25. Sin la cualificación, 55 minutos para el mismo NO.</p>
+<h4>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna</h4>
+<p>El Omission Bias de Mertxe no era decisional — era financiero real. JOLT no aplica cuando el obstáculo no es miedo a equivocarse sino ausencia real de recursos.<br>Lo que sí aplica del JOLT: el Judge para identificar rápidamente si es obstáculo real o disfrazado. En el minuto 40:30, cuando Mertxe dijo &quot;no dispongo del dinero,&quot; la pregunta Judge que habría cerrado en 30 segundos:<br>&quot;Mertxe, si el dinero no fuera un obstáculo, ¿entrarías?&quot; — Mertxe: &quot;Sí, claro.&quot; → Confirmar fecha futura y cerrar limpiamente.<br>En cambio Montse siguió negociando cuotas durante cinco minutos en una negociación que no tenía solución.</p>
+<h4>FUENTE 6 · SWITCH — Heath</h4>
+<h4>JINETE — informado pero desorganizado. Mertxe sabe que necesita deporte, sabe que le falta estructura, sabe que sus picos de ansiedad son el mayor problema. El Jinete tiene el diagnóstico correcto.</h4>
+<h4>ELEFANTE — agotado y desanimado. Cinco años de decadencia progresiva. &quot;Hasta ahora parece que sí ha sido aceptable&quot; — el Elefante se ha rendido al estatus quo.</h4>
+<h4>BRIGHT SPOT — aquí está la contribución más importante de Montse a toda la sesión del proyecto. En lugar de pedirle a Mertxe que imagine un futuro hipotético, le pidió que activara una memoria real: los ocho años que mantuvo el peso, la Maite con sus abdominales, salir &quot;empapada&quot; diciendo &quot;uy qué bien.&quot;</h4>
+<p>El Bright Spot activa la evidencia de que Mertxe CAN — no necesita creer que puede porque ya lo hizo. Ese es el argumento más poderoso posible contra la parálisis de &quot;creo que estoy débil de mente.&quot;<br>Lo que faltó: hacer que Mertxe fuera más específica con la memoria. &quot;¿Recuerdas cómo era tu energía en el trabajo en aquellos años? ¿Podías subir escalones sin problema? ¿Cómo te levantabas del suelo?&quot; Conectar la memoria de energía con la discapacidad física actual. Eso hace que el Bright Spot sea el argumento de urgencia más poderoso.</p>
+<h4>FUENTE 7 · WHY SHE BUYS — Brennan</h4>
+<p>La compra de identidad de Mertxe es específica y sorprendente: no es la mujer que quiere verse guapa. Es la mujer que quiere ser funcional. Que quiere subir un escalón sola. Que quiere aguantar un día de trabajo sin que la espalda falle.<br>Brennan: &quot;Las mujeres no compran el producto. Compran la versión de sí mismas que el producto hace posible.&quot;<br>La versión que Mertxe quiere comprar no es la de la foto en bañador. Es la Mertxe que sale empapada del gimnasio y dice &quot;uy qué bien&quot; aunque la Maite le haya dado caña. Es la Mertxe que puede limpiar todas las máquinas un martes por la mañana sin parar a mitad por la espalda.<br>El pitch de Montse conectó parcialmente con esto (mencionó las piernas y la espalda). Pero la Pre-Suasión y el cierre deberían haber estado completamente anclados ahí, no en la energía genérica.</p>
+<h4>FUENTE 8 · THE MOM TEST — Fitzpatrick</h4>
+<p>Excelente recogida de comportamientos reales: la máquina del trabajo (picos), los donuts antes de llegar a comer, la dieta de lechuga-pavo, el historial de mantenimiento de 8 años, la Maite del gimnasio.<br>La pregunta hipotética que se coló (P2, min 12): &quot;¿Podrías bloquear una hora tres veces a la semana?&quot; — Mertxe dijo sí sin dudarlo. La pregunta de comportamiento real sería: &quot;Mertxe, en la última semana, ¿qué conseguiste hacer de ejercicio?&quot; — probablemente nada. Pero eso habría dado información sobre el gap real entre intención y comportamiento.</p>
+<h4>FUENTE 9 · PRE-SUASIÓN — Cialdini</h4>
+<p>Pre-Suasión presente: bien. Activos usados: reales pero genéricos como ya se analizó.<br>La distancia entre la Pre-Suasión que llegó y la que correspondía se resume en una imagen:<br>Lo que llegó: &quot;llevas sin energía, sin fuerza, atrapada.&quot;<br>Lo que correspondía: &quot;no puedes subir un escalón sin agarrarte. Y tú ya sabes lo que es poder.&quot;<br>La primera es descriptiva. La segunda es concreta y tiene la memoria activada de los 8 años.<br>Para el futuro, el protocolo que Montse necesita: al final del diagnóstico, antes del pitch, escribir las tres frases más cargadas de la prospect textualmente. No su resumen de ellas — sus palabras exactas. De esas tres, la Pre-Suasión usa la más visual y la más dolorosa.</p>
+<h4>FUENTE 10 · INFLUENCE — Cialdini</h4>
+<h4>CONSISTENCIA bien usada: la escalada del compromiso de 7 a 9 fue anclada y recordada en la Pre-Suasión. &quot;Primero has dicho un 7, pero luego me has dicho un 9.&quot; Bien.</h4>
+<h4>ESCASEZ — el error ya analizado. &quot;Plazas limitadas&quot; después de un obstáculo inconmovible. No funciona y puede dañar confianza futura.</h4>
+<p>La única escasez ética disponible aquí era temporal-personal: &quot;Mertxe, en dos años cuando se gradúen los chicos, aquí estoy. Pero la Mertxe de dentro de dos años va a tener dos años más de debilidad en esas piernas si no hace nada. Eso sí es real.&quot;</p>
+<h4>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson</h4>
+<p>El &quot;motivación al revés&quot; fue el Teach más limpio de todas las llamadas del proyecto. Ningún close de este proyecto había invertido el mito de la motivación con evidencia tomada directamente de las palabras de la prospect en la misma llamada. Eso no es una técnica aprendida — es escucha activa convertida en insight en tiempo real.<br>El Teach adicional disponible que no llegó:<br>&quot;Mertxe, trabajas en un gimnasio. Estás rodeada de máquinas de ejercicio ocho horas al día. Y llevas cinco años sin poder usarlas para ti. ¿Hay algo más Challenger Sale que eso? El entorno no falta. El conocimiento no falta. Lo que falta es que alguien te diga exactamente qué hacer con la situación específica que tienes — la tibia, la espalda, los tobillos, las piernas. Eso no lo da el gimnasio donde trabajas. Lo da alguien que te diseña el plan para ti.&quot;<br>Ese Teach conecta su entorno laboral con el gap de manera directa y sin crueldad.</p>
+<h4>FUENTE 12 · SPIN SELLING — Rackham</h4>
+<h4>SITUACIÓN ✅ — completa</h4>
+<h4>PROBLEMA ✅ — múltiple y bien capturado: picos de ansiedad, sedentarismo post-pandemia, debilidad física, desánimo</h4>
+<h4>IMPLICACIÓN ✅ — &quot;¿Cómo crees que te verás en un año si no haces nada?&quot; → Mertxe: &quot;Cada vez peor. Que es lo que me está pasando desde hace 5 años.&quot;</h4>
+<h4>NECESIDAD-BENEFICIO ✅ — Mertxe verbalizó: estructura, acompañamiento, resultados que generen motivación</h4>
+<p>La segunda Implicación que habría añadido urgencia funcional (no cosmética):<br>&quot;Mertxe, tu trabajo es físico. Hay días que ya no puedes limpiar todas las máquinas. Si las piernas siguen como están en dos años, ¿qué pasa con tu capacidad de trabajar?&quot;<br>Eso traslada el objetivo de cosmético a funcional-laboral. El dolor más profundo de Mertxe no es estético — es sentirse inútil en el trabajo que le da sustento.</p>
+<h4>FUENTE 13 · EXACTLY WHAT TO SAY — Jones</h4>
+<p>La auto-venta del prospect fue producida con la pregunta correcta. Mertxe respondió con &quot;es como más llevadero&quot; — su palabra exacta para describir el programa. Eso es Jones: encontrar el activo que la prospect misma genera.<br>Para el seguimiento en dos años (si el equipo tiene la información guardada):<br>&quot;Mertxe, hace dos años hablamos. Me dijiste que cuando los chicos terminaran de estudiar fuera, te lo replantearías. ¿Ha cambiado algo?&quot;<br>Esa apertura usa la consistencia de lo que ella misma prometió. No es presión — es devolver su propia palabra.</p>
+</article>
+
+<article class="transcript-section">
+  <h3>SOBRE EL PATRÓN DE TRES LLAMADAS NO CERRABLES</h3>
+  <p>Mireia, Mariluz, Mertxe. Tres seguidas. Tres con obstáculo económico real e inconmovible. Eso requiere un análisis que va más allá de la técnica de cierre de Montse.<br>Preguntas para Jonathan:<br>¿De dónde vienen estos leads? ¿Hay filtrado de cualificación económica antes de agendar la videollamada? ¿El formulario de inscripción pregunta algo sobre presupuesto disponible? Un filtro básico — &quot;¿tienes actualmente presupuesto disponible para invertir en tu salud?&quot; con una rango orientativo — evitaría un porcentaje significativo de estas llamadas que son correctas en técnica pero incorrectas en prospect.<br>El tiempo de Montse y el tiempo de estas mujeres vale. Tres horas invertidas en diagnósticos que no podían cerrarse es un sistema que se puede optimizar antes de la llamada.</p>
+</article>
+
+<article class="transcript-section">
+  <h3>PLAN DE ENTRENAMIENTO — MONTSE, ITERACIÓN 12</h3>
+  <h4>LO QUE NO SE TOCA:</h4>
+<p>El Reframe — seis llamadas seguidas. El mejor del proyecto.<br>Las visión questions — tres consecutivas. Se están consolidando.<br>El Bright Spot de memoria — apareció por instinto. Montse tiene que saber que lo hizo y hacerlo consciente.<br>El Challenger Sale natural — &quot;motivación al revés&quot; fue un hallazgo genuino.</p>
+<h4>DOS CAMBIOS QUE MONTSE NECESITA ANTES DE LA PRÓXIMA LLAMADA:</h4>
+<h4>CUALIFICACIÓN ECONÓMICA EN EL MINUTO 10 — SEXTA LLAMADA SIN ELLA, SE ACABÓ LA TOLERANCIA</h4>
+<p>Después del rapport inicial y cuando aparece cualquier señal de contexto financiero — hijos fuera, autónoma, divorciada, situación laboral frágil — la pregunta va:<br>&quot;[NOMBRE], con todo lo que tienes, ¿si el programa te encajara tendrías margen económico para algo así ahora mismo o hay alguna limitación que debamos tener en cuenta?&quot;<br>Esa pregunta tiene que llegar antes del minuto 15. Sin excepción. Sin importar lo bien que fluya el diagnóstico. Sin importar lo motivada que parezca la prospect.</p>
+<h4>EL BRIGHT SPOT COMO PROTOCOLO CONSCIENTE</h4>
+<p>Lo que hizo Montse con Mertxe en el minuto 24 fue extraordinario y casual. Tiene que convertirse en intencional. Cuando una prospect tiene historial de éxito anterior — perdió 20 kilos, mantuvo el peso, fue deportista, tuvo épocas buenas — la pregunta correcta no es &quot;¿te imaginas cómo sería?&quot; sino &quot;¿recuerdas cómo eras?&quot; La diferencia es la diferencia entre el futuro hipotético y la memoria corporal real. El cuerpo recuerda lo que ya hizo. Y esa memoria es el argumento más potente que existe.</p>
+</article>
+
+<article class="transcript-section">
+  <h3>PARA MONTSE — LA FRASE DE ESTA AUDITORÍA</h3>
+  <p>&quot;Doce llamadas. En esta hiciste algo que no ha hecho nadie en el proyecto: le pediste a Mertxe que recordara, no que imaginara. &#x27;Tú ya sabes lo que es sentirte así. Lo has hecho.&#x27; Y eso cambió la conversación. Eso es instinto de closers avanzados, no principiantes. Tienes el Reframe más potente del proyecto, las visión questions se están consolidando, y ahora tienes el Bright Spot de memoria. El diagnóstico de Mertxe fue el mejor que has hecho. Y aun así: la señal de los hijos estudiando fuera estaba ahí en el minuto dos de la primera parte. Una sola pregunta en ese momento ahorra 50 minutos y protege el tiempo de Mertxe y el tuyo. Seis llamadas seguidas sin esa pregunta. No es que no sepas hacerla — es que no la estás haciendo. Eso tiene que cambiar mañana, en la siguiente llamada. Todo lo demás está llegando solo.&quot;</p>
+</article>
+</section>
+      <section class="panel" style="margin-top:18px"><div class="insight"><strong>Frase madre:</strong> “Tú ya sabes lo que es sentirte así. Lo has hecho.” Esa es la técnica que convierte esta llamada en una auditoría importante para el equipo.</div></section>
+    </main>
+  </div>
+  <div class="footer">Revoluciona-T · Montse / Mertxe Amostegui · 32,618 caracteres de auditoría transformados en HTML visual</div>
+</div>
+</body>
+</html>

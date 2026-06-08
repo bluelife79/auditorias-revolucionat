@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REVOLUCIONA-T · CLOSER ANA · MAR SERRANO REVUELTO · 52 MINUTOS · CALA DEL MORAL (MÁLAGA) · 5 JUNIO 2026</title>
+<style>
+:root{
+  --bg:#070911;
+  --surface:#121725;
+  --surface2:#171d2d;
+  --surface3:#20283b;
+  --line:rgba(255,255,255,.12);
+  --text:#f5f7fb;
+  --muted:#aeb8ca;
+  --gold:#ffd166;
+  --orange:#ff9f1c;
+  --green:#7ee787;
+  --red:#ff7b72;
+  --blue:#8ad7ff;
+  --violet:#b9a7ff;
+  --shadow:0 24px 80px rgba(0,0,0,.42);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--text);
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 7% 4%, rgba(255,209,102,.20), transparent 30%),
+    radial-gradient(circle at 86% 10%, rgba(138,215,255,.16), transparent 28%),
+    radial-gradient(circle at 70% 82%, rgba(185,167,255,.13), transparent 32%),
+    linear-gradient(180deg,#060711 0%,#0c101b 44%,#060711 100%);
+  line-height:1.55;
+}
+.wrapper{max-width:1320px;margin:0 auto;padding:28px 20px 90px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.035));
+  box-shadow:var(--shadow);
+  padding:36px;
+}
+.hero:before{
+  content:"";
+  position:absolute;right:-110px;top:-110px;
+  width:360px;height:360px;border-radius:999px;
+  background:rgba(255,209,102,.14);filter:blur(20px);
+}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.16em;font-weight:950;color:var(--gold)}
+h1{max-width:1120px;margin:12px 0;font-size:clamp(31px,5vw,62px);line-height:.94;letter-spacing:-.055em}
+.hero p{max-width:920px;margin:0;color:#d2daea;font-size:18px}
+.hero-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#eaf0fb;border-radius:999px;padding:9px 13px;font-size:13px;font-weight:900}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:18px 0}
+.metric-card{min-height:130px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));padding:17px;box-shadow:0 16px 38px rgba(0,0,0,.20)}
+.metric-card span{display:block;color:var(--muted);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.12em}
+.metric-card strong{display:block;margin:9px 0 8px;font-size:24px;line-height:1.05}
+.metric-card em{font-style:normal;color:var(--muted);font-size:13px;font-weight:800}
+.layout{display:grid;grid-template-columns:365px 1fr;gap:18px;align-items:start}
+.sidebar{position:sticky;top:16px}
+.panel{border:1px solid var(--line);border-radius:28px;background:rgba(14,18,29,.76);backdrop-filter:blur(12px);box-shadow:0 20px 60px rgba(0,0,0,.24);padding:18px}
+.panel h2{margin:0 0 14px;font-size:22px;letter-spacing:-.03em}
+.reading{border:1px solid rgba(255,209,102,.30);background:linear-gradient(135deg,rgba(255,209,102,.13),rgba(255,255,255,.04));color:#fff3cf;border-radius:22px;padding:16px;margin:16px 0;font-weight:800}
+.bar-row{margin:13px 0}
+.bar-label{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:900;color:#dfe6f2}
+.bar-label b{color:var(--gold)}
+.bar-track{height:11px;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:#252c3f;overflow:hidden;margin-top:7px}
+.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--gold));box-shadow:0 0 18px rgba(255,209,102,.25)}
+.nav{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.nav a{text-decoration:none;color:#dbe3f1;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.04);padding:10px 12px;font-size:13px;font-weight:900}
+.nav a:hover{border-color:rgba(255,209,102,.55);color:white}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:2px 0 12px}
+.section-title h2{margin:0;font-size:32px;letter-spacing:-.04em}
+.section-title span{color:var(--muted);font-weight:850}
+.accordion{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.026));margin:12px 0}
+.accordion summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;font-weight:950;text-transform:uppercase;letter-spacing:.025em;color:#f6f8fd}
+.accordion summary::-webkit-details-marker{display:none}
+.summary-icon,.source-num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:10px;background:rgba(255,209,102,.14);color:var(--gold);margin-right:10px;font-size:12px;vertical-align:middle}
+.plus{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;color:var(--gold);background:rgba(255,209,102,.10);border:1px solid rgba(255,209,102,.20);font-size:22px;line-height:1;transition:.18s ease;flex:0 0 auto}
+.accordion[open] .plus{transform:rotate(45deg);background:rgba(255,209,102,.18)}
+.accordion-body{padding:0 20px 22px;color:#dce4f2}
+.accordion-body p{margin:12px 0;color:#dce4f2}
+.accordion-body h4{margin:24px 0 10px;font-size:15px;color:#fff;letter-spacing:.02em}
+.accordion-body h4:first-child{margin-top:8px}
+.section-card[open]{border-color:rgba(255,209,102,.32)}
+.source-card{background:linear-gradient(180deg,rgba(138,215,255,.055),rgba(255,255,255,.025))}
+.source-card[open]{border-color:rgba(138,215,255,.28)}
+.table-wrap{overflow:auto;border-radius:18px;border:1px solid var(--line)}
+.score-table{width:100%;border-collapse:collapse;min-width:860px;background:rgba(0,0,0,.16)}
+.score-table th{text-align:left;padding:13px 14px;background:rgba(255,255,255,.06);color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.10em}
+.score-table td{padding:13px 14px;border-top:1px solid rgba(255,255,255,.08);vertical-align:top;color:#dce4f2}
+.score-pill{display:inline-flex;align-items:center;justify-content:center;min-width:48px;padding:5px 8px;border-radius:999px;background:rgba(255,209,102,.14);color:var(--gold);font-weight:950}
+.global-score{margin-top:14px;padding:14px 16px;border-radius:18px;background:rgba(126,231,135,.08);border:1px solid rgba(126,231,135,.22);color:#dfffe4;font-weight:950}
+.data-block{white-space:pre-wrap;overflow:auto;border:1px solid rgba(255,255,255,.10);border-radius:16px;background:#080b12;color:#eaf0fb;padding:14px;font-size:13px}
+.mini-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.mini-card{border:1px solid rgba(255,255,255,.11);border-radius:18px;background:rgba(0,0,0,.14);overflow:hidden}
+.mini-card summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;justify-content:space-between;gap:14px;font-weight:950;color:white}
+.mini-card summary::-webkit-details-marker{display:none}
+.mini-card summary b{color:var(--gold);font-size:20px}
+.mini-card[open] summary b{transform:rotate(45deg)}
+.mini-card>div{padding:0 16px 16px}
+.mini-card.good{border-color:rgba(126,231,135,.20)}
+.mini-card.error{border-color:rgba(255,123,114,.22)}
+blockquote{margin:14px 0;padding:14px 16px;border-left:4px solid var(--gold);background:rgba(255,209,102,.08);border-radius:14px;color:#fff2c7;font-weight:850}
+.ok{color:var(--green)} .bad{color:var(--red)}
+.footer{text-align:center;color:var(--muted);margin-top:28px;font-size:13px}
+@media(max-width:1060px){.metrics{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto}}
+@media(max-width:640px){.wrapper{padding:14px 10px 70px}.hero{padding:22px;border-radius:24px}.metrics{grid-template-columns:1fr}.panel{padding:13px;border-radius:22px}.accordion summary{padding:16px 14px;font-size:13px}.accordion-body{padding:0 14px 18px}.section-title h2{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="hero">
+    <div class="kicker">Auditoría dinámica · Revoluciona-T</div>
+    <h1>REVOLUCIONA-T · CLOSER ANA · MAR SERRANO REVUELTO · 52 MINUTOS · CALA DEL MORAL (MÁLAGA) · 5 JUNIO 2026</h1>
+    <p>Informe visual e interactivo de la entrevista: diagnóstico, scoreboard, evolución, aciertos, errores, 13 fuentes, manual operativo, seguimiento y plan de entrenamiento.</p>
+    <div class="hero-strip"><span class='chip'>Mar Serrano Revuelto</span><span class='chip'>Cala del Moral · Málaga</span><span class='chip'>49 años</span><span class='chip'>Industria farmacéutica</span><span class='chip'>Responsable Andalucía</span><span class='chip'>Hijo Martín · 10 años</span><span class='chip'>75 kg → objetivo ~10 kg</span><span class='chip'>Perimenopausia activa</span><span class='chip'>EMS 100€/mes</span><span class='chip'>Obstáculo: números</span></div>
+  </header>
+
+  <section class="metrics">
+<div class="metric-card">
+  <span>Resultado</span>
+  <strong>EN SEGUIMIENTO</strong>
+  <em>WhatsApp antes de las 14:00</em>
+</div>
+
+<div class="metric-card">
+  <span>Nota global</span>
+  <strong>7.7 / 10</strong>
+  <em>La más alta de Ana</em>
+</div>
+
+<div class="metric-card">
+  <span>Duración</span>
+  <strong>52 min</strong>
+  <em>Llamada fluida</em>
+</div>
+
+<div class="metric-card">
+  <span>Hito clave</span>
+  <strong>Sin “me queda claro”</strong>
+  <em>Primera vez en 17 llamadas</em>
+</div>
+
+<div class="metric-card">
+  <span>Obstáculo</span>
+  <strong>Solo números</strong>
+  <em>Excel + EMS</em>
+</div>
+
+<div class="metric-card">
+  <span>Activo perdido</span>
+  <strong>Rodillas + Martín</strong>
+  <em>No llegó al precio</em>
+</div></section>
+
+  <div class="layout">
+    <aside class="sidebar panel">
+      <h2>Score visual</h2>
+      
+        <div class="bar-row">
+          <div class="bar-label"><span>Apertura / Agenda</span><b>9.0</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:90.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Diagnóstico calidad</span><b>7.5</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:75.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Diagnóstico profundidad</span><b>7.0</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:70.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Construcción de valor</span><b>7.5</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:75.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Manejo de objeciones</span><b>7.5</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:75.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Cierre</span><b>6.5</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:65.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Lenguaje / Tono</span><b>9.5</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:95.0%"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>Estructura</span><b>8.0</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80.0%"></div></div>
+        </div>
+      <div class="reading"><strong>Lectura clave:</strong> 7.7 / 10, nota más alta de Ana. Primera llamada sin “me queda claro”. El gran agujero sigue siendo el activo cargado antes del precio: artrosis, Martín y “durar 250 años”.</div>
+      <nav class="nav">
+        <a href="#auditoria">Auditoría completa</a>
+        <a href="#fuentes">13 fuentes</a>
+        <a href="#manual">Manual operativo</a>
+        <a href="#original">Documento íntegro</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section id="auditoria" class="panel">
+        <div class="section-title"><h2>Auditoría completa</h2><span>11 bloques</span></div>
+        
+    <details class="accordion section-card" open>
+      <summary><div><span class="summary-icon">◆</span>LA NOTICIA QUE CAMBIA ESTA AUDITORÍA</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><p>Diecisiete llamadas. &quot;Me queda claro&quot; no aparece en esta.<br>Léelo otra vez. Diecisiete llamadas en el proyecto. En todas las anteriores — sin excepción — la frase prohibida del Manual salió. En esta no. Ni una sola vez. En su lugar llegaron &quot;No te he entendido esto que me dices, explícamelo&quot; (min 13:29), &quot;Entiendo perfectamente&quot; (min 14:59), &quot;¿tienes alguna duda hasta lo que hemos hablado?&quot; (min 36:53). Sustitutos naturales, no forzados.<br>Esto no es un accidente. Y antes de entrar en todo lo que faltó — que hay bastante — lo primero que Ana necesita escuchar es eso.</p></div>
+    </details>
+    <details class="accordion section-card" open>
+      <summary><div><span class="summary-icon">◆</span>FICHA DEL CASO</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><p>Prospecto: Mar Serrano Revuelto · Cala del Moral (10 km de Málaga) · 49 años (cumple 50 en septiembre) Closer: Ana Fecha: 5 junio 2026 Duración: 52 minutos Resultado: EN SEGUIMIENTO · WhatsApp con decisión antes de las 14:00 del 6 junio Nota global: 7.7 / 10 — nota más alta de Ana en 17 llamadas Historial Ana: [...] · Xisca (CER 7.5) · Alicia JSM (SEG 7.6) · Seyla (SEG 7.1) · Mar (SEG 7.7)<br>Perfil Mar: Industria farmacéutica · responsable de toda Andalucía Viaja constantemente · trabaja en hospitales · hace noches fuera Hijo Martín (10 años) · custodia semanal alternada Origen: Córdoba · 17 años en Málaga · hermano en Madrid Peso zona cómoda: 62-65 kg · actualmente 75 kg · objetivo ~10 kg Perimenopausia activa (primer mes sin regla) Madre con artrosis (89 años) → hereditaria en rodillas &quot;Yo quiero durar hasta los 250&quot; — su frase exacta, repetida 3 veces 3 meses con nutricionista Susana (perdió 3 kg pero tuppers insostenibles) EMS 1 día/semana · 30 minutos · 100€/mes Nunca ha hecho fuerza · sabe que la necesita (lo ha hablado con médicos) Casa nueva reservada en Málaga ciudad (entrega tercer trimestre 2027) &quot;Yo soy muy nórdica, muy organizadita&quot; — su autodescripción Come emocionalmente al terminar la jornada: &quot;llega el momento de tranquilidad y voy a comer&quot; Decisora autónoma económicamente Compromiso: 8/10 Obstáculo: solo económico (&quot;me pongo con el Excel este fin de semana&quot;) Variable clave: mañana habla con EMS sobre si lo deja</p></div>
+    </details>
+    <details class="accordion section-card" open>
+      <summary><div><span class="summary-icon">◆</span>SCOREBOARD — 13 FUENTES + MANUAL OPERATIVO</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><div class="table-wrap"><table class="score-table"><thead><tr><th>Bloque</th><th>Nota</th><th>Vs. Alicia JSM</th><th>Razón</th></tr></thead><tbody><tr><td><strong>Apertura / Agenda</strong></td><td><span class='score-pill'>9.0</span></td><td>↑(8.5)</td><td>Mejor apertura del proyecto. Conexión genuina y simétrica.</td></tr><tr><td><strong>Diagnóstico calidad</strong></td><td><span class='score-pill'>7.5</span></td><td>↓(9.0)</td><td>Solid pero EMS no excavado como dato económico clave.</td></tr><tr><td><strong>Diagnóstico profundidad</strong></td><td><span class='score-pill'>7.0</span></td><td>↓↓(9.0)</td><td>Artrosis y Martín encontrados, no excavados a fondo.</td></tr><tr><td><strong>Construcción de valor</strong></td><td><span class='score-pill'>7.5</span></td><td>=(7.0)</td><td>Reframe excelente. Pitch personalizado. Sin visión questions.</td></tr><tr><td><strong>Manejo de objeciones</strong></td><td><span class='score-pill'>7.5</span></td><td>=(7.5)</td><td>LDA correcto. Reserva verbal sin compromiso. Urgencia artificial.</td></tr><tr><td><strong>Cierre</strong></td><td><span class='score-pill'>6.5</span></td><td>=(5.5)</td><td>EN SEGUIMIENTO. Sin frase de seguridad. Sin silencio.</td></tr><tr><td><strong>Lenguaje / Tono</strong></td><td><span class='score-pill'>9.5</span></td><td>↑(9.5)</td><td>Sin &quot;me queda claro&quot;. El tono más natural del proyecto.</td></tr><tr><td><strong>Estructura</strong></td><td><span class='score-pill'>8.0</span></td><td>↑(7.5)</td><td>Pre-Suasión, LDA, auto-venta, cualificación económica. Sin visión.</td></tr></tbody></table></div><div class='global-score'>GLOBAL <strong>7.7 / 10</strong> — nota más alta de Ana en 17 llamadas</div></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>TABLA EVOLUTIVA — ÚLTIMAS 6 LLAMADAS DE ANA</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><pre class='data-block'>DIMENSIÓN |ISA|SIL|XIS|ALI|SEY|MAR ──────────────────────────────────────────────────────────────────── Nota global |6.5|7.1|7.5|7.6|7.1|7.7 Resultado |SEG|SEG|CER|SEG|SEG|SEG &quot;Me queda claro&quot; |Sí |Sí |NO |Sí |Sí |NO 🟢 Cualif. económica |No |Sí |Sí |Sí(t)|No |Sí ✅ Reframe |Sí |Sí |Sí |Sí |Sí |Sí ✅ Pre-Suasión real |No |No |No |Sí |Sí(d)|Sí(d) Frase seguridad S.11 |No |No |No |No |No |No 🔴 Visión questions |No |No |No |No |No |No 🔴 LDA obstáculo |No |Sí |N/A|Sí |Sí |Sí ✅ Auto-venta |Sí |Sí |Sí |Sí |Sí |Sí ✅ Reserva plaza |No |Sí |N/A|No |No |Verbal EMS/gasto alternativo |N/A|N/A|N/A|N/A|N/A|Perdido 🔴 Urgencia artificial |No |No |No |No |No |Sí ✗ Apertura calidad |7.5|8.0|8.5|8.5|8.0|9.0
+LO QUE ESTÁ CONSOLIDADO: Reframe (6 llamadas), auto-venta (6 llamadas), LDA (4 llamadas), cualificación económica (4 de últimas 6). LO QUE MEJORÓ HOY: Tic verbal desaparecido. Apertura más genuina. Sin presión en el cierre. LO QUE NO SE MUEVE: Frase de seguridad (17 llamadas), visión questions (17 llamadas), Pre-Suasión con activos cargados. LO NUEVO NEGATIVO: Urgencia artificial introducida por primera vez. EMS como dato económico perdido.</pre></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>LO QUE FUNCIONÓ — CON TIMESTAMPS Y EJEMPLOS EXACTOS</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><div class='mini-grid'>
+        <details class="mini-card good">
+          <summary><span>BIEN 1 — LA APERTURA MÁS GENUINA DEL PROYECTO (MIN 0-3:30)</span><b>+</b></summary>
+          <div><p>Ninguna otra apertura de Ana ha tenido este nivel de conexión real. Mar abrió contando su vida laboral compleja, hijo Martín. Ana respondió: &quot;Yo tengo un peque también, el mío es de 11 y se llama Guillermo.&quot;<br>Eso no es técnica. Es simetría real. Dos mujeres de 49 años, madres separadas, hijos de 10-11 años, perimenopausia. Sin fabricar. Y más tarde (min 18:26): &quot;Cambio hormonal es casi llamarlo de una manera muy generosa, es una revolución, Mar. Tenemos la misma edad, además, tenemos 49 años, o sea que sé de lo que me hablas en primera persona.&quot;<br>Eso crea confianza que no puede crearse con técnica — solo con realidad compartida. Ana la usó bien y de manera oportuna.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 2 — REFRAME ESPECÍFICO Y CONECTADO A LA EXPERIENCIA DE MAR (MIN 32:30)</span><b>+</b></summary>
+          <div><p>&quot;El problema no es lo que haces. O el problema es que el sistema que estás ejecutando es que tampoco está diseñado específicamente para ti... Tu edad, Mar, tus circunstancias, que tú tienes unas circunstancias muy concretas.&quot;<br>Y lo conectó directamente con lo que Mar había dicho sobre Susana y los tuppers: &quot;estas cosas no encajan en tu vida real. Punto. No hay más secretos.&quot; La causa raíz del fracaso con Susana (logística de tuppers incompatible con su vida) se convirtió en el argumento central del Reframe. Eso no es genérico — está hecho con la experiencia específica de Mar.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 3 — CUALIFICACIÓN ECONÓMICA COMPLEJA Y BIEN MANEJADA (MIN 25-28)</span><b>+</b></summary>
+          <div><p>Cuando Mar sacó la vivienda nueva, Ana no la dejó pasar: &quot;¿Te limita económicamente para tomar una decisión?&quot; — Mar confirmó que sí. Ana siguió: &quot;¿La compras de manera inmediata o cuándo la entregas?&quot; — respuesta: tercer trimestre de 2027. Con eso supo que el presupuesto tiene margen ahora y que la compra no bloquea hoy.<br>Esa secuencia es precisamente la cualificación económica compleja — no solo &quot;¿tienes dinero?&quot; sino entender el panorama financiero de Mar para calibrar el momento. Bien ejecutada.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 4 — IMPLICACIÓN QUIRÚRGICA CON LA ARTROSIS (MIN 23:23)</span><b>+</b></summary>
+          <div><p>&quot;¿Y tu rodilla entonces? ¿Tu artrosis y tu rodilla, qué?&quot;<br>Tres palabras que hicieron más que cualquier argumento. Mar lo había mencionado, Ana lo guardó y lo devolvió en el momento correcto. Cuando Mar describió quedarse &quot;como una señora consistente&quot; si no hacía nada, Ana conectó directamente con el miedo real: las rodillas heredadas de su madre.<br>Mar: &quot;Claro, que estarían de aquella manera.&quot;<br>Sin más desarrollo. Ana no necesitó añadir nada. Eso es precisión.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 5 — LDA LIMPIO Y HONESTO (MIN 44:09)</span><b>+</b></summary>
+          <div><p>&quot;¿Qué necesitas pensar? ¿Es un tema solo de números o hay algo más?&quot; — Mar: &quot;Un tema nada más que de números.&quot; Ana: &quot;¿Sería un sí o es un no?&quot;<br>Esa secuencia en tres preguntas cortas aisló el obstáculo con precisión. No hubo debate filosófico sobre si era el momento, no hubo rebatir la duda — solo identificar qué tipo de obstáculo había. Y Mar fue directa: solo números, sería un sí.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 6 — AUTO-VENTA DEL PROSPECT CON RESPUESTA GENUINA (MIN 39:14)</span><b>+</b></summary>
+          <div><p>&quot;¿Por qué querrías entrar en el programa con Jonathan?&quot; — Mar respondió con algo real y específico: &quot;el seguimiento tan exhaustivo. Si no me van a echar un broncazo, como los niños chicos.&quot;<br>Esa frase — el broncazo como los niños chicos — es propia de Mar. No es un cliché de cliente motivada. Es alguien que se conoce a sí misma y sabe que necesita accountability externo. Ana la produjo con la pregunta correcta en el momento correcto.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 7 — CONEXIÓN TUPPER → SISTEMA NO ADAPTADO (MIN 13:47-14:00)</span><b>+</b></summary>
+          <div><p>Cuando Mar explicó que Susana le daba tuppers que no podían coexistir con su vida de viajes, Ana lo capturó y lo usó como Reframe: &quot;Y tú lo que estás buscando es algo como que se adapte a comer en un restaurante.&quot; No solo lo registró — lo convirtió en el argumento central de por qué el programa anterior no funcionó y el nuevo sí puede.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 8 — PITCH PERSONALIZADO PARA MAR (MIN 33:38-39:00)</span><b>+</b></summary>
+          <div><p>A diferencia de otras llamadas donde el pitch sueña genérico, en esta Ana nombró explícitamente las circunstancias de Mar: los viajes, los hoteles, la semana con Martín, la otra semana sin él, la artrosis hereditaria y las rodillas. &quot;Lo que quieres conseguir es adelgazar esos 10 kilos y ver en el espejo ese cuerpo que quieres ver y luego que no te dé miedo, pues que las piernas no te vayan a sostener.&quot; Eso conecta el programa con los miedos reales de Mar, no con los de una mujer genérica de 40 años.</p></div>
+        </details>
+
+        <details class="mini-card good">
+          <summary><span>BIEN 9 — SIN PRESIÓN AGRESIVA EN EL CIERRE</span><b>+</b></summary>
+          <div><p>Comparado con Alicia JSM donde Ana presionó con &quot;es que digas que sí ahora,&quot; en esta llamada el manejo del EN SEGUIMIENTO fue limpio. &quot;Necesitas pensarlo, bien. Pero necesito saber si es un sí o un no.&quot; Sin drama, sin urgencia emocional. La urgencia que introdujo fue técnica (mañana 14:00) — que sí tiene un problema que explicaremos más adelante — pero sin el componente de presión emocional que apareció en Alicia JSM.</p></div>
+        </details></div></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>LOS ERRORES — CON PRECISIÓN Y SCRIPTS CORRECTOS</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><div class='mini-grid'>
+        <details class="mini-card error">
+          <summary><span>ERROR 1 — EL EMS FUE DIAGNOSTICADO PERO NO EXCAVADO ECONÓMICAMENTE (MIN 15:13 vs MIN 48:29)</span><b>+</b></summary>
+          <div><p>Min 15:13 — Mar dijo: &quot;Lo único que hago es una sesión de deporte con electroestimulación... hago un día en semana que son 30 minutos.&quot;<br>Ana respondió: &quot;¿Y es suficiente para ti lo que estás haciendo?&quot; — Buena pregunta de seguimiento sobre resultados. Pero la pregunta que faltó y que habría cambiado todo el cierre:<br>&quot;¿Y eso cuánto te cuesta al mes, Mar?&quot;<br>Esa pregunta tiene menos de diez palabras. Y habría revelado los 100€/mes en el minuto 16 en lugar del minuto 48. La diferencia es total:<br>Con ese dato en el minuto 16, Ana entra al precio con un argumento que no usó en ningún momento de la llamada:<br>&quot;Mar, el EMS son 100 euros cada mes, indefinidamente. Si sigues con el EMS seis meses más, eso son 600 euros — más que el descuento del pago único del programa. El programa son 1.300 euros una vez y lo que aprendes se queda contigo para siempre. Si dejas el EMS cuando empieces con nosotros, el coste neto real para ti durante los seis meses es 1.300 menos los 600 que te ahorras en EMS. Son 700 euros por cambiar algo que no está funcionando por algo diseñado específicamente para ti.&quot;<br>Ese argumento no es manipulación — es la aritmética real de Mar. Y Mar tiene mentalidad de Excel. Habría calculado esto ella misma si Ana se lo hubiera puesto delante.<br>¿Por qué no llegó? Porque la pregunta del precio del EMS llegó 33 minutos después, cuando Mar lo mencionó voluntariamente como variable en el cierre. A esas alturas el argumento ya llegó fuera de contexto y sin el impacto que habría tenido antes del pitch.<br>Protocolo nuevo que Ana necesita instalar: en el bloque de entrenamiento, cuando la prospect mencione cualquier actividad física que está pagando, la siguiente pregunta siempre es &quot;¿Y eso cuánto cuesta al mes?&quot; Sin excepción.</p></div>
+        </details>
+
+        <details class="mini-card error">
+          <summary><span>ERROR 2 — LOS ACTIVOS MÁS CARGADOS LLEGARON AL PITCH PERO NO A LA PRE-SUASIÓN</span><b>+</b></summary>
+          <div><p>La Pre-Suasión de Ana (min 39:14-40:23):<br>&quot;Yo quiero que recordemos lo que me has dicho antes. Estás buscando una estabilidad alimentaria. Me has dicho, quiero saber combinar alimentos. Quiero tener esas instrucciones. Estoy borderline ya ahí con lo que considero que esto no es salud y es importante. Y tú quieres sentirte segura, no solo con tu cuerpo, con esa figura que quieres ver en el espejo, esos menos 10 kilos. Que yo cuando te hablo de kilos, Mar, me da igual que sean 8 o que sean al final 14.&quot;<br>Eso es Pre-Suasión correcta en forma. Usa palabras de Mar, llega antes del precio, reactiva el dolor. El problema: usa los activos más limpios y articulados, no los más cargados.<br>Los activos que Mar entregó y que no llegaron a la Pre-Suasión:<br>ACTIVO 1 — La madre y la rodilla (min 21:10): &quot;Mi madre tiene 89 años con artrosis... Su artrosis la voy a tener yo, en la rodilla. El peso no me va a ayudar nada, nada, nada, nada a futuro.&quot;<br>ACTIVO 2 — El compromiso vital (min 21:30): &quot;Yo quiero durar hasta los 250.&quot; La repitió tres veces en la llamada. Esa es SU frase, no una frase de cierre del programa.<br>ACTIVO 3 — El cálculo de Martín (min 27:50): &quot;Yo lo tuve con 40. Cuando él tenga 20, yo tengo 60.&quot; Este cálculo lo hizo Mar sola. Es su miedo, en sus propias palabras.<br>La Pre-Suasión que habría correspondido:<br>&quot;Mar, antes del precio — me dijiste tres cosas que quiero devolverte. Tu madre tiene artrosis a los 89 y su rodilla va a ser la tuya. Lo dijiste con esas palabras. Dijiste que quieres durar hasta los 250. Y dijiste que cuando Martín tenga 20 años, tú tienes 60 — y necesitas llegar entera. El programa son 1.300 euros. ¿Cuánto vale llegar a los 60 con las rodillas funcionando?&quot;<br>Eso no es retórica. Es devolver a Mar sus propias palabras cargadas de emoción en el momento de mayor apertura. El Manual lo pide explícitamente: &quot;¿Esto que voy a decir es algo que ella reconoce de su vida, o estoy describiendo el programa desde fuera?&quot;<br>La artrosis de la madre de Mar, Martín y los 250 años son lo que ella reconoce de su vida. La estabilidad alimentaria es lo que Ana describe del programa desde fuera.</p></div>
+        </details>
+
+        <details class="mini-card error">
+          <summary><span>ERROR 3 — LA FRASE DE SEGURIDAD (SECCIÓN 11): DIECISIETE LLAMADAS, CERO VECES</span><b>+</b></summary>
+          <div><p>El Manual, Sección 11: Validación → Frase de seguridad → Precio → Silencio.<br>La validación llegó: &quot;¿Tú sigues igual de segura de todo esto?&quot; — Mar: &quot;Sí, sí, sí.&quot;<br>La frase de seguridad no. El precio llegó directamente después de la auto-venta.<br>El catálogo del Manual tiene la frase exacta para Mar. Mar se describió a sí misma como &quot;muy nórdica, muy organizadita&quot; y lleva años siendo responsable de toda Andalucía. Es alguien que gestiona con precisión todo lo que entra en su sistema. Pero con el cuerpo lleva años improvisando. Eso la sitúa en el perfil del Manual: &quot;La competente que es un desastre con su cuerpo.&quot;<br>La frase del Manual para ese perfil:<br>&quot;Que con tu cuerpo tengas el mismo control que tienes en todo lo demás. Y que esa rabia de &#x27;cómo puede ser que no pueda con esto&#x27; se convierta en &#x27;por fin lo tengo.&#x27;&quot;<br>Esa frase, dicha entre la validación y el precio, habría resonado de una manera diferente a cualquier otra cosa dicha en esa llamada. Mar lo habría sentido como un espejo de sí misma.<br>La secuencia correcta de Sección 11 para Mar:<br>&quot;¿Sigues igual de segura de todo esto?&quot; → Mar dice sí → &quot;Mar, algo que nos dicen mujeres como tú — que gestionan Andalucía entera, que hacen funcionar todo lo demás con precisión — es que lo más frustrante era darse cuenta de que con el cuerpo llevaban años improvisando. Que con tu cuerpo tengas el mismo control que tienes en todo lo demás. Eso es exactamente lo que hace el programa.&quot; → PRECIO → SILENCIO.<br>No se añade nada más. No se explica. No se comenta. Se espera.</p></div>
+        </details>
+
+        <details class="mini-card error">
+          <summary><span>ERROR 4 — SIN VISIÓN QUESTIONS EN EL PITCH: DIECISIETE LLAMADAS</span><b>+</b></summary>
+          <div><p>El pitch de Ana (min 33:38 a 39:00) fue el más personalizado del proyecto para esta prospect. Usó el nombre de Mar siete veces. Mencionó los viajes, Martín, la artrosis, los tuppers. Todo correcto.<br>Sin una sola visión question.<br>Las que correspondían para Mar, después de cada pilar:<br>Para alimentación (viajera que come en restaurantes): &quot;¿Te imaginas que estás en un hotel en Sevilla, se te presenta una carta de 30 platos, y en lugar de la parálisis de &#x27;qué cojo aquí&#x27;, sabes exactamente qué pedir en ese restaurante, sin menú especial, sin tupper en el coche, comiendo como el resto de la mesa?&quot;<br>Para entrenamiento (hora en el hotel mientras trabaja): &quot;¿Te imaginas que esa semana que no tienes a Martín y estás tres días en Cádiz, antes de entrar al hospital a las ocho de la mañana tienes una tabla de 30 minutos específica para ese momento, en la habitación, que sabes exactamente cómo ejecutar y por qué?&quot;<br>Para acompañamiento (Mar nórdica, necesita estructura): &quot;¿Te imaginas que en ese momento de la noche cuando llegas cansada del hospital y antes de que llegue el &#x27;voy a comer porque tengo un momento de tranquilidad&#x27;, hay alguien al otro lado que ya sabe que ese es tu momento difícil y te ha dejado preparado exactamente qué hacer?&quot;<br>Cada una conecta un pilar con una escena concreta de la vida de Mar. No son abstractas. No son genéricas. Y cada una habría producido un sí antes del precio.</p></div>
+        </details>
+
+        <details class="mini-card error">
+          <summary><span>ERROR 5 — URGENCIA ARTIFICIAL EN EL CIERRE (MIN 49:43)</span><b>+</b></summary>
+          <div><p>&quot;Tenemos en esta época, más que a lo largo incluso de todo el año, un volumen de faltas importante.&quot;<br>Eso es escasez artificial. Cialdini es explícito: la escasez que no es real destruye la confianza a largo plazo. Si Mar descubre después — hablando con otra mujer del programa, viendo las redes sociales, o simplemente siendo la persona analítica que es — que no había tal volumen de urgencia, la relación queda dañada.<br>La escasez ética disponible en esta llamada:<br>&quot;Mar, si entras esta semana puedo incorporarte el lunes. El lunes empieza el trabajo con el nutri y el entrenador. Si esperas al próximo lunes, perdemos una semana antes del verano — que es exactamente el período donde más te va a hacer falta el sistema.&quot;<br>Eso es urgencia real y específica para Mar. No &quot;tenemos mucha demanda.&quot; Es: tu verano empieza en tres semanas y sin el sistema estás sola.</p></div>
+        </details>
+
+        <details class="mini-card error">
+          <summary><span>ERROR 6 — EL DESCUENTO DE 6 CUOTAS DE 250€ NO ES UN DESCUENTO</span><b>+</b></summary>
+          <div><p>Min 45:33 Ana ofreció: &quot;¿Te ayudaría a tomar la decisión ahora si yo te puedo ofrecer en lugar de los 3 pagos de 500 euros un pago mensual de 250 euros?&quot;<br>Mar respondió con precisión inmediata: &quot;Si al final el coste es el mismo, Ana.&quot;<br>Y tiene razón. 6 × 250 = 1.500€. Igual que 3 × 500. No es un descuento — es un cambio de forma de pago. Mar tiene mentalidad de Excel y lo vio al instante.<br>Ofrecer algo como descuento cuando no lo es con una prospect analítica genera el efecto contrario: erosiona la credibilidad.<br>Lo que sí podría haber funcionado con Mar: conectar la forma de pago con la decisión del EMS. &quot;Mar, si dejas el EMS cuando empieces con nosotros, liberas 100€/mes. Esos 100€ caben perfectamente en el fraccionado de 500. El coste neto mensual real para ti sería de 400€ — lo que ya estabas pagando en EMS más 300€ adicionales.&quot;<br>Ese argumento pone los números en el contexto correcto y respeta la inteligencia de Mar.</p></div>
+        </details></div></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>MANUAL OPERATIVO — ERRORES ESPECÍFICOS</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><h4>ERROR 1 DEL MANUAL (Características vs Situaciones): El pitch fue en su mayor parte correcto en este aspecto. Conectó los pilares con situaciones de Mar (viajes, restaurantes, Martín). La excepción fue la explicación del WhatsApp group y la app — que fueron funcionalidades, no situaciones.</h4>
+<h4>ERROR 5 DEL MANUAL (Precio sin frase de seguridad): Confirmado. El precio llegó sin la Sección 11 completa. La frase de seguridad correcta del catálogo para el perfil &quot;competente que es desastre con su cuerpo&quot; estaba disponible y no fue usada.</h4>
+<h4>ERROR 6 DEL MANUAL (Llenar el silencio post-precio): El precio llegó y Ana siguió hablando inmediatamente. No hubo silencio posterior. Una prospect analítica como Mar necesita ese silencio — su cabeza ya está calculando mientras Ana habla, y las palabras adicionales interrumpen ese proceso.</h4>
+<h4>SECCIÓN 11 EJECUTADA: Solo el paso 1 (validación) llegó completo. Pasos 2 (frase de seguridad) y 3 (silencio post-precio) ausentes.</h4></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>PLAN DE SEGUIMIENTO — ACCIÓN ANTES DE MAÑANA 14:00</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><p>Mar va al EMS mañana a las 11:30. A las 14:00 escribe a Ana.</p>
+<h4>ESTA NOCHE — WhatsApp de Ana a Mar (viernes, antes de las 22:00):</h4>
+<p>&quot;Mar, una cosa que quería dejarte antes de que te pongas con el Excel. El EMS son 100€/mes indefinidos — los pagas mientras sigas yendo, sin fecha de fin. El programa son 1.300€ una vez, y después lo que aprendes es tuyo para siempre. Si empiezas esta semana y dejas el EMS, el coste neto real en seis meses es 1.300€ menos 600€ que te ahorras en EMS: 700€ netos para cambiar algo que no funciona por algo diseñado para tu vida. Lo digo para que esté en el Excel. Aquí estoy mañana. Buen finde.&quot;<br>Ese mensaje: (1) respeta el proceso de Mar, (2) pone los números correctos antes de que construya el Excel, (3) contextualiza el EMS como coste de oportunidad, y (4) no presiona.</p>
+<h4>SI MAR ESCRIBE MAÑANA ANTES DE LAS 14:00 CON UN SÍ: &quot;Perfecto, Mar. Hago el link de pago ahora y esta tarde tienes la bienvenida. El lunes empieza todo.&quot;</h4>
+<h4>SI MAR ESCRIBE CON DUDAS ECONÓMICAS: &quot;¿Cuál es el número que no cuadra? Si me dices cuál es el techo que tienes, vemos qué tiene sentido.&quot;</h4>
+<h4>SI MAR NO ESCRIBE ANTES DE LAS 14:00: Ana escribe a las 14:01: &quot;Mar, ¿cómo fue con el EMS? Aquí estoy.&quot;</h4></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>PLAN DE ENTRENAMIENTO — ANA, ITERACIÓN 17</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><h4>LO QUE NO SE TOCA: El Reframe — siete llamadas seguidas. Propio ya. La cualificación económica — volvió en esta llamada. Que se quede. La ausencia de &quot;me queda claro&quot; — que se consolide. La conexión genuina personal — no se fabrica, pero se puede cultivar. La mención de la perimenopausia compartida fue el mejor momento de apertura del proyecto.</h4>
+<h4>TRES CAMBIOS PARA LA PRÓXIMA LLAMADA:</h4>
+<p>1. PREGUNTA DEL GASTO EN ACTIVIDAD FÍSICA EXISTENTE — SIEMPRE EN EL BLOQUE DE ENTRENAMIENTO<br>&quot;¿Estás pagando actualmente algún gimnasio, entrenador, o sesiones de cualquier tipo?&quot; Si sí: &quot;¿Cuánto al mes?&quot;<br>No es intrusiva. Mar misma ofreció la información del EMS cuando vino al caso del cierre — habría dado ese dato sin problema en el minuto 16 si se lo hubieran preguntado. Ese dato cambia el argumento económico del cierre completamente.<br>1. FRASE DE SEGURIDAD DEL CATÁLOGO PERSONALIZADA ANTES DE CADA PRECIO<br>El catálogo del Manual tiene seis frases. Para cada prospect, antes de la llamada, Ana elige una basada en el perfil conocido. La escribe en papel, delante de ella, antes del pitch.<br>Para Mar, era la frase de &quot;La competente desastre con su cuerpo&quot; — disponible y específica. En la próxima llamada: identificar el perfil en el diagnóstico → elegir la frase → escribirla en papel → usarla antes del precio → silencio.<br>1. PRE-SUASIÓN: ACTIVO MÁS CARGADO, NO EL MÁS ARTICULADO<br>El patrón está claro después de cuatro llamadas con Pre-Suasión presente: Ana elige las frases más limpias y articuladas de la prospect, no las más cargadas emocionalmente. &quot;Estabilidad alimentaria&quot; es más limpia que &quot;mi madre tiene artrosis en las rodillas y esa rodilla va a ser la mía.&quot; Pero la segunda es diez veces más poderosa.<br>Ejercicio concreto: al final del diagnóstico, antes de entrar al pitch, Ana escribe tres frases de la prospect — las más cargadas emocionalmente que haya dicho, textualmente. La Pre-Suasión usa esas tres, no las que Ana ha articulado en su propio lenguaje.</p></div>
+    </details>
+    <details class="accordion section-card">
+      <summary><div><span class="summary-icon">◆</span>PARA ANA — LA FRASE DE ESTA AUDITORÍA</div><span class="plus">+</span></summary>
+      <div class="accordion-body"><p>&quot;Diecisiete llamadas. 7.7 — nota más alta del proyecto. Y por primera vez en diecisiete llamadas, sin &#x27;me queda claro&#x27;. No de manera forzada. No porque lo hayas sustituido conscientemente. Porque encontraste otro lenguaje que salió solo. Eso es más valioso que cualquier técnica — es señal de que el nivel está subiendo de verdad. Ahora mira lo que tienes delante: Mar tiene las rodillas de su madre, tiene a Martín con 10 años, dice literalmente que quiere durar 250 años, y te entregó esas tres frases con tanta claridad que podrías recitarlas textualmente. Y en la Pre-Suasión usaste &#x27;estabilidad alimentaria.&#x27; Eso es la distancia que te separa de un cierre en llamada. No es técnica — es escucha. Es quedarte con el activo que duele, no con el que es más fácil de articular. La artrosis de la madre de Mar es el activo de esta llamada. &#x27;Yo quiero durar 250 años&#x27; es el activo de esta llamada. &#x27;Cuando Martín tenga 20, yo tengo 60&#x27; es el activo de esta llamada. Los tienes. Ahora aprende a usarlos en el único lugar donde cuentan: justo antes del precio.&quot;</p></div>
+    </details>
+      </section>
+
+      <section id="fuentes" class="panel" style="margin-top:18px">
+        <div class="section-title"><h2>Las 13 fuentes</h2><span>Evaluación completa</span></div>
+        
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">01</span>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>Labels que llegaron y funcionaron:<br>Min 20:24 — Ana preguntó: &quot;¿Qué supone para ti, emocionalmente?&quot; — no es un Label técnico pero abrió el espacio para que Mar describiera el &quot;borderline.&quot;<br>Min 22:17 — &quot;Llevas tiempo normalizando este peso o este no sentirte cómoda, Mar.&quot; — Mar respondió: &quot;Ya, pero no lo debo normalizar.&quot; Eso es un Label que nombra la conducta de evasión. Correcto.<br>Min 23:23 — &quot;¿Y tu rodilla entonces? ¿Tu artrosis y tu rodilla, qué?&quot; — Tres palabras que funcionaron como Label de implicación. Voss al estado puro: nombras lo que la persona sabe que está evitando.<br>El Label que habría abierto la llamada a otra dimensión:<br>Cuando Mar describió que trabaja rodeada de médicos y ha tenido conversaciones de salud sobre la perimenopausia (min 17:39), el Label correcto era:<br>&quot;Parece que tienes toda la información — los médicos te han dicho lo que necesitas, tú lo entiendes — pero hay algo que hace que aun así no hayas podido implementarlo. ¿Es eso?&quot;<br>Con ese Label, Mar habría nombrado ella misma el gap entre saber y hacer. Eso es el activo central de la venta — y habría llegado desde ella, no desde Ana.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">02</span>FUENTE 2 · GAP SELLING — Keenan</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>ESTADO ACTUAL bien construido: 75 kg, perimenopausia, nutricionista fallida por tuppers, EMS insuficiente, alimentación caótica en viajes, comer emocional al terminar la jornada.<br>CAUSA RAÍZ correctamente identificada: sistema no diseñado para su vida.<br>IMPACT LAYER — dos capas bien establecidas: Capa física-visible: &quot;borderline&quot; entre verse saludable o no, barriga que ha cambiado. Capa futura-real: artrosis hereditaria en rodillas, Martín a los 10 años (&quot;cuando él tenga 20, yo tengo 60&quot;).<br>La segunda pregunta de Implicación que faltó:<br>&quot;Mar, tres meses con Susana y el sistema no funcionó. Si en seis meses más lo sigues intentando con otra nutricionista o con otra solución, y tampoco funciona — lo que llevas ya demostrado que no funciona — ¿qué pasa con las rodillas en ese tiempo? ¿Cuánto pesa la artrosis en función del peso que llevas?&quot;<br>Esa pregunta conecta el tiempo perdido con el riesgo físico real. Es la implicación más potente disponible y no llegó.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">03</span>FUENTE 3 · OBJECTIONS — Jeb Blount</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>LDA correcto y bien secuenciado. El obstáculo fue aislado limpiamente en &quot;solo números.&quot;<br>El Disrupt que habría cambiado el cierre:<br>&quot;Mar, llevas tres meses con Susana que no funcionaron. Llevas años sabiendo que necesitas fuerza y no la has empezado. Cada mes que pasa son 100€ de EMS que no resuelven el problema. Si empezamos mañana, en seis meses tienes el sistema. Si esperamos hasta septiembre, has pagado 400€ más en EMS sin resultados nuevos y has entrado en la menopausia sin el sistema. ¿Qué diferencia hay entre decidir hoy y decidir el lunes?&quot;<br>Eso no es presión — es el coste real del tiempo de espera para esta prospect específica.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">04</span>FUENTE 4 · VIRTUAL SELLING — Blount</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>52 minutos sin corte técnico de Google Meet registrado en el transcript. La llamada fue técnicamente fluida. Esto sigue siendo la excepción en el proyecto.<br>La llamada terminó con un plan concreto: WhatsApp antes de las 14:00 del día siguiente. La continuidad fue bien establecida.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">05</span>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>El Omission Bias de Mar es claro: no duda del programa (&quot;todo me ha resonado&quot;), no duda del compromiso (&quot;sería un sí&quot;), solo necesita ejecutar su proceso de decisión analítico — el Excel. Mar toma todas las decisiones importantes así: &quot;como he tomado la de la vivienda.&quot;<br>Eso no es indecisión — es su sistema de procesamiento. El JOLT aquí no es reducir miedo a equivocarse (ya está convencida) sino evitar que el &quot;proceso del Excel&quot; dure semanas en lugar de días.<br>El Judge correcto para Mar:<br>&quot;Mar, lo que me dices tiene todo el sentido. Tú tomas decisiones importantes con criterio, con análisis. Y lo que hemos hablado hoy es una decisión importante. Para que tu Excel tenga los números completos: el EMS son 100€/mes indefinidos. El programa son 1.300€ una vez. Si empiezas este lunes, en septiembre — cuando cumples 50 — tienes tres meses de programa detrás. Si esperas hasta septiembre para empezar, entras en la menopausia sin el sistema. Esa es la comparación real.&quot;</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">06</span>FUENTE 6 · SWITCH — Heath</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>JINETE — muy activo y bien informado. Mar trabaja con médicos, conoce la ciencia de la perimenopausia, sabe que necesita fuerza, ha leído sobre alimentación saludable. El Jinete no solo tiene ganas — tiene la información teórica completa. Lo que le falta es el sistema operativo.<br>ELEFANTE — cansado pero no derrotado. Tres meses con Susana donde bajó 3 kilos. El Elefante tiene evidencia de que puede funcionar cuando hay sistema.<br>BRIGHT SPOT — disponible y no usado:<br>&quot;Mar, con Susana, con el sistema menos adaptado posible para tu vida — tuppers en el coche, un sistema que tú misma describes como insostenible — perdiste 3 kilos en tres meses. Con el sistema correcto, adaptado a los restaurantes, a los hoteles, a tu vida real, ¿qué crees que podría pasar en seis meses?&quot;<br>Ese Bright Spot usa el mejor argumento disponible: Mar ya demostró que su cuerpo responde cuando hay acompañamiento. El problema fue exclusivamente la logística, no la biología ni la voluntad.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">07</span>FUENTE 7 · WHY SHE BUYS — Brennan</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>Mar tiene la compra de identidad más claramente articulada del proyecto. Ella misma la verbalizó: &quot;que me mire al espejo y diga, wow, si parezco yo otra vez.&quot;<br>Brennan: las mujeres no compran el producto — compran la versión de sí mismas que el producto hace posible. La versión de Mar que quiere comprar es la que llegó a los 62 kilos, la de barriguita plana, la que puede comer en restaurantes sin ansiedad, la que llega a los 60 con las rodillas funcionando para seguir con Martín.<br>Ana capturó parte de esto en el pitch. Lo que no conectó: &quot;wow, si parezco yo otra vez&quot; fue dicho por Mar en el minuto 29:12 y nunca fue devuelto ni como Label ni como activo de cierre. Esa frase — textualmente suya — era el cierre de la Pre-Suasión.<br>&quot;Mar, antes del precio — me dijiste que lo que más quieres es mirarte al espejo y decir &#x27;wow, si parezco yo otra vez.&#x27; Que durante diez años fuiste esa versión de ti. Y que llevas tiempo normalizando no serla. El programa son 1.300 euros. ¿Cuánto vale volver a ser esa?&quot;</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">08</span>FUENTE 8 · THE MOM TEST — Fitzpatrick</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>Buena recogida de datos reales: los tuppers en el coche a las 4pm, los restaurantes en viajes, el EMS una vez por semana, el comportamiento en el hotel.<br>La pregunta hipotética que se coló (min 16:59): &quot;¿Tú crees que podrías sacar una hora tres veces por semana?&quot; — Mar respondió sí entusiasmada. La pregunta de comportamiento real sería: &quot;Mar, en la última semana que estabas de viaje, ¿qué conseguiste hacer de ejercicio?&quot;<br>La pregunta que faltó en el bloque de entrenamiento (min 15:13): &quot;¿Y eso cuánto te cuesta al mes?&quot; para el EMS. Como ya analizamos, esa es la más costosa de todas las preguntas no formuladas en esta llamada.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">09</span>FUENTE 9 · PRE-SUASIÓN — Cialdini</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>Sexta llamada consecutiva con Pre-Suasión presente. Eso es consistencia real.<br>El problema de esta Pre-Suasión específica ya fue diseccionado. Pero hay un ángulo adicional que no se mencionó: Mar describió su manera de ser como &quot;muy nórdica, muy organizadita&quot; (min 14:09). Esa autodescripción es una ventana directa a su sistema de valores.<br>Pre-Suasión alternativa que usa ese activo:<br>&quot;Mar, antes del precio — me describiste cómo eres: nórdica, organizadita, necesitas márgenes claros para funcionar. Y me dijiste que con el cuerpo es donde más fácil te resulta salirte cuando no tienes el sistema. El programa son 1.300 euros. Es darte para el cuerpo el mismo sistema que ya tienes para todo lo demás.&quot;<br>Eso conecta su fortaleza identitaria con la compra.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">10</span>FUENTE 10 · INFLUENCE — Cialdini</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>CONSISTENCIA bien usada: el compromiso 8/10 fue recuperado en la Pre-Suasión. &quot;Tu compromiso es de un pedazo de 8, ¿sigues igual de segura?&quot; — Mar confirmó. Correcto.<br>ESCASEZ — aquí está el error más importante de cierre de esta llamada:<br>&quot;Tenemos un volumen de faltas importante&quot; (min 49:43-50:03).<br>Eso es escasez fabricada. Mar trabaja en la industria farmacéutica, gestiona toda Andalucía, habla con médicos cada día. Tiene detector de argumentos comerciales calibrado al máximo. Cuando Ana usó &quot;volumen de faltas importante&quot; sin datos concretos, Mar respondió con &quot;¿Con tanta rapidez, Ana?&quot; — señal de que la urgencia le sonó artificial.<br>Cialdini es claro: la escasez inventada detectada destruye el contrato de confianza. No en esa llamada — Mar es demasiado educada para señalarlo — sino en el proceso de decisión posterior, cuando está con el Excel y recuerda ese momento.<br>La urgencia ética disponible que Ana tenía:<br>&quot;Mar, si decides esta semana, el lunes entras. El lunes haces la bienvenida con el nutri y el entrenador. Eso significa que para cuando llegue el verano de verdad — julio, agosto, los viajes de trabajo, las cenas en Sevilla — ya tienes seis semanas de sistema detrás. Si esperas hasta después del verano, el primer verano con la perimenopausia activa lo navegas sin el sistema. Ese es el coste real de esperar.&quot;</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">11</span>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>El Reframe fue el mejor del proyecto para esta prospect. &quot;Estas cosas no encajan en tu vida real&quot; es Challenger Sale en cinco palabras.<br>El Teach disponible que añadiría profundidad:<br>&quot;Mar, algo que me llama la atención. Tú trabajas rodeada de médicos. Ya sabes que necesitas fuerza. Ya sabes que la perimenopausia cambia las necesidades. Ya lo has hablado con ellos. Tienes toda la información. Y sin embargo llevas sin hacer fuerza. Eso no es falta de información ni falta de voluntad — eso es falta de un sistema que funcione con tu vida. Y Susana lo demostró al revés: incluso con el sistema menos adaptado posible para ti — tuppers en el coche — perdiste 3 kilos. Con el sistema correcto, el resultado ya sabes cuál es. Solo necesitabas la logística correcta.&quot;<br>Ese Teach habría sido exclusivo para Mar. No podría decírsele a ninguna otra prospect.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">12</span>FUENTE 12 · SPIN SELLING — Rackham</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>SITUACIÓN <span class='ok'>✅</span> — completa y bien capturada PROBLEMA <span class='ok'>✅</span> — bien identificado: sistema insostenible, comer emocional, EMS insuficiente IMPLICACIÓN <span class='ok'>✅</span> — artrosis y rodillas nombradas. Martín y los 60 años presente. NECESIDAD-BENEFICIO <span class='ok'>✅</span> — Mar verbalizó: seguimiento exhaustivo, sistema que se adapte a viajes<br>La segunda Implicación que habría cerrado el diagnóstico:<br>&quot;Mar, tres meses con Susana sin el sistema correcto, perdiste 3 kilos. Si en seis meses con el sistema correcto perdemos 8 o 10, ¿cómo afecta eso al peso en las rodillas cuando llegue la artrosis? ¿Lo has calculado con los médicos?&quot;<br>Mar trabaja con médicos. Esa pregunta la habría llevado a un territorio donde ella misma habría respondido el argumento de salud con datos clínicos reales.</p></div>
+      </details>
+
+      <details class="accordion source-card">
+        <summary><div><span class="source-num">13</span>FUENTE 13 · EXACTLY WHAT TO SAY — Jones</div><span class="plus">+</span></summary>
+        <div class="accordion-body"><p>La auto-venta del prospect fue bien ejecutada. Mar respondió con &quot;el seguimiento tan exhaustivo&quot; y &quot;si no me van a echar un broncazo como los niños chicos&quot; — respuesta genuina y específica.<br>La frase de Jones para el seguimiento de mañana:<br>Cuando Mar escribe el WhatsApp mañana después del EMS, si dice que necesita más tiempo, la respuesta de Ana:<br>&quot;Mar, una pregunta directa: si los números cuadran cuando lo mires, ¿entras esta semana?&quot;<br>Si dice sí: &quot;Entonces dime los números que no cuadran y lo vemos juntas.&quot; Si duda: &quot;¿Qué tendría que ser diferente para que cuadraran?&quot;<br>Esa estructura Jones no cierra con presión — cierra con claridad. Una prospect analítica como Mar prefiere una pregunta directa a tres argumentos emocionales.</p></div>
+      </details>
+      </section>
+
+      <section id="original" class="panel" style="margin-top:18px">
+        <div class="section-title"><h2>Documento íntegro</h2><span>Texto completo preservado</span></div>
+        <details class="accordion">
+          <summary><div><span class="summary-icon">▣</span>Auditoría original completa</div><span class="plus">+</span></summary>
+          <div class="accordion-body"><pre class="data-block">REVOLUCIONA-T · CLOSER ANA · MAR SERRANO REVUELTO · 52 MINUTOS · CALA DEL MORAL (MÁLAGA) · 5 JUNIO 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ LA NOTICIA QUE CAMBIA ESTA AUDITORÍA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Diecisiete llamadas. &quot;Me queda claro&quot; no aparece en esta.
+Léelo otra vez. Diecisiete llamadas en el proyecto. En todas las anteriores — sin excepción — la frase prohibida del Manual salió. En esta no. Ni una sola vez. En su lugar llegaron &quot;No te he entendido esto que me dices, explícamelo&quot; (min 13:29), &quot;Entiendo perfectamente&quot; (min 14:59), &quot;¿tienes alguna duda hasta lo que hemos hablado?&quot; (min 36:53). Sustitutos naturales, no forzados.
+Esto no es un accidente. Y antes de entrar en todo lo que faltó — que hay bastante — lo primero que Ana necesita escuchar es eso.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ FICHA DEL CASO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Prospecto: Mar Serrano Revuelto · Cala del Moral (10 km de Málaga) · 49 años (cumple 50 en septiembre) Closer: Ana Fecha: 5 junio 2026 Duración: 52 minutos Resultado: EN SEGUIMIENTO · WhatsApp con decisión antes de las 14:00 del 6 junio Nota global: 7.7 / 10 — nota más alta de Ana en 17 llamadas Historial Ana: [...] · Xisca (CER 7.5) · Alicia JSM (SEG 7.6) · Seyla (SEG 7.1) · Mar (SEG 7.7)
+Perfil Mar: Industria farmacéutica · responsable de toda Andalucía Viaja constantemente · trabaja en hospitales · hace noches fuera Hijo Martín (10 años) · custodia semanal alternada Origen: Córdoba · 17 años en Málaga · hermano en Madrid Peso zona cómoda: 62-65 kg · actualmente 75 kg · objetivo ~10 kg Perimenopausia activa (primer mes sin regla) Madre con artrosis (89 años) → hereditaria en rodillas &quot;Yo quiero durar hasta los 250&quot; — su frase exacta, repetida 3 veces 3 meses con nutricionista Susana (perdió 3 kg pero tuppers insostenibles) EMS 1 día/semana · 30 minutos · 100€/mes Nunca ha hecho fuerza · sabe que la necesita (lo ha hablado con médicos) Casa nueva reservada en Málaga ciudad (entrega tercer trimestre 2027) &quot;Yo soy muy nórdica, muy organizadita&quot; — su autodescripción Come emocionalmente al terminar la jornada: &quot;llega el momento de tranquilidad y voy a comer&quot; Decisora autónoma económicamente Compromiso: 8/10 Obstáculo: solo económico (&quot;me pongo con el Excel este fin de semana&quot;) Variable clave: mañana habla con EMS sobre si lo deja
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SCOREBOARD — 13 FUENTES + MANUAL OPERATIVO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BLOQUE NOTA VS. ALICIA JSM RAZÓN ───────────────────────────────────────────────────────────────────── Apertura / Agenda 9.0 ↑(8.5) Mejor apertura del proyecto. Conexión genuina y simétrica. Diagnóstico calidad 7.5 ↓(9.0) Solid pero EMS no excavado como dato económico clave. Diagnóstico profundidad 7.0 ↓↓(9.0) Artrosis y Martín encontrados, no excavados a fondo. Construcción de valor 7.5 =(7.0) Reframe excelente. Pitch personalizado. Sin visión questions. Manejo de objeciones 7.5 =(7.5) LDA correcto. Reserva verbal sin compromiso. Urgencia artificial. Cierre 6.5 =(5.5) EN SEGUIMIENTO. Sin frase de seguridad. Sin silencio. Lenguaje / Tono 9.5 ↑(9.5) Sin &quot;me queda claro&quot;. El tono más natural del proyecto. Estructura 8.0 ↑(7.5) Pre-Suasión, LDA, auto-venta, cualificación económica. Sin visión. ───────────────────────────────────────────────────────────────────── GLOBAL 7.7 / 10 — nota más alta de Ana en 17 llamadas
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ TABLA EVOLUTIVA — ÚLTIMAS 6 LLAMADAS DE ANA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DIMENSIÓN |ISA|SIL|XIS|ALI|SEY|MAR ──────────────────────────────────────────────────────────────────── Nota global |6.5|7.1|7.5|7.6|7.1|7.7 Resultado |SEG|SEG|CER|SEG|SEG|SEG &quot;Me queda claro&quot; |Sí |Sí |NO |Sí |Sí |NO 🟢 Cualif. económica |No |Sí |Sí |Sí(t)|No |Sí ✅ Reframe |Sí |Sí |Sí |Sí |Sí |Sí ✅ Pre-Suasión real |No |No |No |Sí |Sí(d)|Sí(d) Frase seguridad S.11 |No |No |No |No |No |No 🔴 Visión questions |No |No |No |No |No |No 🔴 LDA obstáculo |No |Sí |N/A|Sí |Sí |Sí ✅ Auto-venta |Sí |Sí |Sí |Sí |Sí |Sí ✅ Reserva plaza |No |Sí |N/A|No |No |Verbal EMS/gasto alternativo |N/A|N/A|N/A|N/A|N/A|Perdido 🔴 Urgencia artificial |No |No |No |No |No |Sí ✗ Apertura calidad |7.5|8.0|8.5|8.5|8.0|9.0
+LO QUE ESTÁ CONSOLIDADO: Reframe (6 llamadas), auto-venta (6 llamadas), LDA (4 llamadas), cualificación económica (4 de últimas 6). LO QUE MEJORÓ HOY: Tic verbal desaparecido. Apertura más genuina. Sin presión en el cierre. LO QUE NO SE MUEVE: Frase de seguridad (17 llamadas), visión questions (17 llamadas), Pre-Suasión con activos cargados. LO NUEVO NEGATIVO: Urgencia artificial introducida por primera vez. EMS como dato económico perdido.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ LO QUE FUNCIONÓ — CON TIMESTAMPS Y EJEMPLOS EXACTOS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+BIEN 1 — LA APERTURA MÁS GENUINA DEL PROYECTO (MIN 0-3:30)
+Ninguna otra apertura de Ana ha tenido este nivel de conexión real. Mar abrió contando su vida laboral compleja, hijo Martín. Ana respondió: &quot;Yo tengo un peque también, el mío es de 11 y se llama Guillermo.&quot;
+Eso no es técnica. Es simetría real. Dos mujeres de 49 años, madres separadas, hijos de 10-11 años, perimenopausia. Sin fabricar. Y más tarde (min 18:26): &quot;Cambio hormonal es casi llamarlo de una manera muy generosa, es una revolución, Mar. Tenemos la misma edad, además, tenemos 49 años, o sea que sé de lo que me hablas en primera persona.&quot;
+Eso crea confianza que no puede crearse con técnica — solo con realidad compartida. Ana la usó bien y de manera oportuna.
+BIEN 2 — REFRAME ESPECÍFICO Y CONECTADO A LA EXPERIENCIA DE MAR (MIN 32:30)
+&quot;El problema no es lo que haces. O el problema es que el sistema que estás ejecutando es que tampoco está diseñado específicamente para ti... Tu edad, Mar, tus circunstancias, que tú tienes unas circunstancias muy concretas.&quot;
+Y lo conectó directamente con lo que Mar había dicho sobre Susana y los tuppers: &quot;estas cosas no encajan en tu vida real. Punto. No hay más secretos.&quot; La causa raíz del fracaso con Susana (logística de tuppers incompatible con su vida) se convirtió en el argumento central del Reframe. Eso no es genérico — está hecho con la experiencia específica de Mar.
+BIEN 3 — CUALIFICACIÓN ECONÓMICA COMPLEJA Y BIEN MANEJADA (MIN 25-28)
+Cuando Mar sacó la vivienda nueva, Ana no la dejó pasar: &quot;¿Te limita económicamente para tomar una decisión?&quot; — Mar confirmó que sí. Ana siguió: &quot;¿La compras de manera inmediata o cuándo la entregas?&quot; — respuesta: tercer trimestre de 2027. Con eso supo que el presupuesto tiene margen ahora y que la compra no bloquea hoy.
+Esa secuencia es precisamente la cualificación económica compleja — no solo &quot;¿tienes dinero?&quot; sino entender el panorama financiero de Mar para calibrar el momento. Bien ejecutada.
+BIEN 4 — IMPLICACIÓN QUIRÚRGICA CON LA ARTROSIS (MIN 23:23)
+&quot;¿Y tu rodilla entonces? ¿Tu artrosis y tu rodilla, qué?&quot;
+Tres palabras que hicieron más que cualquier argumento. Mar lo había mencionado, Ana lo guardó y lo devolvió en el momento correcto. Cuando Mar describió quedarse &quot;como una señora consistente&quot; si no hacía nada, Ana conectó directamente con el miedo real: las rodillas heredadas de su madre.
+Mar: &quot;Claro, que estarían de aquella manera.&quot;
+Sin más desarrollo. Ana no necesitó añadir nada. Eso es precisión.
+BIEN 5 — LDA LIMPIO Y HONESTO (MIN 44:09)
+&quot;¿Qué necesitas pensar? ¿Es un tema solo de números o hay algo más?&quot; — Mar: &quot;Un tema nada más que de números.&quot; Ana: &quot;¿Sería un sí o es un no?&quot;
+Esa secuencia en tres preguntas cortas aisló el obstáculo con precisión. No hubo debate filosófico sobre si era el momento, no hubo rebatir la duda — solo identificar qué tipo de obstáculo había. Y Mar fue directa: solo números, sería un sí.
+BIEN 6 — AUTO-VENTA DEL PROSPECT CON RESPUESTA GENUINA (MIN 39:14)
+&quot;¿Por qué querrías entrar en el programa con Jonathan?&quot; — Mar respondió con algo real y específico: &quot;el seguimiento tan exhaustivo. Si no me van a echar un broncazo, como los niños chicos.&quot;
+Esa frase — el broncazo como los niños chicos — es propia de Mar. No es un cliché de cliente motivada. Es alguien que se conoce a sí misma y sabe que necesita accountability externo. Ana la produjo con la pregunta correcta en el momento correcto.
+BIEN 7 — CONEXIÓN TUPPER → SISTEMA NO ADAPTADO (MIN 13:47-14:00)
+Cuando Mar explicó que Susana le daba tuppers que no podían coexistir con su vida de viajes, Ana lo capturó y lo usó como Reframe: &quot;Y tú lo que estás buscando es algo como que se adapte a comer en un restaurante.&quot; No solo lo registró — lo convirtió en el argumento central de por qué el programa anterior no funcionó y el nuevo sí puede.
+BIEN 8 — PITCH PERSONALIZADO PARA MAR (MIN 33:38-39:00)
+A diferencia de otras llamadas donde el pitch sueña genérico, en esta Ana nombró explícitamente las circunstancias de Mar: los viajes, los hoteles, la semana con Martín, la otra semana sin él, la artrosis hereditaria y las rodillas. &quot;Lo que quieres conseguir es adelgazar esos 10 kilos y ver en el espejo ese cuerpo que quieres ver y luego que no te dé miedo, pues que las piernas no te vayan a sostener.&quot; Eso conecta el programa con los miedos reales de Mar, no con los de una mujer genérica de 40 años.
+BIEN 9 — SIN PRESIÓN AGRESIVA EN EL CIERRE
+Comparado con Alicia JSM donde Ana presionó con &quot;es que digas que sí ahora,&quot; en esta llamada el manejo del EN SEGUIMIENTO fue limpio. &quot;Necesitas pensarlo, bien. Pero necesito saber si es un sí o un no.&quot; Sin drama, sin urgencia emocional. La urgencia que introdujo fue técnica (mañana 14:00) — que sí tiene un problema que explicaremos más adelante — pero sin el componente de presión emocional que apareció en Alicia JSM.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ LOS ERRORES — CON PRECISIÓN Y SCRIPTS CORRECTOS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ERROR 1 — EL EMS FUE DIAGNOSTICADO PERO NO EXCAVADO ECONÓMICAMENTE (MIN 15:13 vs MIN 48:29)
+Min 15:13 — Mar dijo: &quot;Lo único que hago es una sesión de deporte con electroestimulación... hago un día en semana que son 30 minutos.&quot;
+Ana respondió: &quot;¿Y es suficiente para ti lo que estás haciendo?&quot; — Buena pregunta de seguimiento sobre resultados. Pero la pregunta que faltó y que habría cambiado todo el cierre:
+&quot;¿Y eso cuánto te cuesta al mes, Mar?&quot;
+Esa pregunta tiene menos de diez palabras. Y habría revelado los 100€/mes en el minuto 16 en lugar del minuto 48. La diferencia es total:
+Con ese dato en el minuto 16, Ana entra al precio con un argumento que no usó en ningún momento de la llamada:
+&quot;Mar, el EMS son 100 euros cada mes, indefinidamente. Si sigues con el EMS seis meses más, eso son 600 euros — más que el descuento del pago único del programa. El programa son 1.300 euros una vez y lo que aprendes se queda contigo para siempre. Si dejas el EMS cuando empieces con nosotros, el coste neto real para ti durante los seis meses es 1.300 menos los 600 que te ahorras en EMS. Son 700 euros por cambiar algo que no está funcionando por algo diseñado específicamente para ti.&quot;
+Ese argumento no es manipulación — es la aritmética real de Mar. Y Mar tiene mentalidad de Excel. Habría calculado esto ella misma si Ana se lo hubiera puesto delante.
+¿Por qué no llegó? Porque la pregunta del precio del EMS llegó 33 minutos después, cuando Mar lo mencionó voluntariamente como variable en el cierre. A esas alturas el argumento ya llegó fuera de contexto y sin el impacto que habría tenido antes del pitch.
+Protocolo nuevo que Ana necesita instalar: en el bloque de entrenamiento, cuando la prospect mencione cualquier actividad física que está pagando, la siguiente pregunta siempre es &quot;¿Y eso cuánto cuesta al mes?&quot; Sin excepción.
+ERROR 2 — LOS ACTIVOS MÁS CARGADOS LLEGARON AL PITCH PERO NO A LA PRE-SUASIÓN
+La Pre-Suasión de Ana (min 39:14-40:23):
+&quot;Yo quiero que recordemos lo que me has dicho antes. Estás buscando una estabilidad alimentaria. Me has dicho, quiero saber combinar alimentos. Quiero tener esas instrucciones. Estoy borderline ya ahí con lo que considero que esto no es salud y es importante. Y tú quieres sentirte segura, no solo con tu cuerpo, con esa figura que quieres ver en el espejo, esos menos 10 kilos. Que yo cuando te hablo de kilos, Mar, me da igual que sean 8 o que sean al final 14.&quot;
+Eso es Pre-Suasión correcta en forma. Usa palabras de Mar, llega antes del precio, reactiva el dolor. El problema: usa los activos más limpios y articulados, no los más cargados.
+Los activos que Mar entregó y que no llegaron a la Pre-Suasión:
+ACTIVO 1 — La madre y la rodilla (min 21:10): &quot;Mi madre tiene 89 años con artrosis... Su artrosis la voy a tener yo, en la rodilla. El peso no me va a ayudar nada, nada, nada, nada a futuro.&quot;
+ACTIVO 2 — El compromiso vital (min 21:30): &quot;Yo quiero durar hasta los 250.&quot; La repitió tres veces en la llamada. Esa es SU frase, no una frase de cierre del programa.
+ACTIVO 3 — El cálculo de Martín (min 27:50): &quot;Yo lo tuve con 40. Cuando él tenga 20, yo tengo 60.&quot; Este cálculo lo hizo Mar sola. Es su miedo, en sus propias palabras.
+La Pre-Suasión que habría correspondido:
+&quot;Mar, antes del precio — me dijiste tres cosas que quiero devolverte. Tu madre tiene artrosis a los 89 y su rodilla va a ser la tuya. Lo dijiste con esas palabras. Dijiste que quieres durar hasta los 250. Y dijiste que cuando Martín tenga 20 años, tú tienes 60 — y necesitas llegar entera. El programa son 1.300 euros. ¿Cuánto vale llegar a los 60 con las rodillas funcionando?&quot;
+Eso no es retórica. Es devolver a Mar sus propias palabras cargadas de emoción en el momento de mayor apertura. El Manual lo pide explícitamente: &quot;¿Esto que voy a decir es algo que ella reconoce de su vida, o estoy describiendo el programa desde fuera?&quot;
+La artrosis de la madre de Mar, Martín y los 250 años son lo que ella reconoce de su vida. La estabilidad alimentaria es lo que Ana describe del programa desde fuera.
+ERROR 3 — LA FRASE DE SEGURIDAD (SECCIÓN 11): DIECISIETE LLAMADAS, CERO VECES
+El Manual, Sección 11: Validación → Frase de seguridad → Precio → Silencio.
+La validación llegó: &quot;¿Tú sigues igual de segura de todo esto?&quot; — Mar: &quot;Sí, sí, sí.&quot;
+La frase de seguridad no. El precio llegó directamente después de la auto-venta.
+El catálogo del Manual tiene la frase exacta para Mar. Mar se describió a sí misma como &quot;muy nórdica, muy organizadita&quot; y lleva años siendo responsable de toda Andalucía. Es alguien que gestiona con precisión todo lo que entra en su sistema. Pero con el cuerpo lleva años improvisando. Eso la sitúa en el perfil del Manual: &quot;La competente que es un desastre con su cuerpo.&quot;
+La frase del Manual para ese perfil:
+&quot;Que con tu cuerpo tengas el mismo control que tienes en todo lo demás. Y que esa rabia de &#x27;cómo puede ser que no pueda con esto&#x27; se convierta en &#x27;por fin lo tengo.&#x27;&quot;
+Esa frase, dicha entre la validación y el precio, habría resonado de una manera diferente a cualquier otra cosa dicha en esa llamada. Mar lo habría sentido como un espejo de sí misma.
+La secuencia correcta de Sección 11 para Mar:
+&quot;¿Sigues igual de segura de todo esto?&quot; → Mar dice sí → &quot;Mar, algo que nos dicen mujeres como tú — que gestionan Andalucía entera, que hacen funcionar todo lo demás con precisión — es que lo más frustrante era darse cuenta de que con el cuerpo llevaban años improvisando. Que con tu cuerpo tengas el mismo control que tienes en todo lo demás. Eso es exactamente lo que hace el programa.&quot; → PRECIO → SILENCIO.
+No se añade nada más. No se explica. No se comenta. Se espera.
+ERROR 4 — SIN VISIÓN QUESTIONS EN EL PITCH: DIECISIETE LLAMADAS
+El pitch de Ana (min 33:38 a 39:00) fue el más personalizado del proyecto para esta prospect. Usó el nombre de Mar siete veces. Mencionó los viajes, Martín, la artrosis, los tuppers. Todo correcto.
+Sin una sola visión question.
+Las que correspondían para Mar, después de cada pilar:
+Para alimentación (viajera que come en restaurantes): &quot;¿Te imaginas que estás en un hotel en Sevilla, se te presenta una carta de 30 platos, y en lugar de la parálisis de &#x27;qué cojo aquí&#x27;, sabes exactamente qué pedir en ese restaurante, sin menú especial, sin tupper en el coche, comiendo como el resto de la mesa?&quot;
+Para entrenamiento (hora en el hotel mientras trabaja): &quot;¿Te imaginas que esa semana que no tienes a Martín y estás tres días en Cádiz, antes de entrar al hospital a las ocho de la mañana tienes una tabla de 30 minutos específica para ese momento, en la habitación, que sabes exactamente cómo ejecutar y por qué?&quot;
+Para acompañamiento (Mar nórdica, necesita estructura): &quot;¿Te imaginas que en ese momento de la noche cuando llegas cansada del hospital y antes de que llegue el &#x27;voy a comer porque tengo un momento de tranquilidad&#x27;, hay alguien al otro lado que ya sabe que ese es tu momento difícil y te ha dejado preparado exactamente qué hacer?&quot;
+Cada una conecta un pilar con una escena concreta de la vida de Mar. No son abstractas. No son genéricas. Y cada una habría producido un sí antes del precio.
+ERROR 5 — URGENCIA ARTIFICIAL EN EL CIERRE (MIN 49:43)
+&quot;Tenemos en esta época, más que a lo largo incluso de todo el año, un volumen de faltas importante.&quot;
+Eso es escasez artificial. Cialdini es explícito: la escasez que no es real destruye la confianza a largo plazo. Si Mar descubre después — hablando con otra mujer del programa, viendo las redes sociales, o simplemente siendo la persona analítica que es — que no había tal volumen de urgencia, la relación queda dañada.
+La escasez ética disponible en esta llamada:
+&quot;Mar, si entras esta semana puedo incorporarte el lunes. El lunes empieza el trabajo con el nutri y el entrenador. Si esperas al próximo lunes, perdemos una semana antes del verano — que es exactamente el período donde más te va a hacer falta el sistema.&quot;
+Eso es urgencia real y específica para Mar. No &quot;tenemos mucha demanda.&quot; Es: tu verano empieza en tres semanas y sin el sistema estás sola.
+ERROR 6 — EL DESCUENTO DE 6 CUOTAS DE 250€ NO ES UN DESCUENTO
+Min 45:33 Ana ofreció: &quot;¿Te ayudaría a tomar la decisión ahora si yo te puedo ofrecer en lugar de los 3 pagos de 500 euros un pago mensual de 250 euros?&quot;
+Mar respondió con precisión inmediata: &quot;Si al final el coste es el mismo, Ana.&quot;
+Y tiene razón. 6 × 250 = 1.500€. Igual que 3 × 500. No es un descuento — es un cambio de forma de pago. Mar tiene mentalidad de Excel y lo vio al instante.
+Ofrecer algo como descuento cuando no lo es con una prospect analítica genera el efecto contrario: erosiona la credibilidad.
+Lo que sí podría haber funcionado con Mar: conectar la forma de pago con la decisión del EMS. &quot;Mar, si dejas el EMS cuando empieces con nosotros, liberas 100€/mes. Esos 100€ caben perfectamente en el fraccionado de 500. El coste neto mensual real para ti sería de 400€ — lo que ya estabas pagando en EMS más 300€ adicionales.&quot;
+Ese argumento pone los números en el contexto correcto y respeta la inteligencia de Mar.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ LAS 13 FUENTES — EVALUACIÓN COMPLETA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+────────────────────────────────────────────────────── FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss ──────────────────────────────────────────────────────
+Labels que llegaron y funcionaron:
+Min 20:24 — Ana preguntó: &quot;¿Qué supone para ti, emocionalmente?&quot; — no es un Label técnico pero abrió el espacio para que Mar describiera el &quot;borderline.&quot;
+Min 22:17 — &quot;Llevas tiempo normalizando este peso o este no sentirte cómoda, Mar.&quot; — Mar respondió: &quot;Ya, pero no lo debo normalizar.&quot; Eso es un Label que nombra la conducta de evasión. Correcto.
+Min 23:23 — &quot;¿Y tu rodilla entonces? ¿Tu artrosis y tu rodilla, qué?&quot; — Tres palabras que funcionaron como Label de implicación. Voss al estado puro: nombras lo que la persona sabe que está evitando.
+El Label que habría abierto la llamada a otra dimensión:
+Cuando Mar describió que trabaja rodeada de médicos y ha tenido conversaciones de salud sobre la perimenopausia (min 17:39), el Label correcto era:
+&quot;Parece que tienes toda la información — los médicos te han dicho lo que necesitas, tú lo entiendes — pero hay algo que hace que aun así no hayas podido implementarlo. ¿Es eso?&quot;
+Con ese Label, Mar habría nombrado ella misma el gap entre saber y hacer. Eso es el activo central de la venta — y habría llegado desde ella, no desde Ana.
+────────────────────────────────────────────────────── FUENTE 2 · GAP SELLING — Keenan ──────────────────────────────────────────────────────
+ESTADO ACTUAL bien construido: 75 kg, perimenopausia, nutricionista fallida por tuppers, EMS insuficiente, alimentación caótica en viajes, comer emocional al terminar la jornada.
+CAUSA RAÍZ correctamente identificada: sistema no diseñado para su vida.
+IMPACT LAYER — dos capas bien establecidas: Capa física-visible: &quot;borderline&quot; entre verse saludable o no, barriga que ha cambiado. Capa futura-real: artrosis hereditaria en rodillas, Martín a los 10 años (&quot;cuando él tenga 20, yo tengo 60&quot;).
+La segunda pregunta de Implicación que faltó:
+&quot;Mar, tres meses con Susana y el sistema no funcionó. Si en seis meses más lo sigues intentando con otra nutricionista o con otra solución, y tampoco funciona — lo que llevas ya demostrado que no funciona — ¿qué pasa con las rodillas en ese tiempo? ¿Cuánto pesa la artrosis en función del peso que llevas?&quot;
+Esa pregunta conecta el tiempo perdido con el riesgo físico real. Es la implicación más potente disponible y no llegó.
+────────────────────────────────────────────────────── FUENTE 3 · OBJECTIONS — Jeb Blount ──────────────────────────────────────────────────────
+LDA correcto y bien secuenciado. El obstáculo fue aislado limpiamente en &quot;solo números.&quot;
+El Disrupt que habría cambiado el cierre:
+&quot;Mar, llevas tres meses con Susana que no funcionaron. Llevas años sabiendo que necesitas fuerza y no la has empezado. Cada mes que pasa son 100€ de EMS que no resuelven el problema. Si empezamos mañana, en seis meses tienes el sistema. Si esperamos hasta septiembre, has pagado 400€ más en EMS sin resultados nuevos y has entrado en la menopausia sin el sistema. ¿Qué diferencia hay entre decidir hoy y decidir el lunes?&quot;
+Eso no es presión — es el coste real del tiempo de espera para esta prospect específica.
+────────────────────────────────────────────────────── FUENTE 4 · VIRTUAL SELLING — Blount ──────────────────────────────────────────────────────
+52 minutos sin corte técnico de Google Meet registrado en el transcript. La llamada fue técnicamente fluida. Esto sigue siendo la excepción en el proyecto.
+La llamada terminó con un plan concreto: WhatsApp antes de las 14:00 del día siguiente. La continuidad fue bien establecida.
+────────────────────────────────────────────────────── FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna ──────────────────────────────────────────────────────
+El Omission Bias de Mar es claro: no duda del programa (&quot;todo me ha resonado&quot;), no duda del compromiso (&quot;sería un sí&quot;), solo necesita ejecutar su proceso de decisión analítico — el Excel. Mar toma todas las decisiones importantes así: &quot;como he tomado la de la vivienda.&quot;
+Eso no es indecisión — es su sistema de procesamiento. El JOLT aquí no es reducir miedo a equivocarse (ya está convencida) sino evitar que el &quot;proceso del Excel&quot; dure semanas en lugar de días.
+El Judge correcto para Mar:
+&quot;Mar, lo que me dices tiene todo el sentido. Tú tomas decisiones importantes con criterio, con análisis. Y lo que hemos hablado hoy es una decisión importante. Para que tu Excel tenga los números completos: el EMS son 100€/mes indefinidos. El programa son 1.300€ una vez. Si empiezas este lunes, en septiembre — cuando cumples 50 — tienes tres meses de programa detrás. Si esperas hasta septiembre para empezar, entras en la menopausia sin el sistema. Esa es la comparación real.&quot;
+────────────────────────────────────────────────────── FUENTE 6 · SWITCH — Heath ──────────────────────────────────────────────────────
+JINETE — muy activo y bien informado. Mar trabaja con médicos, conoce la ciencia de la perimenopausia, sabe que necesita fuerza, ha leído sobre alimentación saludable. El Jinete no solo tiene ganas — tiene la información teórica completa. Lo que le falta es el sistema operativo.
+ELEFANTE — cansado pero no derrotado. Tres meses con Susana donde bajó 3 kilos. El Elefante tiene evidencia de que puede funcionar cuando hay sistema.
+BRIGHT SPOT — disponible y no usado:
+&quot;Mar, con Susana, con el sistema menos adaptado posible para tu vida — tuppers en el coche, un sistema que tú misma describes como insostenible — perdiste 3 kilos en tres meses. Con el sistema correcto, adaptado a los restaurantes, a los hoteles, a tu vida real, ¿qué crees que podría pasar en seis meses?&quot;
+Ese Bright Spot usa el mejor argumento disponible: Mar ya demostró que su cuerpo responde cuando hay acompañamiento. El problema fue exclusivamente la logística, no la biología ni la voluntad.
+────────────────────────────────────────────────────── FUENTE 7 · WHY SHE BUYS — Brennan ──────────────────────────────────────────────────────
+Mar tiene la compra de identidad más claramente articulada del proyecto. Ella misma la verbalizó: &quot;que me mire al espejo y diga, wow, si parezco yo otra vez.&quot;
+Brennan: las mujeres no compran el producto — compran la versión de sí mismas que el producto hace posible. La versión de Mar que quiere comprar es la que llegó a los 62 kilos, la de barriguita plana, la que puede comer en restaurantes sin ansiedad, la que llega a los 60 con las rodillas funcionando para seguir con Martín.
+Ana capturó parte de esto en el pitch. Lo que no conectó: &quot;wow, si parezco yo otra vez&quot; fue dicho por Mar en el minuto 29:12 y nunca fue devuelto ni como Label ni como activo de cierre. Esa frase — textualmente suya — era el cierre de la Pre-Suasión.
+&quot;Mar, antes del precio — me dijiste que lo que más quieres es mirarte al espejo y decir &#x27;wow, si parezco yo otra vez.&#x27; Que durante diez años fuiste esa versión de ti. Y que llevas tiempo normalizando no serla. El programa son 1.300 euros. ¿Cuánto vale volver a ser esa?&quot;
+────────────────────────────────────────────────────── FUENTE 8 · THE MOM TEST — Fitzpatrick ──────────────────────────────────────────────────────
+Buena recogida de datos reales: los tuppers en el coche a las 4pm, los restaurantes en viajes, el EMS una vez por semana, el comportamiento en el hotel.
+La pregunta hipotética que se coló (min 16:59): &quot;¿Tú crees que podrías sacar una hora tres veces por semana?&quot; — Mar respondió sí entusiasmada. La pregunta de comportamiento real sería: &quot;Mar, en la última semana que estabas de viaje, ¿qué conseguiste hacer de ejercicio?&quot;
+La pregunta que faltó en el bloque de entrenamiento (min 15:13): &quot;¿Y eso cuánto te cuesta al mes?&quot; para el EMS. Como ya analizamos, esa es la más costosa de todas las preguntas no formuladas en esta llamada.
+────────────────────────────────────────────────────── FUENTE 9 · PRE-SUASIÓN — Cialdini ──────────────────────────────────────────────────────
+Sexta llamada consecutiva con Pre-Suasión presente. Eso es consistencia real.
+El problema de esta Pre-Suasión específica ya fue diseccionado. Pero hay un ángulo adicional que no se mencionó: Mar describió su manera de ser como &quot;muy nórdica, muy organizadita&quot; (min 14:09). Esa autodescripción es una ventana directa a su sistema de valores.
+Pre-Suasión alternativa que usa ese activo:
+&quot;Mar, antes del precio — me describiste cómo eres: nórdica, organizadita, necesitas márgenes claros para funcionar. Y me dijiste que con el cuerpo es donde más fácil te resulta salirte cuando no tienes el sistema. El programa son 1.300 euros. Es darte para el cuerpo el mismo sistema que ya tienes para todo lo demás.&quot;
+Eso conecta su fortaleza identitaria con la compra.
+────────────────────────────────────────────────────── FUENTE 10 · INFLUENCE — Cialdini ──────────────────────────────────────────────────────
+CONSISTENCIA bien usada: el compromiso 8/10 fue recuperado en la Pre-Suasión. &quot;Tu compromiso es de un pedazo de 8, ¿sigues igual de segura?&quot; — Mar confirmó. Correcto.
+ESCASEZ — aquí está el error más importante de cierre de esta llamada:
+&quot;Tenemos un volumen de faltas importante&quot; (min 49:43-50:03).
+Eso es escasez fabricada. Mar trabaja en la industria farmacéutica, gestiona toda Andalucía, habla con médicos cada día. Tiene detector de argumentos comerciales calibrado al máximo. Cuando Ana usó &quot;volumen de faltas importante&quot; sin datos concretos, Mar respondió con &quot;¿Con tanta rapidez, Ana?&quot; — señal de que la urgencia le sonó artificial.
+Cialdini es claro: la escasez inventada detectada destruye el contrato de confianza. No en esa llamada — Mar es demasiado educada para señalarlo — sino en el proceso de decisión posterior, cuando está con el Excel y recuerda ese momento.
+La urgencia ética disponible que Ana tenía:
+&quot;Mar, si decides esta semana, el lunes entras. El lunes haces la bienvenida con el nutri y el entrenador. Eso significa que para cuando llegue el verano de verdad — julio, agosto, los viajes de trabajo, las cenas en Sevilla — ya tienes seis semanas de sistema detrás. Si esperas hasta después del verano, el primer verano con la perimenopausia activa lo navegas sin el sistema. Ese es el coste real de esperar.&quot;
+────────────────────────────────────────────────────── FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson ──────────────────────────────────────────────────────
+El Reframe fue el mejor del proyecto para esta prospect. &quot;Estas cosas no encajan en tu vida real&quot; es Challenger Sale en cinco palabras.
+El Teach disponible que añadiría profundidad:
+&quot;Mar, algo que me llama la atención. Tú trabajas rodeada de médicos. Ya sabes que necesitas fuerza. Ya sabes que la perimenopausia cambia las necesidades. Ya lo has hablado con ellos. Tienes toda la información. Y sin embargo llevas sin hacer fuerza. Eso no es falta de información ni falta de voluntad — eso es falta de un sistema que funcione con tu vida. Y Susana lo demostró al revés: incluso con el sistema menos adaptado posible para ti — tuppers en el coche — perdiste 3 kilos. Con el sistema correcto, el resultado ya sabes cuál es. Solo necesitabas la logística correcta.&quot;
+Ese Teach habría sido exclusivo para Mar. No podría decírsele a ninguna otra prospect.
+────────────────────────────────────────────────────── FUENTE 12 · SPIN SELLING — Rackham ──────────────────────────────────────────────────────
+SITUACIÓN ✅ — completa y bien capturada PROBLEMA ✅ — bien identificado: sistema insostenible, comer emocional, EMS insuficiente IMPLICACIÓN ✅ — artrosis y rodillas nombradas. Martín y los 60 años presente. NECESIDAD-BENEFICIO ✅ — Mar verbalizó: seguimiento exhaustivo, sistema que se adapte a viajes
+La segunda Implicación que habría cerrado el diagnóstico:
+&quot;Mar, tres meses con Susana sin el sistema correcto, perdiste 3 kilos. Si en seis meses con el sistema correcto perdemos 8 o 10, ¿cómo afecta eso al peso en las rodillas cuando llegue la artrosis? ¿Lo has calculado con los médicos?&quot;
+Mar trabaja con médicos. Esa pregunta la habría llevado a un territorio donde ella misma habría respondido el argumento de salud con datos clínicos reales.
+────────────────────────────────────────────────────── FUENTE 13 · EXACTLY WHAT TO SAY — Jones ──────────────────────────────────────────────────────
+La auto-venta del prospect fue bien ejecutada. Mar respondió con &quot;el seguimiento tan exhaustivo&quot; y &quot;si no me van a echar un broncazo como los niños chicos&quot; — respuesta genuina y específica.
+La frase de Jones para el seguimiento de mañana:
+Cuando Mar escribe el WhatsApp mañana después del EMS, si dice que necesita más tiempo, la respuesta de Ana:
+&quot;Mar, una pregunta directa: si los números cuadran cuando lo mires, ¿entras esta semana?&quot;
+Si dice sí: &quot;Entonces dime los números que no cuadran y lo vemos juntas.&quot; Si duda: &quot;¿Qué tendría que ser diferente para que cuadraran?&quot;
+Esa estructura Jones no cierra con presión — cierra con claridad. Una prospect analítica como Mar prefiere una pregunta directa a tres argumentos emocionales.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ MANUAL OPERATIVO — ERRORES ESPECÍFICOS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ERROR 1 DEL MANUAL (Características vs Situaciones): El pitch fue en su mayor parte correcto en este aspecto. Conectó los pilares con situaciones de Mar (viajes, restaurantes, Martín). La excepción fue la explicación del WhatsApp group y la app — que fueron funcionalidades, no situaciones.
+ERROR 5 DEL MANUAL (Precio sin frase de seguridad): Confirmado. El precio llegó sin la Sección 11 completa. La frase de seguridad correcta del catálogo para el perfil &quot;competente que es desastre con su cuerpo&quot; estaba disponible y no fue usada.
+ERROR 6 DEL MANUAL (Llenar el silencio post-precio): El precio llegó y Ana siguió hablando inmediatamente. No hubo silencio posterior. Una prospect analítica como Mar necesita ese silencio — su cabeza ya está calculando mientras Ana habla, y las palabras adicionales interrumpen ese proceso.
+SECCIÓN 11 EJECUTADA: Solo el paso 1 (validación) llegó completo. Pasos 2 (frase de seguridad) y 3 (silencio post-precio) ausentes.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ PLAN DE SEGUIMIENTO — ACCIÓN ANTES DE MAÑANA 14:00 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Mar va al EMS mañana a las 11:30. A las 14:00 escribe a Ana.
+ESTA NOCHE — WhatsApp de Ana a Mar (viernes, antes de las 22:00):
+&quot;Mar, una cosa que quería dejarte antes de que te pongas con el Excel. El EMS son 100€/mes indefinidos — los pagas mientras sigas yendo, sin fecha de fin. El programa son 1.300€ una vez, y después lo que aprendes es tuyo para siempre. Si empiezas esta semana y dejas el EMS, el coste neto real en seis meses es 1.300€ menos 600€ que te ahorras en EMS: 700€ netos para cambiar algo que no funciona por algo diseñado para tu vida. Lo digo para que esté en el Excel. Aquí estoy mañana. Buen finde.&quot;
+Ese mensaje: (1) respeta el proceso de Mar, (2) pone los números correctos antes de que construya el Excel, (3) contextualiza el EMS como coste de oportunidad, y (4) no presiona.
+SI MAR ESCRIBE MAÑANA ANTES DE LAS 14:00 CON UN SÍ: &quot;Perfecto, Mar. Hago el link de pago ahora y esta tarde tienes la bienvenida. El lunes empieza todo.&quot;
+SI MAR ESCRIBE CON DUDAS ECONÓMICAS: &quot;¿Cuál es el número que no cuadra? Si me dices cuál es el techo que tienes, vemos qué tiene sentido.&quot;
+SI MAR NO ESCRIBE ANTES DE LAS 14:00: Ana escribe a las 14:01: &quot;Mar, ¿cómo fue con el EMS? Aquí estoy.&quot;
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ PLAN DE ENTRENAMIENTO — ANA, ITERACIÓN 17 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LO QUE NO SE TOCA: El Reframe — siete llamadas seguidas. Propio ya. La cualificación económica — volvió en esta llamada. Que se quede. La ausencia de &quot;me queda claro&quot; — que se consolide. La conexión genuina personal — no se fabrica, pero se puede cultivar. La mención de la perimenopausia compartida fue el mejor momento de apertura del proyecto.
+TRES CAMBIOS PARA LA PRÓXIMA LLAMADA:
+1. PREGUNTA DEL GASTO EN ACTIVIDAD FÍSICA EXISTENTE — SIEMPRE EN EL BLOQUE DE ENTRENAMIENTO
+&quot;¿Estás pagando actualmente algún gimnasio, entrenador, o sesiones de cualquier tipo?&quot; Si sí: &quot;¿Cuánto al mes?&quot;
+No es intrusiva. Mar misma ofreció la información del EMS cuando vino al caso del cierre — habría dado ese dato sin problema en el minuto 16 si se lo hubieran preguntado. Ese dato cambia el argumento económico del cierre completamente.
+1. FRASE DE SEGURIDAD DEL CATÁLOGO PERSONALIZADA ANTES DE CADA PRECIO
+El catálogo del Manual tiene seis frases. Para cada prospect, antes de la llamada, Ana elige una basada en el perfil conocido. La escribe en papel, delante de ella, antes del pitch.
+Para Mar, era la frase de &quot;La competente desastre con su cuerpo&quot; — disponible y específica. En la próxima llamada: identificar el perfil en el diagnóstico → elegir la frase → escribirla en papel → usarla antes del precio → silencio.
+1. PRE-SUASIÓN: ACTIVO MÁS CARGADO, NO EL MÁS ARTICULADO
+El patrón está claro después de cuatro llamadas con Pre-Suasión presente: Ana elige las frases más limpias y articuladas de la prospect, no las más cargadas emocionalmente. &quot;Estabilidad alimentaria&quot; es más limpia que &quot;mi madre tiene artrosis en las rodillas y esa rodilla va a ser la mía.&quot; Pero la segunda es diez veces más poderosa.
+Ejercicio concreto: al final del diagnóstico, antes de entrar al pitch, Ana escribe tres frases de la prospect — las más cargadas emocionalmente que haya dicho, textualmente. La Pre-Suasión usa esas tres, no las que Ana ha articulado en su propio lenguaje.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ PARA ANA — LA FRASE DE ESTA AUDITORÍA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+&quot;Diecisiete llamadas. 7.7 — nota más alta del proyecto. Y por primera vez en diecisiete llamadas, sin &#x27;me queda claro&#x27;. No de manera forzada. No porque lo hayas sustituido conscientemente. Porque encontraste otro lenguaje que salió solo. Eso es más valioso que cualquier técnica — es señal de que el nivel está subiendo de verdad. Ahora mira lo que tienes delante: Mar tiene las rodillas de su madre, tiene a Martín con 10 años, dice literalmente que quiere durar 250 años, y te entregó esas tres frases con tanta claridad que podrías recitarlas textualmente. Y en la Pre-Suasión usaste &#x27;estabilidad alimentaria.&#x27; Eso es la distancia que te separa de un cierre en llamada. No es técnica — es escucha. Es quedarte con el activo que duele, no con el que es más fácil de articular. La artrosis de la madre de Mar es el activo de esta llamada. &#x27;Yo quiero durar 250 años&#x27; es el activo de esta llamada. &#x27;Cuando Martín tenga 20, yo tengo 60&#x27; es el activo de esta llamada. Los tienes. Ahora aprende a usarlos en el único lugar donde cuentan: justo antes del precio.&quot;</pre></div>
+        </details>
+      </section>
+
+      <section class="panel" style="margin-top:18px">
+        <div class="reading"><strong>Frase madre:</strong> la artrosis de la madre de Mar, “yo quiero durar 250 años” y “cuando Martín tenga 20, yo tengo 60” son los activos de cierre. No van en el diagnóstico. Van justo antes del precio.</div>
+      </section>
+    </main>
+  </div>
+  <div class="footer">Revoluciona-T · Ana / Mar Serrano Revuelto · 5 junio 2026 · 37,729 caracteres preservados</div>
+</div>
+</body>
+</html>

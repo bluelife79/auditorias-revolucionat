@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Auditoría dinámica · Ana · Mariona Cabrero</title>
+<style>
+:root{
+  --bg:#f5f7fb;
+  --paper:#ffffff;
+  --ink:#14161f;
+  --muted:#667085;
+  --line:#e4e7ec;
+  --red:#e5484d;
+  --red-soft:#fff1f2;
+  --orange:#f59e0b;
+  --orange-soft:#fff7e6;
+  --green:#12a150;
+  --green-soft:#ecfdf3;
+  --blue:#2563eb;
+  --blue-soft:#eff6ff;
+  --violet:#7c3aed;
+  --violet-soft:#f5f0ff;
+  --cyan:#0891b2;
+  --cyan-soft:#ecfeff;
+  --pink:#db2777;
+  --pink-soft:#fdf2f8;
+  --slate:#344054;
+  --slate-soft:#f2f4f7;
+  --gold:#b7791f;
+  --gold-soft:#fff8db;
+  --shadow:0 18px 50px rgba(16,24,40,.08);
+  --soft-shadow:0 8px 28px rgba(16,24,40,.055);
+  --radius:26px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 12% 2%, rgba(37,99,235,.14), transparent 34%),
+    radial-gradient(circle at 92% 6%, rgba(219,39,119,.12), transparent 28%),
+    radial-gradient(circle at 60% 0%, rgba(18,161,80,.08), transparent 28%),
+    linear-gradient(180deg,#f8fafc 0%,#f5f7fb 100%);
+  color:var(--ink);
+  line-height:1.56;
+}
+a{color:inherit}
+.layout{display:grid;grid-template-columns:304px minmax(0,1fr);gap:28px;max-width:1520px;margin:0 auto;padding:24px}
+.sidebar{
+  position:sticky;top:18px;height:calc(100vh - 36px);overflow:auto;
+  background:rgba(255,255,255,.86);backdrop-filter:blur(16px);
+  border:1px solid rgba(228,231,236,.85);border-radius:32px;padding:18px;box-shadow:var(--shadow)
+}
+.brand{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.logo{
+  width:46px;height:46px;border-radius:18px;
+  background:linear-gradient(135deg,var(--blue),var(--violet),var(--pink));
+  display:grid;place-items:center;color:white;font-weight:950;box-shadow:0 12px 22px rgba(124,58,237,.22)
+}
+.brand h1{font-size:14px;line-height:1.1;margin:0}
+.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}
+.search{margin:14px 0}
+.search input{width:100%;border:1px solid var(--line);border-radius:17px;padding:12px 13px;font-size:13px;background:#fff;outline:none}
+.search input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px rgba(37,99,235,.10)}
+.nav a{
+  display:flex;align-items:center;gap:8px;text-decoration:none;
+  padding:10px 10px;border-radius:15px;color:#344054;font-size:13px;margin:2px 0
+}
+.nav a:hover{background:var(--slate-soft);color:#111827}
+.nav .dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--pink))}
+.main{min-width:0}
+.hero{
+  background:
+    linear-gradient(135deg,#ffffff 0%,#f7fbff 40%,#fff6fb 100%);
+  border:1px solid rgba(228,231,236,.92);
+  border-radius:38px;padding:36px;box-shadow:var(--shadow);overflow:hidden;position:relative
+}
+.hero:before{
+  content:"";position:absolute;right:-80px;top:-120px;width:330px;height:330px;
+  background:radial-gradient(circle,rgba(37,99,235,.16),transparent 70%);border-radius:50%
+}
+.hero:after{
+  content:"";position:absolute;right:80px;bottom:-130px;width:280px;height:280px;
+  background:radial-gradient(circle,rgba(219,39,119,.12),transparent 70%);border-radius:50%
+}
+.eyebrow{
+  position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--line);background:rgba(255,255,255,.9);
+  border-radius:999px;padding:8px 13px;font-size:12px;color:var(--muted);
+  font-weight:900;text-transform:uppercase;letter-spacing:.04em
+}
+.hero h2{position:relative;z-index:1;font-size:48px;line-height:1.02;margin:18px 0 12px;letter-spacing:-.045em;max-width:1060px}
+.hero .sub{position:relative;z-index:1;font-size:18px;color:#344054;max-width:980px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 8px 22px rgba(16,24,40,.04)}
+.metric small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:900}
+.metric strong{display:block;font-size:28px;margin-top:6px;letter-spacing:-.03em}
+.metric .tag{display:inline-flex;margin-top:8px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:900}
+.tag.red{background:var(--red-soft);color:var(--red)}
+.tag.green{background:var(--green-soft);color:var(--green)}
+.tag.orange{background:var(--orange-soft);color:#ad6500}
+.tag.blue{background:var(--blue-soft);color:var(--blue)}
+.tag.violet{background:var(--violet-soft);color:var(--violet)}
+.tag.pink{background:var(--pink-soft);color:var(--pink)}
+.section{margin-top:30px}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin:0 0 15px}
+.section h3{font-size:30px;letter-spacing:-.035em;margin:0}
+.section .lead{color:var(--muted);margin:6px 0 0;max-width:900px}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--soft-shadow)
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:950}
+.bigline{font-size:23px;font-weight:950;letter-spacing:-.025em;margin:6px 0}
+.callout{border-radius:25px;padding:22px;border:1px solid;box-shadow:0 6px 20px rgba(16,24,40,.035)}
+.callout.red{background:var(--red-soft);border-color:#ffd0d7}
+.callout.orange{background:var(--orange-soft);border-color:#ffe0a3}
+.callout.green{background:var(--green-soft);border-color:#bdeed2}
+.callout.blue{background:var(--blue-soft);border-color:#cfe1ff}
+.callout.violet{background:var(--violet-soft);border-color:#dfd2ff}
+.callout.cyan{background:var(--cyan-soft);border-color:#bae6fd}
+.callout.pink{background:var(--pink-soft);border-color:#fbcfe8}
+.callout.gold{background:var(--gold-soft);border-color:#fde68a}
+.quote{border-left:5px solid var(--blue);padding:12px 14px;background:#f8fafc;border-radius:0 16px 16px 0;font-weight:780}
+.table{width:100%;border-collapse:separate;border-spacing:0 10px}
+.table th{text-align:left;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:0 12px 3px}
+.table td{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}
+.table td:first-child{border-left:1px solid var(--line);border-radius:17px 0 0 17px;font-weight:850}
+.table td:last-child{border-right:1px solid var(--line);border-radius:0 17px 17px 0}
+.score{font-weight:950;font-size:18px}
+.bar{height:10px;border-radius:999px;background:#edf0f5;overflow:hidden;margin-top:7px}
+.bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));}
+.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:950;border:1px solid}
+.pill.red{background:var(--red-soft);color:var(--red);border-color:#ffd0d0}
+.pill.green{background:var(--green-soft);color:var(--green);border-color:#bdeed2}
+.pill.orange{background:var(--orange-soft);color:#ad6500;border-color:#ffe0a3}
+.pill.blue{background:var(--blue-soft);color:var(--blue);border-color:#cfe1ff}
+.pill.violet{background:var(--violet-soft);color:var(--violet);border-color:#dfd2ff}
+.pill.pink{background:var(--pink-soft);color:var(--pink);border-color:#fbcfe8}
+.accordion{display:grid;gap:12px}
+details{background:#fff;border:1px solid var(--line);border-radius:23px;overflow:hidden;box-shadow:0 8px 24px rgba(16,24,40,.04)}
+summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:950;display:flex;align-items:center;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:23px;color:var(--blue)}
+details[open] summary:after{content:"–"}
+.details-body{padding:0 20px 20px;color:#344054}
+.timeline{position:relative;margin-left:8px}
+.timeline:before{content:"";position:absolute;left:12px;top:4px;bottom:4px;width:2px;background:var(--line)}
+.t-item{position:relative;padding-left:44px;margin:0 0 16px}
+.t-dot{position:absolute;left:2px;top:4px;width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--blue)}
+.t-dot.green{border-color:var(--green)}
+.t-dot.red{border-color:var(--red)}
+.t-dot.orange{border-color:var(--orange)}
+.t-dot.violet{border-color:var(--violet)}
+.t-card{background:#fff;border:1px solid var(--line);border-radius:21px;padding:16px;box-shadow:0 6px 18px rgba(16,24,40,.035)}
+.t-card h4{margin:0 0 6px;font-size:16px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.mini{background:#f8fafc;border:1px solid var(--line);border-radius:19px;padding:14px}
+.mini h5{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.script{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:19px;padding:16px;font-weight:760;white-space:pre-wrap}
+.chapter{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:36px;height:36px;border-radius:15px;background:linear-gradient(135deg,var(--blue-soft),var(--violet-soft));color:var(--blue);display:grid;place-items:center;font-weight:950}
+.clean-list{margin:0;padding-left:18px}
+.clean-list li{margin:8px 0}
+.asset-card{position:relative;overflow:hidden}
+.asset-card:before{content:"";position:absolute;right:-42px;top:-42px;width:120px;height:120px;border-radius:50%;background:rgba(37,99,235,.08)}
+.sticky-actions{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;gap:10px;z-index:20}
+.btn{border:0;border-radius:999px;padding:12px 16px;background:#111827;color:#fff;box-shadow:var(--shadow);font-weight:850;cursor:pointer}
+.btn.secondary{background:#fff;color:#111827;border:1px solid var(--line)}
+mark{background:#fff2a8;border-radius:6px;padding:0 3px}
+.compare{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.compare .cell{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;font-size:13px}
+.compare .head{background:#f8fafc;color:var(--muted);font-weight:950;text-transform:uppercase;letter-spacing:.04em}
+@media(max-width:1120px){
+  .layout{grid-template-columns:1fr;padding:14px}
+  .sidebar{position:relative;height:auto}
+  .hero-grid,.grid-4,.grid-5{grid-template-columns:1fr 1fr}
+  .grid-3,.grid-2,.split{grid-template-columns:1fr}
+  .hero h2{font-size:36px}
+  .compare{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .hero-grid,.grid-4,.grid-5{grid-template-columns:1fr}
+  .hero{padding:24px}
+  .hero h2{font-size:31px}
+}
+@media print{
+  .sidebar,.sticky-actions{display:none}
+  body{background:#fff}
+  .layout{display:block;max-width:100%;padding:0}
+  .card,.hero,details,.callout{box-shadow:none;break-inside:avoid}
+  details{display:block}
+  details .details-body{display:block}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">R</div>
+      <div>
+        <h1>Auditoría dinámica</h1>
+        <p>Ana · Mariona Cabrero</p>
+      </div>
+    </div>
+    <div class="search"><input id="searchInput" placeholder="Buscar en la auditoría..." /></div>
+    <nav class="nav">
+      <a href="#resumen"><span class="dot"></span>Resumen inicial</a>
+      <a href="#ficha"><span class="dot"></span>Ficha del caso</a>
+      <a href="#corte"><span class="dot"></span>Corte técnico</a>
+      <a href="#veredicto"><span class="dot"></span>Veredicto</a>
+      <a href="#scoreboard"><span class="dot"></span>Scoreboard</a>
+      <a href="#progreso"><span class="dot"></span>Progreso real</a>
+      <a href="#fase1"><span class="dot"></span>Apertura</a>
+      <a href="#fase2"><span class="dot"></span>Diagnóstico</a>
+      <a href="#corte2"><span class="dot"></span>Parte 2</a>
+      <a href="#pitch"><span class="dot"></span>Pitch</a>
+      <a href="#cierre"><span class="dot"></span>Cierre</a>
+      <a href="#frame"><span class="dot"></span>Frame-by-frame</a>
+      <a href="#mapa"><span class="dot"></span>Mapa psicológico</a>
+      <a href="#evolucion"><span class="dot"></span>Evolución Ana</a>
+      <a href="#plan"><span class="dot"></span>Plan</a>
+      <a href="#scripts"><span class="dot"></span>Scripts</a>
+      <a href="#ejecutivo"><span class="dot"></span>Resumen ejecutivo</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="hero" id="top">
+      <span class="eyebrow">REVOLUCIONA-T · CLOSER ANA · PROSPECTO MARIONA CABRERO</span>
+      <h2>El mejor cierre real de Ana: venta conseguida, sistema aún incompleto.</h2>
+      <p class="sub">Mariona no llegó comprada de casa. Tenía resistencia real, compromiso 7/10, objeción del marido y un historial previo de no empezar. Ana cerró. Bien. Ahora toca convertir ese 7.0 en un sistema repetible.</p>
+      <div class="hero-grid">
+        <div class="metric"><small>Nota global</small><strong>7.0 / 10</strong><span class="tag green">Mejor cierre real</span></div>
+        <div class="metric"><small>Resultado</small><strong>1.500€</strong><span class="tag green">3x500€</span></div>
+        <div class="metric"><small>Duración</small><strong>~67 min</strong><span class="tag orange">2 partes</span></div>
+        <div class="metric"><small>Riesgo clave</small><strong>Meet</strong><span class="tag red">Corte técnico</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="resumen">
+      <div class="section-head">
+        <div>
+          <h3>Resumen inicial de alto impacto</h3>
+          <p class="lead">La lectura en una frase antes de bajar al quirófano.</p>
+        </div>
+      </div>
+      <div class="callout green">
+        <div class="kicker">Idea central</div>
+        <div class="bigline">Ana ya demostró que puede cerrar con resistencia real. Ahora necesita dejar de depender del talento y empezar a cerrar con sistema.</div>
+        <p>Esta llamada tiene progreso de verdad: decisor cualificado, 7/10 trabajado, objeción del marido manejada en vivo y cierre en llamada. Pero siguen faltando las piezas que hacen que una venta sea repetible: Reframe, Pre-Suasión, Post-It de activos y eliminación definitiva del “hay que trabajar dos cosas”.</p>
+      </div>
+    </section>
+
+    <section class="section" id="ficha">
+      <div class="section-head"><div><h3>Ficha del caso</h3><p class="lead">Contexto completo de Mariona, sin esconder datos relevantes.</p></div></div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="kicker">Identificación</div>
+          <p><strong>Prospecto:</strong> Mariona Cabrero</p>
+          <p><strong>Closer:</strong> Ana</p>
+          <p><strong>Fecha:</strong> 20 mayo 2025</p>
+          <p><strong>Duración:</strong> Parte 1 (44 min) + Parte 2 (23 min) = ~67 minutos totales</p>
+          <p><strong>Resultado:</strong> CERRADA — 6 meses · 3x500€ fraccionado = 1.500€</p>
+          <p><strong>Nota global:</strong> 7.0 / 10</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Historial Ana</div>
+          <p>Miryam <span class="pill green">CERRADA · 6.6</span></p>
+          <p>Katia <span class="pill orange">SEGUIM. · 6.5</span></p>
+          <p>Beatriz <span class="pill orange">SEGUIM. · 6.3</span></p>
+          <p>Mari <span class="pill red">REVERSAL · 5.8</span></p>
+          <p>Iria <span class="pill orange">SIN CIERRE · 5.8</span></p>
+          <p>Mariona <span class="pill green">CERRADA · 7.0</span></p>
+        </div>
+        <div class="card">
+          <div class="kicker">Perfil Mariona</div>
+          <p>Madrid, Argüelles · 40 años.</p>
+          <p>Técnico de laboratorio · Universidad Complutense.</p>
+          <p>Horario: mañanas + 2 tardes/semana · sale a las 3h el resto de días.</p>
+          <p>Hija Mariona, 4 años · marido Mariano con trabajo muy exigente.</p>
+          <p>Funciona como madre soltera práctica: “es como si fuera madre soltera”.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="card">
+          <div class="kicker">Vida real y logística</div>
+          <ul class="clean-list">
+            <li>Sin apoyo de padres ni suegros en Madrid.</li>
+            <li>GoFit desde enero · 2 días fijos + a veces fin de semana.</li>
+            <li>Va en bici y andando al trabajo.</li>
+            <li>Come menú de cafetería universidad.</li>
+            <li>Cena con la niña a las 8:30-9h.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Problema, historial y decisión</div>
+          <ul class="clean-list">
+            <li>Problemas: hinchazón abdominal, celulitis, picoteo, ansia dulce.</li>
+            <li>Historial: pidió presupuesto a NutriDeporte hace más de un año; nunca empezó por tiempo.</li>
+            <li>Compromiso declarado: 7/10, honesta y conservadora.</li>
+            <li>Decisión propia: “la decisión es mía”.</li>
+            <li>Marido: apoya, no es obstáculo real.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="corte">
+      <div class="section-head"><div><h3>Sobre el corte técnico — primero lo más práctico</h3></div></div>
+      <div class="grid-2">
+        <div class="callout red">
+          <div class="kicker">Riesgo de infraestructura</div>
+          <p>Sí, importa. No en el resultado de esta llamada — importa para el sistema.</p>
+          <p>Google Meet gratuito tiene un límite de 60 minutos. Una llamada de ventas high-ticket para un programa de 1.300-2.400€ dura entre 45 y 75 minutos.</p>
+          <p>Eso significa que en todas las llamadas largas existe el riesgo de que la plataforma corte exactamente en el peor momento: durante el diagnóstico emocional, en la transición al pitch, o en el cierre.</p>
+        </div>
+        <div class="callout orange">
+          <div class="kicker">Qué pasó aquí</div>
+          <p>En esta llamada el corte ocurrió en el minuto 43, justo cuando Ana estaba recapitulando para cerrar el diagnóstico y transitar al pitch.</p>
+          <p>El riesgo real: si ese corte hubiera pasado durante el momento emocional con la hija o durante el cierre con la objeción del marido, la llamada podría haberse perdido.</p>
+          <p>La reconexión fue manejada bien — Ana hizo un recap sólido al inicio de la Parte 2 — pero eso fue suerte de timing, no de sistema.</p>
+        </div>
+      </div>
+      <div class="callout blue" style="margin-top:16px">
+        <strong>Recomendación directa:</strong>
+        <p>Zoom Pro o Google Meet con cuenta Workspace eliminan el límite de tiempo. El coste mensual de esa herramienta es irrisorio comparado con una venta de 1.300€ perdida por un corte técnico. Esto no es una sugerencia — es infraestructura básica para un programa de estas características.</p>
+      </div>
+    </section>
+
+    <section class="section" id="veredicto">
+      <div class="section-head"><div><h3>Veredicto — equilibrado y directo</h3></div></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="kicker">Lo mejor</div>
+          <p>Esta es la mejor llamada auditada de Ana. Y eso merece ser dicho sin matices.</p>
+          <p>A diferencia de la llamada con Silvia de Nadia — donde la prospect llegaba pre-vendida y sin fricción — Mariona tenía resistencia real. Dio un 7/10 de compromiso. Mencionó al marido antes del precio. Tenía historial de haber estado a punto de entrar en un programa similar y no haberlo hecho. Eso no es un perfil ideal — es un perfil que requiere trabajo. Y Ana lo cerró en llamada.</p>
+          <p>También hay progresos técnicos claros respecto a las cinco llamadas anteriores. Cualificó al decisor de pareja antes del cierre — algo que no ocurrió en la llamada con Mari, que terminó en reversal. Manejó la objeción del marido dentro de la llamada con autoridad y firmeza. Usó activos del diagnóstico en el cierre — no todos, no con la precisión óptima, pero los usó. El 7/10 fue trabajado en lugar de ignorado.</p>
+        </div>
+        <div class="card">
+          <div class="kicker">Lo que sigue abierto</div>
+          <p>Dicho todo eso: esta llamada también revela que los errores estructurales más profundos de Ana siguen intactos.</p>
+          <ul class="clean-list">
+            <li>El “hay que trabajar dos cosas” aparece de nuevo en el minuto 13:40 de la Parte 1.</li>
+            <li>El pitch no tiene Reframe.</li>
+            <li>Los activos más poderosos de la llamada — la hija, la madre de 71 años, el “si los demás pueden por qué no puedo yo” — no llegaron al cierre.</li>
+            <li>No hubo Pre-Suasión antes del precio.</li>
+          </ul>
+          <p>La nota de 7.0 refleja ambas cosas. El progreso es real. Las brechas estructurales también lo son. Y esas brechas van a costar ventas en llamadas donde la prospect tenga más resistencia que Mariona.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scoreboard">
+      <div class="section-head"><div><h3>Scoreboard — los 13 libros como jueces</h3></div></div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>Bloque</th><th>Nota</th><th>Qué libro lo evalúa y por qué</th></tr></thead>
+          <tbody>
+            <tr><td>Apertura / Agenda</td><td><span class="score">8.0</span><div class="bar"><span style="width:80%"></span></div></td><td>Voss: rapport natural, genuino. Blount-Virtual: mejor agenda del proyecto.</td></tr>
+            <tr><td>Diagnóstico calidad</td><td><span class="score">7.0</span><div class="bar"><span style="width:70%"></span></div></td><td>SPIN: buenas Situación, Problema e Implicación. Mom Test: preguntas de comportamiento real.</td></tr>
+            <tr><td>Diagnóstico profundidad</td><td><span class="score">7.5</span><div class="bar"><span style="width:75%"></span></div></td><td>Voss: labeling en momentos clave. Gap Selling: brecha sentida. Activos profundos parcialmente capturados.</td></tr>
+            <tr><td>Construcción de valor</td><td><span class="score">5.5</span><div class="bar"><span style="width:55%"></span></div></td><td>Challenger Sale: sin Reframe. Pitch con personalización pero genérico en estructura.</td></tr>
+            <tr><td>Manejo de objeciones</td><td><span class="score">7.5</span><div class="bar"><span style="width:75%"></span></div></td><td>JOLT: 7/10 trabajado. Blount-Objections: marido manejado en llamada. Decisor cualificado.</td></tr>
+            <tr><td>Cierre</td><td><span class="score">7.0</span><div class="bar"><span style="width:70%"></span></div></td><td>Influence: activos parcialmente usados. Pre-Suasión ausente. Close firme y en llamada.</td></tr>
+            <tr><td>Lenguaje / Tono</td><td><span class="score">8.5</span><div class="bar"><span style="width:85%"></span></div></td><td>Why She Buys: mejor conexión emocional del proyecto. Natural, empático, sin scripts.</td></tr>
+            <tr><td>Estructura</td><td><span class="score">6.0</span><div class="bar"><span style="width:60%"></span></div></td><td>“Dos cosas” otra vez. Switch: path no preparado. Pre-Suasión ausente.</td></tr>
+            <tr><td>GLOBAL</td><td><span class="score">7.0 / 10</span><div class="bar"><span style="width:70%"></span></div></td><td>El mejor cierre real del proyecto. Con brechas estructurales que deben cerrar.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="progreso">
+      <div class="section-head"><div><h3>Progreso real — lo que esta llamada demuestra</h3><p class="lead">Antes de los errores, hay que documentar lo que esta llamada hizo bien. No por cortesía: porque identificar lo que funciona es tan útil como identificar lo que no.</p></div></div>
+      <div class="grid-5">
+        <div class="card asset-card">
+          <div class="num">1</div>
+          <h4>La cualificación del decisor</h4>
+          <p><strong>Primera vez en 6 llamadas.</strong></p>
+          <p>En el minuto 26:31, Ana preguntó directamente: “¿y le has dicho que ibas a hacer la llamada? ¿Qué te dice? ¿Qué te va a decir Mariano?” Y luego: “a la hora de tomar una decisión, ¿tú puedes tomar una decisión o necesitas consultar?”</p>
+          <p>Esto es lo que no ocurrió en la llamada con Mari. En esa llamada, había señales financieras claras durante todo el diagnóstico y Ana nunca cualificó la capacidad de decisión de Mari. El resultado fue un reversal 24 horas después.</p>
+          <p>Aquí Ana hizo exactamente lo correcto. Mariona confirmó: “la decisión es mía.” Eso le dio a Ana la autorización para presionar el cierre en llamada cuando Mariona dijo “no sé si hablar con mi marido.” Sin ese conocimiento previo, Ana no podría haber respondido con la seguridad que respondió.</p>
+          <p>Let's Get Real (Khalsa y Illig) dedican una sección entera a la cualificación del “economic buyer” antes del cierre. Ana lo hizo. Eso marcó la diferencia.</p>
+        </div>
+        <div class="card asset-card">
+          <div class="num">2</div>
+          <h4>El 7/10 trabajado</h4>
+          <p>Cuando Mariona dijo “un 7” (Parte 1, min 36:25), Ana no lo reencuadró inmediatamente hacia arriba.</p>
+          <p>Preguntó: “¿qué es un 7? ¿Qué necesitamos para que sea un 10?”</p>
+          <p>Mariona respondió: “que me digáis que esto funciona” y “que me ayudéis a hacerlo.” Eso era exactamente el argumento del acompañamiento.</p>
+          <p>Ana lo conectó bien en la Parte 2: “de todo lo que te he contado hasta ahora, ¿qué es lo que sientes que sí?” Y Mariona respondió sola con el acompañamiento.</p>
+          <p>Comparado con cómo Montse manejó el 6/10 de Susanna — reencuadrándolo mediante lógica positiva sin llegar al miedo subyacente — Ana fue más paciente y más efectiva.</p>
+        </div>
+        <div class="card asset-card">
+          <div class="num">3</div>
+          <h4>Diagnóstico emocional real</h4>
+          <p>La pregunta del minuto 28:09 de la Parte 1 — “cuando emocionalmente te ves así, ¿qué dices?” — abrió una conversación genuinamente valiosa.</p>
+          <p>Mariona fue al ejemplo de la hija, a la madre de 71 años, al padre activo.</p>
+          <p>Esos tres activos son de primer nivel. Ana los escuchó y los conectó parcialmente.</p>
+        </div>
+        <div class="card asset-card">
+          <div class="num">4</div>
+          <h4>Objeción del marido gestionada</h4>
+          <p>Cuando Mariona dijo “no sé si hablarlo con mi marido por el desembolso económico” (Parte 2, min 16:04), Ana no cedió.</p>
+          <p>Fue directa: “siempre hacemos la matrícula en la llamada. Si no, la gente se echa para atrás.”</p>
+          <p>Luego usó la información que tenía: que Mariona había dicho que la decisión era suya.</p>
+          <p>Blount (Objections): eso fue el takeaway technique de Cialdini (Influence) aplicado — en lugar de pedir permiso, afirmó la norma del proceso con calma. Fue el momento de mayor autoridad de Ana en todas sus llamadas auditadas.</p>
+        </div>
+        <div class="card asset-card">
+          <div class="num">5</div>
+          <h4>Cierre con resistencia real</h4>
+          <p>Seis llamadas auditadas de Ana: Miryam (cerrada, probablemente referida), Katia (seguimiento), Beatriz (seguimiento), Mari (reversal), Iria (sin cierre), Mariona (cerrada con resistencia real).</p>
+          <p>Esta es la primera vez que Ana cierra a alguien con un 7/10 de compromiso, historial de no haber empezado en un programa anterior, y la objeción del marido activa.</p>
+          <p>Eso es progress tangible.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fase1">
+      <div class="section-head"><div><h3>Fase 1 — Apertura y agenda (0:00-4:16)</h3></div></div>
+      <div class="grid-2">
+        <div class="callout green">
+          <div class="kicker">Lo que funcionó</div>
+          <p>El rapport fue el más completo del proyecto. Ana usó la vida de Mariona — Madrid, la Complutense, los cuatro años de la hija, el puzzle de ser casi madre soltera — como material genuino, no como checklist.</p>
+          <p>El momento de “las cosas que hacemos las madres, al final es todo un puzzle” fue empatía real, no performativa.</p>
+          <p>La agenda sigue siendo la más honesta del equipo. “Tanto si es un sí como si es un no” tiene seis llamadas de consistencia. Eso ya es una seña de identidad que funciona.</p>
+        </div>
+        <div class="callout orange">
+          <div class="kicker">Lo que se puede mejorar</div>
+          <p>Cuando Mariona explicó su situación — casi madre soltera, marido con trabajo esclavo, niña de 4 años sin apoyo de abuelos — eso era información estratégica que Ana registró pero no ancló.</p>
+          <p>El anclaje temprano habría sido:</p>
+          <p class="script">“Mariona, para. O sea, llevas meses sacando tiempo de debajo de las piedras para ir al gimnasio, sola con la niña, sin que nadie te ayude. Y eso lo haces para ti. Eso dice mucho de ti.”</p>
+          <p>Voss (Never Split the Difference): un label así al inicio de la llamada habría creado un nivel de conexión que habría hecho el diagnóstico emocional más profundo todavía.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fase2">
+      <div class="section-head"><div><h3>Fase 2 — Diagnóstico (4:16-43:44 · 39 minutos)</h3><p class="lead">La mejor secuencia de preguntas de Ana, con activos muy potentes que todavía no viajan al cierre como deberían.</p></div></div>
+      <div class="grid-4">
+        <div class="callout green"><strong>Situación ✅</strong><p>Trabajo, horarios, hija, gimnasio, alimentación.</p></div>
+        <div class="callout green"><strong>Problema ✅</strong><p>Hinchazón, celulitis, picoteo, ansia dulce, no ver resultados.</p></div>
+        <div class="callout orange"><strong>Implicación ✅ parcial</strong><p>Apareció en min 33:00: “¿cuándo lo vas a hacer?”, pero faltó más profundidad.</p></div>
+        <div class="callout orange"><strong>Necesidad-Beneficio ✅ parcial</strong><p>Mariona construyó algunas solas; otras no fueron extraídas activamente.</p></div>
+      </div>
+
+      <div class="accordion" style="margin-top:16px">
+        <details open>
+          <summary>MIN 6:52 — “Me quiero ver mejor”</summary>
+          <div class="details-body">
+            <div class="quote">Lo que hizo Ana: “¿Cuéntame qué es verte mejor?”</div>
+            <p><strong>Análisis — suma:</strong> Esta es la segunda mejor pregunta diagnóstica del proyecto (la mejor fue la de Iria con “¿cuánto tiempo crees que puedes seguir así?”). Obligar a Mariona a definir concretamente “verte mejor” reveló: celulitis, hinchazón, picoteo, ansia de dulce. Sin esa pregunta, el diagnóstico habría sido superficial.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 7:35 — El bollo de media mañana</summary>
+          <div class="details-body">
+            <p><strong>Lo que hizo Ana:</strong> Escuchó activamente cómo Mariona dejó el bollo industrial y pasó a almendras — y que sigue picando almendras todo el día.</p>
+            <p><strong>Análisis — suma de primer nivel:</strong> Este es exactamente el tipo de datos que Fitzpatrick (Mom Test) llama comportamiento real. No “¿tiendes a picotear?” sino la descripción exacta de qué come, qué sustituyó y cómo el problema se mantuvo aunque cambió el vehículo. Eso es diagnóstico real.</p>
+            <p><strong>Lo que faltó:</strong> un label de Voss sobre el esfuerzo.</p>
+            <p class="script">“Mariona, para un momento. O sea, te quitaste el bollo por voluntad propia, lo sustituiste por fruta y almendras, has cambiado las cenas, vas al gimnasio. Todo eso lo has hecho sola, sin nadie. Y todavía no ves el resultado. Eso debe ser muy frustrante.”</p>
+            <p>Ese labeling habría sido el primer anclaje emocional del diagnóstico.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 13:40 — “Hay que trabajar dos cosas” — sexta llamada auditada del proyecto, mismo error</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Ana: “Pues ya sabes, tienes que trabajar dos cosas como estamos viendo, alimentación y ejercicio.”</div>
+            <p>Honestamente: esto no tiene que seguir apareciendo. No en la llamada 6. No en el cierre, no en el diagnóstico, no en ningún punto.</p>
+            <p>En esta llamada con Mariona el error es especialmente visible porque Mariona venía describiendo esfuerzos propios — el bollo, las almendras, la bici, el gimnasio desde enero, las cenas más tempranas. Decirle “hay que trabajar dos cosas” después de todo eso es ignorar el contexto de forma flagrante.</p>
+            <p>Keenan (Gap Selling): Mariona no necesita que le digan lo que hay que trabajar. Necesita entender POR QUÉ todo lo que está trabajando no está dando resultado.</p>
+            <div class="split">
+              <div class="mini">
+                <h5>Opción A · Challenger Sale — el Reframe que corresponde</h5>
+                <p class="script">“Mariona, lo que me estás describiendo es curioso. Llevas meses haciendo cambios reales — el bollo, las almendras, la bici, el gimnasio. Haces más que la mayoría. Y sin embargo sigues igual. ¿Por qué crees que pasa eso?”</p>
+                <p><strong>Por qué funciona:</strong> Esa pregunta le da a Mariona la insight del Challenger: el problema no es la falta de esfuerzo — es la falta de sistema. Cuando Mariona lo articule sola, el argumento del programa es irrefutable.</p>
+              </div>
+              <div class="mini">
+                <h5>Opción B · Gap Selling + SPIN Implicación</h5>
+                <p class="script">“Mariona, llevas desde enero en el gimnasio con disciplina real. Si eso fuera suficiente, ya estarías donde quieres estar. ¿Qué crees que le está faltando a lo que estás haciendo para que lleguen los resultados?”</p>
+                <p><strong>Por qué funciona:</strong> Fuerza a Mariona a articular la brecha entre su esfuerzo y su resultado. Ese insight es el argumento del programa.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 24:45 — NutriDeporte: la vez que casi compró y no compró</summary>
+          <div class="details-body">
+            <div class="quote">Lo que hizo Ana: “Ahora a lo mejor ya si ves que puedes sacar [tiempo] para un poquito más, sí.”</div>
+            <p><strong>Análisis — suma parcial con oportunidad perdida:</strong> Ana captó que Mariona había pedido presupuesto a NutriDeporte más de un año atrás y no había seguido. Lo usó correctamente para anclar el tiempo presente (“ahora ya sí ves que puedes”). Eso es buena lectura.</p>
+            <p>Pero la pregunta que faltó es la más importante de este momento: “¿qué ha cambiado ahora respecto a hace un año para que esta vez sea diferente?”</p>
+            <p>Rob Fitzpatrick (Mom Test) y el JOLT Effect coinciden: cuando alguien ha estado a punto de tomar una decisión y no la tomó, la razón por la que NO lo hizo es la misma resistencia que puede hacer regresar el buyer's remorse. Identificar exactamente qué ha cambiado crea un argumento de cierre poderoso Y reduce el riesgo de reversal.</p>
+            <div class="split">
+              <div class="mini">
+                <h5>Opción A · Mom Test — comportamiento pasado como predictor</h5>
+                <p class="script">“Mariona, hace un año pediste el presupuesto a NutriDeporte y no empezaste. Dices que fue porque no te veías capaz de sacar el tiempo. ¿Qué ha cambiado exactamente ahora para que eso sea diferente?”</p>
+                <p><strong>Por qué funciona:</strong> La respuesta de Mariona (“la niña ha crecido, el gimnasio está al lado del cole, ya tengo los hábitos del gimnasio construidos”) se convierte en el argumento de “ahora sí es el momento” — pero formulado por ella, no por Ana.</p>
+              </div>
+              <div class="mini">
+                <h5>Opción B · JOLT — Take Risk Off Table preventivo</h5>
+                <p class="script">“Mariona, la vez que pediste el presupuesto a NutriDeporte y no empezaste — si hubieras empezado en ese momento, ¿qué crees que habría pasado?”</p>
+                <p><strong>Por qué funciona:</strong> Si Mariona responde “habría funcionado” — la urgencia de no volver a posponer queda activada. Si responde “no habría podido seguirlo” — revela exactamente qué necesita que sea diferente ahora. Cualquier respuesta da información útil.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 28:44 — El ejemplo de la hija — el activo más profundo de toda la llamada</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Mariona: “Si no me cuido yo, qué ejemplo estoy dando también. Los niños copian lo que ven. Y no le estoy inculcando que ella también va a tener derecho, cuando sea mayor, a tener un rato para cuidarse a sí misma.”</div>
+            <p><strong>Lo que hizo Ana:</strong> Preguntó si hablaban de ello, escuchó que sí, y continuó bien hacia el siguiente tema.</p>
+            <p><strong>Análisis — suma con fallo de anclaje:</strong> Este es el activo emocional más profundo de toda la llamada. Mariona no está hablando de celulitis — está hablando del legado que le deja a su hija. Esa es una motivación de identidad, no de estética.</p>
+            <p>Voss habría labeleado:</p>
+            <p class="script">“Parece que esto ya no es solo por ti. Es que quieres que cuando Mariona crezca, tenga el modelo de una madre que se cuida — no de una madre que siempre lo pospone.”
+[Silencio.]</p>
+            <p>Ese label, con ese silencio, habría sido el activo del cierre. Mariona habría confirmado y profundizado. Lo que dijera en ese momento habría sido el Activo 1 del Post-It.</p>
+            <p>Ana lo usó en el cierre de la Parte 2 (“el ejemplo que le vas a dar a Mariona”) pero de forma genérica, no con las palabras exactas de Mariona.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 29:35 — La madre de 71 años — el segundo activo más poderoso</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Mariona: “Veo a mi madre, que nunca ha hecho ejercicio, con 71 años, está bien pero la veo mucho más torpe de lo que podría estar si se hubiera cuidado. Y mi padre, que hace ejercicio todos los días, pues es todo lo contrario.”</div>
+            <p><strong>Lo que hizo Ana:</strong> Conectó con el tema de la vejez, luego volvió al tema de la hija.</p>
+            <p><strong>Análisis — suma parcial con fallo de anclaje:</strong> Mariona acababa de darle a Ana la imagen más vívida del miedo a largo plazo: su madre a los 71, torpe, menos ágil de lo que podría haber sido. Y el contraste con el padre activo. Eso es la Implicación de Rackham en su forma más pura — Mariona está viendo las consecuencias del statu quo en una persona real, cercana, y a una distancia temporal específica.</p>
+            <p>Lo que faltó — un label + anclaje:</p>
+            <p class="script">“Mariona, para. Tu madre a los 71 haciendo lo que tú estás haciendo ahora. Y tu padre, que sí se mueve, siendo todo lo contrario. Eso que me estás describiendo — ¿cuántos años tienes ahora?”
+[Mariona: “40.”]
+“Tienes 31 años para decidir cuál de las dos eres. ¿Eso te pesa?”</p>
+            <p>Esa pregunta habría sido la implicación temporal más poderosa de la llamada. Y habría sido el Activo 2 del Post-It.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 31:26 — “Si los demás pueden, ¿por qué no voy a poder yo?” — el activo de identidad</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Mariona: “Si se lo hacen los demás, porque no voy a poder ir yo.”</div>
+            <p><strong>Lo que hizo Ana:</strong> “Efectivamente, eso es una frasaza, o sea, es que es así.”</p>
+            <p><strong>Análisis — suma parcial:</strong> Esa frase es la declaración de identidad de Mariona. Cialdini (Influence) llama a esto el momento de “commitment crystallization” — cuando el prospect articula en voz alta su propia creencia de que puede hacerlo. Una vez dicho, el principio de consistencia trabaja para el closer.</p>
+            <p>Ana lo reconoció con “es una frasaza” pero no lo ancló. En el cierre, debía haber devuelto exactamente esas palabras:</p>
+            <p class="script">“Mariona, me dijiste ‘si se lo hacen los demás, por qué no voy a poder yo.’ ¿Sigues sintiendo eso?”</p>
+            <p>Ese retorno de las propias palabras del prospect al cierre es lo que Phil M. Jones (Exactly What to Say) llama el “echo close” — el prospect no puede contradecir lo que ella misma dijo.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>MIN 36:25 — El 7/10 — bien manejado, con matices</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Mariona: “Un 7. No quiero decepcionar, soy conservadora. Por eso digo un 7.”</div>
+            <p><strong>Lo que hizo Ana:</strong> “¿Qué es un 7? ¿Qué necesitamos para que sea un 10?”</p>
+            <p><strong>Análisis — suma:</strong> Esta fue una buena respuesta. Mejor que cualquier manejo del compromiso en las llamadas anteriores. Ana no lo reencuadró hacia arriba con lógica — preguntó qué faltaba. Y Mariona respondió sola con “que me digáis que funciona” y “que me ayudéis a hacerlo” — que es exactamente el argumento del acompañamiento.</p>
+            <p><strong>Lo que podría haberse añadido:</strong> El JOLT Effect dice que cuando alguien da un número bajo por Omission Bias (miedo a fallar), la respuesta más efectiva no es “¿qué necesitas para llegar a 10?” sino “¿qué pasaría si empezaras y a las 4 semanas vieras que el sistema funciona para tu vida?” Eso reduce el riesgo percibido antes de seguir construyendo la motivación.</p>
+            <div class="split">
+              <div class="mini">
+                <h5>Opción A · JOLT — reducir la irreversibilidad</h5>
+                <p class="script">“Mariona, ese 7 tiene sentido. Sé conservadora, que es inteligente. Te voy a proponer algo diferente: no te pido que te comprometas con seis meses hoy. Te pido que te comprometas con las primeras cuatro semanas. Si en un mes ves que el sistema funciona para tu vida — con la niña, con el gimnasio, con los menús — ese 7 cambia solo. ¿Puedes comprometerte con eso?”</p>
+                <p><strong>Por qué funciona:</strong> JOLT TRoT — reduce la decisión de 6 meses a 30 días. El Elefante puede correr esa distancia.</p>
+              </div>
+              <div class="mini">
+                <h5>Opción B · Switch + Voss — labeling del miedo real</h5>
+                <p class="script">“Mariona, ese 7 me dice algo. Parece que no es que no quieras hacerlo — es que tienes miedo de que algo se vuelva a complicar y lo tengas que dejar, como pasó con NutriDeporte. ¿Es eso?”</p>
+                <p><strong>Por qué funciona:</strong> Nombra exactamente el miedo que hay detrás del 7. Cuando Mariona confirma, el argumento del acompañamiento — “estamos aquí para cuando eso pase” — se vuelve irrefutable.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="corte2">
+      <div class="section-head"><div><h3>El corte técnico y la Parte 2 — cómo se gestionó</h3></div></div>
+      <div class="grid-2">
+        <div class="callout green">
+          <div class="kicker">Gestión sólida</div>
+          <p>La gestión del corte fue uno de los momentos más sólidos de Ana en toda la auditoría. El inicio de la Parte 2 fue:</p>
+          <p class="script">“Estábamos un poco recapitulando lo que estás buscando en nosotros, lo que decías, pues eso, pues el verte mejor, el construir esos hábitos y sobre todo que se queden contigo, lo que me digas, que me enseñéis a comer mejor y entrenar mejor.”</p>
+          <p>Eso es un recap limpio, preciso, y que mantiene el momentum emocional. Mariona lo confirmó inmediatamente y el pitch arrancó sin fricción.</p>
+        </div>
+        <div class="callout orange">
+          <div class="kicker">Ajuste que lo habría hecho más potente</div>
+          <p>Habría sido más poderoso incluir los activos del diagnóstico en el recap, no solo el resumen genérico del objetivo:</p>
+          <p class="script">“Estábamos hablando de lo que te dijiste antes — el ejemplo para Mariona, tu madre a los 71, y eso de ‘si los demás pueden por qué no voy a poder yo.’ Todo eso me lo quiero llevar al pitch.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pitch">
+      <div class="section-head"><div><h3>Fase 3 — El pitch (Parte 2, 1:36-9:12)</h3></div></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="kicker">Lectura del pitch</div>
+          <p>El pitch duró aproximadamente 7-8 minutos. Es el más corto de todos los pitches auditados de Ana — y eso es positivo.</p>
+          <div class="callout red">
+            <strong>Problema central — sin Reframe</strong>
+            <p>El Challenger Sale (Dixon y Adamson) dice que el pitch de élite empieza enseñando al prospect algo que no sabía sobre su propio problema. El pitch de Ana fue bien personalizado — usó el dulce, el bikini, la hinchazón, los menús de la cafetería — pero no hubo ningún insight nuevo sobre POR QUÉ Mariona lleva meses sin resultado pese a su esfuerzo.</p>
+          </div>
+          <p><strong>Lo que el pitch sí hizo bien:</strong> Ana usó el dulce de Mariona (“si hay que comer dulce, se come dulce”), el bikini, la hinchazón, los menús de la universidad, la hija Mariona comiendo igual que la madre. Esa personalización tiene valor real — es mejor que el pitch genérico de llamadas anteriores.</p>
+          <p>La frase “que el control de tu cuerpo lo tienes tú y no al revés, Mariona” fue la mejor frase del pitch. Conecta el control con la identidad de Mariona, que es alguien que quiere ser la que manda sobre su propia vida.</p>
+          <p><strong>Problema de check-ins:</strong> Sin check-ins durante el pitch. Rackham (SPIN) — en pitches de 7-8 minutos sin preguntas, el closer no sabe si el prospect está procesando o desconectándose.</p>
+        </div>
+        <div class="card">
+          <div class="kicker">El Reframe que faltó</div>
+          <p class="script">“Mariona, lo que me describes es interesante. Llevas meses cambiando cosas sola — el bollo, las almendras, las cenas a las 9, el gimnasio desde enero. Eso es más disciplina que la media. Y sigues sin ver los resultados que esperas. ¿Sabes por qué? Porque el cuerpo de los 40 no responde a los cambios aislados. Responde a sistemas. El bollo quitado sin que la sustitución esté controlada te mantiene igual. El gimnasio sin la alimentación correcta te mantiene igual. Lo que necesitas no es hacer más cosas — es que todas esas cosas estén conectadas en un sistema que funcione como un todo. Eso es lo que construimos.”</p>
+          <p>Esa frase cambia el frame de “otro programa de nutrición y ejercicio” a “el sistema que conecta todo lo que ya estás haciendo.” Y está construida con los datos de Mariona, no con beneficios genéricos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cierre">
+      <div class="section-head"><div><h3>Fase 4 — El cierre (Parte 2, 7:49-19:33)</h3></div></div>
+      <div class="accordion">
+        <details open>
+          <summary>MIN 7:49-9:12 — Preparación del cierre — bien ejecutado</summary>
+          <div class="details-body">
+            <p>Ana preguntó “de todo lo que te he contado hasta ahora, ¿qué es lo que sientes que sí, sí, es ahora el momento?” Mariona respondió con el acompañamiento. Ana lo reforzó. Luego preguntó si había dudas. La secuencia fue limpia.</p>
+            <p><strong>Lo que faltó — el link con los activos:</strong> La presentación del precio llegó sin Pre-Suasión. Cialdini (Pre-Suasión) es explícito: lo que está en la mente del prospect en el momento de escuchar el precio determina cómo lo evalúa. Si el último pensamiento de Mariona antes del precio hubiera sido la hija, la madre de 71, o “si los demás pueden por qué no puedo yo” — ese precio habría resonado de forma diferente.</p>
+            <p><strong>Lo que debía preceder al precio:</strong></p>
+            <p class="script">“Mariona, antes de contarte el precio — me dijiste que quieres ser el ejemplo para Mariona. Me dijiste que cuando te miras a tu madre ves lo que no quieres llegar a ser. Y me dijiste ‘si los demás pueden, por qué no voy a poder yo.’ El programa son 1.500 euros en tres cuotas de 500. ¿Empezamos?”</p>
+            <p>Eso es el Protocolo de los 3 Activos que debía estar en todas las llamadas desde la auditoría de Mari. No estuvo aquí tampoco.</p>
+          </div>
+        </details>
+        <details>
+          <summary>MIN 11:35 — Mariona elige 6 meses — bien manejado</summary>
+          <div class="details-body">
+            <p><strong>Lo que hizo Ana:</strong> Cuando Mariona eligió 6 meses, Ana preguntó “¿por qué?” para entender la preferencia. Eso es buen instinto diagnóstico en el cierre — asegura que la elección es consciente y no por precio.</p>
+            <p>Luego Ana presentó correctamente el argumento de los primeros 3 meses de resultados vs los 3 siguientes de afianzamiento. Ese argumento es sólido y personalizado.</p>
+          </div>
+        </details>
+        <details>
+          <summary>MIN 16:04 — “No sé si hablarlo con mi marido” — el momento de mayor autoridad de Ana</summary>
+          <div class="details-body">
+            <div class="quote">Lo que dijo Mariona: “No sé si hablarlo con mi marido por el desembolso económico.”<br>Lo que hizo Ana: “Siempre hacemos la matrícula en la llamada. Si no, la gente se echa para atrás.”</div>
+            <p><strong>Análisis — suma:</strong> Este fue el momento más importante del cierre y Ana lo ejecutó correctamente. Fue directa sin ser agresiva. Luego usó la información cualificada previamente: “¿es una decisión que puedes tomar tú?” — y Mariona confirmó que sí.</p>
+            <p>Blount (Objections) habría reconocido esto como el Disrupt del LDA: en lugar de validar la idea de consultar al marido, Ana disrumpió el patrón con la norma del proceso. Eso es exactamente correcto.</p>
+            <p><strong>El único matiz:</strong> la frase “si no, la gente se echa para atrás” puede sonar a presión de proceso en lugar de a argumento de valor. Una versión más elegante:</p>
+            <p class="script">“Mariona, la decisión la tomas tú — me lo dijiste hace un rato. Y lo que te ha traído aquí hoy, lo que sientes cuando te ves en el espejo, el ejemplo para tu hija — eso no cambia en los próximos 10 minutos. ¿Qué necesitas que yo te diga para que te quedes tranquila tomando esta decisión ahora?”</p>
+            <p>Eso mantiene la firmeza sin referir al proceso como argumento.</p>
+          </div>
+        </details>
+        <details>
+          <summary>MIN 17:32-18:04 — El cierre final — bien pero incompleto</summary>
+          <div class="details-body">
+            <p><strong>Lo que hizo Ana:</strong> “Muchas mujeres me dicen que lo que le voy a contar a mi marido es, he hecho esto y es para los dos, porque esto, en tu caso, no es para los dos, además, es para los tres.”</p>
+            <p>Esa frase de “para los tres” fue un cierre de identidad. Conectó el programa con la familia de Mariona. Fue una buena intuición.</p>
+            <p>Luego Mariona dijo “venga, dale” — y Ana preguntó “¿estás segura?” — lo cual es el único momento donde la firmeza de Ana flaquea ligeramente. Cuando el prospect dice “venga, dale” el closer no pregunta si está segura — confirma y avanza.</p>
+            <p>El cierre habría sido perfecto si hubiera anclado los activos antes del “¿estás segura?”:</p>
+            <p class="script">“Mariona, hace un rato me dijiste ‘si los demás pueden, por qué no voy a poder yo.’ ¿Sigues sintiéndolo así?”
+[Mariona dice sí.]
+“Entonces vamos.”</p>
+            <p>Eso es cierre desde la identidad del prospect. No desde la duda del closer.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="frame">
+      <div class="section-head"><div><h3>Frame-by-frame — todos los momentos críticos</h3><p class="lead">El mapa visual de lo que sumó, lo que restó y lo que debía viajar al cierre.</p></div></div>
+      <div class="timeline">
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>MIN 0:00-4:16 | Ana | SUMA</h4><p>Mejor rapport del proyecto. Madrid, hija, puzzle de la maternidad. Natural.</p><p><strong>Fuente:</strong> Voss / Why She Buys — conexión genuina.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>MIN 6:52 | Ana | SUMA</h4><p>“¿Cuéntame qué es verte mejor?” — la mejor pregunta de apertura diagnóstica de todas las llamadas auditadas.</p><p><strong>Fuente:</strong> Keenan / SPIN — obliga a concretar el estado futuro.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>MIN 7:35-8:19 | Mariona | DATOS DE COMPORTAMIENTO REAL</h4><p>El bollo → almendras → ansia de dulce. Historia completa de comportamiento real.</p><p><strong>Fuente:</strong> Mom Test — Mariona proporcionó los mejores datos diagnósticos del proyecto espontáneamente.</p></div></div>
+        <div class="t-item"><div class="t-dot red"></div><div class="t-card"><h4>MIN 13:40 | Ana | RESTA</h4><p>“Hay que trabajar dos cosas.” Sexta llamada auditada del proyecto.</p><p><strong>Fuente:</strong> Keenan — vende proceso antes de que el prospect sienta la brecha.</p></div></div>
+        <div class="t-item"><div class="t-dot orange"></div><div class="t-card"><h4>MIN 24:45 | Mariona | SEÑAL CLAVE PARCIALMENTE EXPLORADA</h4><p>NutriDeporte: casi compró hace un año, no empezó por tiempo.</p><p><strong>Fuente:</strong> Mom Test / JOLT — la pregunta “¿qué ha cambiado ahora?” era la más importante del diagnóstico.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>MIN 26:31 | Ana | SUMA — PRIMERA VEZ EN 6 LLAMADAS</h4><p>Cualificación del decisor de pareja antes del cierre.</p><p><strong>Fuente:</strong> Let's Get Real (Khalsa) — el economic buyer fue identificado. Esto evitó el reversal.</p></div></div>
+        <div class="t-item"><div class="t-dot violet"></div><div class="t-card"><h4>MIN 28:44 | Mariona | ACTIVO 1 — LA HIJA</h4><p>“Los niños copian lo que ven. No le estoy inculcando que tendrá derecho a tener un rato para cuidarse.”</p><p><strong>Fuente:</strong> Voss + Influence (Cialdini) — activo de identidad e identidad de legado. Labeleado parcialmente. No en el cierre.</p></div></div>
+        <div class="t-item"><div class="t-dot violet"></div><div class="t-card"><h4>MIN 29:35 | Mariona | ACTIVO 2 — LA MADRE DE 71</h4><p>“La veo mucho más torpe de lo que podría estar si se hubiera cuidado. Mi padre, que hace ejercicio, todo lo contrario.”</p><p><strong>Fuente:</strong> SPIN Rackham — Implicación en persona real. Faltó el anclaje temporal. No en el cierre.</p></div></div>
+        <div class="t-item"><div class="t-dot violet"></div><div class="t-card"><h4>MIN 31:26 | Mariona | ACTIVO 3 — LA DECLARACIÓN DE IDENTIDAD</h4><p>“Si se lo hacen los demás, ¿por qué no voy a poder yo?”</p><p><strong>Fuente:</strong> Influence (Cialdini) — principio de consistencia. Parcialmente usado al final del cierre.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>MIN 33:00 | Ana | SUMA</h4><p>“¿Cuándo lo vas a hacer?” — buena Implicación temporal.</p><p><strong>Fuente:</strong> SPIN Rackham — conecta la urgencia con la inacción.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>MIN 36:25 | Mariona | SUMA — 7/10 HONESTO</h4><p>Compromiso 7, conservadora, no quiere decepcionar.</p><p><strong>Fuente:</strong> JOLT — bien manejado por Ana. Faltó Take Risk Off Table.</p></div></div>
+        <div class="t-item"><div class="t-dot blue"></div><div class="t-card"><h4>MIN 40:00 | Mariona | ACTIVO ADICIONAL</h4><p>“Ponerme un bikini y decir, mira qué bien me queda.”</p><p><strong>Fuente:</strong> Pre-Suasión — imagen concreta del estado futuro. Usada en el pitch.</p></div></div>
+        <div class="t-item"><div class="t-dot orange"></div><div class="t-card"><h4>MIN CORTE TÉCNICO 43-44 | — | GESTIÓN CORRECTA</h4><p>Reconexión en Parte 2 con recap limpio y mantenimiento del momentum.</p></div></div>
+        <div class="t-item"><div class="t-dot orange"></div><div class="t-card"><h4>PARTE 2 MIN 1:36 | Ana | PITCH</h4><p>Personalizado pero sin Reframe. Check-in final bien ejecutado.</p><p><strong>Fuente:</strong> Challenger Sale — faltó la enseñanza. Sin Pre-Suasión antes del precio.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>PARTE 2 MIN 7:49 | Ana | CIERRE — BIEN DIRIGIDO</h4><p>Post-pitch: pregunta de confirmación, presentación del precio estructurada.</p></div></div>
+        <div class="t-item"><div class="t-dot green"></div><div class="t-card"><h4>PARTE 2 MIN 16:04 | Ana | SUMA — MEJOR MOMENTO DE AUTORIDAD</h4><p>“Siempre hacemos la matrícula en la llamada.” Primera vez que Ana mantiene el marco con firmeza ante la objeción del marido.</p><p><strong>Fuente:</strong> Blount (Objections) — patrón disruptivo correcto.</p></div></div>
+        <div class="t-item"><div class="t-dot orange"></div><div class="t-card"><h4>PARTE 2 MIN 18:04 | Ana | SUMA PARCIAL</h4><p>“¿Estás segura?” después de que Mariona dijo “venga, dale” — único punto de flaqueo.</p><p><strong>Fuente:</strong> Exactly What to Say (Jones) — cuando el prospect dice sí, el closer confirma y avanza. No pregunta.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="mapa">
+      <div class="section-head"><div><h3>Mapa psicológico de Mariona</h3><p class="lead">Heath & Heath (Switch): Jinete / Elefante / Camino.</p></div></div>
+      <div class="grid-4">
+        <div class="callout blue"><strong>Jinete — 8/10</strong><p>Mariona entiende perfectamente lo que necesita. Sabe que necesita un sistema, guía, acompañamiento. Su Jinete no necesita convencimiento — necesita el plan concreto.</p></div>
+        <div class="callout orange"><strong>Elefante — 7/10</strong><p>Motivada, pero con el freno del historial de NutriDeporte. Teme comprometerse con algo que se vuelva a quedar en nada. El 7/10 no era desgana — era memoria de una vez que no se vio capaz.</p></div>
+        <div class="callout green"><strong>Camino — bien preparado</strong><p>El gimnasio ya existe, los hábitos están construidos desde enero, la niña tiene actividades para que Mariona tenga hueco. El camino estaba más preparado que en cualquier otra prospect de las auditadas.</p></div>
+        <div class="callout violet"><strong>Motor principal</strong><p>Doble. Inmediato: verse bien, quitarse la hinchazón, poder ponerse el bikini. Profundo: el legado hacia su hija y el contraste con su madre a los 71. Este segundo motor es el más potente y el menos usado en el cierre.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="evolucion">
+      <div class="section-head"><div><h3>Evolución de Ana — 6 llamadas, fotografía completa</h3></div></div>
+      <div class="card">
+        <table class="table">
+          <thead><tr><th>Dimensión</th><th>Miryam</th><th>Katia</th><th>Beatriz</th><th>Mari</th><th>Iria</th><th>Mariona</th></tr></thead>
+          <tbody>
+            <tr><td>Nota global</td><td>6.6</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.8</td><td>7.0</td></tr>
+            <tr><td>Resultado</td><td>CERRADA</td><td>SEGUIM.</td><td>SEGUIM.</td><td>REVERSAL</td><td>S/CIE.</td><td>CERRADA</td></tr>
+            <tr><td>Rapport calidad</td><td>Alta</td><td>Alta</td><td>Alta</td><td>M. Alta</td><td>Excep.</td><td>Excep.</td></tr>
+            <tr><td>Diagnóstico emocional</td><td>Parcial</td><td>Parcial</td><td>Parcial</td><td>Bueno</td><td>M. Bue.</td><td>Muy bueno</td></tr>
+            <tr><td>Decisor pareja cualificado</td><td>No</td><td>No</td><td>No</td><td>No — KEY</td><td>No</td><td>SÍ — KEY</td></tr>
+            <tr><td>Activos en el cierre</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Parcial</td></tr>
+            <tr><td>Activos más profundos en cierre</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>“Hay que cambiar dos cosas”</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+            <tr><td>Preguntas leading</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td><td>Menos</td></tr>
+            <tr><td>Reframe (Challenger Sale)</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>Pre-Suasión antes del precio</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>Cierre en llamada</td><td>No</td><td>No</td><td>No</td><td>Sí-REV</td><td>No</td><td>Sí</td></tr>
+            <tr><td>Manejo objeción pareja</td><td>N/A</td><td>N/A</td><td>N/A</td><td>No</td><td>N/A</td><td>SÍ — BIEN</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="callout green">
+          <strong>La lectura de la curva</strong>
+          <p>Ana mejora en las variables relacionales — diagnóstico emocional, rapport, qualificación, manejo de objeciones en llamada.</p>
+        </div>
+        <div class="callout red">
+          <strong>El riesgo de la curva</strong>
+          <p>Las variables estructurales — Reframe, Pre-Suasión, Post-It con activos, “dos cosas” — no se mueven.</p>
+          <p>Ana puede llegar a un nivel muy alto de effectiveness con prospectas abiertas y medianamente motivadas. Pero con prospectas con resistencia alta — económica, auto-duda fuerte, o falta de tiempo real — los fallos estructurales van a seguir costando ventas que no debería perder.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plan">
+      <div class="section-head"><div><h3>Plan de entrenamiento — Ana, Iteración 6</h3></div></div>
+      <div class="grid-2">
+        <div class="callout green">
+          <strong>Lo que no se toca</strong>
+          <ul class="clean-list">
+            <li>El rapport — es el mejor del proyecto y es genuino.</li>
+            <li>El diagnóstico emocional — ha mejorado llamada a llamada y en Mariona llegó a lugares reales.</li>
+            <li>La cualificación del decisor — esta llamada demostró que Ana ya lo integra. Que se quede.</li>
+            <li>El manejo de la objeción del marido — bien ejecutado. Conservar el protocolo.</li>
+          </ul>
+        </div>
+        <div class="callout red">
+          <strong>Lo que tiene que cambiar — en orden de impacto</strong>
+          <p>Seis cambios concretos. No decoración. Sistema.</p>
+        </div>
+      </div>
+      <div class="accordion" style="margin-top:16px">
+        <details open><summary>1. “Hay que cambiar dos cosas” — eliminada. No en la llamada 7.</summary><div class="details-body"><p>Sustitución:</p><p class="script">“Mariona, llevas meses haciendo cambios sola y no ves el resultado. ¿Qué crees que le está faltando a lo que estás haciendo?”</p></div></details>
+        <details><summary>2. El Post-It — séptima llamada sin él. Esto no puede seguir.</summary><div class="details-body"><p>Los tres activos más poderosos escritos antes del pitch. El cierre empieza con Activo 1, termina con Activo 3 + el número de compromiso. Sin excepciones.</p></div></details>
+        <details><summary>3. El Reframe del Challenger — antes del pitch, siempre.</summary><div class="details-body"><p>Una frase que enseñe algo que el prospect no sabía sobre su propio problema.</p><p>En Mariona: “el cuerpo de los 40 no responde a cambios aislados — responde a sistemas. Eso es lo que construimos.”</p></div></details>
+        <details><summary>4. Pre-Suasión antes del precio — siempre.</summary><div class="details-body"><p>El precio nunca llega frío. El frame emocional se activa justo antes:</p><p class="script">“Mariona, antes del precio — me dijiste [activo más poderoso]. ¿Eso sigue siendo así?”</p><p>Luego el precio.</p></div></details>
+        <details><summary>5. Herramienta técnica — Zoom o Google Meet Workspace.</summary><div class="details-body"><p>Free Google Meet no es una opción para llamadas de venta. Inversión mínima, riesgo eliminado.</p></div></details>
+        <details><summary>6. “¿Estás segura?” — eliminada cuando el prospect dice sí.</summary><div class="details-body"><p>Cuando el prospect dice “venga, dale” — el closer confirma y avanza. No pregunta.</p></div></details>
+      </div>
+    </section>
+
+    <section class="section" id="scripts">
+      <div class="section-head"><div><h3>Scripts para Ana — nuevos para la próxima llamada</h3></div></div>
+      <div class="grid-2">
+        <div class="card"><div class="kicker">Script 01 · Reframe Challenger para perfil Mariona</div><p><strong>Cuándo:</strong> Al inicio del pitch, siempre con este perfil.</p><p class="script">“[NOMBRE], lo que me describes es interesante. Llevas meses haciendo cambios sola — [lo específico que cambió]. Más disciplina que la mayoría. Y sigues igual. ¿Sabes por qué? Porque el cuerpo de los 40 no responde a cambios aislados — responde a sistemas conectados. Lo que haces funciona, pero sin estar coordinado. Eso es exactamente lo que construimos.”</p></div>
+        <div class="card"><div class="kicker">Script 02 · Anclaje del activo de legado/ejemplo</div><p><strong>Cuándo:</strong> Cuando el prospect menciona la hija o el modelo que quiere dar.</p><p class="script">“[NOMBRE], para. Eso que me acabas de decir — que quieres ser el ejemplo para [nombre hija]. Que ella vea que su madre se cuida, que se pone a ella en primer lugar. Eso no es sobre los kilos. Eso es sobre quién quieres ser.”
+[Silencio de 4 segundos.]
+“¿Puedo anotarlo? Porque eso va a aparecer en el cierre.”</p></div>
+        <div class="card"><div class="kicker">Script 03 · Anclaje del activo generacional</div><p><strong>Cuándo:</strong> Cuando el prospect menciona un familiar mayor como referencia positiva o negativa.</p><p class="script">“[NOMBRE], para un momento. Tu madre con [edad] siendo [descripción]. Tu padre siendo todo lo contrario. Tú tienes [edad] ahora. Tienes [diferencia] años para decidir cuál de los dos eres. Eso merece estar en este papel.”
+[Escribir en el Post-It.]</p></div>
+        <div class="card"><div class="kicker">Script 04 · Cierre con los 3 activos</div><p><strong>Cuándo:</strong> Siempre, inmediatamente antes del precio.</p><p class="script">“[NOMBRE], antes del precio — me dijiste [Activo 1 — las palabras exactas de la prospect]. Me describiste [Activo 2 — imagen concreta del estado futuro]. Y me dijiste [Activo 3 — declaración de identidad]. El programa son [precio]. ¿Empezamos?”</p></div>
+        <div class="card"><div class="kicker">Script 05 · Cuando el prospect dice “venga, dale”</div><p><strong>Cuándo:</strong> Cuando el prospect dice que sí durante el cierre.</p><p class="script">“Perfecto. [Confirmar la opción elegida.] Te paso el enlace ahora.”
+[NO preguntar “¿estás segura?”. Confirmar y avanzar.]</p></div>
+        <div class="card"><div class="kicker">Script 06 · Objeción “voy a hablar con mi marido” con decisor ya cualificado</div><p><strong>Cuándo:</strong> Cuando el prospect que anteriormente confirmó que la decisión es suya menciona al marido.</p><p class="script">“[NOMBRE], hace un rato me dijiste que la decisión es tuya. Y lo que te ha traído aquí hoy — [activo más poderoso del diagnóstico] — eso no cambia en los próximos 10 minutos. ¿Qué necesitas que yo te diga para que te quedes tranquila tomando esta decisión ahora?”</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="ejecutivo">
+      <div class="section-head"><div><h3>Resumen ejecutivo</h3></div></div>
+      <div class="grid-3">
+        <div class="metric"><small>Nota</small><strong>7.0 / 10</strong><span class="tag green">Mejor cierre real</span></div>
+        <div class="metric"><small>Resultado</small><strong>Cerrada</strong><span class="tag green">6 meses · 3x500€</span></div>
+        <div class="metric"><small>Condición</small><strong>Resistencia real</strong><span class="tag blue">Decidido en llamada</span></div>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="callout green">
+          <strong>Cinco cosas que funcionaron en esta llamada</strong>
+          <ol class="clean-list">
+            <li>Cualificación del decisor de pareja antes del cierre — evitó el reversal de Mari.</li>
+            <li>7/10 trabajado con la pregunta “¿qué necesitamos para que sea un 10?” en lugar de reencuadrarlo.</li>
+            <li>Objeción del marido gestionada en llamada con firmeza y sin agresividad.</li>
+            <li>Diagnóstico emocional genuino — hija, madre de 71, declaración de identidad.</li>
+            <li>Cierre en llamada con resistencia real — el progreso más significativo en 6 llamadas.</li>
+          </ol>
+        </div>
+        <div class="callout red">
+          <strong>Cinco cosas que deben cambiar</strong>
+          <ol class="clean-list">
+            <li>“Hay que cambiar dos cosas” — séptima llamada. Nunca más.</li>
+            <li>El Post-It no existe todavía — los activos más poderosos (hija, madre de 71, identidad) no llegaron al cierre.</li>
+            <li>No hay Reframe en ninguno de los pitches auditados — ninguno.</li>
+            <li>El precio sigue llegando sin Pre-Suasión — en todas las llamadas.</li>
+            <li>Herramienta técnica: Google Meet gratuito no es válido para llamadas de esta naturaleza.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="callout violet" style="margin-top:16px">
+        <div class="kicker">Para Ana, la frase de esta auditoría</div>
+        <p class="bigline">“Esta llamada demuestra que eres capaz de construir una venta de verdad — con resistencia, con objeción en vivo y con cierre en llamada. Eso ya no es suerte. Ahora la pregunta es qué pasa cuando se juntan el mejor diagnóstico que sabes hacer con el cierre que todavía no tienes. Cuando el Post-It aparezca, cuando el Reframe aparezca, cuando los activos viajen desde el minuto 28 hasta el minuto 40 de la Parte 2 — esas llamadas no van a ser un 7.0. Van a ser otra cosa.”</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="sticky-actions">
+  <button class="btn" onclick="window.print()">Imprimir / PDF</button>
+  <button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Arriba</button>
+</div>
+
+<script>
+const input = document.getElementById('searchInput');
+const root = document.querySelector('.main');
+let original = root.innerHTML;
+input.addEventListener('input', () => {
+  const q = input.value.trim();
+  root.innerHTML = original;
+  if(!q) return;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  nodes.forEach(node => {
+    if(re.test(node.nodeValue)){
+      const span = document.createElement('span');
+      span.innerHTML = node.nodeValue.replace(re, m => `<mark>${m}</mark>`);
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+  document.querySelectorAll('details').forEach(d => d.open = true);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REVOLUCIONA-T · CLOSER MONTSE · PROSPECTO MIREIA GIMENO</title>
+<style>
+:root{
+  --bg:#070A0F; --panel:#111722; --panel2:#171E2B; --ink:#F7F8FC; --muted:#A7B0C0;
+  --line:rgba(255,255,255,.13); --gold:#FFD166; --green:#49D17D; --red:#FF6B6B;
+  --cyan:#67D8FF; --violet:#A78BFA; --orange:#FFB86B;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+   radial-gradient(circle at 12% -8%, rgba(255,209,102,.20), transparent 34%),
+   radial-gradient(circle at 92% 2%, rgba(103,216,255,.14), transparent 28%),
+   radial-gradient(circle at 70% 120%, rgba(167,139,250,.15), transparent 34%),
+   var(--bg);
+  line-height:1.58;
+}
+.hero{
+  padding:42px 32px 30px; border-bottom:1px solid var(--line); position:relative; overflow:hidden;
+}
+.hero:after{content:"";position:absolute;inset:auto -10% -45% -10%;height:220px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);transform:rotate(-3deg)}
+.kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:900}
+h1{margin:12px 0 14px;font-size:clamp(34px,6vw,76px);line-height:.9;max-width:1200px}
+.hero p{font-size:18px;color:#D8DFEA;max-width:980px;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.badge{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:13px;font-weight:900}
+.badge.red{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.38);color:#FFD6D6}
+.badge.gold{background:rgba(255,209,102,.12);border-color:rgba(255,209,102,.38);color:#FFE5A6}
+.badge.green{background:rgba(73,209,125,.12);border-color:rgba(73,209,125,.38);color:#C9F8D9}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px;max-width:1060px}
+.metric{border:1px solid var(--line);background:rgba(255,255,255,.055);border-radius:20px;padding:15px;backdrop-filter:blur(10px)}
+.metric span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:900}
+.metric b{display:block;color:var(--gold);font-size:27px;margin-top:4px}
+.shell{max-width:1480px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px}
+nav{position:sticky;top:16px;height:calc(100vh - 32px);overflow:auto;border:1px solid var(--line);background:rgba(17,23,34,.72);backdrop-filter:blur(16px);border-radius:24px;padding:16px}
+nav h3{margin:0 0 14px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.16em}
+nav a{display:block;text-decoration:none;color:#DCE3EE;padding:9px 10px;border:1px solid transparent;border-radius:13px;font-size:13px;font-weight:750}
+nav a:hover{background:rgba(255,255,255,.065);border-color:var(--line);color:white}
+.panel{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.03));border-radius:28px;padding:24px;margin-bottom:18px;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.panelTop{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.num{font-size:12px;color:#071018;background:var(--gold);font-weight:1000;border-radius:999px;padding:6px 9px;line-height:1;margin-top:7px}
+h2{font-size:clamp(25px,3vw,38px);line-height:1.04;margin:0;text-transform:none}
+h3{margin:0 0 10px;font-size:18px}
+p{margin:0 0 14px;color:#E7ECF5}
+p:last-child{margin-bottom:0}
+.kvgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.kv{padding:14px;border:1px solid var(--line);background:rgba(0,0,0,.18);border-radius:18px}
+.kv span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;margin-bottom:5px}
+.kv strong{display:block;font-size:15px;color:#FAFBFF}
+.scoreTable{overflow:auto;border:1px solid var(--line);border-radius:18px}
+table{width:100%;border-collapse:collapse;min-width:860px;background:rgba(0,0,0,.20)}
+th,td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);background:rgba(255,255,255,.06)}
+tr.global td{background:rgba(255,209,102,.10);font-weight:950}
+.score{display:inline-flex;min-width:54px;justify-content:center;padding:5px 9px;border-radius:999px;border:1px solid rgba(255,209,102,.40);background:rgba(255,209,102,.13);color:#FFE6A8;font-weight:1000}
+.matrix{white-space:pre;overflow:auto;background:rgba(0,0,0,.32);border:1px solid var(--line);border-radius:18px;padding:18px;font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#F3F6FC}
+.insight{border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0;background:rgba(255,255,255,.04)}
+.insight.good{border-color:rgba(73,209,125,.28);background:linear-gradient(90deg,rgba(73,209,125,.11),rgba(255,255,255,.035))}
+.insight.bad{border-color:rgba(255,107,107,.30);background:linear-gradient(90deg,rgba(255,107,107,.115),rgba(255,255,255,.035))}
+.insight.good h3{color:#CFFADE}
+.insight.bad h3{color:#FFD0D0}
+.accordion{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.045);margin:10px 0;overflow:hidden}
+.accordion summary{cursor:pointer;list-style:none;padding:15px 18px;display:flex;justify-content:space-between;gap:18px;align-items:center;font-weight:950;text-transform:uppercase;font-size:13px}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary b{font-size:22px;color:var(--gold);transition:.2s}
+.accordion[open] summary b{transform:rotate(45deg)}
+.accBody{padding:0 18px 18px;color:#E7ECF5}
+.caseTag{display:inline-block;margin:8px 0 3px;padding:6px 10px;border-radius:999px;background:rgba(103,216,255,.13);border:1px solid rgba(103,216,255,.3);color:#BDEEFF}
+mark{background:rgba(255,209,102,.25);color:white;padding:.05em .24em;border-radius:.35em}
+.footer{max-width:1480px;margin:0 auto;padding:0 24px 30px;color:var(--muted);font-size:12px}
+@media(max-width:980px){
+  .shell{grid-template-columns:1fr;padding:14px}
+  nav{position:relative;height:auto;top:0}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kvgrid{grid-template-columns:1fr}
+  .hero{padding:30px 18px 24px}
+}
+@media print{
+  body{background:white;color:black}
+  nav{display:none}
+  .shell{display:block;max-width:none}
+  .panel,.metric,.kv,.insight,.accordion{break-inside:avoid;background:white;color:black;border-color:#ccc;box-shadow:none}
+  p,td,th,strong,h1,h2,h3{color:black!important}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="kicker">Auditoría forense · Revoluciona-T</div>
+  <h1>Closer Montse · Prospecto Mireia Gimeno</h1>
+  <p>Documento dinámico de análisis completo: diagnóstico, scoreboard, patrón repetido, evolución, errores, 13 fuentes, seguimiento y plan de entrenamiento.</p>
+  <div class="badges">
+    <span class="badge red">SIN CIERRE</span>
+    <span class="badge gold">Nota 6.4 / 10</span>
+    <span class="badge">50 minutos</span>
+    <span class="badge">10ª llamada Montse</span>
+    <span class="badge">No cerrable ahora</span>
+  </div>
+  <div class="metrics">
+    <div class="metric"><span>Resultado</span><b>S/CIE.</b></div>
+    <div class="metric"><span>Obstáculo</span><b>205€ + 100€ máx.</b></div>
+    <div class="metric"><span>Programa</span><b>250€/mes</b></div>
+    <div class="metric"><span>Timeline</span><b>4 meses</b></div>
+  </div>
+</header>
+<div class="shell">
+  <nav>
+    <h3>Índice</h3>
+    <a href='#sec1'>Ficha Del Caso</a><a href='#sec2'>El Diagnóstico Real De Esta Llamada</a><a href='#sec3'>Scoreboard — 13 Fuentes + Manual Operativo</a><a href='#sec4'>Global                      6.4 / 10   ↓(7.0)</a><a href='#sec5'>El Patrón Que Aparece Dos Veces En Dos Días</a><a href='#sec6'>Evolución Montse — 10 Llamadas</a><a href='#sec7'>Lo Que Funcionó — Con Ejemplos Exactos</a><a href='#sec8'>Bien 1 — El Diagnóstico Fue El Más Complejo Del Proyecto Y Lo Manejó Bien</a><a href='#sec9'>Bien 2 — El Reframe Fue Sólido Y Específico (Min 28:20)</a><a href='#sec10'>Bien 3 — La Pregunta Del Dolor Central (Min 19:43)</a><a href='#sec11'>Bien 4 — La Implicación Hacia El Futuro (Min 24:17)</a><a href='#sec12'>Bien 5 — El Manejo Del Entrenamiento (Min 34:29)</a><a href='#sec13'>Bien 6 — El Pitch Fue Específico Para Mireia</a><a href='#sec14'>Bien 7 — La Honestidad Final (Min 48:28)</a><a href='#sec15'>Los Errores — Y Lo Que Revelan Sobre El Momento Actual De Montse</a><a href='#sec16'>Error 1 — Segundo Día Seguido Aceptando &quot;No Decido En Llamada&quot; Sin Explorar</a><a href='#sec17'>Error 2 — Cualificación Económica No Hecha Antes Del Pitch</a><a href='#sec18'>Error 3 — La Prueba Social Específica Pedida — Segunda Llamada Seguida Sin Entregarse</a><a href='#sec19'>Error 4 — &quot;Me Queda Muy Claro&quot; — Min 28:20 — Décima Llamada De Montse</a><a href='#sec20'>Error 5 — Sin Visión Questions En El Pitch — Décima Llamada</a><a href='#sec21'>Error 6 — El Argumento Del &quot;Coste Acumulado&quot; Fue El Incorrecto Para Mireia</a><a href='#sec22'>Error 7 — Pre-Suasión Ausente — Regresión En Tercera Llamada Consecutiva</a><a href='#sec23'>Las 13 Fuentes — Evaluación Completa</a><a href='#sec24'>Sobre El Seguimiento De Mireia</a><a href='#sec25'>Plan De Entrenamiento — Montse, Iteración 10</a><a href='#sec26'>Problema Crítico Inmediato Que Necesita Resolución Antes De La Próxima Llamada:</a><a href='#sec27'>Dos Elementos Que Montse Necesita Trabajar En La Próxima Semana:</a><a href='#sec28'>El Protocolo De Obstáculo Inicial</a><a href='#sec29'>Cualificación Económica En Cada Llamada, Antes Del Pitch</a><a href='#sec30'>Resumen Ejecutivo</a><a href='#sec31'>Nota: 6.4 / 10</a><a href='#sec32'>Para Montse — La Frase De Esta Auditoría:</a>
+  </nav>
+  <main>
+    
+    <section class="panel" id="sec1">
+      <div class="panelTop">
+        <span class="num">01</span>
+        <h2>Ficha Del Caso</h2>
+      </div>
+      <div class='kvgrid'><div class='kv'><span>Prospecto</span><strong>Mireia Gimeno · Castellón · 37 (hacia 38)</strong></div><div class='kv'><span>Closer</span><strong>Montse</strong></div><div class='kv'><span>Fecha</span><strong>2 junio 2026</strong></div><div class='kv'><span>Duración</span><strong>50 minutos</strong></div><div class='kv'><span>Resultado</span><strong>SIN CIERRE · &quot;lo pensaré cuando termine con la otra nutricionista&quot; (~4 meses)</strong></div><div class='kv'><span>Nota global</span><strong>6.4 / 10</strong></div><div class='kv'><span>Historial Montse</span><strong>Emma (SEG. 6.4) · Gladys (SEG. 7.1) · Katherine (SEG. 6.7) · Susanna Q. (S/CIE. 5.5) · Lydia (ENT. 6.5) · Virginia (CER. 6.5) · Susana GM (CER. 7.3) · Lidia (SEG. 6.8) · Alicia (SEG. 7.0) · Mireia (S/CIE. 6.4)</strong></div><div class='kv'><span>Perfil Mireia</span><strong>Fotógrafa comercial · autónoma · Castellón · vive sola</strong></div><div class='kv'><span>Intestino irritable (origen</span><strong>estrés crónico)</strong></div><div class='kv'><span>Objetivo</span><strong>recomposición corporal, no verse &quot;puertota&quot;, más definición</strong></div><div class='kv'><span>Límite económico declarado</span><strong>100€/mes adicionales máximo</strong></div><div class='kv'><span>Escéptica activa</span><strong>ha hecho &quot;varias llamadas de este tipo&quot;, conoce el patrón</strong></div><div class='kv'><span>Compromiso</span><strong>10/10 subjetivo, pero obstáculo económico real e inconmovible ahora</strong></div></div><p>Pareja (Gonzalo, no conviven) · sin hijos<br>Horario aleatorio según sesiones y edición<br>8 años CrossFit (dejado) → empezando funcional<br>6 años de dietas · múltiples nutricionistas<br>Nutricionista PNI activa (Gloria · 150€/mes · ciclo 4-6 meses activo)<br>Terapia psicológica en curso<br>Peso actual 67-68 kg → quería 60 → historial indica meta no saludable (ver nota clínica)<br>Autónoma + nutricionista + gimnasio = 205€/mes comprometidos</p>
+    </section>
+    
+    <section class="panel" id="sec2">
+      <div class="panelTop">
+        <span class="num">02</span>
+        <h2>El Diagnóstico Real De Esta Llamada</h2>
+      </div>
+      <p>Esta llamada no era cerrable. No porque Montse fallara en el cierre, sino porque el obstáculo era estructural y previo al pitch:<br>Mireia paga 150€/mes a una nutricionista cuyo ciclo de tratamiento tiene de 4-6 meses, con medicación/suplementación activa que no puede interrumpir. La nutricionista es alguien en quien confía (&quot;me ayudó en un momento en el que estaba en la mierda&quot;). Además tiene 55€/mes de gimnasio. Total: 205€ comprometidos. El programa cuesta 250€/mes. Ella ha declarado un límite de 100€ adicionales máximo.<br>Ningún pitch, por brillante que fuera, habría movido ese número. El único escenario posible era que el programa reemplazara la nutricionista — y Mireia dejó claro que no la va a dejar antes de terminar el ciclo.<br>El mejor resultado posible de esta llamada era exactamente el que se obtuvo: Mireia sale informada, con buena experiencia, y con la idea de contactar cuando termine el tratamiento. Y ese resultado se habría conseguido en 25 minutos en lugar de 50 si la cualificación económica hubiera llegado antes del pitch.<br>El problema no es el cierre. El problema es que Montse invirtió 8 minutos en un pitch sin base económica, descubrió el obstáculo después, y luego intentó trabajarlo en un terreno donde ya no había espacio.</p>
+    </section>
+    
+    <section class="panel" id="sec3">
+      <div class="panelTop">
+        <span class="num">03</span>
+        <h2>Scoreboard — 13 Fuentes + Manual Operativo</h2>
+      </div>
+      
+    <div class="scoreTable">
+      <table>
+        <thead><tr><th>Bloque</th><th>Nota</th><th>Vs. Alicia</th><th>Razón</th></tr></thead>
+        <tbody><tr class=''><td>Apertura / Agenda</td><td><span class='score'>6.5</span></td><td>↓(7.5)</td><td>Segundo día seguido con &quot;no decido en llamada&quot; aceptado sin explorar.</td></tr><tr class=''><td>Diagnóstico calidad</td><td><span class='score'>8.0</span></td><td>=(8.0)</td><td>Excelente. Caso muy complejo manejado con profundidad real.</td></tr><tr class=''><td>Diagnóstico profundidad</td><td><span class='score'>7.5</span></td><td>=(7.5)</td><td>La frustración central bien excavada. Activo del espejo/cuerpo bien producido.</td></tr><tr class=''><td>Construcción de valor</td><td><span class='score'>7.0</span></td><td>=(7.0)</td><td>Reframe limpio. Pitch ~8 min. Sin visión questions.</td></tr><tr class=''><td>Manejo de objeciones</td><td><span class='score'>4.5</span></td><td>↓(5.5)</td><td>Económica no pre-cualificada antes del pitch. Prueba social pedida no entregada.</td></tr><tr class=''><td>Cierre</td><td><span class='score'>3.5</span></td><td>↓(4.5)</td><td>No cerrable por obstáculo real. Sin Sección 11. Argumento económico incorrecto.</td></tr><tr class=''><td>Lenguaje / Tono</td><td><span class='score'>8.5</span></td><td>=(8.5)</td><td>Honesto, claro, no agresivo. Lo mejor de la llamada.</td></tr><tr class=''><td>Estructura</td><td><span class='score'>6.0</span></td><td>↓(7.0)</td><td>Sin cualif. económica previa. &quot;Me queda muy claro&quot; presente. Obstáculo inicio aceptado.</td></tr></tbody>
+      </table>
+    </div>
+    
+    </section>
+    
+    <section class="panel" id="sec4">
+      <div class="panelTop">
+        <span class="num">04</span>
+        <h2>Global                      6.4 / 10   ↓(7.0)</h2>
+      </div>
+      
+    </section>
+    
+    <section class="panel" id="sec5">
+      <div class="panelTop">
+        <span class="num">05</span>
+        <h2>El Patrón Que Aparece Dos Veces En Dos Días</h2>
+      </div>
+      <p>El 1 de junio, Alicia Olmedo dijo en el minuto 3: &quot;Yo no voy a tomar una decisión en la llamada.&quot; Montse respondió: &quot;Vale, no hay problema.&quot;<br>El 2 de junio, Mireia Gimeno dijo en el minuto 2: &quot;A mí no me gusta tomar una decisión al finalizar la llamada. Si esa es una condición, yo no seguiré con la llamada.&quot; Montse respondió: &quot;Vale, no hay problema.&quot;<br>Dos días consecutivos. Mismo error. Mismo patrón. Misma respuesta.<br>Esto no es coincidencia en la llamada. Es un reflejo instalado: cuando el prospect pone presión verbal, Montse cede inmediatamente para no generar conflicto. Eso es comprensible como impulso humano — pero es el impulso opuesto al que produce cierres.<br>Lo que Montse necesita entender sobre estas situaciones: cuando un prospect dice &quot;no decido en llamada&quot;, hay dos casos completamente diferentes que parecen lo mismo:<br><strong class='caseTag'>CASO A — El obstáculo es genuino (personalidad, proceso, necesita tiempo real): en ese caso, respetar el proceso y anclar con reserva.</strong><br><strong class='caseTag'>CASO B — El obstáculo es condicional (tiene miedo a la presión, ha tenido malas experiencias con ventas agresivas, pero si encontrara lo que busca, sí decidiría): en ese caso, explorar.</strong><br>La diferencia entre los dos casos la responde una sola pregunta. Y Montse no la hizo en ninguna de las dos llamadas.</p>
+    </section>
+    
+    <section class="panel" id="sec6">
+      <div class="panelTop">
+        <span class="num">06</span>
+        <h2>Evolución Montse — 10 Llamadas</h2>
+      </div>
+      <pre class='matrix'>DIMENSIÓN              |EMM|GLA|KAT|SUS|LYD|VIR|SUS2|LID|ALI|MIR
+Nota global            |6.4|7.1|6.7|5.5|6.5|6.5|7.3|6.8|7.0|6.4
+Resultado              |SEG|SEG|SEG|S/C|ENT|CER|CER|SEG|SEG|S/C
+&quot;Me queda claro&quot;       |Sí |No |Sí |Sí |Sí |Sí |Sí×2|Sí×2|Sí×2|Sí ✗
+Diagnóstico emocional  |Lim|Bno|Lim|No |MB |Bno|MB |Bno |MB |MB ✅
+Cualif. económica pre-pitch|No|No|No|No|No|Sí|Sí|No|No|No ✗
+Reframe                |No |No |No |No |No |No |No |Sí |Sí |Sí ✅
+Pitch duración (7-9m)  |No |No |No |No |No |No |No |No |Sí |Sí ✅
+Visión questions       |No |No |No |No |No |No |No |No |No |No
+Obstáculo inicio abordado|N/A|N/A|N/A|N/A|N/A|N/A|N/A|N/A|No ✗|No ✗
+Pre-Suasión pre-$      |No |No |No |No |No |No |Sí |Sí |Sí(p)|No ✗
+Prueba social específica entregada|N/A|N/A|N/A|N/A|N/A|N/A|N/A|N/A|No|No ✗
+Frase de seguridad (S.11)|No|No|No|No|No|No|No|No|No|No
+Reserva de plaza       |No |No |No |No |No |No |Sí |No |No |No
+REGRESIÓN EN ESTA LLAMADA:
+
+Cualificación económica pre-pitch: estuvo en Susana GM y Virginia. Desapareció en Lidia, Alicia, Mireia.
+Pre-Suasión: estuvo en últimas tres llamadas, ausente aquí.</pre>
+    </section>
+    
+    <section class="panel" id="sec7">
+      <div class="panelTop">
+        <span class="num">07</span>
+        <h2>Lo Que Funcionó — Con Ejemplos Exactos</h2>
+      </div>
+      
+    </section>
+    
+    <section class="panel" id="sec8">
+      <div class="panelTop">
+        <span class="num">08</span>
+        <h2>Bien 1 — El Diagnóstico Fue El Más Complejo Del Proyecto Y Lo Manejó Bien</h2>
+      </div>
+      <p>Mireia es la prospect más técnicamente difícil de diagnosticar en toda la historia del proyecto. Tiene: CrossFit, intestino irritable, nutricionista PNI en activo, historia de múltiples nutricionistas, escéptica activa de estos programas, vocabulario técnico propio (microbiota, PNI, suplementación, dismorfia). No es la mujer del perfil estándar del programa.<br>Montse no se intimidó. Siguió el hilo de todo lo que Mireia fue contando, conectó los puntos entre el intestino, el estrés, el CrossFit y el cuerpo, y llegó al dolor real: &quot;me esfuerzo tanto y cuando me miro al espejo digo coño, es que no me veo bien.&quot;<br>Eso con un prospect que habla mucho, sabe mucho y tiene mucho contexto es un logro diagnóstico.</p>
+    </section>
+    
+    <section class="panel" id="sec9">
+      <div class="panelTop">
+        <span class="num">09</span>
+        <h2>Bien 2 — El Reframe Fue Sólido Y Específico (Min 28:20)</h2>
+      </div>
+      <p>&quot;No significa que estés haciendo algo mal. Significa que quizás nadie hasta ahora ha diseñado un plan que tenga en cuenta todo a la vez — tu microbiota, tu intestino irritable, tu cuerpo, tus objetivos de peso, tu entrenamiento, tu inflamación, tu objetivo de composición corporal.&quot;<br>Ese Reframe listó específicamente los elementos de la situación de Mireia. No fue genérico. Y la conectó directamente con el problema estructural: &quot;no es un problema de esfuerzo, es un problema de que cada profesional ha trabajado como una pieza por separado.&quot;<br>Ese es Challenger Sale puro. Mireia lo escuchó. Lo confirmó.</p>
+    </section>
+    
+    <section class="panel" id="sec10">
+      <div class="panelTop">
+        <span class="num">10</span>
+        <h2>Bien 3 — La Pregunta Del Dolor Central (Min 19:43)</h2>
+      </div>
+      <p>&quot;¿Qué es lo que más te pesa de todo esto, Mireia? ¿Cuál es tu prioridad?&quot;<br>Mireia: &quot;El no verme bien, ver que me esfuerzo tanto para que luego cuando me miro al espejo diga, es que no me veo bien. Tengo mucha frustración.&quot;<br>Pregunta correcta. Respuesta directa. El dolor central de Mireia — la desconexión entre el esfuerzo y el resultado visible — quedó nombrado y en el centro de la conversación.</p>
+    </section>
+    
+    <section class="panel" id="sec11">
+      <div class="panelTop">
+        <span class="num">11</span>
+        <h2>Bien 4 — La Implicación Hacia El Futuro (Min 24:17)</h2>
+      </div>
+      <p>&quot;Imagínate que no cambias nada. ¿Cómo te vas a sentir en un año?&quot;<br>Mireia: &quot;Frustrada. Si no me hubiera dejado el CrossFit, estancada, sin avanzar.&quot;<br>Y la segunda pregunta (min 24:44): &quot;¿Y eso es aceptable para ti?&quot; — Mireia: &quot;No, porque mi idea es cambiarlo.&quot;<br>Dos preguntas bien encadenadas que produjeron el compromiso verbal de que el statu quo no era opción.</p>
+    </section>
+    
+    <section class="panel" id="sec12">
+      <div class="panelTop">
+        <span class="num">12</span>
+        <h2>Bien 5 — El Manejo Del Entrenamiento (Min 34:29)</h2>
+      </div>
+      <p>Cuando Mireia explicó que no puede dejar el funcional y el yoga porque necesita el aspecto social y mental, Montse respondió bien: &quot;Si a ti te encanta el yoga porque te relaja, te lo necesitas a nivel mental, yo te digo perfecto. Pero lo que buscamos son resultados. Vamos a buscar las teclas que tenemos que tocar en el cuerpo de Mireia.&quot;<br>Sin confrontación. Sin decirle que deje algo que valora. Con foco en el resultado. Bien ejecutado.</p>
+    </section>
+    
+    <section class="panel" id="sec13">
+      <div class="panelTop">
+        <span class="num">13</span>
+        <h2>Bien 6 — El Pitch Fue Específico Para Mireia</h2>
+      </div>
+      <p>El pitch (min 35-40) fue la segunda vez consecutiva de Montse dentro del target de 7-9 minutos. Y lo adaptó a Mireia: &quot;no vamos a empezar de cero ni a ignorar todo este trabajo, vamos a coger todas las pruebas que tengas, tus pautas actuales&quot; — respetando el trabajo de la nutricionista PNI en lugar de atacarlo. Eso era lo correcto tácticamente para Mireia.</p>
+    </section>
+    
+    <section class="panel" id="sec14">
+      <div class="panelTop">
+        <span class="num">14</span>
+        <h2>Bien 7 — La Honestidad Final (Min 48:28)</h2>
+      </div>
+      <p>Cuando Mireia criticó que &quot;siempre dejáis el precio para el final,&quot; Montse explicó la razón genuina — necesitan entender si pueden ayudar porque el equipo es limitado. No se puso a la defensiva. No mintió. Reconoció el punto (&quot;si tú me hubieras dicho el precio al principio y hubieras dicho que no, pues ambas habríamos perdido menos tiempo&quot;) mientras explicó la lógica del proceso.<br>Eso fue honesto y adulto. En una llamada que no cerró, esa honestidad al final deja la puerta abierta para dentro de cuatro meses.</p>
+    </section>
+    
+    <section class="panel" id="sec15">
+      <div class="panelTop">
+        <span class="num">15</span>
+        <h2>Los Errores — Y Lo Que Revelan Sobre El Momento Actual De Montse</h2>
+      </div>
+      
+    </section>
+    
+    <section class="panel" id="sec16">
+      <div class="panelTop">
+        <span class="num">16</span>
+        <h2>Error 1 — Segundo Día Seguido Aceptando &quot;No Decido En Llamada&quot; Sin Explorar</h2>
+      </div>
+      <p>Este es el problema número uno de esta llamada y de la anterior.<br>Mireia dijo en el minuto 2:22: &quot;A mí no me gusta tomar una decisión al finalizar la llamada porque me siento muy forzada. Si esa es una condición, yo no seguiré con la llamada.&quot;<br>Montse respondió: &quot;Vale, no hay problema.&quot;<br>Eso es la segunda vez en 24 horas. El patrón está instalado: cuando el prospect amenaza con no seguir, Montse cede para preservar la llamada.<br>El problema con ceder inmediatamente es que:</p><p>Confirma el resultado 50 minutos antes de que llegue el precio<br>No explora si el obstáculo es genuino o condicional<br>Señala al prospect que la presión verbal funciona</p><p>Lo que correspondía era explorar ANTES de ceder. La pregunta clave:<br>&quot;Mireia, entiendo perfectamente que eres de las que necesita procesar con calma, y lo respeto. Dime una cosa — si en esta llamada encontraras exactamente lo que buscas, con el perfil de mujer que tenemos, con los resultados que te has descrito, ¿seguirías necesitando tiempo para pensarlo?&quot;<br>Si dice sí: el obstáculo es genuino de proceso. Respetar y anclar con reserva.<br>Si dice que quizás no: el obstáculo era miedo a la presión, no proceso real. Continuar con esa transparencia.<br>La respuesta de Mireia habría sido probable: &quot;Depende del precio.&quot; Eso es información para trabajar la cualificación económica antes del pitch — que es el Error 2.</p>
+    </section>
+    
+    <section class="panel" id="sec17">
+      <div class="panelTop">
+        <span class="num">17</span>
+        <h2>Error 2 — Cualificación Económica No Hecha Antes Del Pitch</h2>
+      </div>
+      <p>Mireia mencionó su situación económica en el minuto 8 al hablar de la nutricionista PNI: &quot;150 euros al mes&quot; y &quot;seis meses mínimo.&quot; Esa información estaba disponible en el minuto 8 de la llamada.<br>Si Montse hubiera hecho la cualificación económica en el minuto 12-15 — como Ana lo hace ya en sus llamadas — habría sabido en ese momento que el obstáculo era inconmovible.<br>La pregunta:<br>&quot;Mireia, una cosa importante — ahora mismo estás con una nutricionista, vas al gimnasio, te cuidas. Cuando me planteo si te puedo ayudar, ¿tienes alguna limitación económica que tengamos que tener en cuenta, o eso no sería el problema?&quot;<br>Mireia habría respondido: &quot;Ahora mismo pago 150€ de nutricionista y 55€ de gimnasio, y no me puedo permitir más de 100€ adicionales.&quot;<br>Con esa información en el minuto 15, Montse habría tenido tres opciones:</p><p>Hacer un diagnóstico más corto y un pitch más corto, centrado en la relación a largo plazo y el follow-up de julio<br>Explorar si el programa podría reemplazar la nutricionista PNI<br>Cerrar la llamada en 20 minutos con un &quot;cuando termines el ciclo con tu nutricionista en unos meses, contáctame y seguimos desde aquí&quot;</p><p>En lugar de eso: 8 minutos de pitch completo para un prospect que no puede pagar. Tiempo de Montse y tiempo de Mireia invertidos en algo que no podía producir resultado.</p>
+    </section>
+    
+    <section class="panel" id="sec18">
+      <div class="panelTop">
+        <span class="num">18</span>
+        <h2>Error 3 — La Prueba Social Específica Pedida — Segunda Llamada Seguida Sin Entregarse</h2>
+      </div>
+      <p>Alicia Olmedo el día 1 de junio (min 50): &quot;Si viniera alguien y me dijera, yo tenía tu problema y esto me funcionó, pues iría a hacer eso.&quot; No entregada.<br>Mireia Gimeno el día 2 de junio (min 33:02): &quot;¿Tienes alguna foto para enseñarme de este tipo de mujeres que tenían el mismo problema que yo y cómo han cambiado con vosotros?&quot;<br>Montse respondió: &quot;Ahora aquí no tengo. Luego si quieres le voy a pedir a Jonathan que me dé perfiles concretos y luego yo te los puedo pasar por WhatsApp.&quot;<br>Dos llamadas seguidas. Dos prospects que piden prueba social específica para su perfil. Dos veces sin respuesta concreta.<br>Esto es una brecha de sistema, no solo de Montse. El equipo necesita tener preparados dos o tres casos de éxito con perfil específico: mujer con intestino irritable y frustración de esfuerzo sin resultado, mujer con CrossFit que no le daba el cuerpo que quería, mujer con historial de dietas que finalmente encontró algo sostenible.<br>Cuando Mireia preguntó, el script correcto:<br>&quot;Mireia, tengo el caso de una chica que hacía CrossFit como tú, también estaba frustrísima porque se veía fuertota y no definida, y que llevaba años bloqueada en el mismo peso. En los primeros dos meses empezó a ver la diferencia en la composición. ¿Quieres que te cuente brevemente?&quot;<br>Si el caso existe: contarlo. Si no existe exactamente ese caso, aproximarlo honestamente. Pero no decir &quot;no tengo.&quot;</p>
+    </section>
+    
+    <section class="panel" id="sec19">
+      <div class="panelTop">
+        <span class="num">19</span>
+        <h2>Error 4 — &quot;Me Queda Muy Claro&quot; — Min 28:20 — Décima Llamada De Montse</h2>
+      </div>
+      <p>&quot;Bueno, me queda muy claro la situación.&quot;<br>El Paso 1 del Manual antes del pitch es el Resumen + Etiqueta Emocional. La instrucción del Manual es: &quot;Una sola frase que nombre lo que hay debajo de todo lo que te dijo. No hagas un repaso de todo lo que te ha contado. Eso suena a que estás tomando notas, no a que la escuchas.&quot;<br>Montse hizo el repaso (min 27:50-28:15) y luego añadió &quot;me queda muy claro.&quot; El repaso fue completo pero genérico. Lo que el Manual pide es la Etiqueta Emocional — la frase que nombra lo que hay debajo.<br>Para Mireia, la etiqueta correcta habría sido:<br>&quot;Parece que lo que más pesa no es no saber qué hacer. Es que llevas años haciendo todo lo que hay que hacer y tu cuerpo no responde, y eso genera una frustración específica — la del esfuerzo sin recompensa. ¿Es así?&quot;<br>Eso produce confirmación emocional antes del pitch. El repaso solo produce confirmación factual.</p>
+    </section>
+    
+    <section class="panel" id="sec20">
+      <div class="panelTop">
+        <span class="num">20</span>
+        <h2>Error 5 — Sin Visión Questions En El Pitch — Décima Llamada</h2>
+      </div>
+      <p>Pitch de ~8 minutos (correcto en duración). Sin preguntas de visión en ningún momento.<br>Las que encajaban para Mireia, del Manual:<br>Para alimentación (intestino irritable, hambre, no puede medir cantidades):<br>&quot;¿Te imaginas poder comer sin pensar cada vez en si tu intestino va a reaccionar? Sin esa gestión constante de qué sí, qué no, cuánto.&quot;<br>Para entrenamiento (quiere definición, no masa):<br>&quot;¿Te imaginas que el ejercicio que haces te empiece a devolver el cuerpo que quieres, en lugar de seguir desarrollando lo que no quieres?&quot;<br>Para acompañamiento (frustración del esfuerzo sin respuesta):<br>&quot;¿Te imaginas que la próxima vez que tu cuerpo no responda como esperas, en lugar de estar sola con esa frustración, haya alguien que te diga exactamente qué cambiar?&quot;<br>Ninguna de las tres llegó.</p>
+    </section>
+    
+    <section class="panel" id="sec21">
+      <div class="panelTop">
+        <span class="num">21</span>
+        <h2>Error 6 — El Argumento Del &quot;Coste Acumulado&quot; Fue El Incorrecto Para Mireia</h2>
+      </div>
+      <p>En el minuto 46:46, Montse intentó: &quot;Si tú calculas todo lo que llevas gastado en suplementos, en nutricionistas...&quot;<br>Mireia la cortó: &quot;Claro, sí, pero es que esa parte la microbiota también la tengo que trabajar igual.&quot;<br>El argumento falló porque implica que lo que Mireia ha gastado antes ha sido un gasto mal hecho. Pero Mireia NO siente eso — especialmente respecto a Gloria, la nutricionista PNI actual con quien está mejorando y en quien confía.<br>El argumento correcto para Mireia era el coste de NO resolver el problema:<br>&quot;Mireia, llevas ocho años en CrossFit, seis años en dietas, y sigues en el mismo punto. ¿Qué te costaría emocionalmente seguir otros dos años igual — con la frustración de esforzarte y no verte como quieres?&quot;<br>Ese argumento conecta con el dolor real de Mireia (el espejo, la frustración, el esfuerzo sin resultado) en lugar de atacar decisiones de gasto que ella considera válidas.<br>Pero en este caso concreto, ni ese argumento habría servido. El obstáculo no era disposición — era liquidez. No hay argumento que cree dinero donde no lo hay.</p>
+    </section>
+    
+    <section class="panel" id="sec22">
+      <div class="panelTop">
+        <span class="num">22</span>
+        <h2>Error 7 — Pre-Suasión Ausente — Regresión En Tercera Llamada Consecutiva</h2>
+      </div>
+      <p>Susana GM, Lidia y Alicia tuvieron Pre-Suasión. Mireia no.<br>No hay excusa válida para la ausencia aquí porque la Pre-Suasión debe ser el protocolo estándar antes de cada precio, no una herramienta táctica para llamadas difíciles.<br>Si el precio llega sin Pre-Suasión, el precio cae en frío. Con Pre-Suasión activa para Mireia:<br>&quot;Mireia, antes del precio — me dijiste que llevas años haciendo todo lo que hay que hacer y tu cuerpo sigue sin devolverte lo que quieres. Que cuando te miras al espejo dices coño, qué frustrante. El programa son 500 euros el primer mes. ¿Cuánto vale dejar de tener esa frustración?&quot;<br>Con ese frame, el precio tiene contexto. Sin él, el precio es solo un número.</p>
+    </section>
+    
+    <section class="panel" id="sec23">
+      <div class="panelTop">
+        <span class="num">23</span>
+        <h2>Las 13 Fuentes — Evaluación Completa</h2>
+      </div>
+      
+        <details class="accordion source">
+          <summary><span>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss</span><b>+</b></summary>
+          <div class="accBody"><p>El momento más crítico de Voss en esta llamada fue el minuto 2:22 — cuando Mireia amenazó con no continuar si se le exigía decidir en llamada. Montse cedió. Esa era la situación que requería un Label preciso antes de responder:<br>&quot;Parece que has tenido malas experiencias con llamadas como esta, que sientes que la presión para decidir rápido va en contra de cómo tú funciones naturalmente. ¿Es eso?&quot;<br>Si Mireia confirma: &quot;Totalmente.&quot; Entonces: &quot;Te entiendo. Yo no voy a pedirte que decidas con presión. Lo que sí me gustaría es que al final tengas la información completa para que cuando llegue el momento, sea fácil. ¿Puedo seguir con eso?&quot;<br>Ese Label habría producido información sobre por qué Mireia tiene resistencia, habría bajado la temperatura del momento y habría mantenido el espacio para un cierre sin presión.<br>Los Labels durante el diagnóstico (frustración del esfuerzo, el espejo, la lucha constante) fueron bien intuidos aunque no formalizados con la estructura de Voss. El instinto de Montse para detectar emociones reales sigue siendo su mayor activo.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 2 · GAP SELLING — Keenan</span><b>+</b></summary>
+          <div class="accBody"><p>ESTADO ACTUAL — excelente construcción para un caso complejo: CrossFit que da el cuerpo equivocado, intestino irritable como condición real, múltiples nutricionistas sin resultado de composición, peso subiendo en lugar de bajar, frustración activa.<br>CAUSA RAÍZ — bien capturada en el Reframe: planes que no integran la realidad completa de Mireia.<br>IMPACT LAYER — producido en el minuto 20:01 pero no explotado completamente. Mireia dijo: &quot;Si fuera una persona que no hace deporte, que no se cuida, pero joder, es que hago lo que hay que hacer.&quot; Ese es el Impact Layer — la injusticia específica de esforzarse y no recibir retorno.<br>La pregunta de segundo nivel que habría profundizado:<br>&quot;Mireia, ¿cuánto tiempo llevas con esa sensación de que haces todo lo correcto y tu cuerpo no te lo devuelve? ¿Cuándo fue la última vez que te miraste al espejo y dijiste, esto es lo que quiero?&quot;<br>Esa respuesta habría anclado el activo en el tiempo.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 3 · OBJECTIONS — Blount</span><b>+</b></summary>
+          <div class="accBody"><p>Tres obstáculos en esta llamada:<br>OBSTÁCULO 1 — &quot;No decido en llamada&quot; (min 2:22): no explorado. Ver Error 1.<br>OBSTÁCULO 2 — Económico (min 40:29): no pre-cualificado. Ver Error 2. La economía de Mireia era real e inconmovible dado su ciclo activo con la nutricionista.<br>OBSTÁCULO 3 — Escepticismo activo (min 30:30): &quot;voy con miedo porque he probado un montón de nutricionistas, ¿por qué uno va a conseguir objetivos?&quot; — Este sí fue respondido parcialmente con el Reframe, aunque sin la prueba social específica que Mireia pedía.<br>El LDA que correspondía para el obstáculo económico cuando Mireia declaró su límite:<br>Ledge: &quot;Entiendo perfectamente, y agradezco que seas tan directa.&quot;<br>Disrupt: &quot;Mireia, lo que me describes es que tienes 205 euros al mes comprometidos y que Gloria está haciendo un trabajo real que no quieres interrumpir. Eso tiene todo el sentido y yo no te voy a pedir que lo dejes.&quot;<br>Ask: &quot;¿Cuándo calculas tú que terminarías el ciclo con ella? ¿En dos meses, en cuatro?&quot;<br>Eso convierte el obstáculo en un timeline concreto para el seguimiento.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 4 · VIRTUAL SELLING — Blount</span><b>+</b></summary>
+          <div class="accBody"><p>Sin cortes técnicos. La llamada fue limpia tecnológicamente.<br>El problema de tiempo sí aplica: 50 minutos para una prospect no cerrable. La regla de Blount en virtual — cada minuto del prospect es un activo limitado que hay que respetar — se violó porque el pitch completo de 8 minutos llegó sin base económica.<br>Si la cualificación económica hubiera revelado el obstáculo en el minuto 15, la llamada habría terminado en 25-30 minutos con el mismo resultado relacional y el mismo &quot;te contacto en julio.&quot; Eso habría respetado el tiempo de Mireia y el de Montse.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna</span><b>+</b></summary>
+          <div class="accBody"><p>El Omission Bias de Mireia era genuino pero específico: &quot;he probado muchas cosas que parecían buenas y siempre acabé en el mismo sitio o peor.&quot; Es miedo fundamentado en evidencia real — no paranoia, sino historial.<br>Para el JOLT, el Judge correcto:<br>&quot;Mireia, lo que veo es que no es que tengas miedo a comprometerte — es que llevas años comprometiéndote con cosas que prometían mucho y no te dieron lo que necesitabas. Entonces cuando ves otro programa tienes la duda legítima: ¿qué hace diferente este? ¿Es eso?&quot;<br>Ese Judge nombra el Omission Bias correcto y abre la puerta a la diferenciación real.<br>En el contexto de esta llamada, el JOLT no era aplicable para el cierre porque el obstáculo era económico. Pero el Judge habría producido más confianza y una mejor base para el seguimiento de julio.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 6 · SWITCH — Heath</span><b>+</b></summary>
+          <div class="accBody"><p>JINETE — hiperactivo y con demasiada información: Mireia sabe de microbiota, de PNI, de macros, de déficit calórico, de entrenamiento de fuerza. Lleva 8 años de CrossFit y 6 de dietas — tiene más información que la mayoría de los prospects del proyecto. El Jinete no necesitaba más información, necesitaba menos fricción de sistema.<br>ELEFANTE — agotado por los años de lucha pero motivado por el cambio: el momento de dejar el CrossFit fue un punto de quiebre real. Mireia está lista para algo diferente.<br>BRIGHT SPOT disponible y no usado:<br>Los cambios que ha hecho en las últimas semanas demuestran que Mireia puede cambiar cuando tiene claridad. Dejó el CrossFit (8 años de hábito), cambió el viernes de burger por &quot;viernes de pescaíno&quot; con Gonzalo, está probando múltiples centros de funcional. Todo eso es acción real.<br>&quot;Mireia, en las últimas semanas has dejado el CrossFit después de ocho años, has cambiado tu hábito de los viernes, y has estado probando centros nuevos. Eso no lo hace alguien que no está preparada — eso lo hace alguien que ya está en movimiento. El sistema que le falta es el que coordine todo ese movimiento hacia un resultado concreto.&quot;<br>Ese Bright Spot habría reforzado el Reframe con evidencia de su propia conducta reciente.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 7 · WHY SHE BUYS — Brennan</span><b>+</b></summary>
+          <div class="accBody"><p>La compra de identidad de Mireia es específica: quiere recuperar el cuerpo que tenía cuando hacía CrossFit de competición — los &quot;cuadraditos,&quot; el verse &quot;rajada.&quot; No es solo peso — es el cuerpo que la hacía sentir orgullosa de sí misma.<br>&quot;Antes me ponía un pantalón corto lo que fuera y era como ole yo. Y era como un win-win porque nunca había podido decir me pongo esto y me veo bien.&quot;<br>Ese activo de identidad — el &quot;ole yo&quot; — es la compra emocional real de Mireia. No &quot;perder 7-8 kilos.&quot; No &quot;definición.&quot; Es ese momento específico frente al espejo donde se ve y dice ole.<br>El pitch no conectó con ese activo. La visión question que correspondía:<br>&quot;¿Te imaginas volver a ponerte lo que quieras y tener ese &#x27;ole yo&#x27; de cuando te veías con los cuadraditos? Sin CrossFit, sin competiciones, sin machacarte — simplemente siendo la Mireia que quieres ver cuando te miras.&quot;<br>Eso es Brennan: conectar la compra con la identidad específica de la mujer, no con características del programa.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 8 · THE MOM TEST — Fitzpatrick</span><b>+</b></summary>
+          <div class="accBody"><p>Diagnóstico de comportamiento bien ejecutado. Montse preguntó qué come concretamente, cuánto entrena, cómo gestiona los fines de semana. Datos de comportamiento real.<br>Pregunta hipotética que se coló (min 17:43): &quot;¿Podrías sacarle a la semana dos o tres horas para entrenarte?&quot; — Mireia dijo que sí porque está motivada y tiene el gimnasio. En un prospect menos motivado, esa pregunta produce un &quot;sí&quot; que no se materializa.<br>La pregunta de comportamiento habría sido: &quot;En las últimas dos semanas que has vuelto de vacaciones y estás probando centros, ¿qué has conseguido hacer?&quot;</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 9 · PRE-SUASIÓN — Cialdini</span><b>+</b></summary>
+          <div class="accBody"><p>Ausente. Tercera llamada en retroceder desde el momento de máxima implementación (Susana GM / Lidia / Alicia). La Pre-Suasión en Montse está en estado inestable — aparece y desaparece según la llamada. No está instalada como protocolo.<br>El punto de implementación para Montse es el mismo que para Ana: el Post-It al final del diagnóstico, antes del pitch, con el activo más específico de la prospect en sus palabras. &quot;Ole yo.&quot; Ese era el activo de Mireia.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 10 · INFLUENCE — Cialdini</span><b>+</b></summary>
+          <div class="accBody"><p>PRUEBA SOCIAL — segunda llamada consecutiva donde fue pedida y no entregada. Esto es un fallo de sistema del equipo, no solo de Montse. Necesita resolverse antes de la próxima llamada.<br>ESCASEZ — correctamente ausente. Montse no intentó crear urgencia artificial en una prospect no cerrable. Eso fue ético y correcto.<br>RECIPROCIDAD — el diagnóstico profundo y el Reframe sólido crearon reciprocidad real. Mireia salió de la llamada con insight genuino sobre por qué su esfuerzo no estaba produciendo resultados. Eso abre la puerta a que en cuatro meses, cuando termine con Gloria, la primera persona a quien contacte sea Montse.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson</span><b>+</b></summary>
+          <div class="accBody"><p>El Reframe de esta llamada fue correcto y específico. Conectó la situación de Mireia con el problema estructural real — planes sin integración.<br>El Teach disponible que no llegó:<br>&quot;Mireia, hay algo que me llama la atención en lo que describes. Llevas ocho años en CrossFit haciendo mucho volumen, y dices que cuando empezaste a bajar la frecuencia fue cuando empezaste a ganar peso. Eso puede parecer una contradicción, pero tiene sentido cuando hay inflamación sistémica — el cuerpo bajo estrés crónico acumula como mecanismo de protección. Hacer más no es la solución. Hacer lo correcto para tu sistema nervioso en este momento sí lo es.&quot;<br>Ese Teach habría sido exclusivo para Mireia y habría dado a Montse autoridad clínica diferenciada de los &quot;200 programas que todos hacen lo mismo.&quot;</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 12 · SPIN SELLING — Rackham</span><b>+</b></summary>
+          <div class="accBody"><p>SITUACIÓN ✅ — completa<br>PROBLEMA ✅ — bien identificado<br>IMPLICACIÓN ✅ — presente (frustración en un año)<br>NECESIDAD-BENEFICIO ✅ — Mireia verbalizó que quiere ver cambios físicos<br>La segunda Implicación que faltó:<br>&quot;Mireia, llevas 8 años haciendo CrossFit y 6 años en dietas. En ese tiempo has probado varios nutricionistas, ninguno con resultado de composición. ¿Qué crees que va a cambiar en los próximos dos años si sigues el mismo esquema — buenas intenciones, un profesional aquí, otro allá, todo por separado?&quot;<br>Esa pregunta confronta el patrón de buscar una nueva solución cada cierto tiempo sin que ninguna resuelva el problema de fondo.</p></div>
+        </details>
+        
+        <details class="accordion source">
+          <summary><span>FUENTE 13 · EXACTLY WHAT TO SAY — Jones</span><b>+</b></summary>
+          <div class="accBody"><p>La frase que debió llegar en el minuto 2:<br>&quot;Mireia, dime una cosa — si en esta llamada encontraras exactamente lo que llevas buscando, con el perfil de mujer que tenemos y los resultados que te has descrito, ¿seguirías necesitando tiempo para pensarlo?&quot;<br>La frase correcta para el final de la llamada en lugar del argumento del coste acumulado:<br>&quot;Mireia, con lo que me has contado, tengo muy claro que podemos ayudarte. El obstáculo ahora es económico y concreto, y lo entiendo perfectamente. ¿Cuándo calculas que terminas el ciclo con Gloria?&quot;<br>Esa frase cierra con dignidad y crea un timeline concreto para el follow-up.</p></div>
+        </details>
+        
+    </section>
+    
+    <section class="panel" id="sec24">
+      <div class="panelTop">
+        <span class="num">24</span>
+        <h2>Sobre El Seguimiento De Mireia</h2>
+      </div>
+      <p>Importante: el seguimiento de Mireia, SI llega, debe ser a su iniciativa, no de Montse. Mireia tiene compromisos activos y un proceso en curso. Cualquier contacto proactivo antes de que ella lo solicite sería contraproducente dado que ella ya expresó que no le gustan los programas que presionan.<br>Si Mireia contacta: Montse responde. Si no: no hay seguimiento proactivo en este caso concreto.</p>
+    </section>
+    
+    <section class="panel" id="sec25">
+      <div class="panelTop">
+        <span class="num">25</span>
+        <h2>Plan De Entrenamiento — Montse, Iteración 10</h2>
+      </div>
+      
+    </section>
+    
+    <section class="panel" id="sec26">
+      <div class="panelTop">
+        <span class="num">26</span>
+        <h2>Problema Crítico Inmediato Que Necesita Resolución Antes De La Próxima Llamada:</h2>
+      </div>
+      <p>El equipo no tiene casos de éxito específicos disponibles para la closer cuando el prospect los pide.<br>Dos llamadas seguidas (Alicia y Mireia) donde la prueba social específica fue pedida y no entregada. Esta no es una brecha de técnica de Montse — es una brecha de sistema del equipo. Jonathan debe facilitar a las closers 4-5 casos de éxito con perfil específico (hipotiroidismo, CrossFit, intestino irritable, yo-yo dieter) con un párrafo de descripción cada uno. Disponibles en el momento en que los prospects los pidan.</p>
+    </section>
+    
+    <section class="panel" id="sec27">
+      <div class="panelTop">
+        <span class="num">27</span>
+        <h2>Dos Elementos Que Montse Necesita Trabajar En La Próxima Semana:</h2>
+      </div>
+      
+    </section>
+    
+    <section class="panel" id="sec28">
+      <div class="panelTop">
+        <span class="num">28</span>
+        <h2>El Protocolo De Obstáculo Inicial</h2>
+      </div>
+      <p>Cuando el prospect ponga cualquier barrera al cierre en los primeros 5 minutos, antes de responder: Label → Pregunta condicional.<br>Label: &quot;Parece que has tenido experiencias con programas que hacen que te sientas presionada a decidir antes de estar lista.&quot;<br>Pregunta: &quot;Si en esta llamada encontraras exactamente lo que buscas, ¿seguirías necesitando ese tiempo?&quot;<br>No es manipulación — es información. La respuesta separa el obstáculo genuino del obstáculo condicional.</p>
+    </section>
+    
+    <section class="panel" id="sec29">
+      <div class="panelTop">
+        <span class="num">29</span>
+        <h2>Cualificación Económica En Cada Llamada, Antes Del Pitch</h2>
+      </div>
+      <p>Montse la tuvo en Susana GM y Virginia. Desapareció en tres llamadas seguidas. Este elemento es tan crítico como el Reframe y debe ser universal, no selectivo.<br>El momento correcto: entre el minuto 15-20, después del diagnóstico nutricional y antes de empezar el diagnóstico de entrenamiento.<br>&quot;Mireia, antes de seguir — ahora mismo tienes compromisos con tu nutricionista y el gimnasio. Si todo lo que hablamos hoy encajara contigo, ¿hay alguna limitación económica que tengamos que tener en cuenta, o eso no es el problema?&quot;</p>
+    </section>
+    
+    <section class="panel" id="sec30">
+      <div class="panelTop">
+        <span class="num">30</span>
+        <h2>Resumen Ejecutivo</h2>
+      </div>
+      
+    </section>
+    
+    <section class="panel" id="sec31">
+      <div class="panelTop">
+        <span class="num">31</span>
+        <h2>Nota: 6.4 / 10</h2>
+      </div>
+      <p>RESULTADO: NO CERRABLE · seguimiento futuro si Mireia inicia contacto</p>
+    </section>
+    
+    <section class="panel" id="sec32">
+      <div class="panelTop">
+        <span class="num">32</span>
+        <h2>Para Montse — La Frase De Esta Auditoría:</h2>
+      </div>
+      <p>&quot;Diez llamadas. Esta no era cerrable — el obstáculo económico era real, inconmovible, y previo al pitch. Eso no es un fallo tuyo. Lo que sí es tuyo es que en dos días consecutivos, dos prospects te dijeron &#x27;no decido en llamada&#x27; en los primeros tres minutos, y en las dos respondiste &#x27;vale, no hay problema.&#x27; Con Alicia lo señalamos. Con Mireia se confirmó. Eso ya no es un error aislado — es un patrón. Tu impulso cuando alguien pone presión verbal es ceder inmediatamente para preservar la llamada. Y lo que no ves es que con esa respuesta firmas el resultado antes de haber empezado. Lo más complicado de trabajar no es el Reframe, ni las visión questions, ni la Pre-Suasión — todo eso está llegando. Lo más complicado es ese reflejo de ceder cuando sientes que el prospect puede salir. Esa es tu frontera ahora mismo. Dominar ese momento — el label antes de responder, la pregunta condicional antes de aceptar — es lo que separa un 7.0 de un 8.0 en tus llamadas. Y con Alicia, con Mireia, con quien sea que lo diga la próxima vez: un label y una pregunta. No &#x27;vale, no hay problema.&#x27; Un label. Una pregunta. Lo demás ya lo tienes.&quot;</p>
+    </section>
+    
+  </main>
+</div>
+<div class="footer">Archivo HTML generado para revisión interna de llamadas Revoluciona-T.</div>
+<script>
+document.querySelectorAll('details.accordion').forEach((d)=>{
+  d.addEventListener('toggle',()=>{});
+});
+</script>
+</body>
+</html>

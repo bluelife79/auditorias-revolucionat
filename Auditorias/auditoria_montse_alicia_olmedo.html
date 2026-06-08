@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoría RevolucionaT · Montse · Alicia Olmedo</title>
+  <style>
+    :root{
+      --bg:#070A12;--panel:#0E1424;--panel2:#111A2E;--card:#121B31;--text:#F6F7FB;--muted:#A9B3C9;
+      --line:rgba(255,255,255,.12);--accent:#9DFFB3;--accent2:#68D8FF;--warn:#FFD166;--danger:#FF6B8A;--ok:#70E000;
+      --shadow:0 24px 80px rgba(0,0,0,.35);--radius:22px;
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:
+      radial-gradient(circle at 10% 0%,rgba(104,216,255,.16),transparent 30%),radial-gradient(circle at 90% 10%,rgba(157,255,179,.12),transparent 32%),var(--bg);color:var(--text);}
+    .layout{display:grid;grid-template-columns:320px 1fr;min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;padding:26px 18px;background:rgba(8,12,22,.78);backdrop-filter:blur(18px);border-right:1px solid var(--line);overflow:auto}.brand{padding:18px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));box-shadow:var(--shadow)}
+    .brand .eyebrow{color:var(--accent2);font-size:12px;text-transform:uppercase;letter-spacing:.16em;font-weight:800}.brand h1{font-size:22px;line-height:1.05;margin:10px 0 8px}.brand p{margin:0;color:var(--muted);font-size:13px}.scoreCircle{width:108px;height:108px;margin:18px auto 6px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent) 70%,rgba(255,255,255,.1) 0);position:relative}.scoreCircle:before{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--panel)}.scoreCircle strong{position:relative;font-size:28px}.scoreCircle span{position:relative;font-size:12px;color:var(--muted)}
+    .nav{margin-top:18px;display:grid;gap:8px}.nav a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:15px;color:var(--muted);text-decoration:none;border:1px solid transparent;font-weight:700;font-size:14px}.nav a:hover,.nav a.active{background:rgba(255,255,255,.07);color:var(--text);border-color:var(--line)}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 18px var(--accent2)}
+    main{padding:34px;max-width:1380px}.hero{border:1px solid var(--line);border-radius:32px;padding:32px;background:linear-gradient(135deg,rgba(18,27,49,.95),rgba(11,16,29,.9));box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-120px;top:-120px;width:320px;height:320px;border-radius:50%;background:rgba(157,255,179,.12);filter:blur(10px)}.hero h2{font-size:42px;line-height:.98;margin:0 0 12px;letter-spacing:-.04em;max-width:900px}.subtitle{color:var(--muted);font-size:17px;max-width:860px}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.chip{padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--line);font-size:13px;font-weight:800}.chip.ok{color:var(--accent)}.chip.warn{color:var(--warn)}.chip.bad{color:var(--danger)}
+    section{margin-top:24px}.sectionHeader{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 0 14px}.sectionHeader h3{margin:0;font-size:24px;letter-spacing:-.02em}.sectionHeader p{margin:0;color:var(--muted)}.grid{display:grid;gap:16px}.grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 10px 40px rgba(0,0,0,.16)}.card h4{margin:0 0 10px;font-size:17px}.card p{color:var(--muted);line-height:1.55}.kpi{display:grid;gap:4px}.kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em;font-weight:900}.kpi .value{font-size:24px;font-weight:950}.notice{border-left:4px solid var(--warn);background:rgba(255,209,102,.08)}.danger{border-left:4px solid var(--danger);background:rgba(255,107,138,.08)}.success{border-left:4px solid var(--accent);background:rgba(157,255,179,.07)}
+    table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:18px}th,td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{color:#fff;background:rgba(255,255,255,.07);font-size:12px;text-transform:uppercase;letter-spacing:.08em}td{color:var(--muted)}.bar{height:8px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent2),var(--accent))}.tag{display:inline-block;padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:var(--text);font-size:12px;font-weight:800;margin:2px}.quote{font-size:22px;line-height:1.25;color:#fff;border-left:4px solid var(--accent2);padding-left:16px;margin:10px 0}.quote small{display:block;color:var(--muted);font-size:13px;margin-top:8px}.accordion{display:grid;gap:10px}.accItem{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.06);overflow:hidden}.accItem summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;color:var(--text);font-weight:900;position:relative}.accItem summary::-webkit-details-marker{display:none}.accItem summary:after{content:'+';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:18px}.accItem[open] summary:after{content:'−'}.accPanel{display:block;padding:18px;border-top:1px solid var(--line);background:rgba(0,0,0,.18);color:var(--muted);line-height:1.62}.accPanel.open{display:block}.accPanel strong{color:var(--text)}.accPanel .script{white-space:pre-wrap;background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:16px;padding:14px;color:#DDE7FF}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.pillList{display:flex;flex-wrap:wrap;gap:8px}.pill{padding:8px 10px;border-radius:13px;background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--muted);font-size:13px}.footer{color:var(--muted);text-align:center;padding:32px}.mobileNav{display:none}.search{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);margin-top:14px}.highlight{background:rgba(255,209,102,.25);border-radius:4px;color:#fff}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.nav{display:none}.mobileNav{display:block;margin-top:18px}.mobileNav select{width:100%;padding:12px;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px}main{padding:18px}.hero h2{font-size:32px}.grid.cols2,.grid.cols3,.split{grid-template-columns:1fr}}
+    @media print{.sidebar,.mobileNav,.search{display:none}.layout{display:block}body{background:#fff;color:#111}.card,.hero{box-shadow:none;border-color:#ddd;background:#fff;color:#111}.subtitle,.card p,td,.accPanel{color:#333}.accPanel{display:block}.hero h2,.sectionHeader h3,.card h4,.kpi .value{color:#111}}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="eyebrow">RevolucionaT · Auditoría</div>
+      <h1>Montse · Alicia Olmedo</h1>
+      <p>1 junio 2026 · 79 minutos · seguimiento julio</p>
+      <div class="scoreCircle"><div><strong>7.0</strong><br><span>/ 10</span></div></div>
+    </div>
+    <input class="search" id="searchInput" placeholder="Buscar en auditoría…" />
+    <nav class="nav" id="nav">
+      <a href="#ficha"><span class="dot"></span>Ficha</a>
+      <a href="#lectura"><span class="dot"></span>Lectura</a>
+      <a href="#scoreboard"><span class="dot"></span>Scoreboard</a>
+      <a href="#evolucion"><span class="dot"></span>Evolución</a>
+      <a href="#funciono"><span class="dot"></span>Lo que funcionó</a>
+      <a href="#errores"><span class="dot"></span>Errores</a>
+      <a href="#fuentes"><span class="dot"></span>13 fuentes</a>
+      <a href="#seguimiento"><span class="dot"></span>Seguimiento julio</a>
+      <a href="#plan"><span class="dot"></span>Plan entrenamiento</a>
+      <a href="#resumen"><span class="dot"></span>Resumen ejecutivo</a>
+    </nav>
+    <div class="mobileNav"><select onchange="location.hash=this.value"><option value="#ficha">Ficha</option><option value="#lectura">Lectura</option><option value="#scoreboard">Scoreboard</option><option value="#evolucion">Evolución</option><option value="#funciono">Lo que funcionó</option><option value="#errores">Errores</option><option value="#fuentes">13 fuentes</option><option value="#seguimiento">Seguimiento julio</option><option value="#plan">Plan entrenamiento</option><option value="#resumen">Resumen</option></select></div>
+  </aside>
+  <main id="content">
+    <div class="hero">
+      <h2>REVOLUCIONA-T · CLOSER MONTSE · PROSPECTO ALICIA OLMEDO</h2>
+      <p class="subtitle">Auditoría de videollamada con foco en diagnóstico emocional, Reframe, Pre-Suasión, prueba social, gestión del obstáculo inicial y anclaje del seguimiento de julio.</p>
+      <div class="chips">
+        <span class="chip warn">Resultado: EN SEGUIMIENTO · “decido en julio”</span>
+        <span class="chip ok">Nota global: 7.0 / 10</span>
+        <span class="chip">Pitch dentro del target 7-9 min</span>
+        <span class="chip">Reframe completo y específico</span>
+        <span class="chip bad">Sin reserva de plaza</span>
+        <span class="chip bad">Prueba social pedida no entregada</span>
+      </div>
+    </div>
+
+    <section id="ficha">
+      <div class="sectionHeader"><h3>Ficha del caso</h3><p>Datos operativos y perfil de Alicia</p></div>
+      <div class="grid cols3">
+        <div class="card kpi"><div class="label">Prospecto</div><div class="value">Alicia Olmedo</div><p>Bilbao · ~45 años</p></div>
+        <div class="card kpi"><div class="label">Closer</div><div class="value">Montse</div><p>Fecha: 1 junio 2026</p></div>
+        <div class="card kpi"><div class="label">Duración</div><div class="value">79 min</div><p>Sin cortes técnicos documentados</p></div>
+        <div class="card kpi"><div class="label">Resultado</div><div class="value">Seguimiento</div><p>“Decido en julio”</p></div>
+        <div class="card kpi"><div class="label">Nota global</div><div class="value">7.0 / 10</div><p>Segunda más alta de Montse</p></div>
+        <div class="card kpi"><div class="label">Decisor</div><div class="value">Autónoma</div><p>Marido mencionado, no bloqueador</p></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h4>Historial Montse</h4>
+        <p>Emma (SEG. 6.4) · Gladys (SEG. 7.1) · Katherine (SEG. 6.7) · Susanna Q. (S/CIE. 5.5) · Lydia (ENT. 6.5) · Virginia (CER. 6.5) · Susana GM (CER. 7.3) · Lidia (SEG. 6.8) · Alicia (SEG. 7.0)</p>
+      </div>
+      <div class="grid cols2" style="margin-top:16px">
+        <div class="card">
+          <h4>Perfil Alicia</h4>
+          <div class="pillList">
+            <span class="pill">Bilbao</span><span class="pill">Profesora de niños con dificultades</span><span class="pill">Horario completo mañana hasta 15:30-16:30</span><span class="pill">Casada</span><span class="pill">Hijos Adrián (12) y María (11)</span><span class="pill">Hipotiroidismo</span><span class="pill">1 año con nutricionista especializado en tiroides</span><span class="pill">3x/semana entrenamiento funcional</span><span class="pill">4 años mismo grupo y entrenador</span>
+          </div>
+        </div>
+        <div class="card">
+          <h4>Situación corporal, síntomas y motivación</h4>
+          <p>Siempre pesó 47 kg. Ahora pesa 49 kg, y para ella es mucho porque nunca engordaba. Síntomas: hambre constante, hinchazón abdominal severa (“barriga de ocho meses”), acumulación nueva de grasa en piernas, fatiga muscular y articular.</p>
+          <p>Mejoró digestión y energía durante el primer tramo del año con el nutricionista, pero lleva 5 meses estancada. Momento de frustración reciente: tiró todos los suplementos con un “le den a todo porque nada me sirve”.</p>
+        </div>
+      </div>
+      <div class="grid cols2" style="margin-top:16px">
+        <div class="card notice"><h4>Compromiso y obstáculo temporal</h4><p>Compromiso: era 10, ahora 7-8 por el bajón. Obstáculo temporal: junio comprometida con el nutricionista actual. En julio toma decisiones.</p></div>
+        <div class="card danger"><h4>Obstáculo declarado al inicio</h4><p>“No tomo decisiones en llamada” — declarado en el minuto 3. Este dato no se trató como obstáculo real de proceso decisional.</p></div>
+      </div>
+      <div class="card success" style="margin-top:16px"><h4>Activo emocional importante</h4><p>Comunidad del gimnasio: activo emocional muy importante para ella. Montse respetó esta pieza y no intentó quitársela. Prueba social pedida explícitamente: “si alguien me dijera, yo tenía tu problema y esto me funcionó...”</p></div>
+    </section>
+
+    <section id="lectura">
+      <div class="sectionHeader"><h3>La lectura</h3><p>La verdad operativa de la llamada</p></div>
+      <div class="card">
+        <p>Esta es la segunda nota más alta de Montse en nueve llamadas. Y merece reconocimiento honesto.</p>
+        <p>El Reframe fue limpio y específico. El diagnóstico emocional llegó a profundidades que Montse no había alcanzado en llamadas anteriores — el momento de “le den a todo a los suplementos,” el “me inunda todo lo demás en mi vida,” el “estoy cansada de esta situación.” Pre-Suasión antes del precio presente por segunda vez.</p>
+        <p>El pitch duró ~8 minutos. El Manual dice 7-9. Es la primera vez en nueve llamadas de Montse que el pitch entra dentro del target del Manual. Eso no es coincidencia — es aprendizaje.</p>
+        <p>Y la llamada no cerró.</p>
+        <p>No cerró porque en el minuto 3 Alicia dijo literalmente: “Yo no voy a tomar una decisión en la llamada.” Y Montse respondió: “Vale, no hay problema. Entiendo que tienes tus tiempos.” Con esa respuesta, Montse firmó el resultado 76 minutos antes de que llegara el precio.</p>
+        <p>Ese es el problema central de esta llamada. No el diagnóstico, no el Reframe, no el pitch. El obstáculo declarado en el minuto 3 nunca fue tratado como lo que era.</p>
+      </div>
+    </section>
+
+    <section id="scoreboard">
+      <div class="sectionHeader"><h3>Scoreboard</h3><p>Comparativa vs. Lidia y razón directa</p></div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Bloque</th><th>Nota</th><th>Vs. Lidia</th><th>Razón</th></tr></thead>
+          <tbody>
+            <tr><td>Apertura / Agenda</td><td><strong>7.5</strong><div class="bar"><span style="width:75%"></span></div></td><td>↑(7.5)</td><td>Igual. Rapport genuino. Buena agenda.</td></tr>
+            <tr><td>Diagnóstico calidad</td><td><strong>8.0</strong><div class="bar"><span style="width:80%"></span></div></td><td>↑↑(7.5)</td><td>Mejor diagnóstico de Montse. Excavó el bajón, el “me inunda”, el tomatillo.</td></tr>
+            <tr><td>Diagnóstico profundidad</td><td><strong>7.5</strong><div class="bar"><span style="width:75%"></span></div></td><td>↑(6.5)</td><td>El activo más potente (“un tomatillo”) identificado pero no completamente excavado.</td></tr>
+            <tr><td>Construcción de valor</td><td><strong>7.5</strong><div class="bar"><span style="width:75%"></span></div></td><td>↑(6.5)</td><td>Reframe sólido. Pitch ~8 min dentro del manual. Sin visión questions.</td></tr>
+            <tr><td>Manejo de objeciones</td><td><strong>5.5</strong><div class="bar"><span style="width:55%"></span></div></td><td>↓(5.0)</td><td>Obstáculo declarado min 3 no abordado. Implicación segunda pregunta faltó. Sin reserva. Prueba social pedida y no entregada específicamente.</td></tr>
+            <tr><td>Cierre</td><td><strong>4.5</strong><div class="bar"><span style="width:45%"></span></div></td><td>↓(5.5)</td><td>“Decido en julio” sin ancla. Prospect anunció no cerrar en llamada y Montse aceptó en min 3. El resultado estaba decidido desde ese momento.</td></tr>
+            <tr><td>Lenguaje / Tono</td><td><strong>8.5</strong><div class="bar"><span style="width:85%"></span></div></td><td>=(8.5)</td><td>El más cálido y auténtico. “No te conformes” al final fue brillante.</td></tr>
+            <tr><td>Estructura</td><td><strong>7.0</strong><div class="bar"><span style="width:70%"></span></div></td><td>↑(6.0)</td><td>Reframe bueno. Pre-Suasión presente. Sin visión questions. Pitch correcto en duración. Error 6 del Manual cometido.</td></tr>
+            <tr><td><strong>GLOBAL</strong></td><td><strong>7.0 / 10</strong></td><td>↑(6.8)</td><td>Segunda nota más alta de Montse.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="evolucion">
+      <div class="sectionHeader"><h3>Evolución de Montse — 9 llamadas completo</h3><p>Patrones instalados y brechas</p></div>
+      <div class="card">
+        <table>
+          <thead><tr><th>Dimensión</th><th>EMM</th><th>GLA</th><th>KAT</th><th>SUS</th><th>LYD</th><th>VIR</th><th>SUS2</th><th>LID</th><th>ALI</th></tr></thead>
+          <tbody>
+            <tr><td>Nota global</td><td>6.4</td><td>7.1</td><td>6.7</td><td>5.5</td><td>6.5</td><td>6.5</td><td>7.3</td><td>6.8</td><td>7.0</td></tr>
+            <tr><td>Resultado</td><td>SEG</td><td>SEG</td><td>SEG</td><td>S/C</td><td>ENT</td><td>CER</td><td>CER</td><td>SEG</td><td>SEG</td></tr>
+            <tr><td>“Me queda claro”</td><td>Sí</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí×2</td><td>Sí×2</td><td>Sí×2</td></tr>
+            <tr><td>Diagnóstico emocional</td><td>Lim</td><td>Bno</td><td>Lim</td><td>No</td><td>MB</td><td>Bno</td><td>MB</td><td>Bno</td><td>MB</td></tr>
+            <tr><td>Decisor cualificado</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+            <tr><td>Pre-Suasión antes $</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí(p)</td><td>Sí(p)</td><td>Sí(p)</td></tr>
+            <tr><td>Reframe</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí(p)</td><td>Sí ✅</td></tr>
+            <tr><td>Pitch duración (7-9m)</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí ✅</td></tr>
+            <tr><td>Visión questions</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+            <tr><td>Prueba social pedida entregada</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>No ✗</td></tr>
+            <tr><td>Obstáculo min 3 abordado</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>No ✗</td></tr>
+            <tr><td>Reserva de plaza</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>No</td><td>No</td></tr>
+          </tbody>
+        </table>
+        <div class="grid cols3" style="margin-top:16px">
+          <div class="card success"><h4>Llegó por primera vez</h4><p>Reframe completo y específico: la llamada 9 tiene el Reframe más sólido de todas las llamadas de Montse.</p></div>
+          <div class="card success"><h4>Pitch en target</h4><p>Pitch dentro del target del Manual (7-9 minutos): primera vez en 9 llamadas.</p></div>
+          <div class="card success"><h4>Diagnóstico MB</h4><p>Diagnóstico emocional muy bueno en prospect compleja con condición médica.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="funciono">
+      <div class="sectionHeader"><h3>Lo que funcionó</h3><p>Con ejemplos exactos</p></div>
+      <div class="accordion">
+        <details class="accItem"><summary>BIEN 1 — El Reframe más sólido del proyecto de Montse (min 58:13)</summary><div class="accPanel"><p class="quote">“No significa que estás haciendo algo mal. Significa que tienes una condición, el hipotiroidismo, que cambia completamente la respuesta de tu cuerpo. Y ningún plan hasta ahora ha tenido en cuenta eso de verdad. El problema no es tu esfuerzo ni tu constancia. El problema es que estás siguiendo planes diseñados para cuerpos que funcionan distinto al tuyo.”</p><p>Eso conectó perfectamente con lo que Alicia había dicho antes: “no sé si estoy yendo en contra de mi naturaleza” y “quizás tengo que aceptarlo.” El Reframe le quitó la culpa y le dio el diagnóstico correcto — exactamente lo que Challenger Sale prescribe.</p><p>Además, vino del Manual: “Y sobre todo, no va de intentar hacer lo mismo que te funcionaba hace diez años. Tu cuerpo ahora funciona diferente. No es que hayas fallado.” Este es el Reframe más limpio que Montse ha producido en nueve llamadas.</p></div></details>
+        <details class="accItem"><summary>BIEN 2 — Excavó el momento del bajón (min 43-45)</summary><div class="accPanel"><p>Cuando Alicia describió el momento de “le den a todo” y tirar los suplementos, Montse no pasó. Preguntó: “¿Qué sentiste en ese momento, que tuviste ese momento de enfado, de rabia, de decepción, de sentir que todo el esfuerzo que estás haciendo no está sirviendo?”</p><p>Alicia respondió con la frase más cargada de la llamada: “hay momentos en los que siento mucha intranquilidad, este nerviosismo y esta ansia. Y luego hay otros momentos en los que estoy de bajón. ¡Qué mierda!”</p><p>Eso es diagnóstico emocional real. Montse lo facilitó con la pregunta correcta.</p></div></details>
+        <details class="accItem"><summary>BIEN 3 — “Me inunda todo” fue seguido (min 41:37-43)</summary><div class="accPanel"><p>Cuando Alicia dijo “tengo la sensación de que esto me inunda todo lo demás en mi vida,” Montse no dejó pasar: “Esta sensación que dices de sentir que esto inunda todo, cuéntame un poco más, a nivel familiar, a nivel personal...”</p><p>Alicia respondió que la irascibilidad y la ansiedad a veces afectan a su familia, que a las 7 de la tarde ya no puede esperar a los niños. Eso es el impacto real en su vida diaria. Bien excavado.</p></div></details>
+        <details class="accItem"><summary>BIEN 4 — El pitch duró ~8 minutos — primera vez dentro del Manual</summary><div class="accPanel"><p>Del Manual: “Duración recomendada: 7-9 minutos en total.” Montse tardó aproximadamente 8 minutos en el pitch (min 58:13-1:06:02). No es casualidad — hay aprendizaje real aquí. En llamadas anteriores el pitch superaba los 12-15 minutos. Este está en el target.</p></div></details>
+        <details class="accItem"><summary>BIEN 5 — Pre-Suasión antes del precio (min 1:08:27-1:09:39)</summary><div class="accPanel"><p class="quote">“Tú me has dicho que llevas tiempo haciendo todo bien, comiendo sano, entrenando y que aún así tu cuerpo no responde, que sigues con este hinchazón y con este hambre constante, esta ansiedad y esta insatisfacción constante. Y lo que de verdad buscas es sentirte cómoda, dejar de luchar, dejar de tener esta insatisfacción diaria y verte bien.”</p><p>El precio llegó después de ese frame, no frío. Es la tercera llamada consecutiva de Montse con Pre-Suasión presente. Está instalándose.</p></div></details>
+        <details class="accItem"><summary>BIEN 6 — La pregunta de visión futura produjo el mejor activo (min 56:37)</summary><div class="accPanel"><p>Montse preguntó “¿qué tendría que pasar para que dijeras la mejor decisión que he tomado en años?” Alicia respondió con la frase más específica y emotiva de toda la llamada:</p><p class="quote">“Estar bien como antes, comer normal. Que a veces antes llegaba la hora de la cena y decía, pues en realidad solo me apetece un tomatillo. Eso para mí es impensable ahora.”</p><p>El tomatillo. Esa es la imagen. Esa es la compra de identidad de Alicia. No la barriga ni los kilos — la relación tranquila con la comida que tenía antes del hipotiroidismo. Montse la produjo con la pregunta correcta.</p></div></details>
+        <details class="accItem"><summary>BIEN 7 — Manejo del obstáculo del gimnasio (min 1:12:37-1:15:16)</summary><div class="accPanel"><p>Cuando Alicia dijo que no sería capaz de dejar su centro de entrenamiento porque le encanta la comunidad, Montse no presionó ni argumentó en contra. Dijo: “No se trata de dejarlo, es completamente compatible.” Y propuso opciones de combinación.</p><p>Eso es respeto por lo que el prospect valora. Brennan — las mujeres no compran contra su comunidad. La comunidad es una fuente de identidad y bienestar. Montse lo entendió.</p></div></details>
+        <details class="accItem"><summary>BIEN 8 — El cierre ético (min 1:17:47)</summary><div class="accPanel"><p class="quote">“Sea con nosotros, sea con lo que sea, no te conformes, no tienes por qué conformarte. No eres la única persona en esta situación. Y puedes mejorar mucho tu situación.”</p><p>Eso no es venta — es genuino. Y probablemente fue la frase más memorable de toda la llamada para Alicia. Ese tipo de ética produce seguimientos reales.</p></div></details>
+      </div>
+    </section>
+
+    <section id="errores">
+      <div class="sectionHeader"><h3>Los errores</h3><p>Con el Manual en la mano y sin filtros</p></div>
+      <div class="accordion">
+        <details class="accItem"><summary>ERROR 1 — El obstáculo declarado en el minuto 3 no fue tratado</summary><div class="accPanel"><p>Este es el error que define el resultado de la llamada.</p><p>En el minuto 3:30, Alicia dijo literalmente: “Yo soy de pensar las cosas con más tranquilidad, no de decidirlas en un momento. Yo no voy a tomar una decisión en la llamada.”</p><p>Montse respondió: “Vale, no hay problema. Entiendo que tú tienes tus tiempos.”</p><p>Con esa respuesta, el resultado quedó determinado 76 minutos antes de que llegara el precio. No hay pitch, no hay Reframe, no hay Pre-Suasión que supere un obstáculo declarado al inicio que fue aceptado sin explorar.</p><div class="script">Lo que Montse necesitaba hacer en ese momento:
+
+“Alicia, entiendo perfectamente que eres de las que piensa bien las cosas antes de comprometerse — y eso lo respeto. Lo que sí te digo es que al final de esta llamada lo que quiero es que las dos salgamos con claridad. Que veas si esto es para ti o no lo es. No hay presión para decir sí en la llamada — pero sí me gustaría que al final tengas información suficiente para saber si merece la pena pensarlo, ¿te parece?”
+
+Esa respuesta no presiona — pero tampoco abdica. Le quita el frente de resistencia a Alicia sin generar confrontación.
+
+Y luego, la pregunta de JOLT inmediatamente:
+
+“Alicia, dime una cosa — lo que tú buscas es alguien que te diga, yo tenía tu situación y esto me funcionó, ¿verdad? Si eso existiera hoy en esta llamada, ¿cambiaría algo en tu forma de decidir?”
+
+Esa pregunta pone en evidencia que el obstáculo de “no decido en llamada” puede ser condicional a la prueba social que Alicia misma pedirá 47 minutos después.</div></details></div>
+        <details class="accItem"><summary>ERROR 2 — El activo del tomatillo no fue completamente excavado</summary><div class="accPanel"><p>Alicia dijo en el minuto 56:37: “Comer normal. Que a veces antes llegaba la hora de la cena y decía, pues en realidad solo me apetece un tomatillo.”</p><p>Montse escuchó eso y siguió adelante hacia el pitch.</p><div class="script">El label que habría hecho explotar esa frase:
+
+“Alicia, eso que me dices del tomatillo — ¿cuánto tiempo llevas sin poder sentirte así? ¿Cuándo fue la última vez que llegaste a la cena y dijiste, hoy solo me apetece algo ligero?”
+
+Esa pregunta ancla el activo en el tiempo y lo convierte en una pérdida concreta. “Llevo dos años sin poder decir eso” es incomparablemente más poderoso como motivación de compra que cualquier descripción de síntomas.
+
+Y ese activo — el tomatillo, la comida sin ansiedad, la relación tranquila — debió haber sido la frase exacta en la Pre-Suasión antes del precio.
+
+La Pre-Suasión correcta:
+
+“Alicia, antes del precio — me dijiste que lo que más añoras es poder llegar a la cena y decir, hoy solo me apetece un tomatillo. Sin ansiedad. Sin lucha. La que no pensaba en la comida. El programa son 500 euros al mes. ¿Cuánto vale dejar de librar esa batalla todos los días?”
+
+Eso es Pre-Suasión con sus palabras exactas. No con síntomas genéricos — con su imagen específica.</div></details></div>
+        <details class="accItem"><summary>ERROR 3 — La prueba social pedida explícitamente no fue entregada</summary><div class="accPanel"><p>En el minuto 50:00, Alicia pidió textualmente la prueba social que necesita para confiar:</p><p class="quote">“Si viniera alguien y me dijera, ay, pues yo tenía una barriga como la tuya y un nutricionista me lo arregló. Pues iría a ese nutricionista. O si alguien me dijera, yo con tu problema hice esto, pues claro, intentaría hacerlo.”</p><p>Eso es Alicia diciéndole a Montse lo que necesita para comprar. Es la pista más directa que puede dar un prospect.</p><p>Montse respondió: “Nosotros hemos ayudado a personas con un cuadro o con una situación como la tuya.” Genérico. Sin historia. Sin nombre. Sin detalle.</p><div class="script">El Manual es claro sobre la prueba social: tiene que ser específica para la mujer que tienes delante. Para Alicia, la prueba social correcta:
+
+“Alicia, tengo mujeres con hipotiroidismo que han entrado al programa exactamente desde donde estás tú — haciendo todo bien, con nutricionista, entrenando, y sintiéndose estancadas, frustradas, con hinchazón que no bajaba. En los primeros dos meses dejaron de tener esa sensación de hambre constante. ¿Quieres que te cuente qué fue lo que cambió para ellas?”
+
+Si Montse no tiene esa historia concreta disponible, necesita pedírsela a Jonathan para tenerla en el futuro. Alicia se la pidió a las claras. No llegó.</div></details></div>
+        <details class="accItem"><summary>ERROR 4 — Sin visión questions en el pitch</summary><div class="accPanel"><p>El Manual establece preguntas de visión después de cada pilar. El pitch de Montse fue un monólogo de ~8 minutos (correcto en duración) sin ninguna pregunta de visión.</p><div class="script">Las preguntas que encajaban para Alicia:
+
+Para alimentación (hambre constante, no se siente satisfecha):
+“¿Te imaginas llegar a las 7 de la tarde y poder esperar tranquilamente a que los niños lleguen para cenar juntos, sin esa urgencia que me describías?”
+
+Para acompañamiento (ha pasado por el “le den a todo”):
+“¿Te imaginas que la próxima vez que llegue ese momento donde dices, le den a todo, tira los suplementos, haya alguien que te diga, espera, esto es lo que está pasando, y esto es lo que cambiamos ahora?”
+
+Ninguna llegó. El pitch produjo “sí, entiendo” en lugar de “sí, quiero eso.”</div></details></div>
+        <details class="accItem"><summary>ERROR 5 — La segunda pregunta de Implicación no llegó</summary><div class="accPanel"><p>Montse preguntó bien: “¿Cómo crees que te vas a ver en un año si sigues igual?” Alicia respondió que no estaría un año igual, que hablaría con su nutricionista en junio.</p><div class="script">La segunda implicación que faltaba:
+
+“Alicia, llevas un año con el nutricionista. Los primeros cinco meses mejoraste. Los últimos cinco llevas estancada. Y hace una semana tiraste todos los suplementos. ¿En qué es diferente lo que harás en julio de lo que hiciste hace doce meses cuando empezaste con él?”
+
+Esa pregunta confronta el ciclo de búsqueda de soluciones que Alicia ya ha vivido antes — nutricionista, suplementos, bella action... — y hace que la inercia (“busco otra cosa en julio”) parezca lo que es: el mismo ciclo de siempre.</div></details></div>
+        <details class="accItem"><summary>ERROR 6 — Error 6 del Manual: llenó el silencio después del precio</summary><div class="accPanel"><p>Después del precio, Alicia dijo: “Vale. Pues ya más o menos me hago a la idea de lo que supone.”</p><p>Esa frase merecía silencio. Montse en cambio respondió con una explicación adicional sobre el gimnasio y la compatibilidad.</p><p>El Manual, Error 6: “El silencio después del precio es parte del cierre. No lo rellenes. Espera.”</p><p>La respuesta de Alicia después del precio ya contenía el siguiente obstáculo (el gimnasio). Pero Montse lo trató antes de que Alicia lo dijera — quitándole a Alicia la oportunidad de procesarlo sola.</p></div></details>
+        <details class="accItem"><summary>ERROR 7 — Sin reserva de plaza para anclar julio</summary><div class="accPanel"><p>La llamada terminó con “decide en julio.” Sin reserva. Sin ancla.</p><p>Alicia tiene compromisos con su nutricionista actual hasta finales de junio. Eso es real y hay que respetarlo. Pero hay un mes entero antes de que “decida en julio” — y en ese mes puede pasar de todo: puede irse a bella action, puede renovar con el nutricionista, puede simplemente olvidarlo.</p><div class="script">La reserva de 100€ con devolución garantizada:
+
+“Alicia, entiendo perfectamente que junio lo tienes comprometido. Lo que podemos hacer es reservar tu plaza para julio con 100 euros ahora mismo. Así, cuando llegue julio y hayas terminado con tu nutricionista, la plaza es tuya sin tener que preocuparte de disponibilidad. Y si en julio ves que no es el momento, te los devuelvo completamente.”
+
+Eso convierte “decido en julio” en un compromiso concreto.</div></details></div>
+        <details class="accItem"><summary>ERROR 8 — “Me queda claro” x2 — novena llamada</summary><div class="accPanel"><p>Min 31:56: “Vale, me queda claro todo el tema de la alimentación.”</p><p>Min ~45: cierre implícito del bloque emocional.</p><p>Dos veces. En la alimentación cortó antes de preguntar sobre cómo gestiona los momentos de hambre nocturna con los niños esperando. Esa información era relevante para el pitch personalizado y no llegó.</p></div></details>
+      </div>
+    </section>
+
+    <section id="fuentes">
+      <div class="sectionHeader"><h3>Las 13 fuentes — evaluación completa</h3><p>Lectura libro por libro</p></div>
+      <div class="accordion">
+        <details class="accItem"><summary>FUENTE 1 · NEVER SPLIT THE DIFFERENCE — Voss</summary><div class="accPanel"><p>Mejor uso de Voss de todas las llamadas de Montse. Tres labels genuinos:</p><p>“¿Cómo te hace sentir vivir siempre con esta sensación de hambre continua?” → Alicia: “Estoy agotada.”</p><p>“¿Qué sentiste en ese momento?” (suplementos) → Alicia: “¿Para qué? Hay momentos de bajón. ¡Qué mierda!”</p><p>“Esta sensación de que te inunda todo...” → Alicia explicó el impacto familiar.</p><p>Tres momentos de apertura emocional real en una sola llamada. Eso es instinto de escucha que Montse tiene cuando lo deja fluir.</p><div class="script">El label que faltó fue el del activo más potente:
+
+“Parece que lo que más añoras no es tener una barriga plana. Es poder llegar a la cena y decir, hoy solo me apetece un tomatillo. Sin ansiedad. Sin lucha. ¿Es así?”
+
+Ese label habría puesto el tomatillo en el centro de la conversación antes del pitch.</div></details></div>
+        <details class="accItem"><summary>FUENTE 2 · GAP SELLING — Keenan</summary><div class="accPanel"><p><strong>Estado actual:</strong> construido en profundidad: hipotiroidismo, 1 año con nutricionista, estancamiento 5 meses, hambre constante, hinchazón de ocho meses, acumulación de grasa en piernas, bajón reciente de motivación.</p><p><strong>Impact Layer:</strong> producido por la pregunta correcta: “Comer normal. Que a veces antes llegaba la hora de la cena y decía, pues en realidad solo me apetece un tomatillo.” Ese es el Impact Layer de Alicia. No la barriga — la relación con la comida. La tranquilidad que perdió con el hipotiroidismo. Fue producido. No fue anclado ni viajó al precio.</p><p><strong>Causa raíz:</strong> el Reframe lo capturó bien: planes diseñados para cuerpos sin hipotiroidismo aplicados a un cuerpo que funciona diferente. Sin integración entre nutricionista y entrenador. Correcto y específico.</p></div></details>
+        <details class="accItem"><summary>FUENTE 3 · OBJECTIONS — Jeb Blount</summary><div class="accPanel"><p>El obstáculo de Alicia tenía dos capas que se mezclaron:</p><p><strong>Capa 1:</strong> “No tomo decisiones en llamada” — obstáculo de proceso decisional.</p><p><strong>Capa 2:</strong> “Junio comprometida con el nutricionista” — obstáculo temporal real.</p><p>La Capa 2 es legítima e inalterable. La Capa 1 es condicional — Alicia misma demostró que podría moverse si tuviera la prueba social correcta (“si alguien me dijera que tenía mi problema y esto le funcionó”).</p><div class="script">Montse trató ambas capas como si fueran la misma. El LDA para la Capa 1:
+
+Ledge: “Entiendo perfectamente que eres de las que piensa bien las cosas.”
+Disrupt: “Alicia, lo que me estás diciendo es que lo que necesitas es que alguien con tu situación te diga que se puede resolver. Si eso existiera hoy, ¿tu forma de decidir cambiaría?”
+Ask: “¿Qué necesitarías ver o escuchar para que en julio fuera una decisión sencilla?”
+
+Esa pregunta separa las dos capas y abre el espacio para la prueba social que Alicia necesita.</div></details></div>
+        <details class="accItem"><summary>FUENTE 4 · VIRTUAL SELLING — Blount</summary><div class="accPanel"><p>Sin cortes técnicos en 79 minutos. Buena señal — o Montse usó un sistema más estable, o fue una rareza afortunada en el proyecto.</p><p>El problema técnico fue diferente: 79 minutos en virtual para una prospect que declaró en el minuto 3 que no cerraría en llamada. La longitud fue la consecuencia de no haber gestionado el obstáculo inicial.</p><p>Blount establece que en virtual el tiempo es un activo crítico. Si el cierre en llamada estaba vetado desde el minuto 3, un diagnóstico de 35 minutos + pitch de 8 minutos habría producido el mismo resultado en la mitad del tiempo. Y con la energía que sobra, se puede trabajar el seguimiento de julio con más precisión.</p></div></details>
+        <details class="accItem"><summary>FUENTE 5 · THE JOLT EFFECT — Dixon y McKenna</summary><div class="accPanel"><p>El Omission Bias de Alicia era muy específico: “he probado cosas y siempre acabo estancada o necesito ver que alguien con mi situación lo consiguió.” No es miedo genérico a elegir mal — es miedo fundamentado en evidencia específica (un año con nutricionista, cinco meses sin avance).</p><div class="script">JOLT establece que el Judge the Indecision tiene que nombrar el bias específico. El que correspondía a Alicia:
+
+“Alicia, lo que me parece que está pasando no es que no quieras cambiar. Es que llevas un año apostando por algo y no está funcionando como esperabas, y comprometerte con algo nuevo ahora significa arriesgarte a ese mismo ciclo. ¿Es eso?”
+
+Si Alicia dice sí: ese es el obstáculo real. Y el argumento es: “Eso es exactamente por qué el programa incluye la coordinación que nunca has tenido — nutricionista, coach y Jonathan trabajando sobre tu caso específico, no en paralelo.”
+
+El TRoT para Alicia era la reserva de 100€ + la promesa de que en julio su plaza estará cuando decida. No el mes de prueba (que podría haberse explorado), sino la reserva que ancla el compromiso sin el riesgo económico inmediato.</div></details></div>
+        <details class="accItem"><summary>FUENTE 6 · SWITCH — Heath</summary><div class="accPanel"><p><strong>Jinete:</strong> hiperactivo. Alicia sabe exactamente lo que hace mal (nada, en realidad), sabe lo que busca (comer tranquila), lleva un año leyendo, investigando, buscando soluciones. Tiene toda la información. Le falta el sistema correcto.</p><p><strong>Elefante:</strong> agotado y en bajón. El momento de tirar los suplementos fue el Elefante diciendo “ya no más.” Eso no es falta de compromiso — es agotamiento de haber luchado demasiado tiempo sin resultados.</p><p><strong>Bright Spot no usado:</strong> Alicia lleva 4 años yendo al mismo centro de entrenamiento funcional. Con disciplina absoluta. Ha mejorado su fuerza y su energía. Eso es evidencia de que cuando Alicia tiene un sistema que funciona para ella, lo mantiene.</p><div class="script">El argumento:
+
+“Alicia, llevas 4 años en el mismo sitio de entrenamiento. Con los mismos. Sin falta. Eso no es casualidad — es que cuando algo encaja contigo, lo sostienes. El problema no ha sido tu constancia. Ha sido que el sistema nutricional y el entrenamiento nunca han trabajado juntos sobre tu caso.”
+
+Ese Bright Spot habría reforzado el Reframe con evidencia que ya existe en Alicia.</div></details></div>
+        <details class="accItem"><summary>FUENTE 7 · WHY SHE BUYS — Brennan</summary><div class="accPanel"><p>La compra de identidad de Alicia era completamente diferente a la mayoría de prospects del proyecto.</p><p>Alicia no compra adelgazar — compra volver a ser la que no pensaba en la comida. La que llegaba a la cena y decía “solo un tomatillo” sin lucha, sin ansiedad, sin fuerza de voluntad. Eso es recuperar la despreocupación que tenía antes del hipotiroidismo.</p><p>El Manual dice: “La mujer SÍ compra: Tener la cabeza más despejada, no ir en modo ruido constante.” Alicia lo verbalizó así: “es como una sensación de que me inunda todo lo demás en mi vida. Quiero que pase a otro plano menos importante.”</p><p>Eso es exactamente lo que el Manual describe. Y ese argumento no fue el frame del precio.</p></div></details>
+        <details class="accItem"><summary>FUENTE 8 · THE MOM TEST — Fitzpatrick</summary><div class="accPanel"><p>Excelente uso del Mom Test en el diagnóstico. Montse preguntó por comportamientos reales: cómo desayuna, cómo come en el recreo, qué come en las tardes, cómo son los fines de semana. Datos concretos, no intenciones.</p><p>Pregunta hipotética que se coló (min 36:56): “¿Por qué crees que tu cuerpo no está respondiendo?” — Opinión de Alicia sobre su propio cuerpo, no comportamiento real.</p><p>La pregunta de comportamiento habría sido: “Cuando llegas a las 7 de la tarde y tienes esa urgencia de comer, ¿qué es lo primero que haces?”</p></div></details>
+        <details class="accItem"><summary>FUENTE 9 · PRE-SUASIÓN — Cialdini</summary><div class="accPanel"><p>Tercera llamada consecutiva de Montse con Pre-Suasión presente. Está instalada.</p><p>La Pre-Suasión que llegó usó activos reales de Alicia — síntomas, frustración, insatisfacción. Eso es mejor que activos inventados (el error de Ana con el vestido de David).</p><div class="script">La Pre-Suasión que podría haber llegado habría usado el activo específico más potente:
+
+“Alicia, antes del precio — me dijiste que lo que más añoras es poder llegar a la cena y decir, hoy solo me apetece un tomatillo. Esa relación tranquila con la comida que tenías antes. El programa son 500 euros al mes. ¿Cuánto vale recuperar eso?”
+
+La diferencia entre los síntomas genéricos y el tomatillo específico es la diferencia entre una Pre-Suasión correcta y una Pre-Suasión memorable.</div></details></div>
+        <details class="accItem"><summary>FUENTE 10 · INFLUENCE — Cialdini</summary><div class="accPanel"><p><strong>Prueba social:</strong> la más costosa de no haber entregado. Alicia la pidió textualmente. No insinuada — pedida. “Si viniera alguien y me dijera, yo tenía tu problema y esto me funcionó.” Montse respondió con una generalización: “hemos ayudado a personas con situaciones como la tuya.”</p><p>Eso es la peor forma de prueba social — abstracta, sin historia, sin detalle. Cialdini: la prueba social funciona cuando es específica para la situación del prospect. Para Alicia: una mujer con hipotiroidismo, estancada después de un año de nutricionista y ejercicio, que en X meses recuperó su relación con la comida.</p><p><strong>Autoridad:</strong> bien usada en el Reframe: “tu cuerpo responde diferente y eso tiene solución.” No fue una promesa vacía — fue una afirmación anclada en el diagnóstico de Alicia. Correcto.</p><p><strong>Consistencia:</strong> no usada. El compromiso 7-8 de Alicia debería haber sido anclado: “Alicia, ese 7-8 que me dices — en una escala donde el 10 era lo que eras antes del hipotiroidismo, ¿en qué aspecto te gustaría ver ese 10 primero, en la comida o en el cuerpo?”</p></div></details>
+        <details class="accItem"><summary>FUENTE 11 · THE CHALLENGER SALE — Dixon y Adamson</summary><div class="accPanel"><p>El Reframe de esta llamada fue el mejor de todas las llamadas de Montse. No parcial como en anteriores — completo, específico, conectado a la historia de Alicia.</p><p>Estructura de Challenger perfecta:</p><ul><li>“Estás haciendo todo lo que se supone que tienes que hacer” → reconoce el esfuerzo.</li><li>“Y sin embargo no funciona” → confronta la realidad.</li><li>“El problema no eres tú” → quita la culpa.</li><li>“El problema es que ningún plan ha tenido en cuenta tu condición real” → el insight disruptivo.</li><li>“Eso sí tiene solución” → abre el espacio al programa.</li></ul><p>Si Montse puede replicar esto en todas las llamadas, el pitch cambiará completamente.</p></div></details>
+        <details class="accItem"><summary>FUENTE 12 · SPIN SELLING — Rackham</summary><div class="accPanel"><p><strong>Situación ✅</strong> completa y bien construida.</p><p><strong>Problema ✅</strong> bien identificado: hambre constante, hinchazón, grasa acumulada, frustración.</p><p><strong>Implicación ✅</strong> presente pero incompleta: la segunda pregunta anclada en el ciclo de Alicia no llegó.</p><p><strong>Necesidad-Beneficio ✅</strong> el tomatillo fue producido. No anclado después.</p><div class="script">La segunda Implicación que habría cambiado el curso:
+
+“Alicia, llevas un año con el nutricionista. Cinco meses sintiéndote estancada. Y la semana pasada tiraste todos los suplementos. ¿En qué es diferente lo que harás en julio de lo que hiciste cuando empezaste con él?”
+
+Esa pregunta no es cruel — es honesta. Y Alicia tiene suficiente inteligencia para ver el patrón si se lo nombran correctamente.</div></details></div>
+        <details class="accItem"><summary>FUENTE 13 · EXACTLY WHAT TO SAY — Jones</summary><div class="accPanel"><div class="script">La frase de Jones que debió llegar en el minuto 3:
+
+“Alicia, una pregunta directa antes de que emplacemos nada: lo que buscas es que alguien con tu situación te diga que sí se puede resolver. Si eso existiera en esta llamada, ¿seguirías necesitando varios días para pensarlo?”
+
+Si Alicia dice que no necesitaría días: el obstáculo es prueba social, no proceso decisional. Trabajar eso.
+
+Si dice que igualmente necesitaría tiempo: el obstáculo es genuinamente su personalidad. Respetarlo y anclar con reserva.
+
+Para el seguimiento de julio, la frase de Jones:
+
+“Alicia, ¿hablaste con tu nutricionista como habías planeado? ¿Qué te dijo?”
+
+Esa pregunta abre el seguimiento sin presión — y si el nutricionista no le ofreció nada nuevo, Alicia ya sabe la respuesta.</div></details></div>
+      </div>
+    </section>
+
+    <section id="seguimiento">
+      <div class="sectionHeader"><h3>El seguimiento de julio — guión exacto</h3><p>Action Item: “decide program enrollment by Jul 1”</p></div>
+      <div class="card">
+        <p>El Action Item al final de la llamada dice “decide program enrollment by Jul 1.” Montse tiene que activar ese seguimiento con precisión.</p>
+        <div class="script">Primera semana de julio — WhatsApp:
+
+“Alicia, ¿cómo estás? Espero que haya ido bien el mes de junio. ¿Pudiste hablar con tu nutricionista como tenías planeado?”
+
+Esperar respuesta. Luego:
+
+“¿Qué tal fue esa conversación? ¿Te dijo algo que te ayudara con el estancamiento?”
+
+Si el nutricionista no le dio nada nuevo:
+
+“¿Cómo lo ves ahora? ¿Sigues pensando en hacer un cambio en julio?”
+
+Si confirma interés:
+
+“Alicia, lo que me contaste el 1 de junio — que lo que más añoras es poder llegar a la cena y decir, hoy solo me apetece un tomatillo — ¿sigues sintiéndolo así? ¿Hay alguna duda que te haya quedado de lo que hablamos?”</div>
+      </div>
+    </section>
+
+    <section id="plan">
+      <div class="sectionHeader"><h3>Plan de entrenamiento — Montse, iteración 9</h3><p>Qué se mantiene y qué cambia</p></div>
+      <div class="grid cols2">
+        <div class="card success">
+          <h4>Lo que no se toca</h4>
+          <p><strong>El diagnóstico emocional:</strong> mejor de sus nueve llamadas. Seguir excavando con esa profundidad.</p>
+          <p><strong>El Reframe:</strong> el más completo y específico del proyecto. Replicar esta estructura en todas las llamadas.</p>
+          <p><strong>El pitch de 7-9 minutos:</strong> primera vez dentro del manual. Mantenerlo.</p>
+          <p><strong>La Pre-Suasión:</strong> instalada en tres llamadas consecutivas. Ahora los activos tienen que ser los más específicos, no los más genéricos.</p>
+        </div>
+        <div class="card danger">
+          <h4>Lo que cambia desde ahora</h4>
+          <p><strong>1. El obstáculo inicial se aborda cuando aparece.</strong> Cuando el prospect declare cualquier barrera al cierre en los primeros 5 minutos, Montse no puede decir “vale, no hay problema”. La respuesta es siempre validar + preguntar si esa barrera es condicional a algo.</p>
+          <div class="script">“Entiendo. Una pregunta: si en esta llamada encontraras exactamente lo que estás buscando, ¿esa decisión de pensártelo cambiaría algo?”</div>
+        </div>
+      </div>
+      <div class="grid cols3" style="margin-top:16px">
+        <div class="card"><h4>2. Prueba social específica</h4><p>Montse necesita pedir a Jonathan una historia real de una mujer con hipotiroidismo que haya entrado al programa y obtenido resultados. Con ese caso preparado, cuando Alicia pidió la prueba social en el minuto 50, Montse habría tenido la respuesta exacta.</p></div>
+        <div class="card"><h4>3. Activo más potente en Pre-Suasión</h4><p>Ejercicio obligatorio: al final del diagnóstico, antes del pitch, escribir el activo más específico y emotivo que la prospect ha dicho. Ese es el activo que va en la Pre-Suasión antes del precio. Para Alicia: el tomatillo. Para Silvia: mantenerlo en el tiempo. Para Susana: cogida, pequeñita.</p></div>
+        <div class="card"><h4>4. Visión questions obligatorias</h4><p>Después de cada pilar: una pregunta que pinte un momento concreto de la vida de la prospect. No “¿te imaginas sentirte mejor?” — “¿Te imaginas llegar a las 7 de la tarde y poder esperar tranquilamente a que lleguen Adrián y María para cenar juntas?”</p></div>
+      </div>
+    </section>
+
+    <section id="resumen">
+      <div class="sectionHeader"><h3>Resumen ejecutivo</h3><p>La frase que debe quedar</p></div>
+      <div class="grid cols2">
+        <div class="card kpi"><div class="label">Nota</div><div class="value">7.0 / 10</div><p>Segunda más alta de Montse.</p></div>
+        <div class="card kpi"><div class="label">Resultado</div><div class="value">Seguimiento</div><p>Julio. Sin reserva de plaza.</p></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h4>Para Montse, la frase de esta auditoría</h4>
+        <p class="quote">“Nueve llamadas. El Reframe de esta fue el mejor de todo el proyecto — tuyo y de cualquier closer del equipo. El diagnóstico llegó a lugares que en llamadas anteriores no habías alcanzado. El pitch duró 8 minutos — exactamente lo que dice el Manual. Eso no es suerte: es que algo está cambiando en cómo llegas a las llamadas. Ahora lo difícil: en el minuto 3, Alicia te dijo que no tomaría ninguna decisión en la llamada. Tú dijiste vale, no hay problema. Y con esa respuesta firmaste el resultado 76 minutos antes de que llegara el precio. La Alicia que dijo que no decide en llamadas es la misma que te dijo exactamente lo que necesitaba — que alguien con su situación le dijera que se puede resolver. Eso no es ‘no decido en llamadas.’ Eso es ‘no tengo prueba social todavía.’ Son dos cosas completamente diferentes. La próxima vez que un prospect ponga esa barrera en el minuto 3, tu trabajo no es aceptarla — es entender si es genuina o condicional. Una pregunta te habría dado esa respuesta. Y con esa respuesta, la llamada habría sido completamente diferente.”</p>
+      </div>
+    </section>
+    <div class="footer">REVOLUCIONA-T · CLOSER MONTSE · PROSPECTO ALICIA OLMEDO · Auditoría completa</div>
+  </main>
+</div>
+<script>btn.querySelector('span').textContent=panel.classList.contains('open')?'−':'＋';}));
+  const links=[...document.querySelectorAll('.nav a')];
+  const sections=links.map(a=>document.querySelector(a.getAttribute('href')));
+  const onScroll=()=>{let idx=0;sections.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<160)idx=i});links.forEach(a=>a.classList.remove('active'));links[idx]?.classList.add('active')};document.addEventListener('scroll',onScroll);onScroll();
+  const input=document.getElementById('searchInput');
+  let original=document.getElementById('content').innerHTML;
+  input.addEventListener('input',e=>{const q=e.target.value.trim();const c=document.getElementById('content');c.innerHTML=original;if(!q){attach();return;}const walker=document.createTreeWalker(c,NodeFilter.SHOW_TEXT);let nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(n=>{const t=n.nodeValue;const ix=t.toLowerCase().indexOf(q.toLowerCase());if(ix>=0){const span=document.createElement('span');span.innerHTML=t.substring(0,ix)+'<span class="highlight">'+t.substring(ix,ix+q.length)+'</span>'+t.substring(ix+q.length);n.parentNode.replaceChild(span,n);}});attach();});
+  function attach(){}
+);}
+</script>
+</body>
+</html>

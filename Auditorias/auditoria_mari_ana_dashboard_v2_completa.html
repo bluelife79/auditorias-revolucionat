@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auditoría Mari · Ana · Completa dinámica</title><style>
+:root{--bg:#080b14;--panel:#101827;--panel2:#0d1422;--card:#121c2e;--ink:#f8fafc;--muted:#9ca3af;--line:#263244;--gold:#f5a524;--red:#fb7185;--green:#4ade80;--blue:#38bdf8;--violet:#a78bfa;--orange:#fb923c}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at top left,#27344e 0,#101827 38%,#060914 100%);color:var(--ink);line-height:1.55}.container{max-width:1220px;margin:auto;padding:28px 18px 90px}.nav{position:sticky;top:0;z-index:50;background:rgba(8,11,20,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav-inner{max-width:1220px;margin:auto;display:flex;gap:8px;overflow:auto;padding:10px 18px}.nav a,.btn{border:1px solid var(--line);background:#111827;color:#e5e7eb;border-radius:999px;padding:9px 13px;text-decoration:none;font-size:13px;white-space:nowrap;cursor:pointer}.nav a:hover,.btn:hover{background:#1f2937}.hero{border:1px solid var(--line);border-radius:32px;padding:34px;background:linear-gradient(135deg,rgba(245,165,36,.18),rgba(56,189,248,.08),rgba(16,24,39,.97));box-shadow:0 30px 100px rgba(0,0,0,.42)}.kicker{color:var(--gold);font-weight:900;text-transform:uppercase;letter-spacing:.16em;font-size:12px}h1{font-size:clamp(34px,5vw,62px);line-height:1.01;margin:12px 0 14px;letter-spacing:-.06em}.subtitle{font-size:18px;color:#d1d5db;max-width:900px}.grid{display:grid;gap:16px}.cards{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:22px}.card,.panel,.tile{background:rgba(18,28,46,.88);border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 60px rgba(0,0,0,.24)}.card{padding:18px}.label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.11em;font-weight:900}.value{font-size:28px;font-weight:950;margin-top:6px}.small{color:#cbd5e1;font-size:14px;margin-top:4px}.section{margin-top:26px}.panel{padding:24px}.section h2{font-size:30px;letter-spacing:-.04em;margin:0 0 12px}.section p{color:#dbe4f0}.hero b,.panel b{color:#fff}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}.tile{padding:18px}.tile h3{margin:0 0 10px;font-size:18px}.highlight{border-left:4px solid var(--gold);background:rgba(245,165,36,.1);padding:14px 16px;border-radius:15px;margin:14px 0}.warn{background:rgba(251,113,133,.10);border:1px solid rgba(251,113,133,.26);padding:14px 16px;border-radius:16px;color:#fecdd3}.quote{background:rgba(56,189,248,.08);border-left:4px solid var(--blue);padding:12px 14px;border-radius:14px;margin:10px 0;color:#eff6ff}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:18px}.score-table,.signal-table{width:100%;border-collapse:collapse;min-width:760px}.score-table th,.score-table td,.signal-table th,.signal-table td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}.score-table th,.signal-table th{color:#f9fafb;background:#0b1220;font-size:12px;text-transform:uppercase;letter-spacing:.1em}.pill{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:5px 9px;font-weight:900;font-size:12px;white-space:nowrap}.good,.green{background:rgba(74,222,128,.15);color:#bbf7d0;border:1px solid rgba(74,222,128,.35)}.mid,.amber{background:rgba(245,165,36,.15);color:#fde68a;border:1px solid rgba(245,165,36,.35)}.bad,.red{background:rgba(251,113,133,.15);color:#fecdd3;border:1px solid rgba(251,113,133,.35)}.timeline{position:relative;margin:8px 0 0;padding-left:24px}.timeline:before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--gold),var(--blue))}.titem{position:relative;margin:0 0 14px;padding:14px 16px;background:#0d1422;border:1px solid var(--line);border-radius:16px}.titem:before{content:"";position:absolute;left:-23px;top:19px;width:12px;height:12px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 4px #0b1020}.phase{border:1px solid var(--line);border-radius:22px;background:#0d1422;margin:14px 0;overflow:hidden}.phase-head{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:16px 18px;cursor:pointer}.phase-head h3{margin:0}.phase-body{display:none;padding:0 18px 18px}.phase.open .phase-body{display:block}.phase.open .phase-head{background:rgba(245,165,36,.08)}.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.mini-list{margin:0;padding-left:18px}.mini-list li{margin:8px 0;color:#dbe4f0}.searchbox{width:100%;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:#0b1220;color:#fff;font-size:16px;margin:0 0 14px}.script{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.22);border-radius:16px;padding:16px;margin:10px 0}.script h3{margin-top:0;color:#ddd6fe}.copy-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:12px}.badbox{border:1px solid rgba(251,113,133,.25);background:rgba(251,113,133,.09);border-radius:16px;padding:14px}.goodbox{border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.08);border-radius:16px;padding:14px}.tag{font-size:12px;color:#fff;text-transform:uppercase;letter-spacing:.12em;font-weight:900;margin-bottom:8px}.full-card{border:1px solid var(--line);border-radius:18px;background:#0d1422;padding:16px;margin:12px 0}.full-card h3{margin-top:0}.print-note{color:#9ca3af;font-size:13px}.accordion-btn{font-size:22px;color:var(--gold);font-weight:900}@media(max-width:900px){.cards,.two,.three,.four,.split,.beforeafter{grid-template-columns:1fr}h1{font-size:36px}.score-table,.signal-table{font-size:13px}.hero{padding:24px}}@media print{.nav,.copy-row,.searchbox,.accordion-btn{display:none}body{background:#fff;color:#111}.panel,.card,.hero,.tile,.phase,.full-card{box-shadow:none;background:#fff;color:#111;border-color:#ddd}.phase-body{display:block!important}.section p,.mini-list li{color:#111}.quote,.highlight,.warn{background:#fff;color:#111;border-color:#ddd}}
+</style></head><body>
+<nav class="nav"><div class="nav-inner">
+<a href="#ficha">Ficha</a><a href="#veredicto">Veredicto</a><a href="#scoreboard">Scoreboard</a><a href="#reversal">Reversal</a><a href="#senales">Señales</a><a href="#fases">Fases</a><a href="#timeline">Timeline</a><a href="#frame">Frame</a><a href="#activos">Activos</a><a href="#psicologico">Mapa psicológico</a><a href="#expertos">Expertos</a><a href="#evolucion">Evolución</a><a href="#giros">Giros</a><a href="#seguimiento">Seguimiento</a><a href="#plan">Plan</a><a href="#scripts">Scripts</a><a href="#resumen">Resumen</a>
+</div></nav><div class="container">
+<header class="hero"><div class="kicker">Revoluciona-T · Closer Ana · Auditoría completa dinámica</div>
+<h1>Mari Aguilera<br><span style="color:var(--gold)">El cierre que se cayó al hacer números</span></h1>
+<p class="subtitle">Versión completa y visual de la auditoría: toda la información está estructurada en módulos dinámicos. Sin bloque negro de texto en bruto. Cada idea importante tiene contexto, ejemplo, qué se hizo, qué faltó y cómo corregirlo.</p>
+<div class="grid cards">
+<div class="card"><div class="label">Nota global</div><div class="value">6.3 / 10</div><div class="small">Estancamiento con nuevo error crítico</div></div>
+<div class="card"><div class="label">Resultado real</div><div class="value" style="font-size:22px">Cierre → reversal</div><div class="small">Reserva de plaza incierta</div></div>
+<div class="card"><div class="label">Reserva</div><div class="value">100€</div><div class="small">Tras devolución parcial</div></div>
+<div class="card"><div class="label">Activo central</div><div class="value" style="font-size:20px">Chayanne + espejo</div><div class="small">No llegó al cierre</div></div>
+</div></header>
+
+<section id="ficha" class="section panel"><h2>Ficha del caso</h2><div class="grid two">
+<div class="tile"><h3>Datos de la llamada</h3>
+<p><span class="label">Prospecto</span><br><b>María Dolores Aguilera Jiménez (Mari)</b></p>
+<p><span class="label">Closer</span><br><b>Ana</b></p>
+<p><span class="label">Fecha</span><br><b>19 mayo 2025</b></p>
+<p><span class="label">Duración</span><br><b>60 minutos</b></p>
+<p><span class="label">Resultado final</span><br><b>CERRADA EN LLAMADA → REVERSAL POST-LLAMADA → RESERVA DE PLAZA INCIERTA</b></p>
+<p><span class="label">Pago / reserva</span><br><b>Pagó 500€ durante la llamada · Devueltos ~400€ · 100€ retenidos como reserva</b></p>
+<p><span class="label">Nota global</span><br><b>6.3 / 10</b></p>
+<p><span class="label">Auditorías previas</span><br><b>Miryam 6.6 · Katia 6.5 · Beatriz 6.3</b></p>
+</div><div class="tile"><h3>Perfil de Mari</h3>
+<p><span class="label">Edad y contexto</span><br>50 años · Córdoba (pueblo) · Separada · 2 hijas: María (12) y Laura (19).</p>
+<p><span class="label">Ingresos</span><br>Cantante en orquesta, limpieza, hostelería ocasional y auxiliar de enfermería en proceso.</p>
+<p><span class="label">Riesgo financiero</span><br>Ingresos irregulares: los ayuntamientos a veces no pagan a tiempo. Curso de Medium todavía en pago. Ex-marido no paga pensión. Gasto no previsto de hija olvidado durante la llamada.</p>
+<p><span class="label">Salud y alimentación</span><br>SIBO diagnosticado y tratado. Nutricionista propia para el SIBO.</p>
+<p><span class="label">Entrenamiento</span><br>Sin ejercicio consistente. Historial de 4-5 días máximos antes de abandonar. Sin material específico en casa.</p>
+<p><span class="label">Objetivo</span><br>6-7 kilos · muslos, brazos, abdomen · aguantar más en los conciertos.</p>
+<p><span class="label">Experiencia previa</span><br>Un entrenador personalizado que funcionó, cortado por COVID.</p>
+<p><span class="label">Compromiso</span><br>10/10.</p>
+<p><span class="label">Carácter</span><br>Muy abierta, divertida, optimista y consciente de sus limitaciones.</p>
+</div></div></section>
+<section id="veredicto" class="section panel"><h2>Veredicto del cirujano</h2>
+<p>Esta es la llamada más reveladora de las cuatro auditadas a Ana. No porque sea la mejor, sino porque desnuda el mecanismo exacto de su error sistémico más peligroso.</p>
+<p>Ana cerró durante la llamada. Mari pagó 500 euros con tarjeta antes de colgar. Eso es progreso táctico real.</p>
+<div class="warn">Pero la venta se deshizo 24 horas después. Y ese desmoronamiento no fue un imprevisto: fue la consecuencia directa de un error de diagnóstico que Ana podía haber evitado.</div>
+<div class="warn">Mientras construía rapport y exploraba el dolor emocional de Mari, ignoró cinco señales de alerta financiera. No una. Cinco.</div>
+<p>El resultado fue una venta emocional sin base económica. Mari vivió la llamada con entusiasmo genuino, pero cuando hizo las cuentas sin la emoción del momento, los números no cuadraban.</p>
+<p>El segundo fallo central continúa sin cambios: el activo más poderoso del diagnóstico no aparece en el cierre. Mari entregó el Chayanne, la orquesta y el &#x27;me cabreo conmigo misma&#x27;. Tres imágenes concretas, personales y cargadas de emoción. El cierre fue genérico.</p>
+<p>Lo que funciona: tono muy cálido, conexión genuina, diagnóstico con momentos de calidad real, gestión post-llamada correcta y propuesta creativa de mantener 100€ como reserva de plaza.</p>
+<div class="highlight">Fallo raíz: cierre emocional sin cualificación financiera. El activo central del diagnóstico no llegó al cierre.</div>
+</section>
+<section id="scoreboard" class="section panel"><h2>Scoreboard global</h2><div class="table-wrap"><table class="score-table"><thead><tr><th>Bloque</th><th>Nota</th><th>Observación rápida</th></tr></thead><tbody>
+<tr><td><b>Apertura / Agenda</b></td><td><span class="pill good">7.5</span></td><td>La más cálida de sus 4 llamadas. Rapport genuino. Agenda bien construida.</td></tr>
+<tr><td><b>Diagnóstico</b></td><td><span class="pill mid">6.5</span></td><td>Buenos momentos emocionales. Sin cualificación financiera. 32 min.</td></tr>
+<tr><td><b>Construcción de valor</b></td><td><span class="pill mid">6.0</span></td><td>Más personalizado que en Beatriz, pero monólogo sin activos de Mari.</td></tr>
+<tr><td><b>Manejo de objeciones</b></td><td><span class="pill bad">4.5</span></td><td>Cinco señales financieras ignoradas. Push a 12 meses cuando Mari quería 6.</td></tr>
+<tr><td><b>Cierre</b></td><td><span class="pill bad">5.5</span></td><td>Cierre conseguido en llamada → reversal 24h.</td></tr>
+<tr><td><b>Lenguaje / Tono</b></td><td><span class="pill good">7.5</span></td><td>Lo mejor. Natural, cálida, sin clichés de coach. Mari conectó mucho.</td></tr>
+<tr><td><b>Estructura</b></td><td><span class="pill bad">5.5</span></td><td>32 min diagnóstico, monólogo pitch, sin cualificación de capacidad.</td></tr>
+</tbody></table></div><div class="highlight"><b>Lectura:</b> el tono sube, la personalización sube, pero la cualificación financiera cae a zona roja.</div></section>
+<section id="reversal" class="section panel"><h2>El reversal — análisis específico</h2>
+<p>El reversal de Mari no fue mala suerte. Fue una consecuencia mecánica de no cualificar la capacidad financiera antes del cierre.</p>
+<div class="warn"><b>Idea central:</b> el cierre emocional sin cualificación financiera no es un cierre sólido. Es una firma bajo entusiasmo. Y las firmas bajo entusiasmo se revierten cuando el entusiasmo pasa.</div>
+<h3>Cinco señales visibles que Ana no procesó</h3><div class="grid">
+<div class="tile">
+    <div class="label">Señal · Min 49:00</div>
+    <h3>“Pues es que estoy todavía terminando de pagar el curso de Medium.”</h3>
+    <div class="beforeafter">
+      <div class="badbox"><div class="tag">Lo que significa</div>Hay deudas activas. El presupuesto tiene compromisos previos.</div>
+      <div class="badbox"><div class="tag">Lo que hizo Ana</div>Siguió explicando opciones de pago del programa.</div>
+    </div>
+    <div class="goodbox" style="margin-top:12px"><div class="tag">Lo que debía decir</div>Mari, paro aquí un segundo. ¿Ese pago te deja margen cómodo para asumir esto ahora?</div>
+    </div>
+<div class="tile">
+    <div class="label">Señal · Min 49:30</div>
+    <h3>“Es que evidentemente es más gasto.”</h3>
+    <div class="beforeafter">
+      <div class="badbox"><div class="tag">Lo que significa</div>Mari percibe el programa como un esfuerzo económico real.</div>
+      <div class="badbox"><div class="tag">Lo que hizo Ana</div>Continuó con la presentación de precios.</div>
+    </div>
+    <div class="goodbox" style="margin-top:12px"><div class="tag">Lo que debía decir</div>Suena a que el número pesa. ¿Cuánto pesa de verdad en tu mes?</div>
+    </div>
+<div class="tile">
+    <div class="label">Señal · Min 49:50</div>
+    <h3>“Estoy hablando, pero estoy ajustando a ver...”</h3>
+    <div class="beforeafter">
+      <div class="badbox"><div class="tag">Lo que significa</div>Está haciendo cálculos mentales en tiempo real. Hay incertidumbre.</div>
+      <div class="badbox"><div class="tag">Lo que hizo Ana</div>Continuó hablando.</div>
+    </div>
+    <div class="goodbox" style="margin-top:12px"><div class="tag">Lo que debía decir</div>Te veo calculando. Hagámoslo bien: ¿qué tendría que cuadrar para que esto sea sostenible?</div>
+    </div>
+<div class="tile">
+    <div class="label">Señal · Min 50:05</div>
+    <h3>“Esto son seis conciertos míos. El año son seis conciertos.”</h3>
+    <div class="beforeafter">
+      <div class="badbox"><div class="tag">Lo que significa</div>Convirtió el precio a unidades de su propio trabajo. La cifra le pesa.</div>
+      <div class="badbox"><div class="tag">Lo que hizo Ana</div>Lo usó como palanca emocional hacia el año completo.</div>
+    </div>
+    <div class="goodbox" style="margin-top:12px"><div class="tag">Lo que debía decir</div>Si son seis conciertos, quiero asegurarme de que no te estoy metiendo en un compromiso que mañana te pese.</div>
+    </div>
+<div class="tile">
+    <div class="label">Señal · Min 54:05</div>
+    <h3>“Es que el dinero también, es que me he gastado una pasta también en el curso este.”</h3>
+    <div class="beforeafter">
+      <div class="badbox"><div class="tag">Lo que significa</div>Confirmación directa de presupuesto ajustado.</div>
+      <div class="badbox"><div class="tag">Lo que hizo Ana</div>Aceptó la elección de 6 meses y procesó el pago.</div>
+    </div>
+    <div class="goodbox" style="margin-top:12px"><div class="tag">Lo que debía decir</div>Perfecto: entonces no empujamos más. ¿Tiene más sentido reservar plaza y arrancar cuando el curso esté cerrado?</div>
+    </div>
+</div>
+<div class="quote"><b>Pregunta que habría evitado el reversal:</b><br>“Mari, para que esto tenga sentido tengo que preguntarte algo antes de seguir. Los 500 euros al mes, ¿están cómodos en tu presupuesto ahora mismo? ¿No hay un gasto importante en las próximas semanas que pueda complicarlo?”</div>
+<div class="grid two"><div class="tile"><h3>Error adicional</h3><p><b>Push hacia la opción más cara.</b> En el min 53:20 Ana intenta mover a Mari al año completo cuando ya había señales claras de restricción económica.</p></div><div class="tile"><h3>Error de cálculo</h3><p>En el momento del precio, Ana dice que el pago único ahorra 500€ cuando eran 300€. Mari la corrige. Microconfianza tocada justo donde más importaba.</p></div></div>
+<div class="highlight"><b>Gestión post-llamada bien hecha:</b> aisló la objeción real, llamó por teléfono, propuso alternativas y mantuvo 100€ como reserva. Lo que faltó fue hacerlo antes, dentro de la llamada.</div>
+</section>
+<section id="senales" class="section panel"><h2>Semáforo de señales de compra y señales de alerta</h2><input class="searchbox" placeholder="Buscar: Chayanne, concierto, espejo, Medium, 10/10..." oninput="filterTable('signalsTable', this.value)"><div class="table-wrap"><table id="signalsTable" class="signal-table"><thead><tr><th>Min</th><th>Frase / señal</th><th>Estado</th><th>Potencial</th></tr></thead><tbody>
+<tr><td><b>15:04</b></td><td>“El saber que tengo a alguien que está ahí pendiente diciéndome... por mi cuenta sola no, el ejercicio sé que no.”</td><td><span class="pill green">CAPTADA</span></td><td>Mari define exactamente qué necesita. Ana lo usa bien en el pitch.</td></tr>
+<tr><td><b>20:59</b></td><td>“El muchacho venía aquí a mi casa con sus pesos, me medía y era increíble. Y yo lo hacía.”</td><td><span class="pill amber">CAPTADA PARCIALMENTE</span></td><td>La única experiencia demostrada de éxito con acompañamiento. Debía llegar al cierre: “cuando el muchacho venía, ibas”.</td></tr>
+<tr><td><b>23:57</b></td><td>“Me pongo frente al espejo y digo, ve, otra vez te has hecho una promesa y no seas capaz de cumplirla.”</td><td><span class="pill red">IGNORADA</span></td><td>Activo emocional central. El dolor no es el cuerpo: es el ciclo de promesas rotas.</td></tr>
+<tr><td><b>30:10</b></td><td>“Evidentemente el 10.”</td><td><span class="pill amber">CAPTADA PARCIALMENTE</span></td><td>Compromiso 10/10 obtenido y no usado en cierre.</td></tr>
+<tr><td><b>31:42</b></td><td>“Que te digan, joe, Mari, ¿qué has hecho?”</td><td><span class="pill red">IGNORADA EN CIERRE</span></td><td>Imagen visual de reconocimiento en escenario. No aparece en el cierre.</td></tr>
+<tr><td><b>33:53</b></td><td>“Como Chayanne, que canta y baila y no se para.”</td><td><span class="pill red">IGNORADA</span></td><td>La frase más específica y personal de la llamada. Cierre perfecto y no usado.</td></tr>
+<tr><td><b>49:00</b></td><td>“Estoy todavía terminando de pagar el curso de Medium.”</td><td><span class="pill red">ALERTA IGNORADA</span></td><td>Riesgo financiero. Había que cualificar.</td></tr>
+<tr><td><b>50:05</b></td><td>“Esto son seis conciertos míos.”</td><td><span class="pill red">ALERTA IGNORADA</span></td><td>Precio convertido a unidad de trabajo. Señal clara de esfuerzo económico.</td></tr>
+</tbody></table></div></section>
+<section id="fases" class="section panel"><h2>Fases de la llamada</h2>
+<div class="phase open"><div class="phase-head" onclick="togglePhase(this)"><div><div class="label">0:00-4:14 · ~4 minutos · Nota 7.5</div><h3>Fase 1 — Apertura y agenda</h3></div><div class="accordion-btn">+</div></div><div class="phase-body"><div class="split"><div><h3>Aciertos</h3><ul class="mini-list">
+<li>Rapport más natural de las cuatro llamadas de Ana.</li>
+<li>Mari es cálida y divertida; Ana lo nota y lo sigue bien.</li>
+<li>Gestiona la complejidad laboral de Mari sin interrumpir.</li>
+<li>Agenda sólida: “tanto si es un sí como si es un no”.</li>
+<li>Pregunta cómo llamarla y usa “Mari” durante toda la llamada.</li>
+</ul></div><div><h3>Errores / fugas</h3><ul class="mini-list">
+<li>Rapport de ~4 minutos. Con Mari es justificable, pero hay que vigilar que no se convierta en patrón.</li>
+</ul></div></div><div class="quote"><b>Script correctivo:</b><br>“Mari, me encanta entender un poco tu mundo, pero para que esto te sirva de verdad voy a llevarte ya a lo importante: qué está pasando y por qué no está cambiando aunque tú quieres.”</div></div></div>
+<div class="phase"><div class="phase-head" onclick="togglePhase(this)"><div><div class="label">4:14-36:07 · ~32 minutos · Nota 6.5</div><h3>Fase 2 — Diagnóstico profundo</h3></div><div class="accordion-btn">+</div></div><div class="phase-body"><div class="split"><div><h3>Aciertos</h3><ul class="mini-list">
+<li>Min 12:07: “¿Dónde crees que está el fallo?” Mari se autodiagnostica: estrés y falta de organización.</li>
+<li>Min 20:13: gran pregunta sobre acompañamiento. Mari confirma que con acompañamiento habría sido más constante.</li>
+<li>Min 21:50-22:20: Ana conecta la historia del entrenador con el valor del acompañamiento.</li>
+<li>Min 23:33: “¿A ti, internamente, qué es lo que te remueve?” lleva al espejo y a promesas rotas.</li>
+<li>Min 31:42: visualización de futuro con orquesta y reconocimiento.</li>
+<li>Min 33:53: aparece Chayanne, la imagen más potente.</li>
+</ul></div><div><h3>Errores / fugas</h3><ul class="mini-list">
+<li>No ancla el activo del espejo y las promesas rotas.</li>
+<li>No usa Chayanne como activo central.</li>
+<li>La orquesta y el reconocimiento no llegan al cierre.</li>
+<li>No hay cualificación financiera durante el diagnóstico.</li>
+<li>32 minutos: mejora leve, pero sigue siendo largo.</li>
+</ul></div></div><div class="quote"><b>Script correctivo:</b><br>“Mari, para. Lo que me acabas de decir es exactamente por qué estás aquí. No por los 7 kilos. Por ese espejo. ¿Cuánto tiempo lleva pasando eso?”</div></div></div>
+<div class="phase"><div class="phase-head" onclick="togglePhase(this)"><div><div class="label">36:07-60:00 · Nota 5.5</div><h3>Fase 3 — Pitch y cierre</h3></div><div class="accordion-btn">+</div></div><div class="phase-body"><div class="split"><div><h3>Aciertos</h3><ul class="mini-list">
+<li>Pitch más personalizado de Ana: SIBO, horarios, familia, cervecita, gimnasio del pueblo.</li>
+<li>Min 45:13: “¿qué resuena más contigo?” buena pregunta.</li>
+<li>Min 46:11: pregunta si siente que es el momento.</li>
+<li>Procesa el pago por Stripe durante la llamada.</li>
+</ul></div><div><h3>Errores / fugas</h3><ul class="mini-list">
+<li>Monólogo de 9 minutos sin check-ins hasta el final.</li>
+<li>No aparecen Chayanne, orquesta ni promesas rotas.</li>
+<li>Error de cálculo en precio: ahorro 500€ cuando eran 300€.</li>
+<li>Ignora cinco señales financieras.</li>
+<li>Empuja el año completo cuando Mari ya eligió 6 meses por dinero.</li>
+</ul></div></div><div class="quote"><b>Script correctivo:</b><br>“Mari, antes de que te pase el enlace quiero preguntarte una cosa: cuando cuelgues y mañana te despiertes, ¿vas a estar cómoda con esta decisión también económicamente?”</div></div></div>
+</section>
+<section id="timeline" class="section panel"><h2>Timeline del cierre</h2><div class="timeline">
+<div class="titem"><b>0:00-4:14 · Rapport cálido y genuino</b><br>Agenda clara.</div>
+<div class="titem"><b>4:14-20:00 · Diagnóstico alimentación</b><br>Sin revelaciones clave todavía.</div>
+<div class="titem"><b>20:59 · PICO 1 — Entrenador muchacho</b><br>Prueba de que el acompañamiento funciona. Parcialmente usado.</div>
+<div class="titem"><b>23:57 · PICO 2 — Promesas rotas</b><br>Activo emocional central. No anclado.</div>
+<div class="titem"><b>30:21 · Compromiso 10/10</b><br>Obtenido. No usado en cierre.</div>
+<div class="titem"><b>31:42 · PICO 3 — Orquesta</b><br>Reconocimiento del público. No llega al cierre.</div>
+<div class="titem"><b>33:53 · PICO 4 — Chayanne</b><br>La imagen más concreta y personal. No llega al cierre.</div>
+<div class="titem"><b>36:07 · Pitch arranca</b><br>Sin re-anclaje de los cuatro activos.</div>
+<div class="titem"><b>36:07-45:13 · Monólogo 9 min</b><br>Personalizado, pero sin los activos de Mari.</div>
+<div class="titem"><b>45:13 · Qué resuena contigo</b><br>Mari responde con entusiasmo.</div>
+<div class="titem"><b>47:22 · Precio presentado</b><br>Error de cálculo corregido por Mari.</div>
+<div class="titem"><b>49:00-50:05 · ZONA ROJA</b><br>Cinco señales financieras ignoradas.</div>
+<div class="titem"><b>53:20 · Push hacia año completo</b><br>Mari resiste y elige 6 meses.</div>
+<div class="titem"><b>55:29 · Pago Stripe</b><br>Pago procesado.</div>
+<div class="titem"><b>24h después · REVERSAL</b><br>La emoción bajó. Los números no cuadraban.</div>
+<div class="titem"><b>Post-llamada · Gestión de salida</b><br>WhatsApp, llamada, alternativa fraccionada sin éxito y reserva incierta.</div>
+</div></section>
+<section id="frame" class="section panel"><h2>Auditoría frame-by-frame</h2><input class="searchbox" placeholder="Buscar en frame: Stripe, Chayanne, 49:00..." oninput="filterTable('frameTable', this.value)"><div class="table-wrap"><table id="frameTable" class="signal-table"><thead><tr><th>Min</th><th>Quién</th><th>Impacto</th><th>Qué pasó</th><th>Análisis</th><th>Corrección</th></tr></thead><tbody>
+<tr><td><b>3:48</b></td><td>Ana</td><td><span class="pill green">SUMA / AVANZA</span></td><td>Agenda en cuatro partes. “Tanto si es un sí como si es un no.” Nombre correcto desde el inicio.</td><td>Constante sólida de Ana: cuatro llamadas, cuatro agendas bien ejecutadas.</td><td>Mantener, pero entrar antes en diagnóstico cuando el rapport ya está caliente.</td></tr>
+<tr><td><b>15:04</b></td><td>Ana</td><td><span class="pill green">SUMA / AVANZA</span></td><td>Mari define que necesita alguien pendiente.</td><td>El núcleo del argumento de venta surge de Mari, no de Ana.</td><td>Usarlo como puente del pitch: “lo que tú misma has descrito es acompañamiento real”.</td></tr>
+<tr><td><b>20:13</b></td><td>Ana</td><td><span class="pill green">SUMA / AVANZA</span></td><td>¿Todo lo que has probado no te ha servido porque te faltó acompañamiento?</td><td>Mejor pregunta del diagnóstico. Mari responde con certeza.</td><td>Repetir este patrón: que la prospecto diga la tesis de venta.</td></tr>
+<tr><td><b>20:59</b></td><td>Mari</td><td><span class="pill amber">SUMA / AVANZA — PARCIAL</span></td><td>Historia del entrenador muchacho.</td><td>Única experiencia de éxito documentada. Ana la usa en pitch, pero no en cierre.</td><td>Cierre: “cuando alguien venía y te medía, tú ibas. Eso es lo que replicamos.”</td></tr>
+<tr><td><b>23:57</b></td><td>Mari</td><td><span class="pill green">SUMA / AVANZA — IGNORADO</span></td><td>Promesa rota frente al espejo.</td><td>Dolor real: identidad y promesas incumplidas.</td><td>Parar y anclar: “esto es exactamente por lo que estás aquí”.</td></tr>
+<tr><td><b>30:21</b></td><td>Ana/Mari</td><td><span class="pill green">SUMA / AVANZA — NO USADO</span></td><td>Compromiso 10/10.</td><td>Cuarta llamada de Ana donde el compromiso no llega al cierre.</td><td>Usarlo solo después de cualificar capacidad económica.</td></tr>
+<tr><td><b>31:42</b></td><td>Ana/Mari</td><td><span class="pill green">SUMA / AVANZA — IGNORADO</span></td><td>Que te digan: joe, Mari, ¿qué has hecho?</td><td>Imagen específica de reconocimiento en escenario.</td><td>Cerrar con reconocimiento, no con frase genérica de vestidos.</td></tr>
+<tr><td><b>33:53</b></td><td>Mari</td><td><span class="pill green">SUMA / AVANZA — IGNORADO</span></td><td>Como Chayanne, que canta y baila y no se para.</td><td>Frase memorable y 100% Mari.</td><td>Escribir CHAYANNE en el post-it.</td></tr>
+<tr><td><b>49:00</b></td><td>Mari</td><td><span class="pill red">ALERTA IGNORADA</span></td><td>Estoy todavía terminando de pagar el curso de Medium.</td><td>Primera señal financiera directa.</td><td>Cualificar: “¿cuánto te queda y cómo te deja eso de margen?”</td></tr>
+<tr><td><b>50:05</b></td><td>Mari</td><td><span class="pill red">ALERTA IGNORADA</span></td><td>Esto son seis conciertos míos.</td><td>Precio convertido a unidad de trabajo.</td><td>Labeling Voss: “suena a que el número pesa”.</td></tr>
+<tr><td><b>53:20</b></td><td>Ana</td><td><span class="pill green">RESTA / RETROCEDE</span></td><td>Push hacia el año completo.</td><td>Error de lectura: había restricción económica.</td><td>Aceptar 6 meses y cerrar sin empujar.</td></tr>
+<tr><td><b>55:29</b></td><td>Ana</td><td><span class="pill green">SUMA / AVANZA TÁCTICO</span></td><td>Pago por Stripe.</td><td>Progreso técnico. El problema fue la ausencia de cualificación previa.</td><td>Añadir checkpoint de realidad antes del enlace.</td></tr>
+</tbody></table></div></section>
+<section id="activos" class="section panel"><h2>Los activos perdidos</h2><div class="grid two">
+<div class="tile"><div class="label">Activo perdido</div><h3>El espejo</h3><div class="quote">““Me pongo frente al espejo y digo, ve, otra vez te has hecho una promesa y no seas capaz de cumplirla.””</div><p><b>Por qué importa:</b> Dolor de identidad. No sufre solo por el cuerpo; sufre por fallarse.</p><div class="goodbox"><div class="tag">Cómo usarlo</div>“Mari, esto no va de 7 kilos. Va de cerrar el ciclo de prometerte algo y volver a encontrarte igual.”</div></div>
+<div class="tile"><div class="label">Activo perdido</div><h3>Chayanne</h3><div class="quote">““Como Chayanne, que canta y baila y no se para.””</div><p><b>Por qué importa:</b> Imagen visual, divertida, específica y suya. Un cierre con esto no suena a script.</p><div class="goodbox"><div class="tag">Cómo usarlo</div>“Mari, me dijiste como Chayanne: cantar y bailar sin parar. Ese es el objetivo.”</div></div>
+<div class="tile"><div class="label">Activo perdido</div><h3>La orquesta</h3><div class="quote">““Que te digan, joe, Mari, ¿qué has hecho?””</div><p><b>Por qué importa:</b> Orgullo legítimo y reconocimiento público en su entorno real.</p><div class="goodbox"><div class="tag">Cómo usarlo</div>“Quiero que cuando subas al escenario alguien te mire y diga: Mari, ¿qué has hecho?”</div></div>
+<div class="tile"><div class="label">Activo perdido</div><h3>10/10</h3><div class="quote">““Evidentemente el 10.””</div><p><b>Por qué importa:</b> Compromiso declarado. Potente, pero peligroso si no se cruza con capacidad económica.</p><div class="goodbox"><div class="tag">Cómo usarlo</div>“Me dijiste 10/10. Ahora solo necesito confirmar que los números también son 10/10 para ti.”</div></div>
+</div><div class="highlight"><b>Cierre que no fue:</b><br>“Mari, me dijiste que llevas años prometiéndote lo mismo frente al espejo y llegando al año siguiente igual. Me dijiste que lo que quieres es aguantar como Chayanne — cantar y bailar sin parar. Y me dijiste que tu compromiso es un 10. El mes de prueba son 250 euros. ¿Empezamos hoy?”</div></section>
+<section id="psicologico" class="section panel"><h2>Mapa psicológico de Mari</h2><div class="grid two">
+<div class="tile"><h3>Motor principal</h3><p>Demostrar que puede cumplir sus propias promesas. El cuerpo es “el reto que me queda”.</p></div>
+<div class="tile"><h3>Perfil de decisión</h3><p>Impulsiva emocionalmente, pero con recursos económicos ajustados. Decide rápido con emoción y luego hace el cálculo real.</p></div>
+<div class="tile"><h3>Dolor más profundo</h3><p>Promesas rotas frente al espejo. No es vanidad corporal: es identidad.</p></div>
+<div class="tile"><h3>Palanca de seguimiento</h3><p>La música, el escenario y Chayanne. Si se empieza por ahí, la conversación se reabre con vida.</p></div>
+</div></section>
+<section id="expertos" class="section panel"><h2>Capa de expertos aplicada</h2><p>Traducción práctica a la llamada de Mari. No teoría de libro: qué cambia en una llamada real.</p><div class="grid two">
+<div class="tile"><h3>Chris Voss · Labeling</h3><p>Cuando Mari dice “esto son seis conciertos”, no se argumenta. Se etiqueta: “suena a que este número pesa de verdad”. Después, silencio.</p></div>
+<div class="tile"><h3>Cialdini · Coherencia</h3><p>El 10/10 debe usarse después de confirmar capacidad económica. Coherencia sin capacidad crea arrepentimiento.</p></div>
+<div class="tile"><h3>JOLT · Miedo a equivocarse</h3><p>La duda no siempre pide más explicación. A veces pide reducir riesgo: “¿qué tendría que pasar para que mañana sigas cómoda con esto?”</p></div>
+<div class="tile"><h3>The Mom Test</h3><p>No vender al entusiasmo. Preguntar por hechos: pagos actuales, gastos próximos, ingresos irregulares, decisiones similares previas.</p></div>
+<div class="tile"><h3>Phil M. Jones</h3><p>Mejor pregunta: “¿Qué opción te resultaría más cómoda para empezar sin que mañana te pese?”</p></div>
+<div class="tile"><h3>Jeb Blount</h3><p>La objeción económica rara vez aparece como frase perfecta. Sale como pistas. Hay que escucharlas antes de presentar más opciones.</p></div>
+<div class="tile"><h3>Matthew Dixon / Ted McKenna</h3><p>Evitar empujar a decidir cuando la indecisión viene de riesgo percibido. Se reduce el riesgo antes de pedir acción.</p></div>
+<div class="tile"><h3>MJ DeMarco</h3><p>No confundir facturación con solidez. Una venta que revierte no es velocidad; es fricción escondida.</p></div>
+</div></section>
+<section id="evolucion" class="section panel"><h2>Evolución de Ana — cuatro llamadas</h2><div class="table-wrap"><table class="signal-table"><thead><tr><th>Dimensión</th><th>Miryam</th><th>Katia</th><th>Beatriz</th><th>Mari</th></tr></thead><tbody>
+<tr><td>Resultado real</td><td>CERRADA</td><td>SEGUIM.</td><td>SEGUIM.</td><td>CERRADA→REVERSAL</td></tr>
+<tr><td>Nota global</td><td>6.6</td><td>6.5</td><td>6.3</td><td>6.3</td></tr>
+<tr><td>Escucha tu corazón</td><td>✗</td><td>✓</td><td>✓</td><td>✓ Ausente</td></tr>
+<tr><td>Si no es tu momento</td><td>✗</td><td>✓</td><td>✓</td><td>✓ Ausente</td></tr>
+<tr><td>Autoduda en voz alta</td><td>✗</td><td>✗</td><td>✗</td><td>Menos evidente</td></tr>
+<tr><td>Diagnóstico</td><td>Muy largo</td><td>Muy largo</td><td>35 min</td><td>32 min</td></tr>
+<tr><td>Activo central en cierre</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+<tr><td>Compromiso en cierre</td><td>✗</td><td>✗</td><td>✗</td><td>✗</td></tr>
+<tr><td>Cualificación financiera</td><td>N/A</td><td>N/A</td><td>Parcial</td><td>✗ crítico</td></tr>
+<tr><td>Push opción cara</td><td>N/A</td><td>N/A</td><td>N/A</td><td>✗ presente</td></tr>
+<tr><td>Cierre en llamada</td><td>✗</td><td>✗</td><td>✗</td><td>✓ → reversal</td></tr>
+<tr><td>Naturalidad</td><td>Alta</td><td>Alta</td><td>Alta</td><td>Muy alta</td></tr>
+<tr><td>Personalización pitch</td><td>Baja</td><td>Baja</td><td>Media</td><td>Alta</td></tr>
+</tbody></table></div><div class="grid two" style="margin-top:16px"><div class="tile"><h3>Tendencia positiva</h3><p>El tono se vuelve más natural, la personalización mejora, la duración baja ligeramente y el cierre táctico aparece con más fluidez.</p></div><div class="tile"><h3>Tendencia negativa</h3><p>El activo central nunca llega al cierre. El compromiso cuantificado tampoco. En Mari aparece además el error crítico de no cualificar dinero.</p></div></div></section>
+<section id="giros" class="section panel"><h2>Momentos de giro</h2><div class="grid">
+<div class="tile"><div class="label">Giro 01 — Min 23:57</div><h3>El espejo y las promesas rotas</h3>
+    <div class="beforeafter"><div class="badbox"><div class="tag">Lo que hizo Ana</div>Escuchó y continuó.</div><div class="goodbox"><div class="tag">Lo que debía hacer</div>“Mari, para. Lo que me acabas de decir es la razón por la que estás aquí. No los 7 kilos. Eso: llevar años prometiéndote lo mismo y llegar al año siguiente igual. ¿Cuánto tiempo lleva pasando ese ciclo?”</div></div>
+    <p><b>Por qué cambia todo:</b> El cierre deja de ser adelgazar y pasa a ser terminar con el ciclo.</p></div>
+<div class="tile"><div class="label">Giro 02 — Min 33:53</div><h3>Chayanne</h3>
+    <div class="beforeafter"><div class="badbox"><div class="tag">Lo que hizo Ana</div>Lo celebró, pero no lo convirtió en activo.</div><div class="goodbox"><div class="tag">Lo que debía hacer</div>Escribir CHAYANNE en el papel y cerrar: “Mari, me dijiste como Chayanne. Eso es el objetivo. ¿Empezamos?”</div></div>
+    <p><b>Por qué cambia todo:</b> Es la frase más personal. Un cierre con sus palabras es casi imposible de rebatir.</p></div>
+<div class="tile"><div class="label">Giro 03 — Min 49:00-50:05</div><h3>Señales financieras</h3>
+    <div class="beforeafter"><div class="badbox"><div class="tag">Lo que hizo Ana</div>Ignoró las señales y procesó el pago.</div><div class="goodbox"><div class="tag">Lo que debía hacer</div>“Mari, para. Antes de seguir quiero preguntarte algo importante. Los 500 euros al mes, ¿están cómodos en tu presupuesto ahora mismo? ¿No hay nada en las próximas semanas que pueda complicarlo?”</div></div>
+    <p><b>Por qué cambia todo:</b> Convierte entusiasmo en decisión consciente o deriva a reserva antes del reversal.</p></div>
+<div class="tile"><div class="label">Giro 04 — Min 53:20</div><h3>Push al año completo</h3>
+    <div class="beforeafter"><div class="badbox"><div class="tag">Lo que hizo Ana</div>Intentó mover a Mari al año completo.</div><div class="goodbox"><div class="tag">Lo que debía hacer</div>“6 meses perfecto, Mari. ¿Fraccionado en 3 cuotas de 500?”</div></div>
+    <p><b>Por qué cambia todo:</b> Cuando alguien elige la opción posible, se cierra esa. No se empuja la que dispara miedo.</p></div>
+</div></section>
+<section id="seguimiento" class="section panel"><h2>Seguimiento de Mari — protocolo septiembre/octubre</h2><div class="grid three">
+<div class="tile"><h3>No hacer</h3><ul class="mini-list">
+<li>“Hola Mari, ¿te acuerdas de nosotros?”</li>
+<li>Enviar información del programa sin contexto personal.</li>
+<li>Contactar solo cuando se acerque la fecha.</li>
+</ul></div>
+<div class="tile"><h3>Agosto</h3><ul class="mini-list">
+<li>“Mari, ¿cómo va la temporada de conciertos? Me acuerdo de lo que me dijiste — cantar y bailar sin parar, como Chayanne. Cuando termines la temporada y quieras arrancar con eso, tu plaza está guardada.”</li>
+</ul></div>
+<div class="tile"><h3>Septiembre</h3><ul class="mini-list">
+<li>“Mari, ¿cómo fue el verano? ¿Pudiste aguantar más en los conciertos o todavía te tocó pararte? Me acuerdo de que el objetivo era ese. Cuando estés lista, aquí estamos.”</li>
+</ul></div>
+</div><div class="highlight"><b>Regla:</b> lo que activa el seguimiento son las propias frases de Mari. No el programa. No el precio. El Chayanne.</div></section>
+<section id="plan" class="section panel"><h2>Plan de entrenamiento — Ana</h2><div class="grid three">
+<div class="tile"><h3>Consolidar</h3><ul class="mini-list">
+<li>Naturalidad del tono.</li>
+<li>Personalización del pitch.</li>
+<li>Cierre en llamada.</li>
+<li>Diagnóstico algo más corto.</li>
+</ul></div>
+<div class="tile"><h3>Corregir urgente</h3><ul class="mini-list">
+<li>Post-it con activo central.</li>
+<li>Cualificación financiera antes del cierre.</li>
+<li>No empujar opción más cara con señales de restricción.</li>
+<li>Checkpoint de realidad antes de Stripe.</li>
+</ul></div>
+<div class="tile"><h3>Regla operativa</h3><ul class="mini-list">
+<li>Antes de precio: cualificar capacidad.</li>
+<li>Antes de Stripe: confirmar comodidad mañana.</li>
+<li>Si hay riesgo: reservar plaza dentro de la llamada.</li>
+<li>Si elige 6 meses por dinero: aceptar y cerrar 6 meses.</li>
+</ul></div>
+</div></section>
+<section id="scripts" class="section panel"><h2>Micro-scripts para Ana</h2><div class="copy-row"><button class="btn" onclick="copyAllScripts()">Copiar todos los scripts</button><button class="btn" onclick="window.print()">Imprimir / guardar PDF</button></div><div id="scriptsBox">
+<div class="script"><h3>Script 01 — Cualificación financiera antes del precio</h3><p>Antes de que te cuente el precio quiero preguntarte algo. ¿Estás en un momento económicamente cómodo para hacer una inversión así ahora? ¿No hay ningún gasto importante en las próximas semanas que yo deba saber?</p></div>
+<div class="script"><h3>Script 02 — Checkpoint de realidad antes de Stripe</h3><p>Antes de que te pase el enlace quiero preguntarte una cosa. Cuando cuelgues y mañana te despiertes, ¿vas a estar cómoda con esta decisión también económicamente? Quiero que te sientas bien con esto mañana por la mañana, no solo ahora.</p></div>
+<div class="script"><h3>Script 03 — Cierre con los 3 activos de Mari</h3><p>Mari, me dijiste que llevas años prometiéndote lo mismo frente al espejo y llegando al año siguiente igual. Me dijiste que quieres aguantar como Chayanne — cantar y bailar sin parar. Y me dijiste que tu compromiso es un 10. Tu plaza está guardada. ¿Empezamos en septiembre?</p></div>
+<div class="script"><h3>Script 04 — Señales de restricción económica</h3><p>Perfecto, 6 meses. Fraccionado en 3 cuotas de 500. ¿Empezamos?</p></div>
+<div class="script"><h3>Script 05 — Seguimiento reserva</h3><p>Mari, ¿cómo va la temporada? Me acuerdo de que me dijiste que quieres aguantar más en el escenario, como Chayanne. Cuando termines la temporada y estés lista para empezar, tu plaza está aquí.</p></div>
+<div class="script"><h3>Script 06 — Voss para “seis conciertos”</h3><p>Suena a que este número pesa de verdad, Mari. Y no quiero que entres en algo que mañana te apriete. ¿Qué tendría que cuadrar para que esto fuese cómodo?</p></div>
+<div class="script"><h3>Script 07 — Reserva dentro de la llamada</h3><p>Entonces hacemos esto bien: no forzamos el pago completo hoy. Reservamos tu plaza con 100€ y cuando cierres ese gasto pendiente, arrancamos sin hacerlo desde la angustia.</p></div>
+</div></section>
+<section id="resumen" class="section panel"><h2>Resumen ejecutivo final</h2><div class="grid two"><div class="tile"><h3>Top 5 errores</h3><ol class="mini-list">
+<li>Cinco señales financieras ignoradas. El reversal era predecible y evitable.</li>
+<li>Sin checkpoint de realidad antes de Stripe.</li>
+<li>Push hacia el año completo pese a señales claras de restricción económica.</li>
+<li>Chayanne, espejo y orquesta no aparecieron en cierre.</li>
+<li>Error de cálculo en precio en el momento de máxima tensión.</li>
+</ol></div><div class="tile"><h3>Top 5 aciertos</h3><ol class="mini-list">
+<li>Tono cálido y natural. Mari conectó mucho.</li>
+<li>Mejor pregunta del diagnóstico: acompañamiento.</li>
+<li>Pitch personalizado con SIBO, horarios y familia.</li>
+<li>Cierre en llamada. El instinto de pedir cierre crece.</li>
+<li>Gestión post-reversal correcta: objeción aislada, alternativas y reserva de 100€.</li>
+</ol></div></div><div class="quote"><b>Para Ana:</b><br>“Cerraste en llamada. Eso es progreso real. Pero cerraste sin preguntar si los números cuadraban. Y sin los activos del diagnóstico. Cuando juntes las tres cosas — instinto para cerrar, cualificación financiera y cierre con palabras de la prospecto — subes de nivel.”</div></section>
+<section class="section panel"><h2>Control de integridad</h2><p class="print-note">Esta versión elimina el bloque negro de “auditoría completa íntegra” y reparte todo el contenido en módulos visuales: ficha, veredicto, scoreboard, reversal, semáforo, fases, timeline, frame-by-frame, activos, mapa psicológico, evolución, giros, seguimiento, plan, scripts y resumen. Correcciones aplicadas: reserva de 100€ y sin destacar que sea “la única” cerrada.</p></section>
+
+</div><script>
+function filterTable(tableId, q){q=q.toLowerCase();document.querySelectorAll('#'+tableId+' tbody tr').forEach(row=>{row.style.display=row.innerText.toLowerCase().includes(q)?'':'none';});}
+function togglePhase(el){const p=el.parentElement;p.classList.toggle('open');}
+function copyAllScripts(){const text=Array.from(document.querySelectorAll('#scriptsBox .script')).map(el=>el.innerText).join('\n\n');navigator.clipboard.writeText(text).then(()=>alert('Scripts copiados'));}
+</script></body></html>

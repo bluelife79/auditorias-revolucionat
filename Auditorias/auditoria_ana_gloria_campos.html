@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Auditoría RevolucionaT · Ana · Gloria Campos</title>
+<style>
+:root{
+  --bg:#f6f2ea;
+  --paper:#fffaf2;
+  --ink:#1f1b16;
+  --muted:#6f665b;
+  --line:#e5d8c7;
+  --brand:#8b2f2f;
+  --brand2:#c55d3b;
+  --gold:#c99b47;
+  --green:#2f7a5b;
+  --red:#a33b36;
+  --blue:#2f5f86;
+  --violet:#6d4b8d;
+  --card:#fffdf8;
+  --shadow: 0 18px 45px rgba(69,45,25,.12);
+  --radius: 24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(201,155,71,.22), transparent 32%),
+    radial-gradient(circle at 90% 8%, rgba(139,47,47,.17), transparent 34%),
+    linear-gradient(180deg,#f8f1e7 0%, #f6f2ea 45%, #efe5d7 100%);
+  color:var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height:1.62;
+}
+a{color:inherit}
+.wrapper{max-width:1180px;margin:0 auto;padding:28px 18px 70px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(139,47,47,.22);
+  background:
+    linear-gradient(135deg, rgba(255,250,242,.96), rgba(255,248,236,.88)),
+    radial-gradient(circle at 90% 10%, rgba(197,93,59,.18), transparent 30%);
+  border-radius:34px;
+  padding:34px;
+  box-shadow:var(--shadow);
+}
+.hero:after{
+  content:"";
+  position:absolute; inset:auto -90px -120px auto;
+  width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle, rgba(201,155,71,.22), transparent 70%);
+}
+.kicker{font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-size:.78rem}
+h1{font-size:clamp(2rem,5vw,4.4rem);line-height:.98;margin:12px 0 16px;letter-spacing:-.06em}
+.subtitle{font-size:1.08rem;color:var(--muted);max-width:850px;margin:0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:26px;position:relative;z-index:1}
+.statgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.stat{
+  background:rgba(255,255,255,.72);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:16px;
+}
+.stat .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
+.stat .value{font-size:1.17rem;font-weight:900;margin-top:5px}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;border:1px solid var(--line);
+  background:#fffaf2;font-weight:900;font-size:.83rem;margin:4px 6px 4px 0;
+}
+.badge.red{color:var(--red);border-color:rgba(163,59,54,.28);background:rgba(163,59,54,.06)}
+.badge.green{color:var(--green);border-color:rgba(47,122,91,.25);background:rgba(47,122,91,.07)}
+.badge.gold{color:#856018;border-color:rgba(201,155,71,.34);background:rgba(201,155,71,.12)}
+.badge.blue{color:var(--blue);border-color:rgba(47,95,134,.25);background:rgba(47,95,134,.07)}
+.nav{
+  position:sticky;top:0;z-index:20;
+  backdrop-filter: blur(14px);
+  background:rgba(246,242,234,.83);
+  border-bottom:1px solid rgba(229,216,199,.7);
+  margin:22px -18px 0;
+  padding:10px 18px;
+}
+.nav-inner{max-width:1180px;margin:0 auto;display:flex;gap:8px;overflow:auto}
+.nav a{
+  white-space:nowrap;text-decoration:none;
+  padding:9px 13px;border-radius:999px;
+  background:rgba(255,250,242,.85);border:1px solid var(--line);
+  color:var(--muted);font-weight:800;font-size:.84rem;
+}
+section{margin-top:34px}
+.section-title{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:14px;
+}
+h2{font-size:clamp(1.55rem,3vw,2.45rem);line-height:1.05;margin:0;letter-spacing:-.04em}
+.section-note{color:var(--muted);font-weight:700;max-width:520px}
+.card{
+  background:rgba(255,250,242,.88);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:0 10px 28px rgba(69,45,25,.08);
+}
+.card + .card{margin-top:16px}
+.callout{
+  border-left:5px solid var(--brand);
+  background:linear-gradient(90deg, rgba(139,47,47,.08), rgba(255,250,242,.82));
+}
+.callout.gold{border-left-color:var(--gold);background:linear-gradient(90deg, rgba(201,155,71,.13), rgba(255,250,242,.82))}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg, rgba(47,122,91,.10), rgba(255,250,242,.82))}
+.callout.red{border-left-color:var(--red);background:linear-gradient(90deg, rgba(163,59,54,.10), rgba(255,250,242,.82))}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.profile-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.item{
+  padding:13px 14px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.55);
+}
+.item b{display:block;margin-bottom:3px}
+.scoreboard{overflow:hidden;padding:0}
+.score-row{
+  display:grid;grid-template-columns:220px 70px 1fr;gap:14px;align-items:center;
+  padding:14px 18px;border-bottom:1px solid var(--line);
+}
+.score-row:last-child{border-bottom:0}
+.score-name{font-weight:900}
+.score-num{
+  height:42px;width:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));color:white;font-weight:950;
+}
+.score-reason{color:var(--muted)}
+.global-score{
+  margin-top:12px;
+  padding:18px;border-radius:22px;
+  background:linear-gradient(135deg, rgba(139,47,47,.10), rgba(201,155,71,.16));
+  border:1px solid rgba(139,47,47,.18);
+  display:flex;justify-content:space-between;gap:18px;align-items:center;
+}
+.global-score strong{font-size:2.2rem;letter-spacing:-.04em}
+.good-list{counter-reset:good}
+.good{
+  display:grid;grid-template-columns:54px 1fr;gap:16px;align-items:start;
+  border:1px solid var(--line);border-radius:22px;padding:18px;background:rgba(255,255,255,.55);
+}
+.good + .good{margin-top:12px}
+.good:before{
+  counter-increment:good;content:counter(good);
+  height:42px;width:42px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  font-weight:950;color:white;background:linear-gradient(135deg,var(--green),#61a982);
+}
+.good h3,.source h3,.phase h3{margin:0 0 8px;font-size:1.15rem;line-height:1.2}
+.source{
+  border:1px solid var(--line);border-radius:24px;background:rgba(255,253,248,.82);
+  padding:22px;position:relative;overflow:hidden;
+}
+.source + .source{margin-top:14px}
+.source:before{
+  content:attr(data-n);
+  position:absolute;right:16px;top:10px;font-size:4.5rem;line-height:1;
+  font-weight:950;color:rgba(139,47,47,.07);letter-spacing:-.08em;
+}
+.source-title{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.pill{
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:999px;padding:4px 10px;font-weight:950;font-size:.75rem;
+  background:rgba(139,47,47,.10);color:var(--brand);border:1px solid rgba(139,47,47,.18);
+}
+.quote{
+  font-size:1.02rem;
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(31,27,22,.04);
+  border:1px dashed rgba(111,102,91,.36);
+  margin:12px 0;
+}
+.script{
+  background:linear-gradient(135deg, rgba(47,95,134,.07), rgba(255,250,242,.75));
+  border:1px solid rgba(47,95,134,.20);
+  border-radius:20px;
+  padding:16px;
+  font-weight:750;
+}
+.timeline{
+  display:grid;grid-template-columns:160px 1fr;gap:12px;
+}
+.trow{display:contents}
+.time{
+  padding:14px;border-radius:18px;background:rgba(139,47,47,.09);font-weight:950;color:var(--brand);align-self:start;
+}
+.tbody{
+  padding:14px;border-radius:18px;background:rgba(255,255,255,.56);border:1px solid var(--line);margin-bottom:10px;
+}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:22px;background:rgba(255,250,242,.75)}
+table{width:100%;border-collapse:collapse;min-width:820px}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:rgba(139,47,47,.08);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+td{background:rgba(255,255,255,.32)}
+tr:last-child td{border-bottom:0}
+.check{font-weight:950;color:var(--green)}
+.cross{font-weight:950;color:var(--red)}
+.warn{font-weight:950;color:var(--gold)}
+.footer{
+  margin-top:40px;border-radius:30px;padding:28px;
+  background:linear-gradient(135deg, rgba(139,47,47,.12), rgba(201,155,71,.18));
+  border:1px solid rgba(139,47,47,.22);
+}
+@media(max-width:850px){
+  .hero-grid,.grid-2,.grid-3,.profile-list{grid-template-columns:1fr}
+  .score-row{grid-template-columns:1fr;gap:8px}
+  .timeline{grid-template-columns:1fr}
+  .hero{padding:24px}
+}
+@media print{
+ body{background:white}
+ .nav{display:none}
+ .card,.hero,.source,.footer{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="hero">
+    <div class="kicker">REVOLUCIONA-T · CLOSER ANA · PROSPECTO GLORIA CAMPOS</div>
+    <h1>Auditoría dinámica · Gloria Campos</h1>
+    <p class="subtitle">Videollamada atípica, perfil no estándar, obstáculo económico real y brecha estructural clara: sin Reframe, sin Pre-Suasión y reserva ofrecida tarde.</p>
+    <div style="margin-top:18px">
+      <span class="badge red">NO CERRADA</span>
+      <span class="badge gold">“Dame 15 días”</span>
+      <span class="badge blue">70 minutos totales</span>
+      <span class="badge red">Sin reserva de plaza</span>
+      <span class="badge green">Nota global 6.3 / 10</span>
+    </div>
+    <div class="hero-grid">
+      <div class="card">
+        <h2 style="font-size:1.45rem">Ficha del caso</h2>
+        <div class="profile-list" style="margin-top:14px">
+          <div class="item"><b>Prospecto</b>Gloria Campos · Alcobendas, Madrid · 66 años</div>
+          <div class="item"><b>Closer</b>Ana</div>
+          <div class="item"><b>Fecha</b>26 mayo 2025</div>
+          <div class="item"><b>Duración</b>47 min Parte 1 + 23 min Parte 2 = 70 min</div>
+          <div class="item"><b>Resultado</b>NO CERRADA — “Dame 15 días” sin reserva de plaza</div>
+          <div class="item"><b>Nota global</b>6.3 / 10</div>
+        </div>
+      </div>
+      <div class="statgrid">
+        <div class="stat"><div class="label">Alimentación</div><div class="value">10/10 compromiso</div></div>
+        <div class="stat"><div class="label">Ejercicio</div><div class="value">7-8/10 compromiso</div></div>
+        <div class="stat"><div class="label">Perfil</div><div class="value">No estético</div></div>
+        <div class="stat"><div class="label">Obstáculo</div><div class="value">Económico real</div></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#perfil">Perfil</a>
+      <a href="#veredicto">Veredicto</a>
+      <a href="#scoreboard">Scoreboard</a>
+      <a href="#funciono">Lo que funcionó</a>
+      <a href="#fuentes">13 fuentes</a>
+      <a href="#activos">Activos perdidos</a>
+      <a href="#riesgo">Riesgo 15 días</a>
+      <a href="#evolucion">Evolución Ana</a>
+      <a href="#plan">Plan</a>
+      <a href="#scripts">Scripts</a>
+      <a href="#resumen">Resumen</a>
+    </div>
+  </nav>
+
+  <section id="perfil">
+    <div class="section-title">
+      <h2>Perfil completo de Gloria</h2>
+      <div class="section-note">La llamada cambia porque Gloria no encaja en el patrón habitual de pérdida de peso.</div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Contexto vital y laboral</h3>
+        <div class="profile-list">
+          <div class="item"><b>Ubicación</b>Alcobendas, Madrid</div>
+          <div class="item"><b>Edad</b>66 años</div>
+          <div class="item"><b>Trabajo</b>Autónoma · empresa con marido José Antonio</div>
+          <div class="item"><b>Horario</b>Trabajo sedentario desde casa · 9-17h</div>
+          <div class="item"><b>Familia</b>Hijos independizados · vive solo con José Antonio</div>
+          <div class="item"><b>Audición</b>Usa audífonos · hipoacusia</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Salud, alimentación y ejercicio</h3>
+        <div class="profile-list">
+          <div class="item"><b>Medidas</b>53 kg · 1.50 m</div>
+          <div class="item"><b>Objetivo</b>No quiere perder peso · problema NO es estético</div>
+          <div class="item"><b>Síntomas</b>Hinchazón abdominal crónica + estreñimiento crónico + moco crónico + dermatitis en 3 zonas</div>
+          <div class="item"><b>Menopausia</b>A los 45 · hace 20 años</div>
+          <div class="item"><b>Tratamiento activo</b>Inyecciones IV en clínica MZK · 500€/mes durante 1 año · termina a mediados de junio</div>
+          <div class="item"><b>Historial nutricional</b>3 nutricionistas previas · ninguna resolvió el problema</div>
+          <div class="item"><b>Alimentación</b>Muy sana · sin fritos, dulces ni bollería · pan sin gluten de panadería especializada · ayuno intermitente 8:30-15:00</div>
+          <div class="item"><b>Ejercicio</b>Camina 1h/día a 5km/h · sin gimnasio activo</div>
+          <div class="item"><b>Economía</b>Obstáculo real: IV treatment + bache económico en empresa</div>
+          <div class="item"><b>Próximo hito</b>Espera negocio potencial en 15 días</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card callout red" style="margin-top:16px">
+      <h3>Nota operativa para el equipo</h3>
+      <p>Gloria tiene 66 años, 53 kg y no quiere perder peso. Sus síntomas son crónicos y médico-funcionales: hinchazón y estreñimiento de toda la vida, moco crónico, dermatitis persistente en tres zonas que no responde a pomada dermatológica, e hipoacusia con audífonos.</p>
+      <p>Está siendo tratada simultáneamente por una clínica médica especializada — MZK — con inyecciones IV para corregir déficits de minerales y metales pesados, y ha pasado por tres nutricionistas sin éxito.</p>
+      <p>El programa Revoluciona-T está diseñado para mujeres de 40-55 años que quieren mejorar composición corporal, perder peso y ganar masa muscular. Gloria no encaja en ese perfil objetivo. Sus síntomas digestivos y dermatológicos crónicos posiblemente tengan un origen más complejo que la dieta y el ejercicio, y ya están siendo tratados médicamente.</p>
+      <p><b>Punto crítico:</b> Ana dijo “encajas dentro del perfil de mujeres a las que nosotros podemos ayudar.” Eso es cuestionable. Antes de continuar el seguimiento, Jonathan necesita evaluar si el nutricionista del programa puede abordar realmente la hinchazón y el estreñimiento crónico de una mujer de 66 años que ya come de forma muy saludable y no necesita perder peso, y si el programa tiene herramientas específicas para este perfil.</p>
+    </div>
+  </section>
+
+  <section id="veredicto">
+    <div class="section-title">
+      <h2>Veredicto · La lectura real</h2>
+      <div class="section-note">Lo que explica por qué no cerró y por qué la llamada es distinta al resto.</div>
+    </div>
+    <div class="card callout">
+      <p>Esta es la llamada más atípica del proyecto. Gloria no es el prospect estándar. No quiere perder peso, no tiene problema con la ropa, no se siente “abandonada.” Tiene hinchazón y estreñimiento crónicos que llevan décadas y que cuatro profesionales no han resuelto. Eso cambia el diagnóstico, el pitch y el cierre.</p>
+      <p>Ana manejó la complejidad del perfil con más adaptación de lo habitual. La conexión de vecinas de Alcobendas fue genuina y caliente. El diagnóstico fue paciente y detallado. Y, lo más importante para el historial de Ana: “hay que cambiar dos cosas” no apareció — novena llamada seguida sin ella.</p>
+      <p>Sin embargo la llamada terminó sin cierre y sin reserva de plaza. El obstáculo económico fue real y bien aislado. Pero hay dos problemas que van más allá de la técnica.</p>
+      <p><b>El primero</b> es de idoneidad del programa para este perfil — abordado en la nota operativa.</p>
+      <p><b>El segundo</b> es técnico: el pitch siguió siendo una plantilla. Sin Reframe. Sin Pre-Suasión. Con el precio llegando frío en la segunda parte de la llamada. Con una pregunta de Implicación que produjo “no lo sé” y que no fue presionada con una segunda pregunta. Y con la reserva de plaza ofrecida tarde — después de que Gloria ya había dicho “de momento es un no.”</p>
+    </div>
+  </section>
+
+  <section id="scoreboard">
+    <div class="section-title"><h2>Scoreboard</h2><div class="section-note">Lectura por bloques según los libros/jueces del sistema.</div></div>
+    <div class="card scoreboard">
+      <div class="score-row"><div class="score-name">Apertura / Agenda</div><div class="score-num">8.0</div><div class="score-reason">Voss / Why She Buys: la conexión de vecinas fue el mejor rapport natural del proyecto.</div></div>
+      <div class="score-row"><div class="score-name">Diagnóstico calidad</div><div class="score-num">6.5</div><div class="score-reason">SPIN / Mom Test: buenas preguntas de comportamiento. “Me queda claro” x1. Leading question en ejercicio.</div></div>
+      <div class="score-row"><div class="score-name">Diagnóstico profundidad</div><div class="score-num">6.0</div><div class="score-reason">Voss: Gloria es pragmática y poco emocional — el diagnóstico fue informativo más que emocional. La frustración fue tocada pero no excavada.</div></div>
+      <div class="score-row"><div class="score-name">Construcción de valor</div><div class="score-num">5.5</div><div class="score-reason">Challenger Sale: sin Reframe. Pitch de plantilla con personalización parcial. Mención del intercambiador fue bien.</div></div>
+      <div class="score-row"><div class="score-name">Manejo de objeciones</div><div class="score-num">6.5</div><div class="score-reason">JOLT / Blount: obstáculo económico bien aislado. Oferta de 100€ reserve + 250€/mes. Reserve rechazada. Llegó tarde.</div></div>
+      <div class="score-row"><div class="score-name">Cierre</div><div class="score-num">5.0</div><div class="score-reason">NO CERRADA. Pre-Suasión ausente. Price frío. Reserve ofrecida después del “no.”</div></div>
+      <div class="score-row"><div class="score-name">Lenguaje / Tono</div><div class="score-num">8.5</div><div class="score-reason">Why She Buys: la mejor del proyecto en calidez genuina. Vecinas, humor, cercanía real.</div></div>
+      <div class="score-row"><div class="score-name">Estructura</div><div class="score-num">6.0</div><div class="score-reason">70 minutos con corte técnico y reconexión. Sin Pre-Suasión. Sin activos anclados en el cierre.</div></div>
+    </div>
+    <div class="global-score"><div><b>GLOBAL</b><br><span class="section-note">Llamada no cerrada, perfil atípico, obstáculo económico real.</span></div><strong>6.3 / 10</strong></div>
+  </section>
+
+  <section id="funciono">
+    <div class="section-title"><h2>Lo que funcionó</h2><div class="section-note">Seis avances reales que conviene conservar.</div></div>
+    <div class="good-list">
+      <div class="good"><div><h3>El rapport de las vecinas · P1, min 1:42-2:15</h3><p>El descubrimiento de que Ana y Gloria viven en Alcobendas, posiblemente en el mismo barrio, fue espontáneo y genuino. Ana no lo forzó — lo descubrió y jugó con ello naturalmente. Brennan (Why She Buys): la conexión de identidad compartida (“vecinas”) crea una base de confianza que ningún script puede replicar. Ese momento fue el mejor arranque de rapport natural de todas las llamadas del proyecto.</p></div></div>
+      <div class="good"><div><h3>Identificó correctamente que el problema no era estético</h3><p>Gloria tiene 53 kg. No quiere perder peso. Su problema es digestivo y de bienestar. Ana identificó esto desde el primer minuto y adaptó el frame: “mejorar esa hinchazón, mejorar el tránsito intestinal, para que te encuentres mejor día a día.” No habló de kilos, ropa de otra talla ni cuerpo. Habló de síntomas. Correctamente calibrado.</p></div></div>
+      <div class="good"><div><h3>“Hay que cambiar dos cosas” no apareció</h3><p>Novena llamada seguida de Ana sin esta frase. El hábito está instalado.</p></div></div>
+      <div class="good"><div><h3>Aisló correctamente el obstáculo económico · P2, min 15:55</h3><p>Cuando Gloria empezó a dudar, Ana hizo la pregunta correcta: “¿Es una cuestión solo de dinero o hay alguna duda del programa?” Gloria respondió: “es una cuestión de dinero, siendo sincera.” Eso es Blount (Objections): identificar el único obstáculo antes de proponer alternativas. Bien ejecutado.</p></div></div>
+      <div class="good"><div><h3>Pregunta de compromiso con dos números distintos · P1, min 38:39-39:11</h3><p>Gloria dio 10/10 para alimentación y 7-8/10 para ejercicio de forma espontánea y diferenciada. Ana recogió esa distinción y la usó para desmontarle el marco de “soy vaga.” Esa intervención en el minuto 39:12-39:58 fue precisa: “una mujer que trabaja, que saca a sus hijos, que camina aprovechando para seguir currando — eso no es vaguedad, es que no te lo han puesto lo suficientemente fácil.”</p></div></div>
+      <div class="good"><div><h3>La mención del intercambiador de alimentos · P2, min 6:01</h3><p>En el pitch, Ana explicó el “intercambiador de alimentos” — una herramienta que adapta recetas según lo que tienes en la nevera. Gloria había expresado frustración con las tablas genéricas y la falta de flexibilidad. Ese detalle específico respondía directamente a lo que Gloria había dicho. Keenan: un elemento del pitch que conecta con el Impact Layer del prospect.</p></div></div>
+    </div>
+  </section>
+
+  <section id="fuentes">
+    <div class="section-title"><h2>Las 13 fuentes · una por una</h2><div class="section-note">Auditoría técnica completa sin bloques negros: cada fuente, fallo y aplicación.</div></div>
+
+    <div class="source" data-n="01"><div class="source-title"><span class="pill">FUENTE 1</span><h3>Never Split the Difference · Chris Voss</h3></div>
+      <p>Gloria es una prospect pragmática, analítica y poco dada a la emoción. Es directa, habla mucho, y tiene una mentalidad de autónoma acostumbrada a evaluar inversiones. Eso hace que el labeling emocional de Voss tenga un rendimiento diferente que con otras prospects.</p>
+      <p>El único momento de apertura emocional fue el minuto 27:09: “Hombre, un poco frustrada, desde luego.” Ana recogió esa emoción y dijo “fíjate que llevas, Jolín, toda la vida, que al final, pues como que se va haciendo crónico.” Correcto, pero insuficiente. No hubo label preciso.</p>
+      <div class="quote">“Parece que llevas toda una vida haciendo las cosas bien — comiendo sano, andando, sin dulces, sin fritos — y después de cuatro nutricionistas sigues igual. Eso no es un problema de voluntad. Es un problema de que nadie ha dado con la causa real.”<br><br>[Silencio.]</div>
+      <p>Ese label habría identificado la frustración con más precisión y habría abierto más profundidad. Ana la validó pero sin la precisión que produce profundidad adicional.</p>
+      <p>Los labels de Voss para Gloria debían ser sobre: la identidad de mujer que “siempre lo ha hecho bien” y sin embargo sigue sin resultado; el cansancio de probar cosas y volver al punto de partida; y el no querer que esto sea “uno más”. Ninguno apareció con esa formulación.</p>
+    </div>
+
+    <div class="source" data-n="02"><div class="source-title"><span class="pill">FUENTE 2</span><h3>Gap Selling · Keenan</h3></div>
+      <p><b>Estado actual — bien construido:</b> hinchazón crónica desde siempre, agravada con la edad y la menopausia; estreñimiento gestionado con suplementos; moco persistente con pequeñas jaquecas; dermatitis en tres zonas; tres nutricionistas sin resultado. Los datos reales están en el diagnóstico.</p>
+      <p><b>Impact Layer — identificado pero no desarrollado:</b> Gloria mencionó dos consecuencias directas de la hinchazón que merecían más excavación.</p>
+      <p>Primero: el pantalón que por la noche no cierra (min 31:40). Ese no era el activo central de Gloria — ella misma lo relativizó: “a ver, tengo 66 años, no me va la vida en ello”. Pero la incomodidad diaria de trabajar sentada con la tripa hinchada sí era real aunque Gloria dijera que no le molestaba. Eso era un Impact Layer físico que Ana podría haber explorado más.</p>
+      <p>Segundo: la dermatitis y el moco. Gloria lo mencionó al final de la primera parte (min 45:07) como consecuencias del intestino mal funcionando. Esa es la conexión más poderosa del diagnóstico: si mejora el intestino, mejora la piel, mejora el moco, mejoran las jaquecas. Keenan llamaría a eso el Impact Layer real. Ana lo recogió brevemente pero no lo convirtió en el argumento central del pitch.</p>
+      <p><b>Estado futuro — construido pobremente:</b> la pregunta de futuro en el minuto 43:06 produjo una respuesta vaga: “que se me quite el hinchazón.” No hubo imagen específica y emocional. Ana debería haber profundizado más: “Y con esa tripa sin hinchazón, ¿qué harías diferente, Gloria? ¿La piel, la jaqueca, el moco?”</p>
+      <p><b>Causa raíz — nunca convertida en Reframe:</b> el problema de Gloria es que todos los sistemas anteriores le han dado tablas genéricas sin identificar qué alimentos específicamente le inflaman. El diagnóstico funcional — intolerancias, FODMAP, microbiota — era la pieza que falta. Eso era el Reframe.</p>
+    </div>
+
+    <div class="source" data-n="03"><div class="source-title"><span class="pill">FUENTE 3</span><h3>Objections · Jeb Blount</h3></div>
+      <p>Ana manejó el obstáculo económico correctamente en estructura pero con un problema de timing.</p>
+      <p><b>LDA bien ejecutado en diagnóstico:</b></p>
+      <p><b>Ledge:</b> “Yo sigo hablando contigo porque quiero resolver las dudas y saber si es un tema solo de dinero.”</p>
+      <p><b>Disrupt:</b> no hubo un Disrupt potente. “Tienes un 10 y un 8 de compromiso” fue la referencia pero no fue el golpe que separa la voluntad del obstáculo.</p>
+      <p><b>Ask:</b> la oferta de 100€ de reserva, luego 250€/mes.</p>
+      <p><b>El problema de timing:</b> la reserva de plaza se ofreció en el minuto 19:09 de la Parte 2 — después de que Gloria ya había dicho “de momento es un no.” Blount documenta que ofrecer la reserva después de una negativa inicial requiere reabrir la conversación desde cero emocionalmente.</p>
+      <div class="script">Momento correcto: inmediatamente después de que Gloria dijo “me lo tengo que pensar” y antes de que dijera “es un no”:<br><br>“Gloria, perfectamente. Para que mientras lo piensas tu plaza esté asegurada, hacemos 100 euros de reserva ahora — si finalmente no cuadra, te lo devuelvo sin problema.”</div>
+    </div>
+
+    <div class="source" data-n="04"><div class="source-title"><span class="pill">FUENTE 4</span><h3>Virtual Selling · Jeb Blount</h3></div>
+      <p><b>Problema técnico:</b> la llamada se cortó al final de la Parte 1 (min 45:47) porque Google Meet gratuito alcanzó el límite de tiempo. Ana y Gloria tuvieron que reconectarse. Es el mismo problema que ocurrió con la llamada de Mariona (Ana) y con Lydia (Montse). Cuarta llamada del proyecto afectada por el límite de Google Meet.</p>
+      <p>La reconexión fue fluida pero tiene un coste: el momentum emocional del diagnóstico se interrumpe, el prospect puede desconectarse mentalmente y la llamada pierde la cadencia que venía construyendo.</p>
+      <p><b>Recomendación operativa:</b> Zoom Pro o Google Meet Workspace. Ya se ha dicho en auditorías anteriores. Cada nuevo corte técnico documenta que el problema no se ha resuelto.</p>
+      <p>En la Parte 2, el pitch duró aproximadamente 8 minutos (min 1:05-9:15) sin check-ins reales. Gloria intervino brevemente dos veces. El mismo patrón de monólogo que aparece en los pitches de todo el equipo.</p>
+    </div>
+
+    <div class="source" data-n="05"><div class="source-title"><span class="pill">FUENTE 5</span><h3>The JOLT Effect · Dixon y McKenna</h3></div>
+      <p>El Omission Bias de Gloria era específico y diferente al de otras prospects: no era miedo a fracasar con un programa nuevo — era escepticismo real basado en cuatro intentos fallidos: “lo soy considerando si esto, si me sale lo mismo que los anteriores”. Además, tenía una evaluación alternativa en mente: el entrenador personal del polideportivo José Caballero.</p>
+      <p><b>Judge the indecision:</b> Ana nunca nombró directamente ese miedo.</p>
+      <div class="quote">“Gloria, llevas cuatro nutricionistas sin resultado. El miedo que tienes no es al precio — es a que esto sea el número cinco de la misma lista. Eso tiene todo el sentido. ¿Qué tendría que ser diferente para que este no sea uno más?”</div>
+      <p>Esa pregunta habría producido que Gloria articulara sus propios criterios de diferenciación — exactamente lo que el Challenger Sale llama Reframe. No llegó.</p>
+      <p><b>TRoT:</b> la reserva de 100€ fue bien concebida como herramienta JOLT. El problema fue que llegó 3 minutos tarde.</p>
+    </div>
+
+    <div class="source" data-n="06"><div class="source-title"><span class="pill">FUENTE 6</span><h3>Switch · Chip y Dan Heath</h3></div>
+      <p><b>Jinete de Gloria — muy claro:</b> sabe que su problema es digestivo, conoce los síntomas, sabe lo que ha probado, sabe que no le han funcionado. Su Jinete tiene el diagnóstico claro pero sin solución.</p>
+      <p><b>Elefante de Gloria — pragmático y económico:</b> no hay un driver emocional profundo visible. Su motivación es más funcional que emocional: quiere resolver un problema que le incomoda, no una transformación de identidad. Eso hace más difícil el trabajo del closer basado en excavación emocional.</p>
+      <p><b>Camino — bloqueado realmente:</b> la situación económica de Gloria era un bloqueador genuino. 500€/mes en IV treatment + bache económico en la empresa. No era una excusa. Heath diría que el camino estaba genuinamente obstruido y que la herramienta correcta era la reserva de plaza para cuando el obstáculo se despejara. Ana lo intentó. Llegó tarde y fue rechazado.</p>
+      <p><b>Bright Spots:</b> Gloria ha mantenido hábitos alimenticios muy saludables durante años sin apoyo externo. Eso es adherencia real que nunca fue usada como argumento en el pitch.</p>
+    </div>
+
+    <div class="source" data-n="07"><div class="source-title"><span class="pill">FUENTE 7</span><h3>Why She Buys · Brennan</h3></div>
+      <p>La mejor actuación de Ana desde esta fuente en todo el proyecto. El rapport con Gloria fue genuinamente cálido y natural: el descubrimiento de las vecinas, el humor sobre la pamela en la playa, la conversación de la horchata de José Antonio. Ana conectó con Gloria como persona, no como prospect.</p>
+      <p>Brennan documenta que para mujeres de 60+ la compra de programas de bienestar está más orientada a la funcionalidad y la autonomía que a la estética. Gloria lo confirmó: “a los 66 no me va la vida en el pantalón ajustado.” Ana calibró correctamente y no insistió en el argumento estético.</p>
+      <p><b>Lo que faltó:</b> el hearing loss de Gloria era un activo de personalización que Ana tocó brevemente. Adaptar explícitamente el programa a una limitación específica — vídeos con subtítulos, instrucciones escritas paso a paso, formato que no requiere escuchar instrucciones en tiempo real — habría generado confianza diferencial. Ana dijo “no son clases colectivas”; correcto. Pero faltó: “y la forma en que recibirás las instrucciones del entrenamiento será siempre visual y escrita, para que no dependa del audio.”</p>
+    </div>
+
+    <div class="source" data-n="08"><div class="source-title"><span class="pill">FUENTE 8</span><h3>The Mom Test · Fitzpatrick</h3></div>
+      <p><b>Bien — preguntas de comportamiento real abundantes:</b></p>
+      <ul>
+        <li>“¿Haces dos comidas entonces?” → confirmado con datos.</li>
+        <li>“¿Y entre el desayuno y la comida tampoco metes nada?” → confirmado.</li>
+        <li>“¿Este hinchazón con la natación te baja o nos quedamos igual?” → datos reales.</li>
+        <li>“¿En qué trabajas, qué horario haces?” → datos de comportamiento.</li>
+      </ul>
+      <p>Eso es Fitzpatrick aplicado. Bien.</p>
+      <p><b>Fallo — pregunta hipotética del ejercicio · P1, min 22:48:</b> “¿Tú crees que podrías sacar una horita tres veces por semana?” Gloria dijo: “hombre, una hora... tres veces... pues ese día no ando.” Respuesta optimista de cualquier prospect a esa pregunta.</p>
+      <div class="script">Pregunta de comportamiento real: “Gloria, ¿cuándo en la semana tienes ahora mismo un hueco de más de 30 minutos que no sea para trabajar?”</div>
+      <p><b>Fallo — “me queda claro” · P1, min 19:11:</b> “Entiendo lo que me dices, me queda clara esta parte de la alimentación.” Aparece en esta llamada aunque con menos frecuencia que en llamadas anteriores. Es la misma señal de siempre: corta el diagnóstico antes de profundizar en las consecuencias de lo que Gloria acaba de decir.</p>
+    </div>
+
+    <div class="source" data-n="09"><div class="source-title"><span class="pill">FUENTE 9</span><h3>Pre-Suasión · Cialdini</h3></div>
+      <p>El precio llegó en el minuto 9:15 de la Parte 2, después de 8 minutos de pitch, sin ningún frame emocional cargado inmediatamente antes.</p>
+      <p><b>Activos disponibles para la Pre-Suasión:</b></p>
+      <p><b>1.</b> “Cuatro nutricionistas y ninguna resolvió el problema.” La frustración acumulada de años sin solución era la urgencia más potente. Frame: “Gloria, llevas cuatro intentos fallidos y esto sigue sin resolverse. ¿Cuántos más pueden pasar?”</p>
+      <p><b>2.</b> La conexión intestino-dermatitis-moco descrita al final de la Parte 1. Si el intestino mejora, mejoran los tres síntomas juntos. Frame: “Gloria, me dijiste que si el intestino mejora, la piel, el moco y las jaquecas también mejoran. El programa son 1.500 en cuotas o 1.300 pago único.”</p>
+      <p><b>3.</b> La idea de que el tratamiento de las inyecciones no va a resolver la hinchazón. Gloria misma lo admitió: “yo sé que la hinchazón no va a mejorar [con las inyecciones].”</p>
+      <p>Ninguno de los tres fue el frame inmediato antes del precio. El precio llegó frío.</p>
+    </div>
+
+    <div class="source" data-n="10"><div class="source-title"><span class="pill">FUENTE 10</span><h3>Influence · Cialdini</h3></div>
+      <p><b>Compromiso y consistencia:</b> el 10/10 de alimentación y el 7-8/10 de ejercicio fueron obtenidos con datos. Pero estos números no fueron usados en el cierre.</p>
+      <div class="quote">Cuando Gloria dijo “de momento es un no”, la respuesta correcta era: “Gloria, me dijiste que tu compromiso era un 10 en alimentación — que lo ibas a hacer. Ese 10 no cambia porque ahora no tengas el dinero organizado. La plaza reservada te la asegura para cuando lo tengas.”</div>
+      <p><b>Prueba social:</b> ausente. Gloria mencionó que había estado con tres nutricionistas anteriores. Eso creaba la apertura perfecta para prueba social específica: “tenemos mujeres que llegaron después de 3 o 4 nutricionistas sin resultado y que con nosotros solucionaron exactamente lo que describes.” No apareció.</p>
+      <p><b>Autoridad:</b> el detalle del intercambiador de alimentos en el pitch fue un punto de autoridad real — específico y diferenciador. Bien.</p>
+    </div>
+
+    <div class="source" data-n="11"><div class="source-title"><span class="pill">FUENTE 11</span><h3>The Challenger Sale · Dixon y Adamson</h3></div>
+      <p>El Reframe de esta llamada estaba construido con claridad y no fue usado. Novena llamada del proyecto de Ana sin Reframe.</p>
+      <p>Gloria ha tenido cuatro nutricionistas. Todas le han dado una tabla genérica. Ninguna ha identificado específicamente qué alimentos le inflaman a Gloria.</p>
+      <p><b>Creencia limitante de Gloria:</b> “yo como bien, entonces no sé dónde está el fallo.”</p>
+      <p><b>Problema real:</b> ha hecho bien las cosas genéricas pero nadie ha hecho el diagnóstico funcional específico: identificar intolerancias individuales, patrones de fermentación, combinaciones problemáticas para SU microbiota concreta. El programa puede hacer eso con personalización real.</p>
+      <div class="script">Reframe: “Gloria, el problema no es lo que comes — llevas años comiendo mejor que el 95% de la población. El problema es que nadie ha identificado qué alimentos específicos le producen inflamación a TU intestino. Una tabla genérica le dice a todo el mundo lo mismo. Un plan construido para ti empieza por descubrir qué alimentos son el problema exacto en tu caso. Eso es lo que ninguna de las cuatro anteriores ha hecho. Y eso es lo que hacemos aquí.”</div>
+      <p>Sin ese Reframe, el pitch de Ana describió el programa como “personalizado” — lo mismo que dicen todos los nutricionistas, y que Gloria ya ha escuchado tres veces sin que funcionara.</p>
+    </div>
+
+    <div class="source" data-n="12"><div class="source-title"><span class="pill">FUENTE 12</span><h3>SPIN Selling · Rackham</h3></div>
+      <p><b>Situación ✅</b> Muy bien cubierta: trabajo sedentario, horarios, marido, hijos independizados, síntomas, historial de nutricionistas, audífonos, tratamiento IV activo.</p>
+      <p><b>Problema ✅</b> Bien identificado: hinchazón crónica, estreñimiento, frustración de cuatro intentos fallidos.</p>
+      <p><b>Implicación ✗ — la pérdida más importante de la llamada:</b></p>
+      <p>En el minuto 29:31 de la Parte 1, Ana preguntó: “¿Cuánto crees que puedes seguir así?” Gloria respondió: “pues será como crónico, efectivamente.” Esa era la apertura para profundizar y Ana no profundizó con una segunda pregunta.</p>
+      <p>En el minuto 36:58 de la Parte 1: “si decides seguir igual, ¿cómo crees que te sentirías en un año?” Gloria dijo: “no lo sé, Ana.” Ana aceptó esa respuesta y la presionó suavemente con “¿te conformarías?” — mejor, pero insuficiente.</p>
+      <div class="script">Segunda Implicación que faltaba: “Gloria, llevas 20 años desde la menopausia con estos síntomas. Te has ocupado de casa, de la empresa, de tus hijos. Has comido bien toda la vida. Y esto sigue. Si en cinco años sigues igual — o si sigue empeorando como dices que está haciendo — ¿qué es lo que más te preocupa que pase?”</div>
+      <p>Esa pregunta habría llegado a la imagen de deterioro que Gloria sí tiene pero no verbalizó. La Implicación abandonada ante “no lo sé” es la pérdida de urgencia más cara de la llamada.</p>
+      <p><b>Necesidad-Beneficio — parcial:</b> la pregunta del futuro en el minuto 43:06 de la Parte 1 produjo “que se me quite el hinchazón.” Genérica pero real. Ana la amplió con “estarías más contenta, pues que te apetece vestirte mejor.” Correcto, pero sin la especificidad de la dermatitis-moco-jaquecas que Gloria había descrito.</p>
+    </div>
+
+    <div class="source" data-n="13"><div class="source-title"><span class="pill">FUENTE 13</span><h3>Exactly What to Say · Phil M. Jones</h3></div>
+      <p>Jones tiene una frase específica para el momento en que el prospect pide tiempo: “Gloria, si el tema económico se resolviera esta semana, ¿empezarías?” Si la respuesta es sí: “entonces lo que necesitas es que tu plaza esté asegurada para cuando eso pase. ¿Hacemos la reserva de 100 euros ahora?”</p>
+      <p>Ana ofreció la reserva pero sin ese set-up previo. Jones dice que la pregunta hipotética condicional confirma la voluntad antes de ofrecer la herramienta. Sin esa confirmación, la oferta de la reserva sonó a “insistir” en lugar de a “solucionar.”</p>
+      <p>También faltó la pregunta binaria antes del precio: “Gloria, si tuvieras el dinero organizado ahora mismo, ¿entrarías al programa?” Esa pregunta separa voluntad de obstáculo económico de la misma forma que funcionó con Virginia en la llamada de Montse.</p>
+      <p>La pregunta de compartir compromisos fue bien usada: “¿Qué más, con respecto al programa, ¿hay algo que digas Jolín, esto no lo has tenido en cuenta?” Correcta. Gloria añadió dermatitis y moco. Bien.</p>
+    </div>
+  </section>
+
+  <section id="activos">
+    <div class="section-title"><h2>Los activos que no llegaron al cierre</h2><div class="section-note">Aquí estaba el material de venta real. No viajó al precio ni al cierre.</div></div>
+    <div class="grid-2">
+      <div class="card callout gold"><h3>Activo 1 · Cuatro nutricionistas</h3><p><b>P1, min 15:14.</b> “Cuatro nutricionistas y ninguna ha resuelto el problema.” La causa raíz de la urgencia. No usada como Pre-Suasión ni como Reframe.</p></div>
+      <div class="card callout gold"><h3>Activo 2 · Intestino, dermatitis, moco y jaquecas</h3><p><b>P1, min 45:07.</b> El Impact Layer más complejo y el beneficio más amplio del programa para Gloria. Emergió al final de la Parte 1 y no fue usado en el pitch ni en el argumento del precio.</p></div>
+      <div class="card callout gold"><h3>Activo 3 · Las inyecciones no resolverán la hinchazón</h3><p><b>P2, min 14:54.</b> Gloria misma lo dijo: “yo sé que la hinchazón no va a mejorar con las inyecciones.” Ese argumento de diferenciación explícita nunca fue usado en el cierre.</p></div>
+      <div class="card callout gold"><h3>Activo 4 · 10/10 en alimentación</h3><p>Compromiso fuerte y específico. No fue usado cuando Gloria dijo “de momento es un no.”</p></div>
+    </div>
+  </section>
+
+  <section id="riesgo">
+    <div class="section-title"><h2>Riesgo del seguimiento en 15 días</h2><div class="section-note">La venta queda abierta y expuesta a competencia directa.</div></div>
+    <div class="card">
+      <p>Gloria tiene tres variables activas en los próximos 15 días:</p>
+      <div class="grid-3">
+        <div class="item"><b>1 · Negocio potencial</b>Si entra dinero, la objeción económica se resuelve.</div>
+        <div class="item"><b>2 · Fin del tratamiento IV</b>Termina a mediados de junio y se libera la obligación de 500€/mes.</div>
+        <div class="item"><b>3 · Competencia</b>Está evaluando al entrenador personal del polideportivo José Caballero.</div>
+      </div>
+      <p>Los dos primeros son favorables. El tercero es una competencia directa y más barata.</p>
+      <p>El seguimiento debe ser activo — Ana escribe, no espera. Y debe estar anclado en la dermatitis-moco-intestino, no en el pantalón que no cierra. Para Gloria, el argumento de bienestar funcional es mucho más potente que el estético.</p>
+      <div class="script">“Gloria, soy Ana. ¿Cómo va lo del negocio? ¿El tratamiento del suero terminó bien? Seguía pensando en lo que me contaste — que el intestino bien funciona te mejoraría la piel y el moco también. ¿Cómo lo tienes?”</div>
+    </div>
+  </section>
+
+  <section id="evolucion">
+    <div class="section-title"><h2>Evolución de Ana · 9 llamadas</h2><div class="section-note">Lectura de curva: mejora relacional, brecha estructural intacta.</div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Dimensión</th><th>MIR.</th><th>KAT.</th><th>BEA.</th><th>MARI</th><th>IRIA</th><th>MAR.</th><th>SAND.</th><th>MÓN.</th><th>GLO.</th></tr></thead>
+        <tbody>
+          <tr><td>Nota global</td><td>6.6</td><td>6.5</td><td>6.3</td><td>5.8</td><td>5.8</td><td>7.0</td><td>6.5</td><td>6.5</td><td>6.3</td></tr>
+          <tr><td>Resultado</td><td>CER.</td><td>SEG.</td><td>SEG.</td><td>REV.</td><td>S/CIE.</td><td>CER.</td><td>SEG.</td><td>SEG.</td><td>N/C</td></tr>
+          <tr><td>“Dos cosas” explícita</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td><td class="check">✅</td></tr>
+          <tr><td>Diagnóstico emocional</td><td>P.</td><td>P.</td><td>P.</td><td>Bno</td><td>M.B.</td><td>M.B.</td><td>Bno</td><td>M.B.</td><td>Lim.</td></tr>
+          <tr><td>Decisor cualificado</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>SÍ</td><td>SÍ</td><td>SÍ</td><td>SÍ</td></tr>
+          <tr><td>Implicación profundizada</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Parc</td><td>Parc</td><td>No</td></tr>
+          <tr><td>Activos en el cierre</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Parc</td><td>Parc</td><td>Parc</td><td>No</td></tr>
+          <tr><td>Reframe (Challenger)</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Pre-Suasión antes precio</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Reserve de plaza ofrecida</td><td>No</td><td>N/A</td><td>N/A</td><td>N/A</td><td>No</td><td>N/A</td><td>No</td><td>No</td><td>Tarde</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <p>En Ana hay una mejora real y sostenida en las variables relacionales: la eliminación de “dos cosas” ya es un hábito instalado — cuatro llamadas seguidas — y la cualificación del decisor financiero también aparece con consistencia — tres llamadas seguidas. El diagnóstico emocional sigue siendo lo mejor del equipo cuando el prospect es emotivo: Mónica Duque, Iria.</p>
+      <p>Lo que no ha cambiado en nueve llamadas: ningún Reframe, ninguna Pre-Suasión antes del precio, activos que no viajan al cierre con consistencia. Esos tres elementos llevan nueve llamadas sin aparecer de forma estructurada.</p>
+      <p>Comparativa con el equipo: la mejor llamada del proyecto técnicamente fue el 7.0 de Mariona. Montse cerró a Virginia con 6.5. Elena tuvo un diagnóstico excepcional con Gisela. Ana sigue siendo consistentemente la más fuerte en diagnóstico emocional cuando el prospect lo permite — pero Gloria no era emocionalmente excavable de la misma manera, y eso redujo el rendimiento del diagnóstico.</p>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="section-title"><h2>Plan de entrenamiento · Ana, iteración 9</h2><div class="section-note">Qué se conserva y qué cambia desde esta semana.</div></div>
+    <div class="grid-2">
+      <div class="card callout green">
+        <h3>Lo que no se toca</h3>
+        <ul>
+          <li>La eliminación de “dos cosas” — cuatro llamadas seguidas. Consolidado.</li>
+          <li>La cualificación del decisor financiero — tres llamadas seguidas bien ejecutada.</li>
+          <li>El rapport genuino — el mejor del equipo. El momento de vecinas de esta llamada fue el mejor arranque de rapport natural del proyecto.</li>
+          <li>La pregunta de futuro: “¿qué tendría que suceder para que fuera la mejor decisión en años?”</li>
+        </ul>
+      </div>
+      <div class="card callout red">
+        <h3>Lo que cambia desde esta semana</h3>
+        <p><b>Reframe — novena llamada sin él.</b> Ya no es una variable pendiente de desarrollar: es la brecha estructural más importante de Ana. En esta llamada el Reframe era: “todos tus nutricionistas anteriores te dieron tablas genéricas. Aquí el primer paso es identificar qué alimentos específicos TE inflaman a TI. Eso es lo que ninguna anterior ha hecho.”</p>
+        <p><b>Cuando la Implicación produce “no lo sé” — segunda pregunta obligatoria.</b> Gloria dijo “no lo sé” a la pregunta de futuro. Ana pasó adelante. Protocolo: “No lo has pensado — si en dos años la hinchazón sigue igual o empeora, ¿qué es lo que más te preocupa que pase además de la incomodidad diaria?” No se acepta el primer “no lo sé.”</p>
+        <p><b>Pre-Suasión antes del precio — novena llamada sin ella.</b> El activo más potente del diagnóstico, reactivado en una frase inmediatamente antes del precio. Para Gloria: la conexión intestino-piel-moco-jaquecas + los cuatro nutricionistas fallidos.</p>
+        <p><b>Reserva de plaza — antes del “no”, no después.</b> En cuanto el prospect dice “me lo tengo que pensar,” la reserva se ofrece inmediatamente. No se espera a que llegue el “no.” El “de momento es un no” de Gloria se habría podido evitar con la reserva cinco minutos antes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="scripts">
+    <div class="section-title"><h2>Scripts para Ana</h2><div class="section-note">Seguimiento de Gloria y próximos perfiles similares.</div></div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Script 01 · Seguimiento de Gloria en 15 días</h3>
+        <p><b>Si el negocio entró y tiene presupuesto:</b></p>
+        <div class="script">“Gloria, soy Ana, tu vecina de Alcobendas. ¿Cómo fue lo del negocio? Seguía pensando en lo que me contaste — cuatro nutricionistas y ninguna resolvió lo del intestino. Sabemos lo que falta por hacer. ¿Lo hacemos?”</div>
+        <p><b>Si todavía no tiene claro el dinero:</b></p>
+        <div class="script">“Gloria, ¿terminaste las inyecciones? ¿Cómo sigue la tripa? Me acordé de lo que me dijiste sobre la piel y el moco — que si mejora el intestino mejoran los dos. Tu plaza sigue disponible. Cuando quieras.”</div>
+      </div>
+      <div class="card">
+        <h3>Script 02 · Reframe para historial de nutricionistas sin resultado</h3>
+        <div class="script">“[NOMBRE], llevas [número] nutricionistas. En todas te han dado una tabla. Ninguna ha identificado qué alimentos específicamente te inflaman a ti. Un plan genérico le dice a todo el mundo lo mismo. Un plan construido para ti empieza por descubrir cuál es el problema exacto en tu caso. Eso es lo que ninguna anterior ha hecho. Y eso es lo que hacemos aquí.”</div>
+      </div>
+      <div class="card">
+        <h3>Script 03 · Ante “no lo sé” en la pregunta de Implicación</h3>
+        <div class="script">“No lo has pensado todavía, entiendo. Pero si en dos años esto sigue igual o peor — ¿qué es lo que más te preocupa que pase?”<br><br>[Esperar. No llenar el silencio.]</div>
+      </div>
+      <div class="card">
+        <h3>Script 04 · Reserve de plaza antes del primer “no”</h3>
+        <p><b>Cuándo:</b> inmediatamente cuando el prospect dice “me lo tengo que pensar” o “tengo que mirarlo.”</p>
+        <div class="script">“Gloria, perfectamente. Para que mientras lo piensas tu plaza esté asegurada, ¿hacemos 100 euros de reserva ahora? Si finalmente no cuadra, te lo devuelvo sin problema.”</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resumen">
+    <div class="section-title"><h2>Resumen ejecutivo</h2><div class="section-note">La auditoría en una página.</div></div>
+    <div class="card callout red">
+      <h3>Nota: 6.3 / 10</h3>
+      <p><b>Resultado:</b> NO CERRADA · “Dame 15 días” · sin reserva de plaza · competencia del polideportivo.</p>
+      <h3>Lo que funcionó</h3>
+      <p>Rapport excepcional — vecinas. Ningún “dos cosas” — cuatro llamadas seguidas. Cualificación del decisor. Aislamiento correcto del obstáculo económico. Mención del intercambiador de alimentos bien personalizada. Manejo respetuoso del hearing loss de Gloria.</p>
+      <h3>Lo que puede costar esta venta en 15 días</h3>
+      <p>Sin reserva de plaza, Gloria tiene libertad total para evaluar el entrenador del polideportivo. El Reframe que posicionaba el programa como diferente de todos los anteriores nunca se entregó. La Implicación fue aceptada en blanco — “no lo sé”. La Pre-Suasión no cargó el precio con el frame de los cuatro fracasos anteriores y la conexión intestino-piel-moco.</p>
+      <h3>Para Ana</h3>
+      <p>“Nueve llamadas. El diagnóstico emocional cuando el prospect lo permite sigue siendo lo mejor del equipo. La eliminación de ‘dos cosas’ es ya un hábito real. La cualificación del decisor también. Lo que llevan nueve llamadas sin aparecer son el Reframe y la Pre-Suasión. En esta llamada, el Reframe era claro — cuatro nutricionistas con tablas genéricas, ninguna identificó qué alimentos específicos son el problema de Gloria. Sin ese Reframe, el pitch fue una descripción más del programa. Con él, habría sido el argumento que separa este programa de todo lo que Gloria ya probó. Cuando ese Reframe esté instalado, las llamadas con prospectos difíciles van a cerrarse de forma diferente.”</p>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="kicker">Documento HTML dinámico · Revoluciona-T</div>
+    <h2 style="margin-top:8px">Gloria no necesitaba otro pitch. Necesitaba una diferencia clara.</h2>
+    <p class="subtitle">El Reframe era el punto: no más tablas genéricas, sino identificar qué alimentos concretos inflaman a Gloria. Sin eso, el programa sonó demasiado parecido a lo que ya había probado.</p>
+  </div>
+</div>
+</body>
+</html>
